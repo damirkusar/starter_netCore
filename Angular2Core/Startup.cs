@@ -103,7 +103,7 @@ namespace Angular2Core
                  // This method should only be used during development.
                  .AddEphemeralSigningKey();
 
-            openIdDictBuilder.SetAccessTokenLifetime(TimeSpan.FromMinutes(60));
+            openIdDictBuilder.SetAccessTokenLifetime(TimeSpan.FromHours(24));
 
             // Add framework services.
             services.AddMvc();
