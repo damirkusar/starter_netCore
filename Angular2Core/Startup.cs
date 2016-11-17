@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Angular2Core.Models;
@@ -42,11 +43,14 @@ namespace Angular2Core
                 o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 6;
+                o.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromHours(24);
+                o.Cookies.ExternalCookie.ExpireTimeSpan = TimeSpan.FromHours(24);
                 //o.Cookies.ApplicationCookie.LoginPath = "/login";
                 o.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
                 {
                     OnRedirectToLogin = ctx =>
                     {
+                        // Needed so that API returns unauthorized instead of the default page with StatusCode.Ok
                         if (ctx.Request.Path.StartsWithSegments("/api") && ctx.Response.StatusCode == (int)HttpStatusCode.OK)
                         {
                             ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
