@@ -1,5 +1,6 @@
 ﻿using Angular2Core.Models;
 using Angular2Core.ViewModels;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,13 +29,7 @@ namespace Angular2Core.Controllers
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
         {
-            var currentUser = this.userManager.GetUserAsync(this.User).Result;
-            var userInfo = new UserInfoViewModel(currentUser)
-            {
-                RoleNames = this.userManager.GetRolesAsync(currentUser).Result
-            };
-
-            return userInfo;
+            return this.CreateUserInfo();
         }
 
         [HttpPost]
@@ -85,6 +80,33 @@ namespace Angular2Core.Controllers
             return this.Ok(registerViewModel);
         }
 
+        [HttpPost]
+        [Route("Login")]
+        [AllowAnonymous]
+        public IActionResult Login([FromBody] LoginViewModel loginViewModel)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var result = this.loginManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe, false).Result;
+                if (result.Succeeded)
+                {
+                    return this.Ok(this.CreateUserInfo());
+                }
+
+                this.ModelState.AddModelError("", "Invalid login!");
+            }
+
+            return this.BadRequest(loginViewModel);
+        }
+
+        [HttpPost]
+        [Route("Logout")]
+        public IActionResult Logout()
+        {
+            this.loginManager.SignOutAsync().Wait();
+            return this.Ok();
+        }
+
         private IActionResult GetErrorResult(IdentityResult result)
         {
             if (result == null)
@@ -113,5 +135,17 @@ namespace Angular2Core.Controllers
 
             return null;
         }
+
+        private UserInfoViewModel CreateUserInfo()
+        {
+            var currentUser = this.userManager.GetUserAsync(this.User).Result;
+            var userInfo = new UserInfoViewModel(currentUser)
+            {
+                RoleNames = this.userManager.GetRolesAsync(currentUser).Result
+            };
+
+            return userInfo;
+        }
+
     }
 }
