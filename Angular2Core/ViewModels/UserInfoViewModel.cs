@@ -10,8 +10,8 @@ namespace Angular2Core.ViewModels
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public ICollection<IdentityUserRole<string>> Roles { get; set; }
-        public ICollection<string> RoleNames { get; set; }
+        //public ICollection<IdentityUserRole<string>> UserRoles { get; set; }
+        public ICollection<string> AssignedRoles { get; set; }
         public string PhoneNumber { get; set; }
 
         public UserInfoViewModel(ApplicationUser user)
@@ -21,7 +21,7 @@ namespace Angular2Core.ViewModels
             this.FirstName = user.FirstName;
             this.LastName = user.LastName;
             this.PhoneNumber = user.PhoneNumber;
-            this.Roles = user.Roles;
+            //this.Roles = user.Roles;
         }
     }
 }

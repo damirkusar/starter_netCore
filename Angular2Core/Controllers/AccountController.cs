@@ -142,7 +142,7 @@ namespace Angular2Core.Controllers
             var user = this.userManager.GetUserAsync(this.User).Result;
             var userInfo = new UserInfoViewModel(user)
             {
-                RoleNames = this.userManager.GetRolesAsync(user).Result
+                AssignedRoles = this.userManager.GetRolesAsync(user).Result
             };
 
             return userInfo;
