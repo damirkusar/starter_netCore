@@ -1,5 +1,6 @@
 ﻿using Angular2Core.Models;
 using Angular2Core.ViewModels;
+using Angular2Core.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

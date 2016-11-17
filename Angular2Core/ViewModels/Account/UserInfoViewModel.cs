@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Angular2Core.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace Angular2Core.ViewModels
+namespace Angular2Core.ViewModels.Account
 {
     public class UserInfoViewModel
     {

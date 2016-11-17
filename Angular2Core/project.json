@@ -22,6 +22,10 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
 
+    "Microsoft.AspNetCore.Cors": "1.1.0",
+    "OpenIddict": "1.0.0-*",
+    "OpenIddict.Mvc": "1.0.0-*",
+    "AspNet.Security.OAuth.Validation": "1.0.0-alpha2-final",
     "Microsoft.AspNetCore.Identity": "1.0.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
