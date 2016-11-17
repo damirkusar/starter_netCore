@@ -51,7 +51,8 @@ namespace Angular2Core.Controllers
             {
                 UserName = registerViewModel.Email,
                 Email = registerViewModel.Email,
-                FullName = registerViewModel.FullName
+                FirstName = registerViewModel.FirstName,
+                LastName = registerViewModel.LastName
             };
 
             var result = this.userManager.CreateAsync(user, registerViewModel.Password).Result;
