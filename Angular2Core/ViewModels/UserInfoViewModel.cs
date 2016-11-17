@@ -1,0 +1,27 @@
+﻿using System.Collections.Generic;
+using Angular2Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+namespace Angular2Core.ViewModels
+{
+    public class UserInfoViewModel
+    {
+        public string Id { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public ICollection<IdentityUserRole<string>> Roles { get; set; }
+        public ICollection<string> RoleNames { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public UserInfoViewModel(ApplicationUser user)
+        {
+            this.Id = user.Id;
+            this.Email = user.Email;
+            this.FirstName = user.FirstName;
+            this.LastName = user.LastName;
+            this.PhoneNumber = user.PhoneNumber;
+            this.Roles = user.Roles;
+        }
+    }
+}
