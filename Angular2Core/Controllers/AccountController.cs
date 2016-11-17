@@ -1,6 +1,5 @@
 ﻿using Angular2Core.Models;
 using Angular2Core.ViewModels;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,9 +26,10 @@ namespace Angular2Core.Controllers
 
         [HttpGet]
         [Route("UserInfo")]
-        public UserInfoViewModel GetUserInfo()
+        public IActionResult GetUserInfo()
         {
-            return this.CreateUserInfo();
+            var userInfo = this.CreateUserInfo();
+            return this.Ok(userInfo);
         }
 
         [HttpPost]
@@ -88,9 +88,10 @@ namespace Angular2Core.Controllers
             if (this.ModelState.IsValid)
             {
                 var result = this.loginManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe, false).Result;
+
                 if (result.Succeeded)
                 {
-                    return this.Ok(this.CreateUserInfo());
+                    return this.Ok(loginViewModel);
                 }
 
                 this.ModelState.AddModelError("", "Invalid login!");
@@ -138,14 +139,13 @@ namespace Angular2Core.Controllers
 
         private UserInfoViewModel CreateUserInfo()
         {
-            var currentUser = this.userManager.GetUserAsync(this.User).Result;
-            var userInfo = new UserInfoViewModel(currentUser)
+            var user = this.userManager.GetUserAsync(this.User).Result;
+            var userInfo = new UserInfoViewModel(user)
             {
-                RoleNames = this.userManager.GetRolesAsync(currentUser).Result
+                RoleNames = this.userManager.GetRolesAsync(user).Result
             };
 
             return userInfo;
         }
-
     }
 }

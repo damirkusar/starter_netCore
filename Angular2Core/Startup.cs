@@ -1,4 +1,7 @@
+using System.Net;
+using System.Threading.Tasks;
 using Angular2Core.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -32,12 +35,29 @@ namespace Angular2Core
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlite(this.Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>(o => {
+            services.AddIdentity<ApplicationUser, ApplicationRole>(o =>
+            {
                 o.Password.RequireDigit = false;
                 o.Password.RequireLowercase = false;
                 o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 6;
+                //o.Cookies.ApplicationCookie.LoginPath = "/login";
+                o.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
+                {
+                    OnRedirectToLogin = ctx =>
+                    {
+                        if (ctx.Request.Path.StartsWithSegments("/api") && ctx.Response.StatusCode == (int)HttpStatusCode.OK)
+                        {
+                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        }
+                        else
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+                        return Task.FromResult(0);
+                    }
+                };
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -67,6 +87,7 @@ namespace Angular2Core
 
             app.UseStaticFiles();
             app.UseIdentity();
+            app.UseCors(policy => policy.AllowAnyOrigin());
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

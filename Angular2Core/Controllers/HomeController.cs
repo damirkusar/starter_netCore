@@ -6,12 +6,12 @@ namespace Angular2Core.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public IActionResult Error()
         {
-            return View();
+            return this.View();
         }
     }
 }
