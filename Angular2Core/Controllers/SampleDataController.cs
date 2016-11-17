@@ -1,17 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Angular2Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OpenIddict;
 
 namespace Angular2Core.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
+        private DataDbContext dataDbContext;
+        private ApplicationDbContext appDbContext;
+
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+
+        public SampleDataController(DataDbContext dataDbContext)
+        {
+            this.dataDbContext = dataDbContext;
+        }
 
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
@@ -23,6 +34,14 @@ namespace Angular2Core.Controllers
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             });
+        }
+
+        [HttpPost]
+        [Route("CreateSampleData")]
+        public void CreateSampleData()
+        {
+            this.dataDbContext.Samples.Add(new Sample() { Name = "Hello World-" + new Random().Next() });
+            this.dataDbContext.SaveChanges();
         }
 
         public class WeatherForecast

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Angular2Core.Models;
@@ -34,6 +35,10 @@ namespace Angular2Core
             services.AddCors();
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnectionServer")));
+
+            services.AddCors();
+            services.AddDbContext<DataDbContext>(
+                options => options.UseSqlServer(this.Configuration.GetConnectionString("DataConnectionServer")));
 
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlite(this.Configuration.GetConnectionString("DefaultConnection")));
@@ -78,9 +83,9 @@ namespace Angular2Core
                 // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
                 .AddMvcBinders()
 
-                // Enable the authorization, logout, token and userinfo endpoints.
-                // .EnableAuthorizationEndpoint("/connect/authorize") // Create corresponding View
-                // .EnableLogoutEndpoint("/connect/logout") // Create corresponding View
+                 // Enable the authorization, logout, token and userinfo endpoints.
+                 .EnableAuthorizationEndpoint("/connect/authorize") // Create corresponding View
+                                                                    // .EnableLogoutEndpoint("/connect/logout") // Create corresponding View
                 .EnableTokenEndpoint("/connect/token")
                 // .EnableUserinfoEndpoint("/connect/account/UserInfo") // Create corresponding View or use /api/account/userInfo
 

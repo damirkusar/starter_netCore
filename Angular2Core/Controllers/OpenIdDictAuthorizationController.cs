@@ -127,7 +127,6 @@ namespace Angular2Core.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> Exchange(OpenIdConnectRequest request)
         {
-            System.Console.WriteLine("Hello Damir: " + request.Username);
             if (request.IsPasswordGrantType())
             {
                 var user = await this.userManager.FindByNameAsync(request.Username);
