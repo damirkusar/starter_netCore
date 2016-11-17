@@ -79,10 +79,10 @@ namespace Angular2Core
                 .AddMvcBinders()
 
                 // Enable the authorization, logout, token and userinfo endpoints.
-                // .EnableAuthorizationEndpoint("/connect/authorize")
-                // .EnableLogoutEndpoint("/connect/logout")
+                // .EnableAuthorizationEndpoint("/connect/authorize") // Create corresponding View
+                // .EnableLogoutEndpoint("/connect/logout") // Create corresponding View
                 .EnableTokenEndpoint("/connect/token")
-                // .EnableUserinfoEndpoint("/connect/account/UserInfo")
+                // .EnableUserinfoEndpoint("/connect/account/UserInfo") // Create corresponding View or use /api/account/userInfo
 
                 // Note: the Mvc.Client sample only uses the code flow and the password flow, but you
                 // can enable the other flows if you need to support implicit or client credentials.
