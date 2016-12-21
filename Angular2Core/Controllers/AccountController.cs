@@ -1,8 +1,8 @@
 ﻿using Angular2Core.Models;
-using Angular2Core.ViewModels;
 using Angular2Core.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Angular2Core.Controllers
@@ -13,12 +13,12 @@ namespace Angular2Core.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> loginManager;
-        private readonly RoleManager<ApplicationRole> roleManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> loginManager,
-            RoleManager<ApplicationRole> roleManager)
+            RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.loginManager = loginManager;
@@ -59,10 +59,9 @@ namespace Angular2Core.Controllers
 
             if (!this.roleManager.RoleExistsAsync("NormalUser").Result)
             {
-                var role = new ApplicationRole
+                var role = new IdentityRole()
                 {
-                    Name = "NormalUser",
-                    Description = "Perform normal operations."
+                    Name = "NormalUser"
                 };
                 var roleResult = this.roleManager.CreateAsync(role).Result;
                 if (!roleResult.Succeeded)

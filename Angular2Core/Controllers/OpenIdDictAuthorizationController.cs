@@ -5,19 +5,20 @@
  */
 
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Angular2Core.Models;
-using Angular2Core.ViewModels.Account;
 using Angular2Core.ViewModels.Shared;
-using Angular2Core.ViewModels.OpenIdDictAuthorization;
 using AspNet.Security.OpenIdConnect.Extensions;
+using AspNet.Security.OpenIdConnect.Primitives;
 using AspNet.Security.OpenIdConnect.Server;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OpenIddict;
+using OpenIddict.Core;
+using OpenIddict.Models;
 
 namespace Angular2Core.Controllers
 {
@@ -44,7 +45,7 @@ namespace Angular2Core.Controllers
         public async Task<IActionResult> Authorize(OpenIdConnectRequest request)
         {
             // Retrieve the application details from the database.
-            var application = await this.applicationManager.FindByClientIdAsync(request.ClientId);
+            var application = await this.applicationManager.FindByClientIdAsync(request.ClientId, CancellationToken.None);
             if (application == null)
             {
                 return this.View("Error", new ErrorViewModel
@@ -56,12 +57,15 @@ namespace Angular2Core.Controllers
 
             // Flow the request_id to allow OpenIddict to restore
             // the original authorization request from the cache.
-            return this.View(new OpenIdDictAuthorizeViewModel
-            {
-                ApplicationName = application.DisplayName,
-                RequestId = request.RequestId,
-                Scope = request.Scope
-            });
+
+            //return this.View(new OpenIdDictAuthorizeViewModel
+            //{
+            //    ApplicationName = application.DisplayName,
+            //    RequestId = request.RequestId,
+            //    Scope = request.Scope
+            //});
+
+            return this.Ok();
         }
 
         [Authorize, HttpPost("~/connect/authorize/accept"), ValidateAntiForgeryToken]
@@ -101,10 +105,12 @@ namespace Angular2Core.Controllers
         {
             // Flow the request_id to allow OpenIddict to restore
             // the original logout request from the distributed cache.
-            return View(new LogoutViewModel
-            {
-                RequestId = request.RequestId
-            });
+            //return View(new LogoutViewModel
+            //{
+            //    RequestId = request.RequestId
+            //});
+
+            return this.Ok();
         }
 
         [HttpPost("~/connect/logout"), ValidateAntiForgeryToken]

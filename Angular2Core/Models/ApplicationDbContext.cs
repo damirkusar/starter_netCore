@@ -1,12 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OpenIddict;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Angular2Core.Models
 {
-    public class ApplicationDbContext : OpenIddictDbContext<ApplicationUser, ApplicationRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext
-            (DbContextOptions<ApplicationDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
             //nothing here

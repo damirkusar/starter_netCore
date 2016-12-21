@@ -1,11 +1,11 @@
 using System;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Angular2Core.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,7 +34,11 @@ namespace Angular2Core
         {
             services.AddCors();
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnectionServer")));
+                options =>
+                {
+                    options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnectionServer"));
+                    options.UseOpenIddict();
+                });
 
             services.AddCors();
             services.AddDbContext<DataDbContext>(
@@ -43,7 +47,7 @@ namespace Angular2Core
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlite(this.Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>(o =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(o =>
             {
                 o.Password.RequireDigit = false;
                 o.Password.RequireLowercase = false;
@@ -77,15 +81,18 @@ namespace Angular2Core
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            var openIdDictBuilder = services.AddOpenIddict<ApplicationDbContext>()
+            var openIdDictBuilder = services.AddOpenIddict()
+                // Register the Entity Framework stores.
+                .AddEntityFrameworkCoreStores<ApplicationDbContext>()
+
                 // Register the ASP.NET Core MVC binder used by OpenIddict.
                 // Note: if you don't call this method, you won't be able to
                 // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
                 .AddMvcBinders()
 
-                 // Enable the authorization, logout, token and userinfo endpoints.
-                 .EnableAuthorizationEndpoint("/connect/authorize") // Create corresponding View
-                                                                    // .EnableLogoutEndpoint("/connect/logout") // Create corresponding View
+                // Enable the authorization, logout, token and userinfo endpoints.
+                //.EnableAuthorizationEndpoint("/connect/authorize") // Create corresponding View
+                // .EnableLogoutEndpoint("/connect/logout") // Create corresponding View
                 .EnableTokenEndpoint("/connect/token")
                 // .EnableUserinfoEndpoint("/connect/account/UserInfo") // Create corresponding View or use /api/account/userInfo
 
