@@ -1,0 +1,159 @@
+﻿.notification-bar,
+.login-bar {
+    width: 300px;
+    max-width: 300px;
+}
+
+.user-bar,
+.login-bar {
+    width: 225px;
+    max-width: 225px;
+}
+
+/*@media only screen and (max-width: 1025) {
+    body {
+        background: black;
+    }
+    .notification-bar {
+        width: 70vw;
+        max-width: 70vw;
+    }
+
+    .login-bar {
+        width: 30vw;
+        max-width: 30vw;
+    }
+
+    .user-bar {
+        width: 35vw;
+        max-width: 35vw;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    body {
+        background: yellow;
+    }
+    .notification-bar {
+        width: 70vw;
+        max-width: 70vw;
+    }
+
+    .login-bar {
+        width: 30vw;
+        max-width: 30vw;
+    }
+
+    .user-bar {
+        width: 35vw;
+        max-width: 35vw;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    body {
+        background: pink;
+    }
+    .notification-bar {
+        width: 70vw;
+        max-width: 70vw;
+    }
+
+    .login-bar {
+        width: 60vw;
+        max-width: 60vw;
+    }
+
+    .user-bar {
+        width: 60vw;
+        max-width: 60vw;
+    }
+}*/
+
+.notification-bar-items .login-bar-items,
+.user-bar-items {
+    max-height: 60vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.notification-bar-header,
+.notification-bar-footer,
+.notification-bar-item,
+.login-bar-header,
+.login-bar-footer,
+.login-bar-item,
+.user-bar-header,
+.user-bar-footer,
+.user-bar-item {
+    min-height: 30px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0.75em;
+}
+
+.notification-bar.dropdown-menu,
+.login-bar.dropdown-menu,
+.user-bar.dropdown-menu {
+    border-style: none;
+    background-color: transparent;
+}
+
+
+
+/*.notification-bar,
+.login-bar,
+.user-bar 
+{
+    position: fixed;
+    display: none;
+    width: 300px;
+    max-width: 300px;
+    top: 4em;
+    z-index: 1000;
+}
+
+.user-bar 
+{
+    width: 200px;
+    max-width: 300px;
+}
+
+.notification-bar-items
+.login-bar-items,
+.user-bar-items 
+{
+    max-height: 60vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.notification-bar-right,
+.login-bar-right,
+.user-bar-right 
+{
+    right: 15px;
+}
+
+.notification-bar-left,
+.login-bar-left, 
+.user-bar-left 
+{
+    left: 15px;
+}
+
+.notification-bar-header,
+.notification-bar-footer,
+.notification-bar-item,
+.login-bar-header,
+.login-bar-footer,
+.login-bar-item,
+.user-bar-header,
+.user-bar-footer,
+.user-bar-item {
+    min-height: 30px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0.75em;
+}*/
+

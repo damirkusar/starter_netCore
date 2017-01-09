@@ -1,0 +1,46 @@
+﻿a,
+a:link,
+a:visited {
+    color: $color-red-100; 
+    text-decoration: none;
+}
+
+a:hover, 
+a:active {
+    color: $color-grey-100;
+    text-decoration: none;
+}
+
+a {
+    cursor: pointer !important;
+}
+
+.navbar-white .navbar-brand {
+    color: $color-black;
+}
+
+.navbar-white .navbar-brand:hover {
+    color: $color-red-100;
+}
+
+.nav-link,
+.nav-link:link,
+.nav-link:visited,
+.dropdown-item,
+.dropdown-item:link,
+.dropdown-item:visited {
+    color: $color-black !important;
+}
+
+.nav-link:hover,
+.nav-link:active,
+.dropdown-item:hover,
+.dropdown-item:active {
+    color: $color-red-100 !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:active,
+.dropdown-item.active {
+    background: $color-grey-10 !important;
+}

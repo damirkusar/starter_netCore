@@ -1,0 +1,13 @@
+﻿[data-notify="container"][class*="alert-pastel-"] {
+    letter-spacing: 1px;
+}
+
+[data-notify="container"][class*="alert-pastel-"] > [data-notify="title"] {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+[data-notify="container"][class*="alert-pastel-"] > [data-notify="message"] {
+    font-weight: 400;
+}
