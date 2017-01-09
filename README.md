@@ -3,12 +3,14 @@
 This seed is an extention of Steve Sanderson´s [ASP.NET Core + Angular 2 template for Visual Studio](http://blog.stevensanderson.com/2016/10/04/angular2-template-for-visual-studio).
 
 It includes [Asp.Net Core Identity](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity) and 
-token based authentication with [OpenIdDict](https://github.com/openiddict/openiddict-core)
+token based authentication with [OpenIdDict](https://github.com/openiddict/openiddict-core).
+
+It also includes a starting point with a login mechanism and auto logout when token expires. It also uses scss instead of css. 
 
 
 Here is Steve Sanderson´s [README](https://github.com/damirkusar/Angular2CoreSeed/blob/master/Angular2Core/README.md) of the template.
 
-## Getting Started
+# Getting Started
 
 Do be able to compile the styles in wwwroot/dist/styles with VS, you will need to install the VS extention "Web Compiler".
 
