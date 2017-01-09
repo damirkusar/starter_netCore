@@ -1,0 +1,7 @@
+﻿[
+  {
+    "inputFile": "wwwroot/dist/styles/_styles.scss",
+    "outputFile": "wwwroot/dist/styles/_styles.css",
+    "minify": { "enabled": false }
+  }
+]

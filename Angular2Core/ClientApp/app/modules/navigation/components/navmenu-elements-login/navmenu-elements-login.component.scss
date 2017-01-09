@@ -1,0 +1,18 @@
+﻿@import '../../../../colors.scss';
+
+button[name*=userButton]:hover,
+button[name*=userButton]:active,
+button[name*=userButton]:focus,
+button[name*=loginButton]:hover,
+button[name*=loginButton]:active,
+button[name*=loginButton]:focus 
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: $color-green-100;
+    color: $color-green-100;
+}
+
+.user-bar-header a:hover {
+    text-decoration: none;
+}

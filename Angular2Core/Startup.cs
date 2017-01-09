@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using OpenIddict;
 
 namespace Angular2Core
 {
@@ -40,7 +39,6 @@ namespace Angular2Core
                     options.UseOpenIddict();
                 });
 
-            services.AddCors();
             services.AddDbContext<DataDbContext>(
                 options => options.UseSqlServer(this.Configuration.GetConnectionString("DataConnectionServer")));
 

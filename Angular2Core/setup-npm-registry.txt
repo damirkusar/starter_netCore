@@ -1,0 +1,3 @@
+﻿npm set registry http://axtaartifactory:8081/artifactory/api/npm/axpo-tools-npm
+npm set registry https://registry.npmjs.org
+npm config set @axta:registry http://axtaartifactory:8081/artifactory/api/npm/axpo-tools-npm

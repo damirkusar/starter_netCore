@@ -1,0 +1,32 @@
+<div class="fixed-top">
+    <navmenu-top class="hidden-sm-down" [isLoggedIn]="isLoggedIn" [user]="loggedInUser" [loginError]="loginError" (onLogin)="login($event)" (onLogout)="logout($event)"></navmenu-top>
+    <nav class="navbar navbar-toggleable-md navbar-white">
+        <div class="d-flex justify-content-end" style="margin-right: 3rem">
+            <div class="mr-auto">
+                <a class="navbar-brand" [routerLink]="['/home']"><span class="hidden-xs-down">Angular 2 Core</span></a>
+            </div>
+            <div class="hidden-md-up">
+                <navmenu-elements-login [isLoggedIn]="isLoggedIn" [user]="loggedInUser" [loginError]="loginError" (onLogin)="login($event)" (onLogout)="logout($event)"></navmenu-elements-login>
+            </div>
+            <div class="hidden-md-up">
+                <navmenu-elements-notification></navmenu-elements-notification>
+            </div>
+            <div>
+                <button class="navbar-toggler " type="button"
+                        data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                        *ngIf="isLoggedIn">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="isLoggedIn">
+            <ul class="navbar-nav ">
+                <li class="nav-item" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/news-room']">Newsroom</a></li>
+                <li class="nav-item" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/contact']">Contact</a></li>
+                <li class="nav-item" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/admin']">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
