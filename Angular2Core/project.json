@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "Microsoft.NETCore.App": {
-      "version": "1.0.3",
+      "version": "1.1.0",
       "type": "platform"
     },
     "Microsoft.AspNetCore.AngularServices": "1.0.0-*",
@@ -17,7 +17,7 @@
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "Microsoft.Extensions.Configuration.CommandLine": "1.0.0",
-    "Microsoft.Extensions.Logging": "1.0.0",
+    "Microsoft.Extensions.Logging": "1.1.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
@@ -35,9 +35,10 @@
     "Microsoft.AspNetCore.Authentication.MicrosoftAccount": "1.0.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
     "Microsoft.EntityFrameworkCore.Tools": {
-      "version": "1.0.0-*",
+      "version": "1.1.0-*",
       "type": "build"
     },
+    "Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-*",
     "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
     "Microsoft.EntityFrameworkCore.Sqlite.Design": "1.0.0"
   },
@@ -46,7 +47,9 @@
     "Microsoft.AspNetCore.Razor.Tools": "1.0.0-*",
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-*",
     "Microsoft.DotNet.Watcher.Tools": "1.0.0-*",
-    "Microsoft.EntityFrameworkCore.Tools": "1.0.0-*"
+    "Microsoft.EntityFrameworkCore.Tools": "1.1.0-*",
+    "Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-*"
+
   },
 
   "frameworks": {
