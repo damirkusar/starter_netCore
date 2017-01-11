@@ -57,11 +57,11 @@ namespace Angular2Core.Controllers
                 return this.GetErrorResult(result);
             }
 
-            if (!this.roleManager.RoleExistsAsync("NormalUser").Result)
+            if (!this.roleManager.RoleExistsAsync("user").Result)
             {
                 var role = new IdentityRole()
                 {
-                    Name = "NormalUser"
+                    Name = "user"
                 };
                 var roleResult = this.roleManager.CreateAsync(role).Result;
                 if (!roleResult.Succeeded)
@@ -71,7 +71,7 @@ namespace Angular2Core.Controllers
                 }
             }
 
-            var addUserToRoleResult = this.userManager.AddToRoleAsync(user, "NormalUser").Result;
+            var addUserToRoleResult = this.userManager.AddToRoleAsync(user, "user").Result;
             if (!addUserToRoleResult.Succeeded)
             {
                 return this.GetErrorResult(addUserToRoleResult);
