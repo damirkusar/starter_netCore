@@ -8,6 +8,7 @@ import './rxjs-operators';
 import { ICredentials, Credentials } from '../models/credentials';
 import { IErrorMessage, ErrorMessage } from '../models/errorMessage';
 import { IToken, Token } from '../models/token';
+import { IUser, User } from '../models/user';
 import { HttpErrorHandlerService } from './httpErrorHandler.service';
 import { LoggerService } from './logger.service';
 import { LocalStorageService } from 'angular-2-local-storage';
@@ -84,6 +85,20 @@ export class AuthService {
 
     isLoggedIn(): boolean {
         return this._localStorage.get('loggedIn') === true;
+    }
+
+    getCurrentUser(): IUser {
+        return this._localStorage.get('loggedInUser');
+    }
+
+    isInRole(allowedRoles: string[]): boolean {
+        let loggedInUser: IUser = this.getCurrentUser();
+        let userRoles = loggedInUser.assignedRoles;
+        let userRolesMapped = userRoles.map(userRole => userRole.toLowerCase());
+
+        let isInRole = allowedRoles.some(allowedRole => userRolesMapped.indexOf(allowedRole.toLowerCase()) >= 0);
+
+        return isInRole;
     }
 
     private extractSuccessData(res: Response) { 
