@@ -33,3 +33,4 @@ export const routes: Routes = [
 ```
 
 You will also need to remove the UniversalModule from the feature modules since it does not like that BrowserModule gets loaded twice then. But needed when not doing lazy loading. 
+Used library: https://github.com/brandonroberts/angular-router-loader
