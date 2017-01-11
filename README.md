@@ -17,3 +17,19 @@ Do be able to compile the styles in wwwroot/dist/styles with VS, you will need t
 Also, when starting the first time, adding new 3rd party libraries, you will need to execute <webpack --config webpack.config.vendor.js> in the project. You will need to have webpack installed globally <npm install -g webpack>
 
 If you update Node for example, and you have already installed node_modules, you will need to rebuild it with <npm rebuild>
+
+# Hints
+## Lazy Loading
+
+This project is prepared for lazy loading of angular modules. 
+In your route configuration, use loadChildren with a relative path to your lazy loaded angular module. The string is delimited with a # where the right side of split is the angular module class name.
+
+```TypeScript
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  { path: 'lazy', loadChildren: './lazy.module#LazyModule' }
+];
+```
+
+You will also need to remove the UniversalModule from the feature modules since it does not like that BrowserModule gets loaded twice then. But needed when not doing lazy loading. 

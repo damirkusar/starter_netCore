@@ -23,7 +23,8 @@ var sharedConfig = {
                 include: /ClientApp/,
                 exclude: /node_modules/,
                 loaders: ['raw-loader', 'sass-loader']
-            }
+            },
+            { include: /ClientApp/, loader: 'angular-router-loader' }
         ]
     }
 };
