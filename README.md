@@ -18,6 +18,9 @@ Also, when starting the first time, adding new 3rd party libraries, you will nee
 
 If you update Node for example, and you have already installed node_modules, you will need to rebuild it with <npm rebuild>
 
+## Needed Software
+You will also need [nodeJS](https://nodejs.org/en/) installed and [.net core tools](https://www.microsoft.com/net/core#windowsvs2015) with [.net core 1.1](https://www.microsoft.com/net/download/core)
+
 # Hints
 ## Lazy Loading
 
