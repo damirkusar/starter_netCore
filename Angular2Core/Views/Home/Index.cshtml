@@ -3,7 +3,11 @@
 }
 
 @*<app asp-prerender-module="ClientApp/dist/main-server">Loading...</app>*@
-<app>Loading...</app>
+<app>
+    <div class='custom-modal' style="background: white">
+        <div class="loader absolut-center"></div>
+    </div>
+</app>
 
 <script src="~/dist/vendor.js" asp-append-version="false"></script>
 @section scripts {
