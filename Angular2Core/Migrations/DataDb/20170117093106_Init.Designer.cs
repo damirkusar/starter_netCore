@@ -8,13 +8,13 @@ using Angular2Core.Models;
 namespace Angular2Core.Migrations.DataDb
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20161117141437_Sample")]
-    partial class Sample
+    [Migration("20170117093106_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Angular2Core.Models.Sample", b =>

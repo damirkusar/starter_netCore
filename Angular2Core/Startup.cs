@@ -35,12 +35,12 @@ namespace Angular2Core
             services.AddDbContext<ApplicationDbContext>(
                 options =>
                 {
-                    options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnectionServer"));
+                    options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
                     options.UseOpenIddict();
                 });
 
             services.AddDbContext<DataDbContext>(
-                options => options.UseSqlServer(this.Configuration.GetConnectionString("DataConnectionServer")));
+                options => options.UseSqlServer(this.Configuration.GetConnectionString("DataDefaultConnection")));
 
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlite(this.Configuration.GetConnectionString("DefaultConnection")));
