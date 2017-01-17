@@ -5,9 +5,10 @@ import { FormsModule } from '@angular/forms';
 
 import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
 
+import { ContactComponent } from './contact/contact.component';
+
 import { AuthGuardService } from '../../services/authGuard.service';
 import { CanDeactivateGuardService } from '../../services/canDeactivateGuard.service';
-import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
     declarations: [

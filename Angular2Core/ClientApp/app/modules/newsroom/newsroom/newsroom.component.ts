@@ -1,8 +1,8 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
-import { LoggerService } from '../../../../services/logger.service';
-import { INews, News } from '../../services/news.service';
+import { LoggerService } from '../../../services/logger.service';
+import { INews, News } from '../services/news.service';
 
 @Component({
     selector: 'news-room',

@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 
 import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
 
-import { NavMenuComponent } from './components/navmenu/navmenu.component';
+import { NavigationComponent } from './navigation/navigation.component';
+
 import { NavMenuTopComponent } from './components/navmenu-top/navmenu-top.component';
 import { NavMenuElementsLocalizationComponent } from './components/navmenu-elements-localization/navmenu-elements-localization.component';
 import { NavMenuElementsLoginComponent } from './components/navmenu-elements-login/navmenu-elements-login.component';
@@ -13,7 +14,7 @@ import { NavMenuElementsNotificationComponent } from './components/navmenu-eleme
 
 @NgModule({
     declarations: [
-        NavMenuComponent,
+        NavigationComponent,
         NavMenuTopComponent,
         NavMenuElementsLocalizationComponent,
         NavMenuElementsLoginComponent,
@@ -29,7 +30,7 @@ import { NavMenuElementsNotificationComponent } from './components/navmenu-eleme
         LocalizationModule.forChild()
         // My Modules
     ],
-    exports: [NavMenuComponent],
+    exports: [NavigationComponent],
     providers: [
     ]
 })

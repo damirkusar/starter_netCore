@@ -5,9 +5,10 @@ import { FormsModule } from '@angular/forms';
 
 import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
 
+import { NewsRoomComponent } from './newsroom/newsroom.component';
+
 import { AuthGuardService } from '../../services/authGuard.service';
 import { CanDeactivateGuardService } from '../../services/canDeactivateGuard.service';
-import { NewsRoomComponent } from './components/newsroom/newsroom.component';
 
 import { NewsService } from './services/news.service';
 import { NewsResolverService } from './services/newsResolver.service';

@@ -1,19 +1,19 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
-import { ICredentials } from '../../../../models/credentials';
-import { IUser } from '../../../../models/user';
-import { IToken } from '../../../../models/token';
-import { AccountService } from '../../../../services/account.service';
-import { AuthService } from '../../../../services/auth.service';
-import { LoaderService } from '../../../../services/loader.service';
-import { LoggerService } from '../../../../services/logger.service';
+import { ICredentials } from '../../../models/credentials';
+import { IUser } from '../../../models/user';
+import { IToken } from '../../../models/token';
+import { AccountService } from '../../../services/account.service';
+import { AuthService } from '../../../services/auth.service';
+import { LoaderService } from '../../../services/loader.service';
+import { LoggerService } from '../../../services/logger.service';
 
 @Component({
-    selector: 'nav-menu',
-    template: require('./navmenu.component.html'),
-    styles: [require('./navmenu.component.scss')]
+    selector: 'navigation',
+    template: require('./navigation.component.html'),
+    styles: [require('./navigation.component.scss')]
 })
-export class NavMenuComponent extends Locale implements OnChanges, OnInit, DoCheck, OnDestroy {
+export class NavigationComponent extends Locale implements OnChanges, OnInit, DoCheck, OnDestroy {
     isLoggedIn: boolean;
     loginError: boolean;
     loggedInUser: IUser;

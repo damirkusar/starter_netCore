@@ -5,9 +5,10 @@ import { FormsModule } from '@angular/forms';
 
 import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
 
+import { AdminComponent } from './admin/admin.component';
+
 import { AuthGuardService } from '../../services/authGuard.service';
 import { CanDeactivateGuardService } from '../../services/canDeactivateGuard.service';
-import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
     declarations: [
