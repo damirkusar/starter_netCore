@@ -1,4 +1,7 @@
-﻿.notification-bar-header,
+﻿.default-bar-header,
+.default-bar-footer,
+.default-bar-item,
+.notification-bar-header,
 .notification-bar-footer,
 .notification-bar-item,
 .login-bar-header,
@@ -12,6 +15,9 @@
     background-color: $color-white;
 }
 
+.default-bar-item:hover,
+.default-bar-item:active,
+.default-bar-item:focus,
 .notification-bar-item:hover,
 .notification-bar-item:active,
 .notification-bar-item:focus,

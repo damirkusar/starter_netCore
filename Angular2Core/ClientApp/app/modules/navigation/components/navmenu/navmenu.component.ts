@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
+import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 import { ICredentials } from '../../../../models/credentials';
 import { IUser } from '../../../../models/user';
 import { IToken } from '../../../../models/token';
@@ -12,28 +13,31 @@ import { LoggerService } from '../../../../services/logger.service';
     template: require('./navmenu.component.html'),
     styles: [require('./navmenu.component.scss')]
 })
-export class NavMenuComponent implements OnChanges, OnInit, DoCheck, OnDestroy {
+export class NavMenuComponent extends Locale implements OnChanges, OnInit, DoCheck, OnDestroy {
     isLoggedIn: boolean;
     loginError: boolean;
     loggedInUser: IUser;
 
     constructor(
-        private _logger: LoggerService,
-        private _authService: AuthService,
-        private _accountService: AccountService,
-        private _loaderService: LoaderService) {
+        private logger: LoggerService,
+        private authService: AuthService,
+        private accountService: AccountService,
+        private loaderService: LoaderService,
+        public locale: LocaleService,
+        public localization: LocalizationService) {
+        super(locale, localization);
     }
 
     ngOnChanges(changes: Object): void { }
 
     ngOnInit(): void {
-            this.isLoggedIn = this._authService.isLoggedIn();
+            this.isLoggedIn = this.authService.isLoggedIn();
         if (this.isLoggedIn) {
-            this._authService.startLogoutTimer();
-            this.loggedInUser = this._accountService.getLoggedInUser();
+            this.authService.startLogoutTimer();
+            this.loggedInUser = this.accountService.getLoggedInUser();
         }
 
-        this._authService.loggedInUpdated.subscribe(
+        this.authService.loggedInUpdated.subscribe(
             (isLoggedIn) => {
                 this.isLoggedIn = isLoggedIn;
             }
@@ -43,42 +47,42 @@ export class NavMenuComponent implements OnChanges, OnInit, DoCheck, OnDestroy {
     ngDoCheck(): void { }
 
     ngOnDestroy(): void {
-        this._authService.loggedInUpdated.unsubscribe();
+        this.authService.loggedInUpdated.unsubscribe();
     }
 
     login(credentials: ICredentials) {
-        this._loaderService.setShowModal(true);
-        this._authService.login(credentials)
+        this.loaderService.setShowModal(true);
+        this.authService.login(credentials)
             .subscribe(response => this.loginSucceeded(response),
             error => this.loginFailed(error));
     }
 
     loginSucceeded(token: IToken) {
         this.loginError = false;
-        this.isLoggedIn = this._authService.isLoggedIn();
-        this._accountService.getUserInfo()
+        this.isLoggedIn = this.authService.isLoggedIn();
+        this.accountService.getUserInfo()
             .subscribe(response => this.gettingUserInfoSucceeded(response),
             error => this.gettingUserInfoFailed(error));
     }
 
     loginFailed(error: any) {
-        this._logger.error(`NavMenuComponent: Login error: ${JSON.stringify(error)}`);
+        this.logger.error(`NavMenuComponent: Login error: ${JSON.stringify(error)}`);
         this.loginError = true;
-        this._loaderService.setShowModal(false);
+        this.loaderService.setShowModal(false);
     }
 
     gettingUserInfoSucceeded(user: IUser) {
         this.loggedInUser = user;
-        this._loaderService.setShowModal(false);
+        this.loaderService.setShowModal(false);
     }
 
     gettingUserInfoFailed(error: any) {
-        this._logger.error(`NavMenuComponent: Getting UserInfo error: ${JSON.stringify(error)}`);
-        this._loaderService.setShowModal(false);
+        this.logger.error(`NavMenuComponent: Getting UserInfo error: ${JSON.stringify(error)}`);
+        this.loaderService.setShowModal(false);
     }
 
     logout(event: Event) {
-        this._authService.logout();
-        this.isLoggedIn = this._authService.isLoggedIn();
+        this.authService.logout();
+        this.isLoggedIn = this.authService.isLoggedIn();
     }
 }

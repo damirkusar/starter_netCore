@@ -7,6 +7,7 @@ token based authentication with [OpenIdDict](https://github.com/openiddict/openi
 
 It also includes a starting point with a login mechanism and auto logout when token expires. It also uses scss instead of css. 
 
+Localization is also included with the following librarie: [angular2localization](https://github.com/robisim74/angular2localization)
 
 Here is Steve Sanderson´s [README](https://github.com/damirkusar/Angular2CoreSeed/blob/master/Angular2Core/README.md) of the template.
 

@@ -1,0 +1,15 @@
+﻿@import '../../../../colors.scss';
+
+button[name*=localizationButton]:hover,
+button[name*=localizationButton]:active,
+button[name*=localizationButton]:focus
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: $color-brown-100;
+    color: $color-brown-100;
+}
+
+.localization-bar-header a:hover {
+    text-decoration: none;
+}

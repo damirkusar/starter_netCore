@@ -17,6 +17,7 @@
     "angular2-platform-node": "~2.0.10",
     "angular2-universal": "~2.1.0-rc.1",
     "angular2-universal-polyfills": "~2.1.0-rc.1",
+    "angular2localization": "^1.4.1",
     "aspnet-prerendering": "^2.0.2",
     "aspnet-webpack": "^1.0.11",
     "bootstrap": "4.0.0-alpha.6",

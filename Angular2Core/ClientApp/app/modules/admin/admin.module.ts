@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
 import { FormsModule } from '@angular/forms';
 
+import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
+
 import { AuthGuardService } from '../../services/authGuard.service';
 import { CanDeactivateGuardService } from '../../services/canDeactivateGuard.service';
 import { AdminComponent } from './components/admin/admin.component';
@@ -25,7 +27,9 @@ import { AdminComponent } from './components/admin/admin.component';
                 canActivateChild: [AuthGuardService],
                 children: []
             }
-        ])
+        ]),
+        LocaleModule.forChild(),
+        LocalizationModule.forChild()
         // My Modules
     ],
     exports: [AdminComponent],

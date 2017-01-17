@@ -6,6 +6,9 @@
                 <a class="navbar-brand" [routerLink]="['/home']"><span class="hidden-xs-down">Angular 2 Core</span></a>
             </div>
             <div class="hidden-md-up">
+                <navmenu-elements-localization></navmenu-elements-localization>
+            </div>
+            <div class="hidden-md-up">
                 <navmenu-elements-login [isLoggedIn]="isLoggedIn" [user]="loggedInUser" [loginError]="loginError" (onLogin)="login($event)" (onLogout)="logout($event)"></navmenu-elements-login>
             </div>
             <div class="hidden-md-up">
@@ -23,9 +26,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="isLoggedIn">
             <ul class="navbar-nav ">
-                <li class="nav-item" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/news-room']">Newsroom</a></li>
-                <li class="nav-item" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/contact']">Contact</a></li>
-                <li class="nav-item" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/admin']">Admin</a></li>
+                <li class="nav-item" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/news-room']">{{ 'NEWSROOM_LINK' | translate:lang }}</a></li>
+                <li class="nav-item" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/contact']">{{ 'CONTACT_LINK' | translate:lang }}</a></li>
+                <li class="nav-item" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/admin']">{{ 'ADMIN_LINK' | translate:lang }}</a></li>
             </ul>
         </div>
     </nav>

@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
+import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 import { LoggerService } from '../../services/logger.service';
 
 @Component({
@@ -6,8 +7,10 @@ import { LoggerService } from '../../services/logger.service';
     template: require('./home.component.html'),
     styles: [require('./home.component.scss')]
 })
-export class HomeComponent implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
-    constructor(private _logger: LoggerService) { }
+export class HomeComponent extends Locale implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
+    constructor(private logger: LoggerService, public locale: LocaleService, public localization: LocalizationService) {
+        super(locale, localization);
+    }
 
     ngOnChanges(changes: Object): void { }
 
