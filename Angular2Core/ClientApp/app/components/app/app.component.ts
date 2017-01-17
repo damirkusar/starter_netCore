@@ -30,6 +30,7 @@ export class AppComponent extends Locale implements OnChanges, OnInit, DoCheck, 
 
         // Initializes LocalizationService: asynchronous loading.
         this.localization.translationProvider('./resources/locale-'); // Required: initializes the translation provider with the given path prefix.
+        localization.setMissingKey("missing");
         this.localization.updateTranslation(); // Need to update the translation.
     }
 

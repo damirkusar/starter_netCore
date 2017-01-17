@@ -1,25 +1,27 @@
 ﻿{
-  "COMMON": {
-    "CHANGE_LANGUAGE": "Change Language"
+  "missing": "Missing Translation",
+
+  "common": {
+    "changeLanguage": "Change Language"
   },
 
-  "HOME": {
-    "TITLE": "Welcome",
-    "LINK": "Welcome"
+  "home": {
+    "title": "Welcome",
+    "link": "Welcome"
   },
 
-  "NEWSROOM": {
-    "TITLE": "News Room",
-    "LINK": "News Room"
+  "newsRoom": {
+    "title": "News Room",
+    "link": "News Room"
   },
 
-  "CONTACT": {
-    "TITLE": "Contact",
-    "LINK": "Contact"
+  "contact": {
+    "title": "Contact",
+    "link": "Contact"
   },
 
-  "ADMIN": {
-    "TITLE": "Admin",
-    "LINK": "Admin"
+  "admin": {
+    "title": "Admin",
+    "link": "Admin"
   }
 }

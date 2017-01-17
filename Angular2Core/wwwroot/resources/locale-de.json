@@ -1,25 +1,27 @@
 ﻿{
-  "COMMON": {
-    "CHANGE_LANGUAGE": "Sprache Wechseln"
+  "missing":  "Keine Übersetzung",  
+
+  "common": {
+    "changeLanguage": "Sprache Wechseln"
   },
 
-  "HOME": {
-    "TITLE": "Willkommen",
-    "LINK": "Willkommen"
+  "home": {
+    "title": "Willkommen",
+    "link": "Willkommen"
   },
 
-  "NEWSROOM": {
-    "TITLE": "News Raum",
-    "LINK": "News Raum"
+  "newsRoom": {
+    "title": "News Raum",
+    "link": "News Raum"
   },
 
-  "CONTACT": {
-    "TITLE": "Kontakt",
-    "LINK": "Kontakt"
+  "contact": {
+    "title": "Kontakt",
+    "link": "Kontakt"
   },
 
-  "ADMIN": {
-    "TITLE": "Admin",
-    "LINK": "Admin"
+  "admin": {
+    "title": "Admin",
+    "link": "Admin"
   }
 }
