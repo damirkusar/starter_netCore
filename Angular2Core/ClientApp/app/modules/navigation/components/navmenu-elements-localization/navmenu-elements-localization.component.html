@@ -9,12 +9,12 @@
             <span>{{ 'CHANGE_COUNTRY' | translate:lang }}</span>
         </div>-->
         <div class="default-bar-items">
-            <div class="default-bar-item">
-                <h6 (click)="selectLocale('de', 'CH', 'CHF');"><i class="fa " aria-hidden="true"></i> German</h6>
+            <div class="default-bar-item" (click)="selectLocale('de', 'CH', 'CHF');">
+                <h6><i class="fa " aria-hidden="true"></i> German</h6>
             </div>
-            
-            <div class="default-bar-item">
-                <h6 (click)="selectLocale('en', 'GB', 'GBP');"><i class="fa " aria-hidden="true"></i> English</h6>
+
+            <div class="default-bar-item" (click)="selectLocale('en', 'GB', 'GBP');">
+                <h6><i class="fa " aria-hidden="true"></i> English</h6>
             </div>
         </div>
     </div>
