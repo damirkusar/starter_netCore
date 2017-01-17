@@ -1,15 +1,25 @@
 ﻿{
-  "CHANGE_COUNTRY": "Sprache Wechseln",
+  "COMMON": {
+    "CHANGE_LANGUAGE": "Sprache Wechseln"
+  },
 
-  "HOME_TITLE": "Willkommen",
-  "HOME_LINK": "Willkommen",
+  "HOME": {
+    "TITLE": "Willkommen",
+    "LINK": "Willkommen"
+  },
 
-  "NEWSROOM_TITLE": "News Raum",
-  "NEWSROOM_LINK": "News Raum",
+  "NEWSROOM": {
+    "TITLE": "News Raum",
+    "LINK": "News Raum"
+  },
 
-  "CONTACT_TITLE": "Kontakt",
-  "CONTACT_LINK": "Kontakt",
+  "CONTACT": {
+    "TITLE": "Kontakt",
+    "LINK": "Kontakt"
+  },
 
-  "ADMIN_TITLE": "Admin",
-  "ADMIN_LINK": "Admin"
+  "ADMIN": {
+    "TITLE": "Admin",
+    "LINK": "Admin"
+  }
 }
