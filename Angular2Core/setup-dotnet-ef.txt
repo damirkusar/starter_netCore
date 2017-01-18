@@ -1,0 +1,4 @@
+﻿Below an example of how to use it. 
+
+dotnet ef migrations add InitSample -c DataDbContext -e Development
+dotnet ef database update -c DataDbContext -e Development
