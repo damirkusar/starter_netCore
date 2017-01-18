@@ -8,7 +8,7 @@ using Angular2Core.Models.DataDb;
 namespace Angular2Core.Migrations.DataDb
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20170118094553_InitLocalization")]
+    [Migration("20170118102035_InitLocalization")]
     partial class InitLocalization
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,11 +24,14 @@ namespace Angular2Core.Migrations.DataDb
 
                     b.Property<string>("Container");
 
-                    b.Property<string>("Key");
+                    b.Property<string>("Key")
+                        .IsRequired();
 
-                    b.Property<string>("Language");
+                    b.Property<string>("Language")
+                        .IsRequired();
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Value")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

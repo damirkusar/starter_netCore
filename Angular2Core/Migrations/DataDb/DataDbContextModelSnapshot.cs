@@ -23,11 +23,14 @@ namespace Angular2Core.Migrations.DataDb
 
                     b.Property<string>("Container");
 
-                    b.Property<string>("Key");
+                    b.Property<string>("Key")
+                        .IsRequired();
 
-                    b.Property<string>("Language");
+                    b.Property<string>("Language")
+                        .IsRequired();
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Value")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

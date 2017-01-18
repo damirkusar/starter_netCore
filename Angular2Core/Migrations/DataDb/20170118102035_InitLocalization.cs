@@ -16,9 +16,9 @@ namespace Angular2Core.Migrations.DataDb
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Container = table.Column<string>(nullable: true),
-                    Key = table.Column<string>(nullable: true),
-                    Language = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
+                    Key = table.Column<string>(nullable: false),
+                    Language = table.Column<string>(nullable: false),
+                    Value = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
