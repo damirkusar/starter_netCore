@@ -29,8 +29,9 @@ export class AppComponent extends Locale implements OnChanges, OnInit, DoCheck, 
         this.locale.definePreferredCurrency('CHF');
 
         // Initializes LocalizationService: asynchronous loading.
-        this.localization.translationProvider('./resources/locale-'); // Required: initializes the translation provider with the given path prefix.
-        localization.setMissingKey("missing");
+        // this.localization.translationProvider('./resources/locale-'); // Required: initializes the translation provider with the given path prefix.
+        this.localization.translationProvider('/api/localization/', 'json', true); // Required: initializes the translation provider with the given path prefix.
+        //localization.setMissingKey("missing");
         this.localization.updateTranslation(); // Need to update the translation.
     }
 

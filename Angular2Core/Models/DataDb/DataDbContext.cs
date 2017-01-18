@@ -1,18 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Angular2Core.Models
+namespace Angular2Core.Models.DataDb
 {
     public class DataDbContext : DbContext
     {
+        public DbSet<Localization> Localizations { get; set; }
         public DataDbContext(DbContextOptions<DataDbContext> options)
             : base(options)
         { }
 
-        public DbSet<Sample> Samples { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Sample>().ToTable("Samples");
+            modelBuilder.Entity<Localization>().ToTable("Localization");
         }
     }
 }

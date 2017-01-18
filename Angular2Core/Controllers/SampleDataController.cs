@@ -1,62 +1,29 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Angular2Core.Models;
+using Angular2Core.Models.DataDb;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using OpenIddict;
 
 namespace Angular2Core.Controllers
 {
-    [Route("api/[controller]")]
+    [AllowAnonymous]
+    [Route("api/sample")]
     public class SampleDataController : Controller
     {
-        private DataDbContext dataDbContext;
-        private ApplicationDbContext appDbContext;
-
-        private static string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly DataDbContext dataDbContext;
 
         public SampleDataController(DataDbContext dataDbContext)
         {
             this.dataDbContext = dataDbContext;
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            });
-        }
-
         [HttpPost]
         [Route("CreateSampleData")]
         public void CreateSampleData()
         {
-            this.dataDbContext.Samples.Add(new Sample() { Name = "Hello World-" + new Random().Next() });
+            this.dataDbContext.Localizations.Add(new Localization() { Language = "de", Container = "home", Key = "title", Value = "Willkommen c" });
+            this.dataDbContext.Localizations.Add(new Localization() { Language = "en", Container = "home", Key = "title", Value = "Welcome c" });
+            this.dataDbContext.Localizations.Add(new Localization() { Language = "de", Key = "welcome", Value = "Willkommen" });
+            this.dataDbContext.Localizations.Add(new Localization() { Language = "en", Key = "welcome", Value = "Welcome" });
             this.dataDbContext.SaveChanges();
-        }
-
-        public class WeatherForecast
-        {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
-
-            public int TemperatureF
-            {
-                get
-                {
-                    return 32 + (int)(this.TemperatureC / 0.5556);
-                }
-            }
         }
     }
 }

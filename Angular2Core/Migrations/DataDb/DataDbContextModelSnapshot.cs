@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Angular2Core.Models;
+using Angular2Core.Models.DataDb;
 
 namespace Angular2Core.Migrations.DataDb
 {
@@ -16,16 +16,22 @@ namespace Angular2Core.Migrations.DataDb
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Angular2Core.Models.Sample", b =>
+            modelBuilder.Entity("Angular2Core.Models.DataDb.Localization", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Container");
+
+                    b.Property<string>("Key");
+
+                    b.Property<string>("Language");
+
+                    b.Property<string>("Value");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Samples");
+                    b.ToTable("Localization");
                 });
         }
     }

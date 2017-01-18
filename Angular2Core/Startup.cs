@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Angular2Core.Models;
+using Angular2Core.Models.DataDb;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,7 +41,7 @@ namespace Angular2Core
                 });
 
             services.AddDbContext<DataDbContext>(
-                options => options.UseSqlServer(this.Configuration.GetConnectionString("DataDefaultConnection")));
+                options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultDataConnection")));
 
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlite(this.Configuration.GetConnectionString("DefaultConnection")));

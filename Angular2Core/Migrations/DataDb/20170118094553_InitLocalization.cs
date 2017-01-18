@@ -5,28 +5,31 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Angular2Core.Migrations.DataDb
 {
-    public partial class Init : Migration
+    public partial class InitLocalization : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Samples",
+                name: "Localization",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Container = table.Column<string>(nullable: true),
+                    Key = table.Column<string>(nullable: true),
+                    Language = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Samples", x => x.Id);
+                    table.PrimaryKey("PK_Localization", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Samples");
+                name: "Localization");
         }
     }
 }
