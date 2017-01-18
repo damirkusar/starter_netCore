@@ -74,6 +74,9 @@
   "publishOptions": {
     "include": [
       "appsettings.json",
+      "appsettings.development.json",
+      "appsettings.staging.json",
+      "appsettings.production.json",
       "ClientApp/dist",
       "node_modules",
       "Views",
