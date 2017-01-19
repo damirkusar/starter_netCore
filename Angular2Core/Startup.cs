@@ -6,12 +6,16 @@ using Angular2Core.Models.DataDb;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace Angular2Core
 {
@@ -119,6 +123,7 @@ namespace Angular2Core
             // Add framework services.
             services.AddMvc();
             services.AddOptions();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -126,6 +131,10 @@ namespace Angular2Core
         {
             loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddNLog();
+
+            app.AddNLogWeb();
+            env.ConfigureNLog("nlog.config");
 
             if (env.IsDevelopment())
             {
@@ -182,6 +191,9 @@ namespace Angular2Core
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            var logger = LogManager.GetCurrentClassLogger();
+            logger.Debug($"Environment in AngularCoreSeed is ${env.EnvironmentName}");
         }
     }
 }

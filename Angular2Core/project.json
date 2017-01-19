@@ -20,6 +20,8 @@
     "Microsoft.Extensions.Logging": "1.1.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
+    "NLog.Extensions.Logging": "1.0.0-*",
+    "NLog.Web.AspNetCore": "4.3.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
 
     "Microsoft.AspNetCore.Cors": "1.1.0",
@@ -81,7 +83,8 @@
       "node_modules",
       "Views",
       "web.config",
-      "wwwroot"
+      "wwwroot",
+      "nlog.config"
     ]
   },
 
