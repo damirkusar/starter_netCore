@@ -1,0 +1,1 @@
+﻿Scaffold-DbContext "Server=YOUR-DB-CONNECTION-STRING" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ModelsGenerated -verbose
