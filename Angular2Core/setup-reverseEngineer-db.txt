@@ -1,1 +1,1 @@
-﻿Scaffold-DbContext "Server=YOUR-DB-CONNECTION-STRING" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ModelsGenerated -Context DataDbContext -Environment staging -verbose
+﻿Scaffold-DbContext -Connection "Server=YOUR-DB-CONNECTION-STRING" -Context "GeneratedDataDbContext" -Environment "staging" -OutputDir "ModelsGenerated" -provider "Microsoft.EntityFrameworkCore.SqlServer" -verbose -Force
