@@ -8,8 +8,9 @@ namespace Angular2Core.Dal
     {
         public IEnumerable<SampleView> GetSamples()
         {
-            var sample = this.dataDbContext.SampleView.ToList();
-            return sample;
+            //var sample = this.dataDbContext.SampleView.ToList();
+            //return sample;
+            return null;
         }
     }
 }

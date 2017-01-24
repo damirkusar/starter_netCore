@@ -8,9 +8,10 @@ using Angular2Core.Models.DataDb;
 namespace Angular2Core.Migrations.DataDb
 {
     [DbContext(typeof(DataDbContext))]
-    partial class DataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170124110802_InitLocalizations")]
+    partial class InitLocalizations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -40,6 +41,16 @@ namespace Angular2Core.Migrations.DataDb
                     b.HasKey("Id");
 
                     b.ToTable("Localizations","Model");
+                });
+
+            modelBuilder.Entity("Angular2Core.Models.DataDb.Views.SampleView", b =>
+                {
+                    b.Property<string>("SampleProp")
+                        .ValueGeneratedOnAdd();
+
+                    b.HasKey("SampleProp");
+
+                    b.ToTable("Sample","Facade");
                 });
         }
     }

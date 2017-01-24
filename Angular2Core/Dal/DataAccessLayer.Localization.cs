@@ -7,12 +7,12 @@ namespace Angular2Core.Dal
 {
     public partial class DataAccessLayer
     {
-        public List<Localization> GetLocalizations()
+        public List<Localizations> GetLocalizations()
         {
             return this.dataDbContext.Localizations.ToList();
         }
 
-        public List<Localization> GetLocalizations(string language)
+        public List<Localizations> GetLocalizations(string language)
         {
             return this.dataDbContext.Localizations.Where(x => x.Language.Equals(language)).ToList();
         }
@@ -33,9 +33,9 @@ namespace Angular2Core.Dal
             return jObject;
         }
 
-        public Localization AddLocalization(string language, string container, string key, string value)
+        public Localizations AddLocalization(string language, string container, string key, string value)
         {
-            var localization = new Localization()
+            var localization = new Localizations()
             {
                 Language = language,
                 Container = container,
@@ -48,7 +48,7 @@ namespace Angular2Core.Dal
             return localization;
         }
 
-        private string CreateLocalizationKey(Localization localization)
+        private string CreateLocalizationKey(Localizations localization)
         {
             var key = localization.Container != null ? $"{localization.Container}_{localization.Key}" : $"{localization.Key}";
             return key;

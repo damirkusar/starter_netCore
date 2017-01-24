@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Angular2Core.Models.DataDb
 {
-    public class Localization
+    public class Localizations
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Container { get; set; }
         [Required]
         public string Language { get; set; }
