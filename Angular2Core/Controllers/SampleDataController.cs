@@ -1,4 +1,4 @@
-using Angular2Core.Models.DataDb;
+using Angular2Core.Dal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,22 +8,29 @@ namespace Angular2Core.Controllers
     [Route("api/sample")]
     public class SampleDataController : Controller
     {
-        private readonly DataDbContext dataDbContext;
+        private readonly DataAccessLayer dal;
 
-        public SampleDataController(DataDbContext dataDbContext)
+        public SampleDataController(DataAccessLayer dal)
         {
-            this.dataDbContext = dataDbContext;
+            this.dal = dal;
         }
 
         [HttpPost]
         [Route("CreateSampleData")]
         public void CreateSampleData()
         {
-            this.dataDbContext.Localizations.Add(new Localization() { Language = "de", Container = "home", Key = "title", Value = "Willkommen c" });
-            this.dataDbContext.Localizations.Add(new Localization() { Language = "en", Container = "home", Key = "title", Value = "Welcome c" });
-            this.dataDbContext.Localizations.Add(new Localization() { Language = "de", Key = "welcome", Value = "Willkommen" });
-            this.dataDbContext.Localizations.Add(new Localization() { Language = "en", Key = "welcome", Value = "Welcome" });
-            this.dataDbContext.SaveChanges();
+            this.dal.AddLocalization("en", "test", "test", "Just Testing");
+        }
+
+        [HttpGet]
+        [Route("GetSampleData")]
+        public IActionResult GetSampleData()
+        {
+            // Default reverse engineered models
+            var localization = this.dal.GetLocalizations();
+            var localizationAsJson = this.dal.GetLocalizationsAsJson();
+
+            return this.Ok(localization);
         }
     }
 }

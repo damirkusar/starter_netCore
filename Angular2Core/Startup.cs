@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Angular2Core.Dal;
 using Angular2Core.Models;
 using Angular2Core.Models.DataDb;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -124,6 +125,7 @@ namespace Angular2Core
             services.AddMvc();
             services.AddOptions();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<DataAccessLayer, DataAccessLayer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
