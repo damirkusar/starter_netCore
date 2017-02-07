@@ -5,6 +5,7 @@
  */
 
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using Angular2Core.Models;
@@ -83,7 +84,7 @@ namespace Angular2Core.Controllers
             }
 
             // Create a new authentication ticket.
-            var ticket = await this.CreateTicketAsync(request, user);
+            var ticket = await this.CreateUserTicketAsync(request, user);
 
             // Returning a SignInResult will ask OpenIddict to issue the appropriate access/identity tokens.
             return this.SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
@@ -131,7 +132,7 @@ namespace Angular2Core.Controllers
 
         [HttpPost("~/connect/token")]
         [Produces("application/json")]
-        public async Task<IActionResult> Exchange(OpenIdConnectRequest request)
+        public async Task<IActionResult> Token(OpenIdConnectRequest request)
         {
             if (request.IsPasswordGrantType())
             {
@@ -196,7 +197,28 @@ namespace Angular2Core.Controllers
                 }
 
                 // Create a new authentication ticket.
-                var ticket = await this.CreateTicketAsync(request, user);
+                var ticket = await this.CreateUserTicketAsync(request, user);
+
+                return this.SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
+            }
+
+            else if (request.IsClientCredentialsGrantType())
+            {
+                // Note: the client credentials are automatically validated by OpenIddict:
+                // if client_id or client_secret are invalid, this action won't be invoked.
+
+                var application = await this.applicationManager.FindByClientIdAsync(request.ClientId, this.HttpContext.RequestAborted);
+                if (application == null)
+                {
+                    return this.BadRequest(new OpenIdConnectResponse
+                    {
+                        Error = OpenIdConnectConstants.Errors.InvalidClient,
+                        ErrorDescription = "The client application was not found in the database."
+                    });
+                }
+
+                // Create a new authentication ticket.
+                var ticket = this.CreateClientTicket(request, application);
 
                 return this.SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
             }
@@ -208,7 +230,31 @@ namespace Angular2Core.Controllers
             });
         }
 
-        private async Task<AuthenticationTicket> CreateTicketAsync(OpenIdConnectRequest request, ApplicationUser user)
+
+        private AuthenticationTicket CreateClientTicket(OpenIdConnectRequest request, OpenIddictApplication application)
+        {
+            // Create a new ClaimsIdentity containing the claims that
+            // will be used to create an id_token, a token or a code.
+            var identity = new ClaimsIdentity(OpenIdConnectServerDefaults.AuthenticationScheme);
+
+            // Use the client_id as the name identifier.
+            identity.AddClaim(ClaimTypes.NameIdentifier, application.ClientId,
+                OpenIdConnectConstants.Destinations.AccessToken,
+                OpenIdConnectConstants.Destinations.IdentityToken);
+
+            identity.AddClaim(ClaimTypes.Name, application.DisplayName,
+                OpenIdConnectConstants.Destinations.AccessToken,
+                OpenIdConnectConstants.Destinations.IdentityToken);
+
+            // Create a new authentication ticket holding the user identity.
+            return new AuthenticationTicket(
+                new ClaimsPrincipal(identity),
+                new AuthenticationProperties(),
+                OpenIdConnectServerDefaults.AuthenticationScheme);
+        }
+
+
+        private async Task<AuthenticationTicket> CreateUserTicketAsync(OpenIdConnectRequest request, ApplicationUser user)
         {
             // Create a new ClaimsPrincipal containing the claims that
             // will be used to create an id_token, a token or a code.

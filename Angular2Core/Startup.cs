@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Angular2Core.Dal;
 using Angular2Core.Models;
@@ -17,6 +18,8 @@ using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using OpenIddict.Core;
+using OpenIddict.Models;
 
 namespace Angular2Core
 {
@@ -97,8 +100,8 @@ namespace Angular2Core
                 // Enable the authorization, logout, token and userinfo endpoints.
                 //.EnableAuthorizationEndpoint("/connect/authorize") // Create corresponding View
                 // .EnableLogoutEndpoint("/connect/logout") // Create corresponding View
-                .EnableTokenEndpoint("/connect/token")
                 // .EnableUserinfoEndpoint("/connect/account/UserInfo") // Create corresponding View or use /api/account/userInfo
+                .EnableTokenEndpoint("/connect/token")
 
                 // Note: the Mvc.Client sample only uses the code flow and the password flow, but you
                 // can enable the other flows if you need to support implicit or client credentials.
@@ -106,6 +109,7 @@ namespace Angular2Core
                 //.UseJsonWebTokens()
                 // .AllowAuthorizationCodeFlow()
                 .AllowPasswordFlow()
+                .AllowClientCredentialsFlow()
                 //.AllowRefreshTokenFlow()
 
                 // Make the "client_id" parameter mandatory when sending a token request.
@@ -196,6 +200,30 @@ namespace Angular2Core
 
             var logger = LogManager.GetCurrentClassLogger();
             logger.Debug($"Environment in AngularCoreSeed is ${env.EnvironmentName}");
+            InitializeAsync(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
+        }
+
+        private async Task InitializeAsync(IServiceProvider services, CancellationToken cancellationToken)
+        {
+            // Create a new service scope to ensure the database context is correctly disposed when this methods returns.
+            using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                await context.Database.EnsureCreatedAsync();
+
+                var manager = scope.ServiceProvider.GetRequiredService<OpenIddictApplicationManager<OpenIddictApplication>>();
+
+                if (await manager.FindByClientIdAsync("console", cancellationToken) == null)
+                {
+                    var application = new OpenIddictApplication
+                    {
+                        ClientId = "console",
+                        DisplayName = "My client application"
+                    };
+
+                    await manager.CreateAsync(application, "388D45FA-B36B-4988-BA59-B187D329C207", cancellationToken);
+                }
+            }
         }
     }
 }
