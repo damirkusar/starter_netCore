@@ -101,5 +101,8 @@
 
   "tooling": {
     "defaultNamespace": "Angular2Core"
-  }
+  },
+  "version": "1.0.0-*",
+  "authors": [ "Damir Kusar" ],
+  "description": "#"
 }
