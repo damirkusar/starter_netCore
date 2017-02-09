@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
-import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { Localization, LocaleService, TranslationService } from 'angular-l10n';
 import { LoggerService } from '../../../services/logger.service';
 import { INews, News } from '../services/news.service';
 
@@ -9,15 +9,15 @@ import { INews, News } from '../services/news.service';
     template: require('./newsroom.component.html'),
     styles: [require('./newsroom.component.scss')]
 })
-export class NewsRoomComponent extends Locale implements OnChanges, OnInit, DoCheck, OnDestroy {
+export class NewsRoomComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     news: INews;
     error: any;
     constructor(
         private logger: LoggerService,
         private route: ActivatedRoute,
         public locale: LocaleService,
-        public localization: LocalizationService) {
-        super(locale, localization);
+        public translation: TranslationService) {
+        super(locale, translation);
     }
 
     ngOnChanges(changes: Object): void { }
@@ -34,7 +34,7 @@ export class NewsRoomComponent extends Locale implements OnChanges, OnInit, DoCh
     ngOnDestroy(): void { }
 
     canDeactivate(): Promise<boolean> | boolean {
-        // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+        // Allow synchronous navigation (`true`) if nothing is unchanged
         this.logger.debug(`NewsRoomComponent-canDeactivate`);
         // Otherwise ask the user with the dialog service and return its
         // promise which resolves to true or false when the user decides

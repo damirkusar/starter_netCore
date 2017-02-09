@@ -27,6 +27,7 @@ module.exports = {
             'angular-2-local-storage',
             'angular2-universal',
             'angular2-universal-polyfills',
+            'angular-l10n',
             'bootstrap',
             'bootstrap/dist/css/bootstrap.css',
             'es6-shim',

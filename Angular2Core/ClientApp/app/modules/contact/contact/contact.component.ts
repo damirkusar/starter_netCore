@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
-import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { Localization, LocaleService, TranslationService } from 'angular-l10n';
 import { LoggerService } from '../../../services/logger.service';
 
 @Component({
@@ -7,11 +7,11 @@ import { LoggerService } from '../../../services/logger.service';
     template: require('./contact.component.html'),
     styles: [require('./contact.component.scss')]
 })
-export class ContactComponent extends Locale implements OnChanges, OnInit, DoCheck, OnDestroy {
+export class ContactComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     constructor(private logger: LoggerService,
         public locale: LocaleService,
-        public localization: LocalizationService) {
-        super(locale, localization);
+        public translation: TranslationService) {
+        super(locale, translation);
     }
 
     ngOnChanges(changes: Object): void { }

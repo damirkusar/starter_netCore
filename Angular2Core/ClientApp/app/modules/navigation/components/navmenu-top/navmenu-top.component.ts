@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
-import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { Localization, LocaleService, TranslationService } from 'angular-l10n';
 import { ICredentials } from '../../../../models/credentials';
 import { IUser } from '../../../../models/user';
 import { LoggerService } from '../../../../services/logger.service';
@@ -10,7 +10,7 @@ import { LoggerService } from '../../../../services/logger.service';
     styles: [require('./navmenu-top.component.scss')]
 
 })
-export class NavMenuTopComponent extends Locale implements OnChanges, OnInit, DoCheck, OnDestroy {
+export class NavMenuTopComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     private _isLoggedIn: boolean;
     @Input() user: IUser;
     @Input() loginError: boolean;
@@ -19,8 +19,8 @@ export class NavMenuTopComponent extends Locale implements OnChanges, OnInit, Do
 
     constructor(private logger: LoggerService,
         public locale: LocaleService,
-        public localization: LocalizationService) {
-        super(locale, localization);
+        public translation: TranslationService) {
+        super(locale, translation);
     }
 
     ngOnChanges(changes: Object): void { }

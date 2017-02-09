@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
-import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { Localization, LocaleService, TranslationService } from 'angular-l10n';
 import { ICredentials } from '../../../models/credentials';
 import { IUser } from '../../../models/user';
 import { IToken } from '../../../models/token';
@@ -13,7 +13,7 @@ import { LoggerService } from '../../../services/logger.service';
     template: require('./navigation.component.html'),
     styles: [require('./navigation.component.scss')]
 })
-export class NavigationComponent extends Locale implements OnChanges, OnInit, DoCheck, OnDestroy {
+export class NavigationComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     isLoggedIn: boolean;
     loginError: boolean;
     loggedInUser: IUser;
@@ -24,8 +24,8 @@ export class NavigationComponent extends Locale implements OnChanges, OnInit, Do
         private accountService: AccountService,
         private loaderService: LoaderService,
         public locale: LocaleService,
-        public localization: LocalizationService) {
-        super(locale, localization);
+        public translation: TranslationService) {
+        super(locale, translation);
     }
 
     ngOnChanges(changes: Object): void { }

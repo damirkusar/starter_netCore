@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { FormsModule } from '@angular/forms';
-import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
+import { LocalizationModule } from 'angular-l10n';
 
 import { AdminModule } from './modules/admin/admin.module';
 import { ContactModule } from './modules/contact/contact.module';
@@ -55,8 +55,7 @@ import { LoaderService } from './services/loader.service';
             prefix: 'dk',
             storageType: 'localStorage'
         }),
-        LocaleModule.forRoot(), // New instance of LocaleService.
-        LocalizationModule.forRoot(), // New instance of LocalizationService.
+        LocalizationModule.forRoot(),
         // My Modules
         AdminModule,
         ContactModule,

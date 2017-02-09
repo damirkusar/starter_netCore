@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
 import { FormsModule } from '@angular/forms';
 
-import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
+import { LocalizationModule } from 'angular-l10n';
 
 import { NavigationComponent } from './navigation/navigation.component';
 
@@ -26,7 +26,6 @@ import { NavMenuElementsNotificationComponent } from './components/navmenu-eleme
         FormsModule,
         RouterModule.forRoot([
         ]),
-        LocaleModule.forChild(),
         LocalizationModule.forChild()
         // My Modules
     ],

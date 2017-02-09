@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
-import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { Localization, LocaleService, TranslationService } from 'angular-l10n';
 
 import { IUser } from '../../../../models/user';
 import { ICredentials } from '../../../../models/credentials';
@@ -11,11 +11,10 @@ import { LoggerService } from '../../../../services/logger.service';
     styles: [require('./navmenu-elements-localization.component.scss')]
 
 })
-export class NavMenuElementsLocalizationComponent extends Locale implements OnChanges, OnInit, DoCheck, OnDestroy {
+export class NavMenuElementsLocalizationComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     constructor(private logger: LoggerService,
-        public locale: LocaleService,
-        public localization: LocalizationService) { 
-        super(locale, localization);
+        public translation: TranslationService, public locale: LocaleService) { 
+        super(locale, translation);
     }
 
     ngOnChanges(changes: Object): void { }
@@ -27,7 +26,7 @@ export class NavMenuElementsLocalizationComponent extends Locale implements OnCh
     ngOnDestroy(): void { }
 
     selectLocale(language: string, country: string, currency: string): void {
-        this.locale.setCurrentLocale(language, country);
+        this.locale.setDefaultLocale(language, country);
         this.locale.setCurrentCurrency(currency);
     }
 }

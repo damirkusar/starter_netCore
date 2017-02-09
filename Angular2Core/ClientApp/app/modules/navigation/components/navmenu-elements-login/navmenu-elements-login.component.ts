@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
-import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { Localization, LocaleService, TranslationService } from 'angular-l10n';
 import { IUser } from '../../../../models/user';
 import { ICredentials } from '../../../../models/credentials';
 import { LoggerService } from '../../../../services/logger.service';
@@ -10,7 +10,7 @@ import { LoggerService } from '../../../../services/logger.service';
     styles: [require('./navmenu-elements-login.component.scss')]
 
 })
-export class NavMenuElementsLoginComponent extends Locale implements OnChanges, OnInit, DoCheck, OnDestroy {
+export class NavMenuElementsLoginComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     private _isLoggedIn: boolean;
     @Input() user: IUser;
     @Input() loginError: boolean;
@@ -20,8 +20,8 @@ export class NavMenuElementsLoginComponent extends Locale implements OnChanges, 
     constructor(
         private logger: LoggerService,
         public locale: LocaleService,
-        public localization: LocalizationService) {
-        super(locale, localization);
+        public translation: TranslationService) {
+        super(locale, translation);
     }
 
     ngOnChanges(changes: Object): void { }
