@@ -1,6 +1,6 @@
 {
   "name": "webapp",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "license": "UNLICENSED",
   "repository": "https://github.com/damirkusar/AngularMeetsNetCore",
   "dependencies": {
