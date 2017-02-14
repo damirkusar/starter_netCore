@@ -51,5 +51,9 @@
   },
   "devDependencies": {
     "angular-router-loader": "^0.5.0"
+  },
+  "scripts": {
+    "webpack": "webpack --config webpack.config.vendor.js",
+    "remodel": "dotnet ef dbcontext scaffold \"Server=YOUR-DB-CONNECTION-STRING\" \"Microsoft.EntityFrameworkCore.SqlServer\" -c \"GeneratedDataDbContext\" -e \"staging\" -o \"ModelsGenerated\" --verbose"
   }
 }
