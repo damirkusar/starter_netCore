@@ -97,23 +97,10 @@ namespace Angular2Core
                 // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
                 .AddMvcBinders()
 
-                // Enable the authorization, logout, token and userinfo endpoints.
-                //.EnableAuthorizationEndpoint("/connect/authorize") // Create corresponding View
-                // .EnableLogoutEndpoint("/connect/logout") // Create corresponding View
-                // .EnableUserinfoEndpoint("/connect/account/UserInfo") // Create corresponding View or use /api/account/userInfo
                 .EnableTokenEndpoint("/connect/token")
 
-                // Note: the Mvc.Client sample only uses the code flow and the password flow, but you
-                // can enable the other flows if you need to support implicit or client credentials.
-
-                //.UseJsonWebTokens()
-                // .AllowAuthorizationCodeFlow()
                 .AllowPasswordFlow()
                 .AllowClientCredentialsFlow()
-                //.AllowRefreshTokenFlow()
-
-                // Make the "client_id" parameter mandatory when sending a token request.
-                // .RequireClientIdentification()
 
                 // During development, you can disable the HTTPS requirement.
                 .DisableHttpsRequirement()
@@ -182,7 +169,6 @@ namespace Angular2Core
                         .AllowAnyMethod()
                         .AllowAnyOrigin()
             );
-            //app.UseCors(policy => policy.AllowAnyOrigin());
 
             app.UseOAuthValidation();
             app.UseOpenIddict();
@@ -200,7 +186,7 @@ namespace Angular2Core
 
             var logger = LogManager.GetCurrentClassLogger();
             logger.Debug($"Environment in AngularCoreSeed is ${env.EnvironmentName}");
-            InitializeAsync(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
+            this.InitializeAsync(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
         }
 
         private async Task InitializeAsync(IServiceProvider services, CancellationToken cancellationToken)
@@ -209,16 +195,16 @@ namespace Angular2Core
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                await context.Database.EnsureCreatedAsync();
+                await context.Database.EnsureCreatedAsync(cancellationToken);
 
                 var manager = scope.ServiceProvider.GetRequiredService<OpenIddictApplicationManager<OpenIddictApplication>>();
 
-                if (await manager.FindByClientIdAsync("console", cancellationToken) == null)
+                if (await manager.FindByClientIdAsync("TestClient", cancellationToken) == null)
                 {
                     var application = new OpenIddictApplication
                     {
-                        ClientId = "console",
-                        DisplayName = "My client application"
+                        ClientId = "TestClient",
+                        DisplayName = "My TestClient application"
                     };
 
                     await manager.CreateAsync(application, "388D45FA-B36B-4988-BA59-B187D329C207", cancellationToken);
