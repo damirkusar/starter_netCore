@@ -54,6 +54,7 @@
   },
   "scripts": {
     "webpack": "webpack --config webpack.config.vendor.js",
-    "remodel": "dotnet ef dbcontext scaffold \"Server=YOUR-DB-CONNECTION-STRING\" \"Microsoft.EntityFrameworkCore.SqlServer\" -c \"GeneratedDataDbContext\" -e \"staging\" -o \"ModelsGenerated\" --verbose"
+    "remodel": "dotnet ef dbcontext scaffold \"Server=YOUR-DB-CONNECTION-STRING\" \"Microsoft.EntityFrameworkCore.SqlServer\" -c \"GeneratedDataDbContext\" -e \"staging\" -o \"ModelsGenerated\" --verbose",
+    "postinstall": "npm run webpack"
   }
 }
