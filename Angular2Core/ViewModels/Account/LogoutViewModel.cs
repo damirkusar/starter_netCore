@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Angular2Core.ViewModels.Account
+namespace WebApp.ViewModels.Account
 {
     public class LogoutViewModel
     {

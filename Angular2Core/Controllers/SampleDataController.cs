@@ -1,8 +1,8 @@
-using Angular2Core.Dal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Dal;
 
-namespace Angular2Core.Controllers
+namespace WebApp.Controllers
 {
     [Authorize]
     [Route("api/sample")]

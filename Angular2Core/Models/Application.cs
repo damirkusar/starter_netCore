@@ -1,4 +1,4 @@
-﻿namespace Angular2Core.Models
+﻿namespace WebApp.Models
 {
     public class Application
     {

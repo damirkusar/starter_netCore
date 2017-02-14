@@ -1,6 +1,6 @@
-﻿using Angular2Core.Models.DataDb;
+﻿using WebApp.Models.DataDb;
 
-namespace Angular2Core.Dal
+namespace WebApp.Dal
 {
     public partial class DataAccessLayer
     {

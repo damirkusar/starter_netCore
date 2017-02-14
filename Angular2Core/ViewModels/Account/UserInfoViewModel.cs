@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Angular2Core.Models;
+using WebApp.Models;
 
-namespace Angular2Core.ViewModels.Account
+namespace WebApp.ViewModels.Account
 {
     public class UserInfoViewModel
     {

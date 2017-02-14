@@ -2,9 +2,6 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Angular2Core.Dal;
-using Angular2Core.Models;
-using Angular2Core.Models.DataDb;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,8 +17,11 @@ using NLog.Extensions.Logging;
 using NLog.Web;
 using OpenIddict.Core;
 using OpenIddict.Models;
+using WebApp.Dal;
+using WebApp.Models;
+using WebApp.Models.DataDb;
 
-namespace Angular2Core
+namespace WebApp
 {
     public class Startup
     {

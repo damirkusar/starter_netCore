@@ -1,11 +1,11 @@
-﻿using Angular2Core.Models;
-using Angular2Core.ViewModels.Account;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Models;
+using WebApp.ViewModels.Account;
 
-namespace Angular2Core.Controllers
+namespace WebApp.Controllers
 {
     [Authorize]
     [Route("api/Account")]

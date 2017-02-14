@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Angular2Core.ViewModels.OpenIdDictAuthorization
+namespace WebApp.ViewModels.OpenIdDictAuthorization
 {
     public class OpenIdDictAuthorizeViewModel
     {

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Angular2Core.Models.DataDb.Views;
-using System.Linq;
+using WebApp.Models.DataDb.Views;
 
-namespace Angular2Core.Dal
+namespace WebApp.Dal
 {
     public partial class DataAccessLayer
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Angular2Core.Models.DataDb.Views
+namespace WebApp.Models.DataDb.Views
 {
     [Table("Sample", Schema = "Facade")]
     public class SampleView

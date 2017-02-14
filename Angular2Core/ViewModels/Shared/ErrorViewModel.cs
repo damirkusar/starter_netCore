@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Angular2Core.ViewModels.Shared
+namespace WebApp.ViewModels.Shared
 {
     public class ErrorViewModel
     {

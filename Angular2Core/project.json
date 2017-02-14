@@ -96,7 +96,7 @@
   },
 
   "tooling": {
-    "defaultNamespace": "Angular2Core"
+    "defaultNamespace": "WebApp"
   },
   "version": "1.0.0-*",
   "authors": [ "Damir Kusar" ],

@@ -7,7 +7,6 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Angular2Core.Models;
 using AspNet.Security.OpenIdConnect.Extensions;
 using AspNet.Security.OpenIdConnect.Primitives;
 using AspNet.Security.OpenIdConnect.Server;
@@ -17,8 +16,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Core;
 using OpenIddict.Models;
+using WebApp.Models;
 
-namespace Angular2Core.Controllers
+namespace WebApp.Controllers
 {
     public class OpenIdDictAuthorizationController : Controller
     {

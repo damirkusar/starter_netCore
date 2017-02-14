@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Angular2Core.Models.DataDb
+namespace WebApp.Models.DataDb
 {
     public class Localizations
     {

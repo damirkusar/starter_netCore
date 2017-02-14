@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Angular2Core.Models
+namespace WebApp.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

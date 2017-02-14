@@ -1,7 +1,6 @@
-﻿using Angular2Core.Models.DataDb.Views;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Angular2Core.Models.DataDb
+namespace WebApp.Models.DataDb
 {
     public class DataDbContext : DbContext
     {

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Angular2Core.Migrations.DataDb
+namespace WebApp.Migrations.DataDb
 {
     public partial class InitLocalizations : Migration
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Angular2Core.Models.DataDb;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using WebApp.Models.DataDb;
 
-namespace Angular2Core.Dal
+namespace WebApp.Dal
 {
     public partial class DataAccessLayer
     {

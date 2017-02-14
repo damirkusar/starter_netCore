@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Angular2Core.ViewModels.Account
+namespace WebApp.ViewModels.Account
 {
     public class RegisterViewModel
     {

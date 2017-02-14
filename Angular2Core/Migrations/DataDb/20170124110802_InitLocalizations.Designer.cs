@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Angular2Core.Models.DataDb;
+using WebApp.Models.DataDb;
 
-namespace Angular2Core.Migrations.DataDb
+namespace WebApp.Migrations.DataDb
 {
     [DbContext(typeof(DataDbContext))]
     [Migration("20170124110802_InitLocalizations")]

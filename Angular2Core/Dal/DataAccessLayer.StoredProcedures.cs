@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Data.SqlClient;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
-namespace Angular2Core.Dal
+namespace WebApp.Dal
 {
     public partial class DataAccessLayer
     {
