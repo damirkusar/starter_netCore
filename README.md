@@ -1,4 +1,4 @@
-# Angular2Core is a seed for Angular2 and Asp.Net Core applications
+# AngularMeetsNetCore is a seed for Angular and Asp.Net Core applications
 
 This seed is an extention of Steve Sanderson´s [ASP.NET Core + Angular 2 template for Visual Studio](http://blog.stevensanderson.com/2016/10/04/angular2-template-for-visual-studio).
 
@@ -7,9 +7,9 @@ token based authentication with [OpenIdDict](https://github.com/openiddict/openi
 
 It also includes a starting point with a login mechanism and auto logout when token expires. It also uses scss instead of css. 
 
-Localization is also included with the following librarie: [angular2localization](https://github.com/robisim74/angular2localization)
+Localization is also included with the following librarie: [angular-l10n](https://github.com/4vanger/angular-l10n)
 
-Here is Steve Sanderson´s [README](https://github.com/damirkusar/Angular2CoreSeed/blob/master/Angular2Core/README.md) of the template.
+Here is Steve Sanderson´s [README](https://github.com/damirkusar/AngularMeetsNetCore/blob/master/WebApp/README.md) of the template.
 
 # Getting Started
 
