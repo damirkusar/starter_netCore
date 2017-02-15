@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Dal;
@@ -28,22 +29,30 @@ namespace WebApp.Controllers
         [AllowAnonymous]
         public IActionResult GetSampleData()
         {
-            // Default reverse engineered models
-            var localization = this.dal.GetLocalizations();
-            var localizationAsJson = this.dal.GetLocalizationsAsJson();
-
-            return this.Ok(localization);
+            try
+            {
+                var localization = this.dal.GetLocalizations();
+                return this.Ok(localization);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
         }
 
         [HttpGet]
         [Route("GetSampleDataSecured")]
         public IActionResult GetSampleDataSecured()
         {
-            // Default reverse engineered models
-            var localization = this.dal.GetLocalizations();
-            var localizationAsJson = this.dal.GetLocalizationsAsJson();
-
-            return this.Ok(localization);
+            try
+            {
+                var localization = this.dal.GetLocalizations();
+                return this.Ok(localization);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
         }
     }
 }

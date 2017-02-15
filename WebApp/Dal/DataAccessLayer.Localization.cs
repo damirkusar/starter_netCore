@@ -7,17 +7,17 @@ namespace WebApp.Dal
 {
     public partial class DataAccessLayer
     {
-        public List<Localizations> GetLocalizations()
+        public virtual List<Localizations> GetLocalizations()
         {
             return this.dataDbContext.Localizations.ToList();
         }
 
-        public List<Localizations> GetLocalizations(string language)
+        public virtual List<Localizations> GetLocalizations(string language)
         {
             return this.dataDbContext.Localizations.Where(x => x.Language.Equals(language)).ToList();
         }
 
-        public JObject GetLocalizationsAsJson()
+        public virtual JObject GetLocalizationsAsJson()
         {
             var jObject = new JObject();
             var localizations = this.GetLocalizations();
@@ -25,7 +25,7 @@ namespace WebApp.Dal
             return jObject;
         }
 
-        public JObject GetLocalizationsAsJson(string language)
+        public virtual JObject GetLocalizationsAsJson(string language)
         {
             var jObject = new JObject();
             var localizations = this.GetLocalizations(language);
@@ -33,7 +33,7 @@ namespace WebApp.Dal
             return jObject;
         }
 
-        public Localizations AddLocalization(string language, string container, string key, string value)
+        public virtual Localizations AddLocalization(string language, string container, string key, string value)
         {
             var localization = new Localizations()
             {
