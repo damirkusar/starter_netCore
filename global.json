@@ -1,3 +1,3 @@
 {
-  "projects": [ "WebApp", "WebApp.Test" ]
+  "projects": [ "WebApp", "WebApp.Tests", "WebApp.Tests.Integration" ]
 }
