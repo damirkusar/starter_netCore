@@ -14,7 +14,7 @@ namespace WebApp.Models
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.HasDefaultSchema("Security");
+            builder.HasDefaultSchema("SecurityModel");
             base.OnModelCreating(builder);
 
             // Customize the ASP.NET Identity model and override the defaults if needed.

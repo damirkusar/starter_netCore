@@ -8,13 +8,13 @@ using WebApp.Models;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170215103655_InitApplicationDbContext")]
+    [Migration("20170215125949_InitApplicationDbContext")]
     partial class InitApplicationDbContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasDefaultSchema("Security")
+                .HasDefaultSchema("SecurityModel")
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

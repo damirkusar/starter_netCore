@@ -10,11 +10,11 @@ namespace WebApp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Security");
+                name: "SecurityModel");
 
             migrationBuilder.CreateTable(
                 name: "UserTokens",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
@@ -29,7 +29,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OpenIddictApplications",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -47,7 +47,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OpenIddictScopes",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -60,7 +60,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Roles",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     RoleId = table.Column<Guid>(nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
@@ -75,7 +75,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Users",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
@@ -103,7 +103,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OpenIddictAuthorizations",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -117,7 +117,7 @@ namespace WebApp.Migrations
                     table.ForeignKey(
                         name: "FK_OpenIddictAuthorizations_OpenIddictApplications_ApplicationId",
                         column: x => x.ApplicationId,
-                        principalSchema: "Security",
+                        principalSchema: "SecurityModel",
                         principalTable: "OpenIddictApplications",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -125,7 +125,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "RoleClaims",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -140,7 +140,7 @@ namespace WebApp.Migrations
                     table.ForeignKey(
                         name: "FK_RoleClaims_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "Security",
+                        principalSchema: "SecurityModel",
                         principalTable: "Roles",
                         principalColumn: "RoleId",
                         onDelete: ReferentialAction.Cascade);
@@ -148,7 +148,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserClaims",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -163,7 +163,7 @@ namespace WebApp.Migrations
                     table.ForeignKey(
                         name: "FK_UserClaims_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Security",
+                        principalSchema: "SecurityModel",
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -171,7 +171,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserLogins",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(type: "varchar(256)", nullable: false),
@@ -185,7 +185,7 @@ namespace WebApp.Migrations
                     table.ForeignKey(
                         name: "FK_UserLogins_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Security",
+                        principalSchema: "SecurityModel",
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -193,7 +193,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserRoles",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
@@ -205,14 +205,14 @@ namespace WebApp.Migrations
                     table.ForeignKey(
                         name: "FK_UserRoles_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "Security",
+                        principalSchema: "SecurityModel",
                         principalTable: "Roles",
                         principalColumn: "RoleId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserRoles_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Security",
+                        principalSchema: "SecurityModel",
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -220,7 +220,7 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OpenIddictTokens",
-                schema: "Security",
+                schema: "SecurityModel",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -235,14 +235,14 @@ namespace WebApp.Migrations
                     table.ForeignKey(
                         name: "FK_OpenIddictTokens_OpenIddictApplications_ApplicationId",
                         column: x => x.ApplicationId,
-                        principalSchema: "Security",
+                        principalSchema: "SecurityModel",
                         principalTable: "OpenIddictApplications",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_OpenIddictTokens_OpenIddictAuthorizations_AuthorizationId",
                         column: x => x.AuthorizationId,
-                        principalSchema: "Security",
+                        principalSchema: "SecurityModel",
                         principalTable: "OpenIddictAuthorizations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -250,69 +250,69 @@ namespace WebApp.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "RoleClaims",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "UserClaims",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserLogins_UserId",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "UserLogins",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "UserRoles",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictApplications_ClientId",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "OpenIddictApplications",
                 column: "ClientId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictAuthorizations_ApplicationId",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "OpenIddictAuthorizations",
                 column: "ApplicationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictTokens_ApplicationId",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "OpenIddictTokens",
                 column: "ApplicationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictTokens_AuthorizationId",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "OpenIddictTokens",
                 column: "AuthorizationId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "Roles",
                 column: "NormalizedName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "Users",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                schema: "Security",
+                schema: "SecurityModel",
                 table: "Users",
                 column: "NormalizedUserName",
                 unique: true);
@@ -322,47 +322,47 @@ namespace WebApp.Migrations
         {
             migrationBuilder.DropTable(
                 name: "RoleClaims",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "UserClaims",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "UserLogins",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "UserRoles",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "UserTokens",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictScopes",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictTokens",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "Roles",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "Users",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictAuthorizations",
-                schema: "Security");
+                schema: "SecurityModel");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictApplications",
-                schema: "Security");
+                schema: "SecurityModel");
         }
     }
 }

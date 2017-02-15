@@ -8,7 +8,7 @@ using WebApp.Models.DataDb;
 namespace WebApp.Migrations.DataDb
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20170215103753_InitDataDbContext")]
+    [Migration("20170215130007_InitDataDbContext")]
     partial class InitDataDbContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
