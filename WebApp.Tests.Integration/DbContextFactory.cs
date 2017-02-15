@@ -27,7 +27,7 @@ namespace WebApp.Tests.Integration
             .AddEntityFrameworkSqlServer()
             .BuildServiceProvider();
             var dbContextBuilder = new DbContextOptionsBuilder<DataDbContext>();
-            dbContextBuilder.UseSqlServer($"Server=(localdb)\\mssqllocaldb;Database=Angular2Core;Trusted_Connection=True;MultipleActiveResultSets=true")
+            dbContextBuilder.UseSqlServer($"Server=(localdb)\\mssqllocaldb;Database=WebAppSolution;Trusted_Connection=True;MultipleActiveResultSets=true")
                 .UseInternalServiceProvider(serviceProvider);
 
             var dbContext = new DataDbContext(dbContextBuilder.Options);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +14,12 @@ namespace WebApp.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> loginManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<ApplicationRole> roleManager;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> loginManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<ApplicationRole> roleManager)
         {
             this.userManager = userManager;
             this.loginManager = loginManager;
@@ -57,27 +58,40 @@ namespace WebApp.Controllers
                 return this.GetErrorResult(result);
             }
 
-            if (!this.roleManager.RoleExistsAsync("user").Result)
+            if (this.userManager.Users.Count() == 1)
             {
-                var role = new IdentityRole()
+                return this.AssignFirstCreatedUserAsAdmin(user);
+            }
+
+            return this.Ok(user);
+        }
+
+        private IActionResult AssignFirstCreatedUserAsAdmin(ApplicationUser user)
+        {
+            if (!this.roleManager.RoleExistsAsync("admin").Result)
+            {
+                var role = new ApplicationRole()
                 {
-                    Name = "user"
+                    Name = "admin"
                 };
                 var roleResult = this.roleManager.CreateAsync(role).Result;
                 if (!roleResult.Succeeded)
                 {
                     this.ModelState.AddModelError("", "Error while creating role!");
-                    return this.StatusCode(500, this.ModelState);
+                    {
+                        return this.StatusCode(500, this.ModelState);
+                    }
                 }
             }
 
-            var addUserToRoleResult = this.userManager.AddToRoleAsync(user, "user").Result;
+            var addUserToRoleResult = this.userManager.AddToRoleAsync(user, "admin").Result;
             if (!addUserToRoleResult.Succeeded)
             {
-                return this.GetErrorResult(addUserToRoleResult);
+                {
+                    return this.GetErrorResult(addUserToRoleResult);
+                }
             }
-
-            return this.Ok(registerViewModel);
+            return this.Ok(user);
         }
 
         [HttpPost]

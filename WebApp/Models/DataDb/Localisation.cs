@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models.DataDb
 {
-    public class Localizations
+    public class Localisation
     {
         public Guid Id { get; set; }
         public string Container { get; set; }

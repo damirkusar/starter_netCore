@@ -25,10 +25,10 @@ namespace WebApp.Tests.Integration.Controllers
         }
 
         [Test]
-        public void GetSampleData_Has_OneLocalization()
+        public void GetSampleData_Has_Localization()
         {
-            var sampleData = (IList<Localizations>)((OkObjectResult)this.sampleDataController.GetSampleData()).Value;
-            Assert.That(sampleData.Count, Is.EqualTo(6));
+            var sampleData = (IList<Localisation>)((OkObjectResult)this.sampleDataController.GetSampleData()).Value;
+            Assert.That(sampleData.Count, Is.EqualTo(0));
         }
 
         [Test]

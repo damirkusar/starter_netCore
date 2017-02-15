@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using WebApp.Models.DataDb;
 
 namespace WebApp.Migrations.DataDb
@@ -15,7 +16,7 @@ namespace WebApp.Migrations.DataDb
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Angular2Core.Models.DataDb.Localizations", b =>
+            modelBuilder.Entity("WebApp.Models.DataDb.Localisation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,7 +39,7 @@ namespace WebApp.Migrations.DataDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("Localizations","Model");
+                    b.ToTable("Localisations","Model");
                 });
         }
     }

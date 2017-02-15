@@ -5,7 +5,7 @@ namespace WebApp.Models.DataDb
     public class DataDbContext : DbContext
     {
         // Models
-        public DbSet<Localizations> Localizations { get; set; }
+        public DbSet<Localisation> Localizations { get; set; }
 
         //Views
         //public DbSet<SampleView> SampleView { get; set; }
@@ -16,9 +16,9 @@ namespace WebApp.Models.DataDb
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Models
-            modelBuilder.Entity<Localizations>(entity =>
+            modelBuilder.Entity<Localisation>(entity =>
             {
-                entity.ToTable("Localizations", "Model");
+                entity.ToTable("Localisations", "Model");
                 entity.Property(e => e.Id).HasDefaultValueSql("newsequentialid()");
                 entity.Property(e => e.Container).HasColumnType("varchar(255)");
                 entity.Property(e => e.Key).IsRequired().HasColumnType("varchar(255)");

@@ -19,9 +19,9 @@ namespace WebApp.Tests.Controllers
         [SetUp]
         public void Setup()
         {
-            var localizations = new List<Localizations>
+            var localizations = new List<Localisation>
             {
-                new Localizations
+                new Localisation
                 {
                     Id = new Guid(),
                     Container = "TestContainer",
@@ -46,7 +46,7 @@ namespace WebApp.Tests.Controllers
         [Test]
         public void GetSampleData_Has_OneLocalization()
         {
-            var sampleData = (IList<Localizations>)((OkObjectResult) this.sampleDataController.GetSampleData()).Value;
+            var sampleData = (IList<Localisation>)((OkObjectResult) this.sampleDataController.GetSampleData()).Value;
             Assert.That(sampleData.Count, Is.EqualTo(1));
         }
 

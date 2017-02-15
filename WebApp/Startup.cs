@@ -54,7 +54,7 @@ namespace WebApp
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlite(this.Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(o =>
+            services.AddIdentity<ApplicationUser, ApplicationRole>(o =>
             {
                 o.Password.RequireDigit = false;
                 o.Password.RequireLowercase = false;
@@ -85,7 +85,7 @@ namespace WebApp
                     }
                 };
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<ApplicationDbContext, Guid>()
                 .AddDefaultTokenProviders();
 
             var openIdDictBuilder = services.AddOpenIddict()

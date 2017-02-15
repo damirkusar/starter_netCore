@@ -8,8 +8,8 @@ using WebApp.Models.DataDb;
 namespace WebApp.Migrations.DataDb
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20170124110802_InitLocalizations")]
-    partial class InitLocalizations
+    [Migration("20170215103753_InitDataDbContext")]
+    partial class InitDataDbContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace WebApp.Migrations.DataDb
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Angular2Core.Models.DataDb.Localizations", b =>
+            modelBuilder.Entity("WebApp.Models.DataDb.Localisation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,17 +40,7 @@ namespace WebApp.Migrations.DataDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("Localizations","Model");
-                });
-
-            modelBuilder.Entity("Angular2Core.Models.DataDb.Views.SampleView", b =>
-                {
-                    b.Property<string>("SampleProp")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("SampleProp");
-
-                    b.ToTable("Sample","Facade");
+                    b.ToTable("Localisations","Model");
                 });
         }
     }

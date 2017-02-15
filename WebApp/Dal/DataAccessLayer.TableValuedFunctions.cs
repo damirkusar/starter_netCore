@@ -7,9 +7,9 @@ namespace WebApp.Dal
 {
     public partial class DataAccessLayer
     {
-        public List<Localizations> GetLocalizationsViaTableValuedFunction(string language)
+        public List<Localisation> GetLocalizationsViaTableValuedFunction(string language)
         {
-            return this.dataDbContext.Localizations.FromSql("SELECT * FROM Facade.Localizations({0})", language).OrderByDescending(p => p.Container).ToList();
+            return this.dataDbContext.Localizations.FromSql("SELECT * FROM Facade.Localisations({0})", language).OrderByDescending(p => p.Container).ToList();
         }
     }
 }

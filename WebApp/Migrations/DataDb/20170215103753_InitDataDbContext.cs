@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApp.Migrations.DataDb
 {
-    public partial class InitLocalizations : Migration
+    public partial class InitDataDbContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +12,7 @@ namespace WebApp.Migrations.DataDb
                 name: "Model");
 
             migrationBuilder.CreateTable(
-                name: "Localizations",
+                name: "Localisations",
                 schema: "Model",
                 columns: table => new
                 {
@@ -23,14 +24,14 @@ namespace WebApp.Migrations.DataDb
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Localizations", x => x.Id);
+                    table.PrimaryKey("PK_Localisations", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Localizations",
+                name: "Localisations",
                 schema: "Model");
         }
     }
