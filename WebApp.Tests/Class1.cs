@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace WebApp.Test
+namespace WebApp.Tests
 {
     [TestFixture]
     public class Class1

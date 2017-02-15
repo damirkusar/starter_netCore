@@ -8,7 +8,7 @@ using WebApp.Controllers;
 using WebApp.Dal;
 using WebApp.Models.DataDb;
 
-namespace WebApp.Test.Controllers
+namespace WebApp.Tests.Controllers
 {
     [TestFixture]
     public class SampleDataControllerTest
