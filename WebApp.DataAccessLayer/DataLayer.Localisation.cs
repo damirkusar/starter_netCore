@@ -7,45 +7,46 @@ namespace WebApp.DataAccessLayer
 {
     public partial class DataLayer
     {
-        public virtual List<Localisation> GetLocalizations()
+        public virtual List<Localisation> GetLocalisations()
         {
-            return this.dataDbContext.Localizations.ToList();
+            return this.dataDbContext.Localisations.ToList();
         }
 
-        public virtual List<Localisation> GetLocalizations(string language)
+        public virtual List<Localisation> GetLocalisations(string language)
         {
-            return this.dataDbContext.Localizations.Where(x => x.Language.Equals(language)).ToList();
+            return this.dataDbContext.Localisations.Where(x => x.Language.Equals(language)).ToList();
         }
 
-        public virtual JObject GetLocalizationsAsJson()
+        public virtual JObject GetLocalisationsAsJson()
         {
             var jObject = new JObject();
-            var localizations = this.GetLocalizations();
+            var localizations = this.GetLocalisations();
             localizations.ForEach(x => jObject[this.CreateLocalizationKey(x)] = x.Value);
             return jObject;
         }
 
-        public virtual JObject GetLocalizationsAsJson(string language)
+        public virtual JObject GetLocalisationsAsJson(string language)
         {
             var jObject = new JObject();
-            var localizations = this.GetLocalizations(language);
+            var localizations = this.GetLocalisations(language);
             localizations.ForEach(x => jObject[this.CreateLocalizationKey(x)] = x.Value);
             return jObject;
         }
 
-        public virtual Localisation AddLocalization(string language, string container, string key, string value)
+        public virtual Localisation UpdateLocalisation(Localisation localisation)
         {
-            var localization = new Localisation()
-            {
-                Language = language,
-                Container = container,
-                Key = key,
-                Value = value
-            };
-            this.dataDbContext.Localizations.Add(localization);
+            this.dataDbContext.Update(localisation);
             this.dataDbContext.SaveChanges();
 
-            return localization;
+            return localisation;
+        }
+
+        public virtual Localisation AddLocalisation(Localisation localisation)
+        {
+            this.dataDbContext.Localisations.Add(localisation);
+            this.dataDbContext.SaveChanges();
+
+            return localisation;
         }
 
         private string CreateLocalizationKey(Localisation localization)

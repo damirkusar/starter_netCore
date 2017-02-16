@@ -6,17 +6,17 @@ namespace WebApp.Tests.Integration
 {
     public static class DbContextFactory
     {
-        private static DataLayer dataAccessLayerInstance;
+        private static DataLayer dataLayerInstance;
 
         public static DataLayer DataAccessLayerInstance
         {
             get
             {
-                if (DbContextFactory.dataAccessLayerInstance == null)
+                if (DbContextFactory.dataLayerInstance == null)
                 {
-                    DbContextFactory.dataAccessLayerInstance = DbContextFactory.CreateDataAccessLayerInstance();
+                    DbContextFactory.dataLayerInstance = DbContextFactory.CreateDataAccessLayerInstance();
                 }
-                return DbContextFactory.dataAccessLayerInstance;
+                return DbContextFactory.dataLayerInstance;
             }
         }
 

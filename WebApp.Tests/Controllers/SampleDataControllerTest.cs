@@ -32,7 +32,7 @@ namespace WebApp.Tests.Controllers
             };
 
             this.dataAccessLayerMock = new Mock<DataLayer>(new DataDbContext(new DbContextOptions<DataDbContext>()));
-            this.dataAccessLayerMock.Setup(x => x.GetLocalizations()).Returns(localizations);
+            this.dataAccessLayerMock.Setup(x => x.GetLocalisations()).Returns(localizations);
             this.sampleDataController = new SampleDataController(this.dataAccessLayerMock.Object);
         }
         
@@ -53,7 +53,7 @@ namespace WebApp.Tests.Controllers
         [Test]
         public void GetSampleData_GetLocalizationsThrows_BadRequest()
         {
-            this.dataAccessLayerMock.Setup(x => x.GetLocalizations()).Throws(new Exception());
+            this.dataAccessLayerMock.Setup(x => x.GetLocalisations()).Throws(new Exception());
             this.sampleDataController = new SampleDataController(this.dataAccessLayerMock.Object);
             var sampleData = this.sampleDataController.GetSampleData();
             Assert.That(sampleData, Is.TypeOf<BadRequestResult>());

@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.DataAccessLayer;
+using WebApp.DataAccessLayer.Models;
 
 namespace WebApp.Controllers
 {
@@ -21,7 +22,7 @@ namespace WebApp.Controllers
         [AllowAnonymous]
         public void CreateSampleData()
         {
-            this.dataLayer.AddLocalization("en", "test", "test", "Just Testing");
+            this.dataLayer.AddLocalisation(new Localisation {Key = "TestKey", Language = "DE", Value = "TestValue"});
         }
 
         [HttpGet]
@@ -31,7 +32,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                var localization = this.dataLayer.GetLocalizations();
+                var localization = this.dataLayer.GetLocalisations();
                 return this.Ok(localization);
             }
             catch (Exception)
@@ -46,7 +47,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                var localization = this.dataLayer.GetLocalizations();
+                var localization = this.dataLayer.GetLocalisations();
                 return this.Ok(localization);
             }
             catch (Exception)

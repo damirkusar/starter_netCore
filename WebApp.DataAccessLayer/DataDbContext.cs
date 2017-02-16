@@ -6,7 +6,7 @@ namespace WebApp.DataAccessLayer
     public class DataDbContext : DbContext
     {
         // Models
-        public DbSet<Localisation> Localizations { get; set; }
+        public DbSet<Localisation> Localisations { get; set; }
 
         //Views
         //public DbSet<SampleView> SampleView { get; set; }

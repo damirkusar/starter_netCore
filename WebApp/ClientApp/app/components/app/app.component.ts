@@ -26,7 +26,7 @@ export class AppComponent extends Localization implements OnChanges, OnInit, DoC
         this.locale.init();
         
         this.translation.AddConfiguration()
-            .AddProvider('/api/localization/', 'json', true);
+            .AddProvider('/api/localizations/', 'json', true);
         this.translation.init();
     }
 
