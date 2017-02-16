@@ -20,8 +20,10 @@ Here is Steve Sanderson´s [README](https://github.com/damirkusar/AngularMeetsNet
 4. You will also need [.net core tools](https://www.microsoft.com/net/core#windowsvs2015) with [.net core 1.1](https://www.microsoft.com/net/download/core) installed
 
 ## Running the App for the first time
-In the package.json file, there is a post hook that it runs <webpack --config webpack.config.vendor.js> command after all node packages are installed. 
-If you add a new package, this command runs automatically again, but!! If you need something to be packed, you need to add it to the webpack.config.vendor.js file and then run this command again, manually.
+In the package.json file, there is a script <webpack-vendor> and <webpack> which you have to run. 
+If you add a new or you update a package, and you have updated webpack.config.vendor.js file, then run this commands again, manually.
+
+-> If you running into problems, delete first all files under wwwroot/dist (except _placeholder.txt) as well ClientApp/dist (except _placeholder.txt)
 
 In the DataAccessLayer, there are some npm scripts. You will need to run these to setup your DB. You can make changes of course as you like. 
 - npm run init-applicationdb
