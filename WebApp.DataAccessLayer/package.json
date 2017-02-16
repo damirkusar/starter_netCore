@@ -8,7 +8,7 @@
   "devDependencies": {
   },
   "scripts": {
-    "scaffold-models": "dotnet ef --startup-project ../WebApp dbcontext scaffold \"Server=YOUR-DB-CONNECTION-STRING\" \"Microsoft.EntityFrameworkCore.SqlServer\" -c \"GeneratedDataDbContext\" -e \"Development\" -o \"ModelsGenerated\" --schema \"Models\" --verbose",
+    "scaffold-models": "dotnet ef --startup-project ../WebApp dbcontext scaffold \"Server=(localdb)\\mssqllocaldb;Database=WebAppSolution;Trusted_Connection=True;MultipleActiveResultSets=true\" \"Microsoft.EntityFrameworkCore.SqlServer\" -c \"GeneratedDataDbContext\" -e \"Development\" -o \"GeneratedModels\" --schema \"Models\" --verbose",
     "preinit-applicationdb": "dotnet ef --startup-project ../WebApp migrations add InitApplicationDbContext -c ApplicationDbContext -e Development",
     "init-applicationdb": "dotnet ef --startup-project ../WebApp database update -c ApplicationDbContext -e Development",
     "preinit-datadb": "dotnet ef --startup-project ../WebApp migrations add InitDataDbContext -c DataDbContext -e Development",
