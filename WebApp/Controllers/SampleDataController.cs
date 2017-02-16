@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Dal;
+using WebApp.DataAccessLayer;
 
 namespace WebApp.Controllers
 {
@@ -9,11 +9,11 @@ namespace WebApp.Controllers
     [Route("api/sample")]
     public class SampleDataController : Controller
     {
-        private readonly DataAccessLayer dal;
+        private readonly DataLayer dataLayer;
 
-        public SampleDataController(DataAccessLayer dal)
+        public SampleDataController(DataLayer dataLayer)
         {
-            this.dal = dal;
+            this.dataLayer = dataLayer;
         }
 
         [HttpPost]
@@ -21,7 +21,7 @@ namespace WebApp.Controllers
         [AllowAnonymous]
         public void CreateSampleData()
         {
-            this.dal.AddLocalization("en", "test", "test", "Just Testing");
+            this.dataLayer.AddLocalization("en", "test", "test", "Just Testing");
         }
 
         [HttpGet]
@@ -31,7 +31,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                var localization = this.dal.GetLocalizations();
+                var localization = this.dataLayer.GetLocalizations();
                 return this.Ok(localization);
             }
             catch (Exception)
@@ -46,7 +46,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                var localization = this.dal.GetLocalizations();
+                var localization = this.dataLayer.GetLocalizations();
                 return this.Ok(localization);
             }
             catch (Exception)

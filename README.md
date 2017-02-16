@@ -13,17 +13,25 @@ Here is Steve Sanderson´s [README](https://github.com/damirkusar/AngularMeetsNet
 
 # Getting Started
 
-Do be able to compile the styles in wwwroot/dist/styles with VS, you will need to install the VS extention "Web Compiler".
+## Pre requirements
+1. Do be able to compile the styles in wwwroot/dist/styles with VS, you will need to install the VS extention "Web Compiler".
+2. You will need to have webpack installed globally <npm install -g webpack>
+3. You will also need [nodeJS](https://nodejs.org/en/) installed 
+4. You will also need [.net core tools](https://www.microsoft.com/net/core#windowsvs2015) with [.net core 1.1](https://www.microsoft.com/net/download/core) installed
 
-Also, when starting the first time, adding new 3rd party libraries, you will need to execute <webpack --config webpack.config.vendor.js> in the project. You will need to have webpack installed globally <npm install -g webpack>
+## Running the App for the first time
+In the package.json file, there is a post hook that it runs <webpack --config webpack.config.vendor.js> command after all node packages are installed. 
+If you add a new package, this command runs automatically again, but!! If you need something to be packed, you need to add it to the webpack.config.vendor.js file and then run this command again, manually.
 
+In the DataAccessLayer, there are some npm scripts. You will need to run these to setup your DB. You can make changes of course as you like. 
+- npm run init-applicationdb
+- npm run init-datadb
+
+These commands will create the init migrations and create / update the DB you have specified. 
+## Hints
 If you update Node for example, and you have already installed node_modules, you will need to rebuild it with <npm rebuild>
 
-## Needed Software
-You will also need [nodeJS](https://nodejs.org/en/) installed and [.net core tools](https://www.microsoft.com/net/core#windowsvs2015) with [.net core 1.1](https://www.microsoft.com/net/download/core)
-
-# Hints
-## Lazy Loading
+# Lazy Loading
 
 This project is prepared for lazy loading of angular modules. 
 In your route configuration, use loadChildren with a relative path to your lazy loaded angular module. The string is delimited with a # where the right side of split is the angular module class name.

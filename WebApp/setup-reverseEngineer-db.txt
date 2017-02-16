@@ -1,1 +1,1 @@
-﻿dotnet ef dbcontext scaffold "Server=YOUR-DB-CONNECTION-STRING" "Microsoft.EntityFrameworkCore.SqlServer" -c "GeneratedDataDbContext" -e "staging" -o "ModelsGenerated" --verbose
+﻿--schema Models

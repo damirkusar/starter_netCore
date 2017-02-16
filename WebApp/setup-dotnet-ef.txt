@@ -1,7 +1,7 @@
 ﻿Below an example of how to use it. 
 
-dotnet ef migrations add InitApplicationDbContext -c ApplicationDbContext -e Development
-dotnet ef migrations add InitDataDbContext -c DataDbContext -e Development
+dotnet ef migrations add InitApplicationDbContext -c ApplicationDbContext -e Staging
+dotnet ef migrations add InitDataDbContext -c DataDbContext -e Staging
 
-dotnet ef database update -c ApplicationDbContext -e Development
-dotnet ef database update -c DataDbContext -e Development
+dotnet ef database update -c ApplicationDbContext -e Staging
+dotnet ef database update -c DataDbContext -e Staging

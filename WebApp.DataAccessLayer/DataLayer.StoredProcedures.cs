@@ -2,9 +2,9 @@
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApp.Dal
+namespace WebApp.DataAccessLayer
 {
-    public partial class DataAccessLayer
+    public partial class DataLayer
     {
         public bool SetSomething(string id, int otherId)
         {

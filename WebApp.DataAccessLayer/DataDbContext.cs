@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebApp.DataAccessLayer.Models;
 
-namespace WebApp.Models.DataDb
+namespace WebApp.DataAccessLayer
 {
     public class DataDbContext : DbContext
     {
@@ -19,7 +20,7 @@ namespace WebApp.Models.DataDb
             modelBuilder.Entity<Localisation>(entity =>
             {
                 entity.ToTable("Localisations", "Model");
-                entity.Property(e => e.Id).HasDefaultValueSql("newsequentialid()");
+                entity.Property(e => e.LocalisationId).HasDefaultValueSql("newsequentialid()");
                 entity.Property(e => e.Container).HasColumnType("varchar(255)");
                 entity.Property(e => e.Key).IsRequired().HasColumnType("varchar(255)");
                 entity.Property(e => e.Language).IsRequired().HasColumnType("varchar(255)");

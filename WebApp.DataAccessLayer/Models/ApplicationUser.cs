@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace WebApp.Models
+namespace WebApp.DataAccessLayer.Models
 {
     public class ApplicationUser : IdentityUser<Guid>
     {

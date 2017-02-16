@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
 using WebApp.Controllers;
-using WebApp.Dal;
-using WebApp.Models.DataDb;
+using WebApp.DataAccessLayer;
+using WebApp.DataAccessLayer.Models;
 
 namespace WebApp.Tests.Controllers
 {
     [TestFixture]
     public class SampleDataControllerTest
     {
-        private Mock<DataAccessLayer> dataAccessLayerMock;
+        private Mock<DataLayer> dataAccessLayerMock;
         private SampleDataController sampleDataController;
 
         [SetUp]
@@ -23,7 +23,7 @@ namespace WebApp.Tests.Controllers
             {
                 new Localisation
                 {
-                    Id = new Guid(),
+                    LocalisationId = new Guid(),
                     Container = "TestContainer",
                     Key = "TestKey",
                     Language = "en",
@@ -31,7 +31,7 @@ namespace WebApp.Tests.Controllers
                 }
             };
 
-            this.dataAccessLayerMock = new Mock<DataAccessLayer>(new DataDbContext(new DbContextOptions<DataDbContext>()));
+            this.dataAccessLayerMock = new Mock<DataLayer>(new DataDbContext(new DbContextOptions<DataDbContext>()));
             this.dataAccessLayerMock.Setup(x => x.GetLocalizations()).Returns(localizations);
             this.sampleDataController = new SampleDataController(this.dataAccessLayerMock.Object);
         }

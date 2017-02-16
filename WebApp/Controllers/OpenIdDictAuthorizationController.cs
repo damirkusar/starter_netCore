@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Core;
 using OpenIddict.Models;
-using WebApp.Models;
+using WebApp.DataAccessLayer.Models;
 
 namespace WebApp.Controllers
 {
@@ -135,8 +135,6 @@ namespace WebApp.Controllers
                 ErrorDescription = "The specified grant type is not supported."
             });
         }
-
-
         private AuthenticationTicket CreateClientCredentialsGrantTypeTicket(OpenIdConnectRequest request, OpenIddictApplication application)
         {
             // Create a new ClaimsIdentity containing the claims that
@@ -158,8 +156,6 @@ namespace WebApp.Controllers
                 new AuthenticationProperties(),
                 OpenIdConnectServerDefaults.AuthenticationScheme);
         }
-
-
         private async Task<AuthenticationTicket> CreatePasswordGrantTypeTicketAsync(OpenIdConnectRequest request, ApplicationUser user)
         {
             // Create a new ClaimsPrincipal containing the claims that

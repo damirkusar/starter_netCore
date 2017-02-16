@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Models;
+using WebApp.DataAccessLayer.Models;
 using WebApp.ViewModels.Account;
 
 namespace WebApp.Controllers

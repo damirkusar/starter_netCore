@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using WebApp.Controllers;
-using WebApp.Models.DataDb;
+using WebApp.DataAccessLayer.Models;
 
 namespace WebApp.Tests.Integration.Controllers
 {

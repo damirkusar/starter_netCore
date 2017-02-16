@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebApp.DataAccessLayer.Models;
 
-namespace WebApp.Models
+namespace WebApp.DataAccessLayer
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {

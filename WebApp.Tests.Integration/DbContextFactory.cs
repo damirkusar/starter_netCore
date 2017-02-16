@@ -1,15 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using WebApp.Dal;
-using WebApp.Models.DataDb;
+using WebApp.DataAccessLayer;
 
 namespace WebApp.Tests.Integration
 {
     public class DbContextFactory
     {
-        private static DataAccessLayer dataAccessLayerInstance;
+        private static DataLayer dataAccessLayerInstance;
 
-        public static DataAccessLayer DataAccessLayerInstance
+        public static DataLayer DataAccessLayerInstance
         {
             get
             {
@@ -21,7 +20,7 @@ namespace WebApp.Tests.Integration
             }
         }
 
-        private static DataAccessLayer CreateDataAccessLayerInstance()
+        private static DataLayer CreateDataAccessLayerInstance()
         {
             var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkSqlServer()
@@ -32,7 +31,7 @@ namespace WebApp.Tests.Integration
 
             var dbContext = new DataDbContext(dbContextBuilder.Options);
 
-            return new DataAccessLayer(dbContext);
+            return new DataLayer(dbContext);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using WebApp.Models.DataDb;
+using WebApp.DataAccessLayer.Models;
 
-namespace WebApp.Dal
+namespace WebApp.DataAccessLayer
 {
-    public partial class DataAccessLayer
+    public partial class DataLayer
     {
         public virtual List<Localisation> GetLocalizations()
         {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using WebApp.Models.DataDb.Views;
+using WebApp.DataAccessLayer.Views;
 
-namespace WebApp.Dal
+namespace WebApp.DataAccessLayer
 {
-    public partial class DataAccessLayer
+    public partial class DataLayer
     {
         public IEnumerable<SampleView> GetSamples()
         {

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebApp.Models.DataDb
+namespace WebApp.DataAccessLayer.Models
 {
     public class Localisation
     {
-        public Guid Id { get; set; }
+        [Key]
+        public Guid LocalisationId { get; set; }
         public string Container { get; set; }
         [Required]
         public string Language { get; set; }

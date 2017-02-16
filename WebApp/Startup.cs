@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,9 +16,8 @@ using NLog.Extensions.Logging;
 using NLog.Web;
 using OpenIddict.Core;
 using OpenIddict.Models;
-using WebApp.Dal;
-using WebApp.Models;
-using WebApp.Models.DataDb;
+using WebApp.DataAccessLayer;
+using WebApp.DataAccessLayer.Models;
 
 namespace WebApp
 {
@@ -116,7 +114,7 @@ namespace WebApp
             services.AddMvc();
             services.AddOptions();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<DataAccessLayer, DataAccessLayer>();
+            services.AddSingleton<DataLayer, DataLayer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

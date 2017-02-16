@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebApp.Models.DataDb.Views
+namespace WebApp.DataAccessLayer.Views
 {
     [Table("Sample", Schema = "Facade")]
     public class SampleView

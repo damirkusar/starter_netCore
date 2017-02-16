@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using WebApp.Models;
+using WebApp.DataAccessLayer.Models;
 
 namespace WebApp.ViewModels.Account
 {

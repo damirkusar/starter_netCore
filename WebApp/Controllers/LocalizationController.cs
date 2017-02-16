@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Dal;
+using WebApp.DataAccessLayer;
 
 namespace WebApp.Controllers
 {
@@ -8,18 +8,18 @@ namespace WebApp.Controllers
     [Route("api/localization")]
     public class LocalizationController : Controller
     {
-        private readonly DataAccessLayer dal;
+        private readonly DataLayer dataLayer;
 
-        public LocalizationController(DataAccessLayer dal)
+        public LocalizationController(DataLayer dataLayer)
         {
-            this.dal = dal;
+            this.dataLayer = dataLayer;
         }
 
         [HttpGet]
         [Route("{language}")]
         public IActionResult GetLocalization(string language)
         {
-            return this.Ok(this.dal.GetLocalizationsAsJson(language));
+            return this.Ok(this.dataLayer.GetLocalizationsAsJson(language));
         }
     }
 }
