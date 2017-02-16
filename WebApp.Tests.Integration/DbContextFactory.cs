@@ -4,7 +4,7 @@ using WebApp.DataAccessLayer;
 
 namespace WebApp.Tests.Integration
 {
-    public class DbContextFactory
+    public static class DbContextFactory
     {
         private static DataLayer dataAccessLayerInstance;
 
