@@ -75,7 +75,7 @@ namespace WebApp.Controllers
 
         [HttpPut]
         [Route("")]
-        public IActionResult UpdateLocalisation(Localisation localisation)
+        public IActionResult UpdateLocalisation([FromBody] Localisation localisation)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [Route("")]
-        public IActionResult AddLocalisation(Localisation localisation)
+        public IActionResult AddLocalisation([FromBody] Localisation localisation)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace WebApp.Controllers
 
         [HttpDelete]
         [Route("")]
-        public IActionResult RemoveLocalisation(Localisation localisation)
+        public IActionResult RemoveLocalisation([FromBody] Localisation localisation)
         {
             try
             {
