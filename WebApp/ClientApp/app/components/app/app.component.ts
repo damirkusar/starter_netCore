@@ -25,7 +25,7 @@ export class AppComponent extends Localization implements OnChanges, OnInit, DoC
             .SetCookieExpiration(30);
         this.locale.init();
         
-        this.translation.AddConfiguration().AddProvider('/api/localisations/', 'json', true);
+        this.translation.AddConfiguration().AddProvider('/api/localisations/json/', 'json', true);
         this.translation.init();
     }
 

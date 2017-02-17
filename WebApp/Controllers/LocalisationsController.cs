@@ -23,7 +23,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                return this.Ok(this.dataLayer.GetLocalisationsAsJson());
+                return this.Ok(this.dataLayer.GetLocalisations());
             }
             catch (Exception)
             {
@@ -37,7 +37,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                return this.Ok(this.dataLayer.GetLocalisationsAsJson(language));
+                return this.Ok(this.dataLayer.GetLocalisations(language));
             }
             catch (Exception)
             {
@@ -45,17 +45,45 @@ namespace WebApp.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("json")]
+        public IActionResult GetLocalisationsAsJson()
+        {
+            try
+            {
+                return this.Ok(this.dataLayer.GetLocalisationsAsJson());
+            }
+            catch (Exception exception)
+            {
+                return this.BadRequest(exception);
+            }
+        }
+
+        [HttpGet]
+        [Route("json/{language}")]
+        public IActionResult GetLocalisationsAsJson(string language)
+        {
+            try
+            {
+                return this.Ok(this.dataLayer.GetLocalisationsAsJson(language));
+            }
+            catch (Exception exception)
+            {
+                return this.BadRequest(exception);
+            }
+        }
+
         [HttpPut]
-        [Route("{localisationId}")]
-        public IActionResult UpdateLocalisation(Guid localisationId, Localisation localisation)
+        [Route("")]
+        public IActionResult UpdateLocalisation(Localisation localisation)
         {
             try
             {
                 return this.Ok(this.dataLayer.UpdateLocalisation(localisation));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(exception);
             }
         }
 
@@ -67,23 +95,23 @@ namespace WebApp.Controllers
             {
                 return this.Ok(this.dataLayer.AddLocalisation(localisation));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(exception);
             }
         }
 
         [HttpDelete]
-        [Route("{localisationId}")]
-        public IActionResult RemoveLocalisation(Guid localisationId, Localisation localisation)
+        [Route("")]
+        public IActionResult RemoveLocalisation(Localisation localisation)
         {
             try
             {
                 return this.Ok(this.dataLayer.RemoveLocalisation(localisation));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(exception);
             }
         }
     }

@@ -57,7 +57,7 @@ namespace WebApp.DataAccessLayer
             return localisation;
         }
 
-        private string CreateLocalizationKey(Localisation localization)
+        public virtual string CreateLocalizationKey(Localisation localization)
         {
             var key = localization.Container != null ? $"{localization.Container}_{localization.Key}" : $"{localization.Key}";
             return key;
