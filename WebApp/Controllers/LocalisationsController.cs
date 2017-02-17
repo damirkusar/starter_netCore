@@ -46,8 +46,8 @@ namespace WebApp.Controllers
         }
 
         [HttpPut]
-        [Route("{key}")]
-        public IActionResult UpdateLocalisation(string key, Localisation localisation)
+        [Route("{localisationId}")]
+        public IActionResult UpdateLocalisation(Guid localisationId, Localisation localisation)
         {
             try
             {
@@ -61,11 +61,25 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [Route("")]
-        public IActionResult CreateLocalisation(Localisation localisation)
+        public IActionResult AddLocalisation(Localisation localisation)
         {
             try
             {
                 return this.Ok(this.dataLayer.AddLocalisation(localisation));
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+        }
+
+        [HttpDelete]
+        [Route("{localisationId}")]
+        public IActionResult RemoveLocalisation(Guid localisationId, Localisation localisation)
+        {
+            try
+            {
+                return this.Ok(this.dataLayer.RemoveLocalisation(localisation));
             }
             catch (Exception)
             {

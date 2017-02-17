@@ -49,6 +49,14 @@ namespace WebApp.DataAccessLayer
             return localisation;
         }
 
+        public virtual Localisation RemoveLocalisation(Localisation localisation)
+        {
+            this.dataDbContext.Localisations.Remove(localisation);
+            this.dataDbContext.SaveChanges();
+
+            return localisation;
+        }
+
         private string CreateLocalizationKey(Localisation localization)
         {
             var key = localization.Container != null ? $"{localization.Container}_{localization.Key}" : $"{localization.Key}";
