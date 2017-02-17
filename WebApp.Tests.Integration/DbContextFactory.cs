@@ -6,7 +6,20 @@ namespace WebApp.Tests.Integration
 {
     public static class DbContextFactory
     {
+        private static DataDbContext dataDbContextInstance;
         private static DataLayer dataLayerInstance;
+
+        public static DataDbContext DataDbContextInstance
+        {
+            get
+            {
+                if (DbContextFactory.dataDbContextInstance == null)
+                {
+                    DbContextFactory.dataDbContextInstance = DbContextFactory.CreateDataDbContextInstance();
+                }
+                return DbContextFactory.dataDbContextInstance;
+            }
+        }
 
         public static DataLayer DataAccessLayerInstance
         {
@@ -20,7 +33,7 @@ namespace WebApp.Tests.Integration
             }
         }
 
-        private static DataLayer CreateDataAccessLayerInstance()
+        private static DataDbContext CreateDataDbContextInstance()
         {
             var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkSqlServer()
@@ -29,9 +42,12 @@ namespace WebApp.Tests.Integration
             dbContextBuilder.UseSqlServer($"Server=(localdb)\\mssqllocaldb;Database=WebAppSolution;Trusted_Connection=True;MultipleActiveResultSets=true")
                 .UseInternalServiceProvider(serviceProvider);
 
-            var dbContext = new DataDbContext(dbContextBuilder.Options);
+            return new DataDbContext(dbContextBuilder.Options);
+        }
 
-            return new DataLayer(dbContext);
+        private static DataLayer CreateDataAccessLayerInstance()
+        {
+            return new DataLayer(DbContextFactory.DataDbContextInstance);
         }
     }
 }
