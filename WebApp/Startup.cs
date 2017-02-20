@@ -126,6 +126,8 @@ namespace WebApp
 
             app.AddNLogWeb();
             env.ConfigureNLog("nlog.config");
+            LogManager.Configuration.Variables["connectionString"] = this.Configuration.GetConnectionString("DefaultLogConnection");
+            LogManager.Configuration.Variables["configDir"] = "C:\\temp\\";
 
             if (env.IsDevelopment())
             {
@@ -183,7 +185,8 @@ namespace WebApp
             });
 
             var logger = LogManager.GetCurrentClassLogger();
-            logger.Debug($"Environment in AngularCoreSeed is ${env.EnvironmentName}");
+            logger.Trace($"Environment in WebApp is {env.EnvironmentName}");
+
             this.InitializeAsync(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
         }
 

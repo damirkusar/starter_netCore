@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using WebApp.DataAccessLayer;
 using WebApp.DataAccessLayer.Models;
 
@@ -11,10 +12,12 @@ namespace WebApp.Controllers
     public class SampleDataController : Controller
     {
         private readonly DataLayer dataLayer;
+        private Logger logger;
 
         public SampleDataController(DataLayer dataLayer)
         {
             this.dataLayer = dataLayer;
+            this.logger = LogManager.GetCurrentClassLogger();
         }
 
         [HttpPost]

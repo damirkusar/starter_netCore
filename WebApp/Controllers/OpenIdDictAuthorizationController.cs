@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
+using NuGet.Protocol.Core.v3;
 using OpenIddict.Core;
 using OpenIddict.Models;
 using WebApp.DataAccessLayer.Models;
@@ -25,6 +27,7 @@ namespace WebApp.Controllers
         private readonly OpenIddictApplicationManager<OpenIddictApplication> applicationManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly Logger logger;
 
         public OpenIdDictAuthorizationController(
             OpenIddictApplicationManager<OpenIddictApplication> applicationManager,
@@ -34,17 +37,21 @@ namespace WebApp.Controllers
             this.applicationManager = applicationManager;
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.logger = LogManager.GetCurrentClassLogger();
         }
 
         [HttpPost("~/connect/token")]
         [Produces("application/json")]
         public async Task<IActionResult> Token(OpenIdConnectRequest request)
         {
+            this.logger.Trace($"Token called with request: {request.ToJson()}");
             if (request.IsPasswordGrantType())
             {
+                this.logger.Trace($"Token GrantType is Password");
                 var user = await this.userManager.FindByNameAsync(request.Username);
                 if (user == null)
                 {
+                    this.logger.Error($"Error in Token: The username/password couple is invalid");
                     return this.BadRequest(new OpenIdConnectResponse
                     {
                         Error = OpenIdConnectConstants.Errors.InvalidGrant,
@@ -55,6 +62,7 @@ namespace WebApp.Controllers
                 // Ensure the user is allowed to sign in.
                 if (!await this.signInManager.CanSignInAsync(user))
                 {
+                    this.logger.Error($"Error in Token: The specified user ({user.ToJson()}) is not allowed to sign in");
                     return this.BadRequest(new OpenIdConnectResponse
                     {
                         Error = OpenIdConnectConstants.Errors.InvalidGrant,
@@ -65,6 +73,7 @@ namespace WebApp.Controllers
                 // Reject the token request if two-factor authentication has been enabled by the user.
                 if (this.userManager.SupportsUserTwoFactor && await this.userManager.GetTwoFactorEnabledAsync(user))
                 {
+                    this.logger.Error($"Error in Token: The specified user ({user.ToJson()}) is not allowed to sign in");
                     return this.BadRequest(new OpenIdConnectResponse
                     {
                         Error = OpenIdConnectConstants.Errors.InvalidGrant,
@@ -75,6 +84,7 @@ namespace WebApp.Controllers
                 // Ensure the user is not already locked out.
                 if (this.userManager.SupportsUserLockout && await this.userManager.IsLockedOutAsync(user))
                 {
+                    this.logger.Error($"Error in Token: The username/password couple is invalid");
                     return this.BadRequest(new OpenIdConnectResponse
                     {
                         Error = OpenIdConnectConstants.Errors.InvalidGrant,
@@ -90,6 +100,7 @@ namespace WebApp.Controllers
                         await this.userManager.AccessFailedAsync(user);
                     }
 
+                    this.logger.Error($"Error in Token: The username/password couple is invalid");
                     return this.BadRequest(new OpenIdConnectResponse
                     {
                         Error = OpenIdConnectConstants.Errors.InvalidGrant,
@@ -110,12 +121,14 @@ namespace WebApp.Controllers
 
             if (request.IsClientCredentialsGrantType())
             {
+                this.logger.Trace($"Token GrantType is Client");
                 // Note: the client credentials are automatically validated by OpenIddict:
                 // if client_id or client_secret are invalid, this action won't be invoked.
 
                 var application = await this.applicationManager.FindByClientIdAsync(request.ClientId, this.HttpContext.RequestAborted);
                 if (application == null)
                 {
+                    this.logger.Error($"Error in Token: The client application ({request.ClientId}) was not found in the database");
                     return this.BadRequest(new OpenIdConnectResponse
                     {
                         Error = OpenIdConnectConstants.Errors.InvalidClient,
@@ -129,6 +142,7 @@ namespace WebApp.Controllers
                 return this.SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
             }
 
+            this.logger.Error($"Error in Token: The specified grant ({request.GrantType}) type is not supported");
             return this.BadRequest(new OpenIdConnectResponse
             {
                 Error = OpenIdConnectConstants.Errors.UnsupportedGrantType,
