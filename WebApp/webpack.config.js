@@ -7,22 +7,22 @@ var allFilenamesExceptJavaScript = /\.(?!js(\?|$))([^.]+(\?|$))/;
 
 // Configuration in common to both client-side and server-side bundles
 var sharedConfig = {
-    resolve: { extensions: ['', '.js', '.ts'] },
+    resolve: { extensions: ['.js', '.ts'] },
     output: {
         filename: '[name].js',
         publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
     },
     module: {
-        loaders: [
-            { test: /\.ts$/, include: /ClientApp/, loader: 'ts', query: { silent: true } },
-            { test: /\.html$/, loader: 'raw' },
-            { test: /\.css$/, loader: 'to-string!css' },
-            { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'url', query: { limit: 25000 } },
+        rules: [
+            { test: /\.ts$/, include: /ClientApp/, loader: 'ts-loader', query: { silent: true } },
+            { test: /\.html$/, loader: 'raw-loader' },
+            { test: /\.css$/, loader: 'to-string-loader!css' },
+            { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'url-loader', query: { limit: 25000 } },
             {
                 test: /\.scss$/,
                 include: /ClientApp/,
                 exclude: /node_modules/,
-                loaders: ['raw-loader', 'sass-loader']
+                use: [{ loader: 'raw-loader' }, { loader: 'sass-loader' }]
             },
             { include: /ClientApp/, loader: 'angular-router-loader' }
         ]

@@ -1,11 +1,11 @@
 <div class="dropdown" style="display: inline-flex">
-    <button name="localizationButton" class="btn btn-sm bg-color-brown-100 color-brown-100" style="background: transparent"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+    <button name="localizationButton" class="btn btn-sm color-grey-80" style="background: transparent"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-globe" aria-hidden="true"></i>
-        <span class="hidden-sm-down">{{ 'currentLanguage' | translate:lang }}</span> 
+        <span class="hidden-sm-down">{{ 'currentLanguage' | translate:lang }}</span>
     </button>
     <div class="default-bar dropdown-menu dropdown-menu-right">
-        <div class="default-bar-header d-flex flex-row justify-content-between">
+        <div class="default-bar-header d-flex flex-row justify-content-between hidden-md-up">
             <span class="">{{ 'currentLanguage' | translate:lang }}</span>
         </div>
         <div class="default-bar-items">

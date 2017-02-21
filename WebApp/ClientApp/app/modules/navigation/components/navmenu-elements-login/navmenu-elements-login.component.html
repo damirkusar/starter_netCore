@@ -1,21 +1,21 @@
-<div class="dropdown" style="display: inline-flex" *ngIf="isLoggedIn">
-    <button name="userButton" class="btn btn-sm bg-color-green-100 color-green-100" style="background: transparent"
+<div class="dropdown" style="display: inline-flex" *ngIf="isLoggedIuser-barn">
+    <button name="userButton" class="btn btn-sm color-grey-80" style="background: transparent"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-user" aria-hidden="true"></i>
         <span class="hidden-sm-down">{{user?.firstName}} {{user?.lastName}}</span>
     </button>
-    <div class="user-bar dropdown-menu dropdown-menu-right">
-        <div class="user-bar-header d-flex flex-row justify-content-between">
+    <div class="default-bar dropdown-menu dropdown-menu-right">
+        <div class="default-bar-header d-flex flex-row justify-content-between">
             <span *ngIf="user">{{user?.firstName}} {{user?.lastName}}</span>
             <span *ngIf="!user">Guest</span>
             <a href="#" class="float-xs-right" (click)="logout($event)">Logout</a>
         </div>
-        <div class="user-bar-items">
-            <!--<div class="user-bar-item">
+        <div class="default-bar-items">
+            <!--<div class="default-bar-item">
                 <h6><i class="fa fa-user" aria-hidden="true"></i> Profile</h6>
             </div>
 
-            <div class="user-bar-item">
+            <div class="default-bar-item">
                 <h6><i class="fa fa-cog" aria-hidden="true"></i> Settings</h6>
             </div>-->
         </div>
@@ -23,15 +23,15 @@
 </div>
 
 <div class="dropdown" style="display: inline-flex" *ngIf="!isLoggedIn">
-    <button name="loginButton" class="btn btn-sm bg-color-green-100 color-green-100" style="background: transparent"
+    <button name="loginButton" class="btn btn-sm color-grey-80" style="background: transparent"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-sign-in" aria-hidden="true"></i>
         <span class="hidden-sm-down">Login</span>
     </button>
 
-    <div class="login-bar float-xs-right dropdown-menu dropdown-menu-right">
-        <div class="login-bar-items">
-            <div class="login-bar-item" [ngClass]="{'outline-color-red-100': loginError}">
+    <div id="loginbar" class="default-bar float-xs-right dropdown-menu dropdown-menu-right">
+        <div class="default-bar-items">
+            <div class="default-bar-item" [ngClass]="{'outline-color-red-100': loginError}">
                 <form novalidate #loginForm="ngForm" (ngSubmit)="login({username: email.value, password: password.value}, $event)">
                     <div class="form-group">
                         <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" #email>

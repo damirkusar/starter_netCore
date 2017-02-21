@@ -1,19 +1,9 @@
-﻿.notification-bar {
-    width: 300px;
-    max-width: 300px;
-}
-
-.default-bar,
-.user-bar,
-.login-bar {
+﻿.default-bar {
     width: 225px;
     max-width: 225px;
 }
 
-.default-bar-items,
-.notification-bar-items,
-.login-bar-items,
-.user-bar-items {
+.default-bar-items {
     max-height: 60vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -21,26 +11,15 @@
 
 .default-bar-header,
 .default-bar-footer,
-.default-bar-item,
-.notification-bar-header,
-.notification-bar-footer,
-.notification-bar-item,
-.login-bar-header,
-.login-bar-footer,
-.login-bar-item,
-.user-bar-header,
-.user-bar-footer,
-.user-bar-item {
+.default-bar-item
+{
     min-height: 30px;
     border-style: solid;
     border-width: 1px;
     padding: 0.75em;
 }
 
-.default-bar.dropdown-menu,
-.notification-bar.dropdown-menu,
-.login-bar.dropdown-menu,
-.user-bar.dropdown-menu {
+.default-bar.dropdown-menu {
     border-style: none;
     background-color: transparent;
 }

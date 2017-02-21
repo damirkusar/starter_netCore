@@ -1,15 +1,6 @@
 ﻿.default-bar-header,
 .default-bar-footer,
-.default-bar-item,
-.notification-bar-header,
-.notification-bar-footer,
-.notification-bar-item,
-.login-bar-header,
-.login-bar-footer,
-.login-bar-item,
-.user-bar-header,
-.user-bar-footer,
-.user-bar-item
+.default-bar-item
  {
     border-color: $color-grey-20;
     background-color: $color-white;
@@ -17,13 +8,7 @@
 
 .default-bar-item:hover,
 .default-bar-item:active,
-.default-bar-item:focus,
-.notification-bar-item:hover,
-.notification-bar-item:active,
-.notification-bar-item:focus,
-.user-bar-item:hover,
-.user-bar-item:active,
-.user-bar-item:focus 
+.default-bar-item:focus
 {
     border-color: $color-grey-20;
     background-color: $color-grey-10;

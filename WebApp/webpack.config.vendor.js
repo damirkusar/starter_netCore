@@ -6,12 +6,22 @@ var extractCSS = new ExtractTextPlugin('vendor.css');
 
 module.exports = {
     resolve: {
-        extensions: ['', '.js']
+        extensions: ['.ts', '.js']
     },
     module: {
-        loaders: [
+        rules: [
             { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, loader: 'url-loader?limit=100000' },
-            { test: /\.css(\?|$)/, loader: extractCSS.extract(['css']) }
+            //{ test: /\.css(\?|$)/, loader: extractCSS.extract(['css']) }
+            {
+                test: /\.css(\?|$)/,
+                use: extractCSS.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        { loader: 'css-loader', options: { importLoaders: 1 } }
+                    ]
+                })
+            }
+
         ]
     },
     entry: {
@@ -47,7 +57,7 @@ module.exports = {
     plugins: [
         extractCSS,
         new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.Tether': 'tether', 'Tether': 'tether' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
-        new webpack.optimize.OccurenceOrderPlugin(),
+        //new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.DllPlugin({
             path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
             name: '[name]_[hash]'
