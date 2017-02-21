@@ -11,7 +11,7 @@ import { LoggerService } from '../../../../services/logger.service';
 
 })
 export class NavMenuElementsLoginComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
-    private _isLoggedIn: boolean;
+    private loggedIn: boolean;
     @Input() user: IUser;
     @Input() loginError: boolean;
     @Output() onLogin = new EventEmitter<ICredentials>();
@@ -34,11 +34,11 @@ export class NavMenuElementsLoginComponent extends Localization implements OnCha
 
     @Input()
     set isLoggedIn(loggedIn: boolean) {
-        this._isLoggedIn = loggedIn;
+        this.loggedIn = loggedIn;
     }
 
     get isLoggedIn(): boolean {
-        return this._isLoggedIn;
+        return this.loggedIn;
     }
 
     login(credentials: ICredentials, event: Event) {

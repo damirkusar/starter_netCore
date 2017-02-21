@@ -2,8 +2,6 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-//import { TimerObservable } from "rxjs/observable/TimerObservable";
-//import { Observable } from 'rxjs/Rx';
 import './rxjs-operators';
 import { ICredentials, Credentials } from '../models/credentials';
 import { IErrorMessage, ErrorMessage } from '../models/errorMessage';
@@ -18,8 +16,8 @@ export class AuthService {
     loggedInUpdated = new EventEmitter();
     logoutTimerObservable: any;
 
-    constructor(private _logger: LoggerService, private _httpErrorHandlerService: HttpErrorHandlerService, private _localStorage: LocalStorageService, private _http: Http, private _router: Router) {
-        this._httpErrorHandlerService.errorOccured.subscribe(
+    constructor(private logger: LoggerService, private httpErrorHandlerService: HttpErrorHandlerService, private localStorage: LocalStorageService, private http: Http, private router: Router) {
+        this.httpErrorHandlerService.errorOccured.subscribe(
             (errorMessage) => {
                 this.handleHttpErrors(errorMessage);
             }
@@ -36,7 +34,7 @@ export class AuthService {
     }
 
     startLogoutTimer() {
-        let tokenExpiresMillis = <number>this._localStorage.get('token-expires-millis');
+        let tokenExpiresMillis = <number>this.localStorage.get('token-expires-millis');
         let tokenExpiresDate: Date = new Date(tokenExpiresMillis);
 
         if ((this.logoutTimerObservable == null || this.logoutTimerObservable.closed) && tokenExpiresMillis != null) {
@@ -45,18 +43,18 @@ export class AuthService {
     }
 
     private setLogoutTimer(date: Date) {
-        this._logger.debug(`LogoutTimer set to: ${date}`);
+        this.logger.debug(`LogoutTimer set to: ${date}`);
         var source = Observable.timer(date).timeInterval();
 
         this.logoutTimerObservable = source.subscribe(
-            (x) => this._logger.debug('LogoutTimer fired...'),
-            (error) => this._logger.error('Error: ' + error),
+            (x) => this.logger.debug('LogoutTimer fired...'),
+            (error) => this.logger.error('Error: ' + error),
             () => this.logout());
     }
 
     login(credentials: ICredentials): Observable<IToken> {
-        //this._logger.debug(`Login in... ${JSON.stringify(credentials)}`);
-        this._logger.debug(`Login in...`);
+        //this.logger.debug(`Login in... ${JSON.stringify(credentials)}`);
+        this.logger.debug(`Login in...`);
 
         credentials.grant_type = 'password';
         credentials.scope = 'openid';
@@ -66,29 +64,29 @@ export class AuthService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
 
-        return this._http.post(`/connect/token`, params, options)
-            .map(response => this.extractSuccessData(response))
-            .catch(error => this._httpErrorHandlerService.responseError(error));
+        return this.http.post(`/connect/token`, params, options)
+            .map(response => this.extractSuccessData(response as Response))
+            .catch(error => this.httpErrorHandlerService.responseError(error));
     }
 
     logout() {
-        this._logger.debug("Loging out...");
-        this._router.navigate(['/home']);
-        this._localStorage.set('loggedIn', undefined);
-        this._localStorage.set('token', undefined);
-        this._localStorage.set('token-expires-millis', undefined);
-        this._localStorage.set('loggedInUser', undefined); // AccountService
+        this.logger.debug("Loging out...");
+        this.router.navigate(['/home']);
+        this.localStorage.set('loggedIn', undefined);
+        this.localStorage.set('token', undefined);
+        this.localStorage.set('token-expires-millis', undefined);
+        this.localStorage.set('loggedInUser', undefined); // AccountService
         this.logoutTimerObservable.unsubscribe();
         this.logoutTimerObservable = undefined;
         this.loggedInUpdated.emit(false);
     }
 
     isLoggedIn(): boolean {
-        return this._localStorage.get('loggedIn') === true;
+        return this.localStorage.get('loggedIn') === true;
     }
 
     getCurrentUser(): IUser {
-        return this._localStorage.get('loggedInUser');
+        return this.localStorage.get('loggedInUser');
     }
 
     isInRole(allowedRoles: string[]): boolean {
@@ -103,14 +101,14 @@ export class AuthService {
 
     private extractSuccessData(res: Response) { 
         let token: IToken = res.json();
-        this._localStorage.set('loggedIn', true);
-        this._localStorage.set('token', `${token.token_type} ${token.access_token}`);
+        this.localStorage.set('loggedIn', true);
+        this.localStorage.set('token', `${token.token_type} ${token.access_token}`);
 
         let date = new Date();
         date.setSeconds(date.getSeconds() + token.expires_in);
         date.setMinutes(date.getMinutes() - 1);
         let time = date.getTime();
-        this._localStorage.set('token-expires-millis', time);
+        this.localStorage.set('token-expires-millis', time);
         this.startLogoutTimer();
 
         this.loggedInUpdated.emit(true);

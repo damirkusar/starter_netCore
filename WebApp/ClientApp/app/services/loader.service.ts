@@ -9,7 +9,7 @@ export class LoaderService implements OnChanges, OnInit, DoCheck, OnDestroy {
     showModal: boolean = false;
     showModalUpdated = new EventEmitter();
 
-    constructor(private _logger: LoggerService, private _http: Http) {}
+    constructor(private logger: LoggerService, private http: Http) {}
 
     ngOnChanges(changes: Object): void {}
 

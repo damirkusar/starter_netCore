@@ -8,7 +8,7 @@ import { IErrorMessage, ErrorMessage } from "../models/errorMessage";
 @Injectable()
 export class HttpErrorHandlerService {
     errorOccured = new EventEmitter();
-    constructor(private _logger: LoggerService) { }
+    constructor(private logger: LoggerService) { }
 
     responseError(errorResponse: Response | any) {
         let errMsg: IErrorMessage;
@@ -19,7 +19,7 @@ export class HttpErrorHandlerService {
         }
 
         this.errorOccured.emit(errMsg);
-        this._logger.error(`Response Error:`, errMsg);
+        this.logger.error(`Response Error:`, errMsg);
         return Observable.throw(errMsg);
     }
 }

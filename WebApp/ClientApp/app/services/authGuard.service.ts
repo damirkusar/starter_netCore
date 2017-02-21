@@ -7,25 +7,25 @@ import { LocalStorageService } from 'angular-2-local-storage';
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild {
 
-    constructor(private _logger: LoggerService, private _localStorage: LocalStorageService, private _authService: AuthService, private _router: Router) {
+    constructor(private logger: LoggerService, private localStorage: LocalStorageService, private authService: AuthService, private router: Router) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let canActivate = true;
         
         if (route.data['auth']) {
-            this._logger.log(`Auth: ${route.data['auth']}`);
-            canActivate = this._authService.isLoggedIn();
+            this.logger.log(`Auth: ${route.data['auth']}`);
+            canActivate = this.authService.isLoggedIn();
         }
 
         if (canActivate && route.data['roles']) {
-            this._logger.log(`Allowed roles: ${route.data['roles']}`);
-            canActivate = this._authService.isInRole(route.data['roles']);
+            this.logger.log(`Allowed roles: ${route.data['roles']}`);
+            canActivate = this.authService.isInRole(route.data['roles']);
         }
 
         if (!canActivate) {
-            this._logger.error(`Can not activate: ${state.url}`);
-            this._router.navigate(['/home']); 
+            this.logger.error(`Can not activate: ${state.url}`);
+            this.router.navigate(['/home']); 
         }
 
         return canActivate;

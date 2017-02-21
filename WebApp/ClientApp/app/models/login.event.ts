@@ -2,13 +2,13 @@
 
 export class LoginEvent {
     credentials: ICredentials;
-    private _isDefaultPrevented: boolean;
+    private defaultPrevented: boolean;
 
     public isDefaultPrevented(): boolean {
-        return (this._isDefaultPrevented);
+        return (this.defaultPrevented);
     }
 
     public preventDefault(): void {
-        this._isDefaultPrevented = true;
+        this.defaultPrevented = true;
     }
 }

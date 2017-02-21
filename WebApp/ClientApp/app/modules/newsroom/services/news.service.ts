@@ -25,17 +25,17 @@ export class News implements INews {
 
 @Injectable()
 export class NewsService {
-    private _newsUrl = './news.json';
-    constructor(private _logger: LoggerService, 
-        private _httpErrorHandlerService: HttpErrorHandlerService,
-        private _httpOptions: HttpOptionsService,
-        private _http: Http) {
+    private newsUrl = './news.json';
+    constructor(private logger: LoggerService, 
+        private httpErrorHandlerService: HttpErrorHandlerService,
+        private httpOptions: HttpOptionsService,
+        private http: Http) {
     }
 
     getNews(): Observable<INews[]> {
-        return this._http.get(this._newsUrl, this._httpOptions.getDefaultOptions())
-            .map(response => this.extractData(response))
-            .catch(error => this._httpErrorHandlerService.responseError(error));
+        return this.http.get(this.newsUrl, this.httpOptions.getDefaultOptions())
+            .map(response => this.extractData(response as Response))
+            .catch(error => this.httpErrorHandlerService.responseError(error));
     }
 
     private extractData(res: Response) {

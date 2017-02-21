@@ -13,7 +13,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 
 @Injectable()
 export class AccountService implements OnChanges, OnInit, DoCheck, OnDestroy {
-    constructor(private _logger: LoggerService, private _httpErrorHandlerService: HttpErrorHandlerService, private _httpOptions: HttpOptionsService, private _localStorage: LocalStorageService, private _http: Http) {
+    constructor(private logger: LoggerService, private httpErrorHandlerService: HttpErrorHandlerService, private httpOptions: HttpOptionsService, private localStorage: LocalStorageService, private http: Http) {
     }
 
     ngOnChanges(changes: Object): void { }
@@ -25,18 +25,18 @@ export class AccountService implements OnChanges, OnInit, DoCheck, OnDestroy {
     ngOnDestroy(): void { }
     
     getUserInfo(): Observable<IUser> {
-        return this._http.get(`/api/account/userinfo`, this._httpOptions.getDefaultOptions())
-            .map(response => this.extractData(response))
-            .catch(error => this._httpErrorHandlerService.responseError(error));
+        return this.http.get(`/api/account/userinfo`, this.httpOptions.getDefaultOptions())
+            .map(response => this.extractData(response as Response))
+            .catch(error => this.httpErrorHandlerService.responseError(error));
     }
 
     getLoggedInUser(): IUser {
-       return this._localStorage.get('loggedInUser');
+       return this.localStorage.get('loggedInUser');
     }
 
     private extractData(res: Response) {
         let body:IUser = res.json();
-        this._localStorage.set('loggedInUser', body);
+        this.localStorage.set('loggedInUser', body);
         return body || {};
     }
 }

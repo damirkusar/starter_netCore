@@ -7,7 +7,7 @@ import { LoggerService } from './logger.service';
 
 @Injectable()
 export class HttpOptionsService implements OnChanges, OnInit, DoCheck, OnDestroy {
-    constructor(private _logger: LoggerService, private _localStorage: LocalStorageService, private _http: Http) {}
+    constructor(private logger: LoggerService, private localStorage: LocalStorageService, private http: Http) {}
 
     ngOnChanges(changes: Object): void {}
 
@@ -18,7 +18,7 @@ export class HttpOptionsService implements OnChanges, OnInit, DoCheck, OnDestroy
     ngOnDestroy(): void {}
 
     getDefaultOptions(): RequestOptions {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization':  this._localStorage.get('token')}); 
+        let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization':  this.localStorage.get('token')}); 
         let options = new RequestOptions({ headers: headers });
         return options;
     }
