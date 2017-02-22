@@ -41,7 +41,7 @@ var clientBundleConfig = merge(sharedConfig, {
         })
     ].concat(isDevBuild ? [] : [
         // Plugins that apply in production builds only
-        new webpack.optimize.OccurenceOrderPlugin(),
+        //new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin()
     ])
 });
