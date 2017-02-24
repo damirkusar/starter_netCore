@@ -38,6 +38,7 @@ module.exports = {
             'angular2-universal',
             'angular2-universal-polyfills',
             'angular-l10n',
+            'aspnet-prerendering',
             'bootstrap',
             'bootstrap/dist/css/bootstrap.css',
             'es6-shim',
