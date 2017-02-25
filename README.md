@@ -36,10 +36,10 @@ If you update Node for example, and you have already installed node_modules, you
 # Pre-Rendering
 
 Pre-Rendering is currently not enabled because the [angular-l10n](https://github.com/4vanger/angular-l10n) library uses navigator which the Pre-Rendering does not like:)
-You can enable it by commenting / uncommenting the app tag in Views/Home/Index.cshtml and commenting out line 259 in node_modules/angular-l10n/bundles/angular-l10n.umd.js
+You can enable it by commenting / uncommenting the app tag in Views/Home/Index.cshtml and change line 259 in node_modules/angular-l10n/bundles/angular-l10n.umd.js
 
 ```TypeScript
-//this.hasCookie = typeof navigator.cookieEnabled !== "undefined" && navigator.cookieEnabled;
+this.hasCookie = typeof navigator !== "undefined" && typeof navigator.cookieEnabled !== "undefined" && navigator.cookieEnabled;
 ```
 
 I created an issue here: https://github.com/robisim74/angular-l10n/issues/61 and waiting for an response. 
