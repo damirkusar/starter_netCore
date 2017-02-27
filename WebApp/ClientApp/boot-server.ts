@@ -1,5 +1,6 @@
 import 'angular2-universal-polyfills';
 import './_workaround.universal.ts'; // temporary until 2.1.1 things are patched in Core
+import './_workaround.prerendering';
 import 'zone.js';
 import { enableProdMode } from '@angular/core';
 import { platformNodeDynamic } from 'angular2-universal';
