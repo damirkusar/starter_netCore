@@ -24,8 +24,9 @@ export class AppComponent extends Localization implements OnChanges, OnInit, DoC
             .DefineCurrency('CHF')
             .SetCookieExpiration(30);
         this.locale.init();
-        
-        this.translation.AddConfiguration().AddProvider('/api/localisations/json/', 'json', true);
+
+        this.translation.AddConfiguration().AddWebAPIProvider('/api/localisations/json/', 'json');
+        this.translation.translationError.subscribe((error: any) => console.log(error));
         this.translation.init();
     }
 

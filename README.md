@@ -35,16 +35,9 @@ If you update Node for example, and you have already installed node_modules, you
 
 # Pre-Rendering
 
-Pre-Rendering is enabled with a workaround in boot-server.ts for navigator, browser and window which is not defined on server side. 
-
-I am using [angular-l10n](https://github.com/4vanger/angular-l10n) which is currently dependend on navigator, browser and window.
-
-You could also change line 259 in node_modules/angular-l10n/bundles/angular-l10n.umd.js
-```TypeScript
-this.hasCookie = typeof navigator !== "undefined" && typeof navigator.cookieEnabled !== "undefined" && navigator.cookieEnabled;
-```
-
-I created an issue here: https://github.com/robisim74/angular-l10n/issues/61 and waiting for an response. 
+Pre-Rendering is enabled.
+There is a workaround in boot-server.ts for navigator, browser and window which is not defined on server side for libraries which are not ready yet for prerendering. 
+It is currently commented out because all used libraries are now supporting Pre-Rendering. 
 
 # Lazy Loading
 
