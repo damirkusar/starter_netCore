@@ -1,4 +1,4 @@
-﻿import { Injectable, OnChanges, OnInit, DoCheck, OnDestroy } from '@angular/core';
+﻿import { Injectable, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import './rxjs-operators';
@@ -13,6 +13,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 
 @Injectable()
 export class AccountService implements OnChanges, OnInit, DoCheck, OnDestroy {
+    loggedInUserUpdated: EventEmitter<IUser> = new EventEmitter<IUser>();
+
     constructor(private logger: LoggerService, private httpErrorHandlerService: HttpErrorHandlerService, private httpOptions: HttpOptionsService, private localStorage: LocalStorageService, private http: Http) {
     }
 
@@ -37,6 +39,7 @@ export class AccountService implements OnChanges, OnInit, DoCheck, OnDestroy {
     private extractData(res: Response) {
         let body:IUser = res.json();
         this.localStorage.set('loggedInUser', body);
+        this.loggedInUserUpdated.emit(body);
         return body || {};
     }
 }

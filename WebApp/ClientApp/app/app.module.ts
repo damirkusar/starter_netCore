@@ -52,7 +52,7 @@ import { LoaderService } from './services/loader.service';
             { path: '**', redirectTo: 'home' }
         ]),
         LocalStorageModule.withConfig({
-            prefix: 'dk',
+            prefix: 'webapp',
             storageType: 'localStorage'
         }),
         LocalizationModule.forRoot(),
