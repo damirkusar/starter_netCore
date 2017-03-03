@@ -80,7 +80,7 @@ export class MainSpec {
             declarations: declarations,
             imports: imports,
             providers: providers
-        });
+        }).compileComponents();
 
         this.fixture = TestBed.createComponent(component);
         this.instance = this.fixture.componentInstance;
