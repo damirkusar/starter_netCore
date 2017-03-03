@@ -1,8 +1,7 @@
-import { } from 'jasmine';
-
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Router, Resolve, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Localization, LocaleService, TranslationService, LocalizationModule } from 'angular-l10n';
 import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
 import { UniversalModule } from 'angular2-universal';
@@ -29,31 +28,61 @@ export class MainSpec {
         element: any;
         constructor() { }
 
-        init(component): void {
+        init(component, additionalDeclarations, additionalImports, additionalProviders): void {
+            console.error('Initalizing', component.name);
+            let declarations = [component];
+
+            let imports = [
+                UniversalModule,
+                FormsModule,
+                LocalStorageModule.withConfig({
+                    prefix: 'wepapp-test',
+                    storageType: 'localStorage'
+                }),
+                LocalizationModule.forRoot(),
+                RouterModule.forRoot([])
+            ];
+
+            let providers = [
+                { provide: APP_BASE_HREF, useValue: '/' },
+                HttpErrorHandlerService,
+                HttpOptionsService,
+                AuthGuardService,
+                CanDeactivateGuardService,
+                AccountService,
+                AuthService,
+                LoaderService,
+                LoggerService
+            ];
+
+            console.error('additionalDeclarations', additionalDeclarations);
+            console.error('additionalImports', additionalImports);
+            console.error('additionalProviders', additionalProviders);
+            //console.error('imports', imports);
+            //console.error('providers', providers);
+
+            if (additionalDeclarations) {
+                for (let ad of additionalDeclarations) {
+                    declarations.push(ad);
+                }
+            }
+
+            if (additionalImports) {
+                for (let ai of additionalImports) {
+                    imports.push(ai);
+                } 
+            }
+
+            if (additionalProviders) {
+                for (let ap of additionalProviders) {
+                    providers.push(ap);
+                }
+            }
+
             TestBed.configureTestingModule({
-                declarations: [component],
-                imports: [
-                    UniversalModule,
-                    LocalStorageModule.withConfig({
-                        prefix: 'wepapp-test',
-                        storageType: 'localStorage'
-                    }),
-                    LocalizationModule.forRoot(),
-                    RouterModule.forRoot([]),
-                    //NavigationModule
-                ],
-                providers: [
-                    HttpErrorHandlerService,
-                    HttpOptionsService,
-                    AuthGuardService,
-                    CanDeactivateGuardService,
-                    AccountService,
-                    AuthService,
-                    LoaderService,
-                    LoggerService,
-                    LocalStorageService,
-                    { provide: APP_BASE_HREF, useValue: '/' }
-                ]
+                declarations: declarations,
+                imports: imports,
+                providers: providers
         }).compileComponents();
 
         this.fixture = TestBed.createComponent(component);

@@ -2,6 +2,7 @@
 
 require('core-js/es6');
 require('core-js/es7/reflect');
+//require('angular2-universal-polyfills/browser'); // This needs to be at the top, Universal neccessary polyfills
 
 require('zone.js/dist/zone');
 require('zone.js/dist/long-stack-trace-zone');
@@ -10,9 +11,6 @@ require('zone.js/dist/sync-test');
 require('zone.js/dist/jasmine-patch');
 require('zone.js/dist/async-test');
 require('zone.js/dist/fake-async-test');
-
-require('./ClientApp/app/services/logger.service');
-
 
 var appContext = require.context('./ClientApp/app', true, /\.spec\.ts/);
 
