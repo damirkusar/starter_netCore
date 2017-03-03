@@ -12,6 +12,10 @@ describe('NewsRoomComponent', () => {
     });
 
     it('should create Component', () => {
-        expect(this.spec.instance instanceof NewsRoomComponent).toBe(true, 'should create Component');
+        expect(this.spec.instance instanceof NewsRoomComponent).toBeTruthy();
+    });
+
+    it('news property undefined', () => {
+        expect(this.spec.instance.news).toBeUndefined();
     });
 });

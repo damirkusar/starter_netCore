@@ -10,8 +10,6 @@ import { UniversalModule } from 'angular2-universal';
 //import { DebugElement } from "@angular/core";
 //import { MockBackend, MockConnection } from '@angular/http/testing';
 
-//import { NavigationModule } from './modules/navigation/navigation.module';
-
 import { HttpErrorHandlerService } from './services/httpErrorHandler.service';
 import { HttpOptionsService } from './services/httpOptions.service';
 import { AuthGuardService } from './services/authGuard.service';
@@ -23,71 +21,74 @@ import { LoggerService } from './services/logger.service';
 import { LoaderService } from './services/loader.service';
 
 export class MainSpec {
-        fixture: any;
-        instance: any;
-        element: any;
-        constructor() { }
+    fixture: any;
+    instance: any;
+    element: any;
+    testBed: any;
+    constructor() { }
 
-        init(component, additionalDeclarations, additionalImports, additionalProviders): void {
-            console.error('Initalizing', component.name);
-            let declarations = [component];
+    init(component, additionalDeclarations, additionalImports, additionalProviders): void {
+        console.info('Initalizing Tests for', component.name);
+        let declarations = [component];
 
-            let imports = [
-                UniversalModule,
-                FormsModule,
-                LocalStorageModule.withConfig({
-                    prefix: 'wepapp-test',
-                    storageType: 'localStorage'
-                }),
-                LocalizationModule.forRoot(),
-                RouterModule.forRoot([])
-            ];
+        let imports = [
+            UniversalModule,
+            FormsModule,
+            LocalStorageModule.withConfig({
+                prefix: 'wepapp-test',
+                storageType: 'localStorage'
+            }),
+            LocalizationModule.forRoot(),
+            RouterModule.forRoot([])
+        ];
 
-            let providers = [
-                { provide: APP_BASE_HREF, useValue: '/' },
-                HttpErrorHandlerService,
-                HttpOptionsService,
-                AuthGuardService,
-                CanDeactivateGuardService,
-                AccountService,
-                AuthService,
-                LoaderService,
-                LoggerService
-            ];
+        let providers = [
+            { provide: APP_BASE_HREF, useValue: '/' },
+            HttpErrorHandlerService,
+            HttpOptionsService,
+            AuthGuardService,
+            CanDeactivateGuardService,
+            AccountService,
+            AuthService,
+            LoaderService,
+            LoggerService
+        ];
 
-            console.error('additionalDeclarations', additionalDeclarations);
-            console.error('additionalImports', additionalImports);
-            console.error('additionalProviders', additionalProviders);
-            //console.error('imports', imports);
-            //console.error('providers', providers);
+        //console.info('additionalDeclarations', additionalDeclarations);
+        //console.info('additionalImports', additionalImports);
+        //console.info('additionalProviders', additionalProviders);
 
-            if (additionalDeclarations) {
-                for (let ad of additionalDeclarations) {
-                    declarations.push(ad);
-                }
+        if (additionalDeclarations) {
+            for (let ad of additionalDeclarations) {
+                declarations.push(ad);
             }
+        }
 
-            if (additionalImports) {
-                for (let ai of additionalImports) {
-                    imports.push(ai);
-                } 
+        if (additionalImports) {
+            for (let ai of additionalImports) {
+                imports.push(ai);
             }
+        }
 
-            if (additionalProviders) {
-                for (let ap of additionalProviders) {
-                    providers.push(ap);
-                }
+        if (additionalProviders) {
+            for (let ap of additionalProviders) {
+                providers.push(ap);
             }
+        }
 
-            TestBed.configureTestingModule({
-                declarations: declarations,
-                imports: imports,
-                providers: providers
-        }).compileComponents();
+        TestBed.configureTestingModule({
+            declarations: declarations,
+            imports: imports,
+            providers: providers
+        });
 
         this.fixture = TestBed.createComponent(component);
         this.instance = this.fixture.componentInstance;
         this.element = this.fixture.nativeElement;
         this.fixture.detectChanges();
+        this.testBed = TestBed;
+
+        console.info('xxxxxxx instance main.spec', this.instance.name);
+
     }
 }

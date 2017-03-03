@@ -9,6 +9,6 @@ describe('ContactComponent', () => {
     });
 
     it('should create Component', () => {
-        expect(this.spec.instance instanceof ContactComponent).toBe(true, 'should create Component');
+        expect(this.spec.instance instanceof ContactComponent).toBeTruthy();
     });
 });

@@ -9,6 +9,6 @@ describe('AppComponent', () => {
     });
 
     //it('should create Component', () => {
-    //    expect(this.spec.instance instanceof AppComponent).toBe(true, 'should create AppComponent');
+    //    expect(this.spec.instance instanceof AppComponent).toBeTruthy();
     //});
 });

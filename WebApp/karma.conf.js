@@ -2,7 +2,6 @@
 
 module.exports = function (config) {
     config.set({
-
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
         // frameworks to use
@@ -18,7 +17,7 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            './karma.testshim.config.js': ['webpack', 'sourcemap']
+            './karma.testshim.config.js': ['webpack'] //, 'sourcemap']
         },
         webpack: WebpackConfig,
         webpackMiddleware: {
@@ -37,7 +36,8 @@ module.exports = function (config) {
           'karma-webpack',
           'karma-remap-istanbul',
           'karma-chrome-launcher',
-          'karma-phantomjs-launcher'
+          'karma-phantomjs-launcher',
+          'karma-phantomjs2-launcher'
         ],
         // test results reporter to use
         // possible values: 'dots', 'progress'
@@ -51,7 +51,7 @@ module.exports = function (config) {
         // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
         logLevel: config.LOG_WARN,
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
+        autoWatch: false,
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: ['Chrome'],
@@ -60,6 +60,6 @@ module.exports = function (config) {
         singleRun: true,
         // Concurrency level
         // how many browser should be started simultaneous
-        concurrency: Infinity
+        concurrency: 1 //Infinity
     });
 }

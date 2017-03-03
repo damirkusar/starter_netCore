@@ -9,7 +9,7 @@ describe('HomeComponent', () => {
     });
 
     it('should create Component', () => {
-        expect(this.spec.instance instanceof HomeComponent).toBe(true, 'should create HomeComponent');
+        expect(this.spec.instance instanceof HomeComponent).toBeTruthy();
     });
 
     it(`should have one 'h1' element`, () => {

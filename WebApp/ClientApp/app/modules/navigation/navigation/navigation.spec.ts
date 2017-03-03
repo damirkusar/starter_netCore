@@ -10,6 +10,7 @@ import { NavMenuElementsNotificationComponent } from '../components/navmenu-elem
 describe('NavigationComponent', () => {
     beforeEach(() => {
         this.spec = new MainSpec();
+        //this.spec.init(NavigationComponent);
         this.spec.init(NavigationComponent,
             [
                 NavMenuTopComponent,
@@ -19,11 +20,17 @@ describe('NavigationComponent', () => {
             ]);
     });
 
-    //it('should create Component', () => {
-    //    expect(this.spec.instance instanceof NavigationComponent).toBe(true, 'should create Component');
-    //});
+    afterEach(() => {
+        this.spec.fixture.destroy();
+        this.spec.instance = null;
+        this.spec = null;
+    });
 
-    //it('2 should create Component', () => {
-    //    expect(this.spec.instance instanceof NavigationComponent).toBe(true, 'should create Component');
-    //});
+    it('should create Component', () => {
+        expect(this.spec.instance instanceof NavigationComponent).toBeTruthy();
+    });
+
+    it(`isLoggedIn property is falsy`, () => {
+        expect(this.spec.instance.isLoggedIn).toBeFalsy();
+    });
 });

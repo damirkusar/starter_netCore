@@ -9,6 +9,6 @@ describe('AdminComponent', () => {
     });
 
     it('should create Component', () => {
-        expect(this.spec.instance instanceof AdminComponent).toBe(true, 'should create Component');
+        expect(this.spec.instance instanceof AdminComponent).toBeTruthy();
     });
 });
