@@ -9,6 +9,8 @@ It also includes a starting point with a login mechanism and auto logout when to
 
 Localization is also included with the following librarie: [angular-l10n](https://github.com/4vanger/angular-l10n)
 
+Testing for Backend and Frontend is included as well. 
+
 Here is Steve Sanderson´s [README](https://github.com/damirkusar/AngularMeetsNetCore/blob/master/WebApp/README.md) of the template.
 
 # Getting Started
