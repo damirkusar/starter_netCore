@@ -8,6 +8,10 @@ describe('HomeComponent', () => {
         this.spec.init(HomeComponent);
     });
 
+    afterEach(() => {
+        this.spec.destroy();
+    });
+
     it('should create Component', () => {
         expect(this.spec.instance instanceof HomeComponent).toBeTruthy();
     });

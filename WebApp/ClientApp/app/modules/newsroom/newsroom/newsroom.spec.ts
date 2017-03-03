@@ -11,6 +11,10 @@ describe('NewsRoomComponent', () => {
         this.spec.init(NewsRoomComponent, null, null, [NewsService, NewsResolverService]);
     });
 
+    afterEach(() => {
+        this.spec.destroy();
+    });
+
     it('should create Component', () => {
         expect(this.spec.instance instanceof NewsRoomComponent).toBeTruthy();
     });

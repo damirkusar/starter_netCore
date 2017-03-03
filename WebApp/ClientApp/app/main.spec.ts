@@ -88,7 +88,12 @@ export class MainSpec {
         this.fixture.detectChanges();
         this.testBed = TestBed;
 
-        console.info('xxxxxxx instance main.spec', this.instance.name);
+        //console.info('xxxxxxx instance main.spec', this.instance.name);
+    }
 
+    destroy() {
+        Array.from(document.querySelectorAll('style')).forEach(x => x.parentNode.removeChild(x));
+        this.fixture.destroy();
+        this.instance = null;
     }
 }

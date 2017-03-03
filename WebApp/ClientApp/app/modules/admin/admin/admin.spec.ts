@@ -8,6 +8,10 @@ describe('AdminComponent', () => {
         this.spec.init(AdminComponent);
     });
 
+    afterEach(() => {
+        this.spec.destroy();
+    });
+
     it('should create Component', () => {
         expect(this.spec.instance instanceof AdminComponent).toBeTruthy();
     });

@@ -21,9 +21,7 @@ describe('NavigationComponent', () => {
     });
 
     afterEach(() => {
-        this.spec.fixture.destroy();
-        this.spec.instance = null;
-        this.spec = null;
+        this.spec.destroy();
     });
 
     it('should create Component', () => {
