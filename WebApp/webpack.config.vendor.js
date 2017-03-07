@@ -16,7 +16,7 @@ module.exports = {
                 use: extractCSS.extract({
                     fallback: 'style-loader',
                     use: [
-                        { loader: 'css-loader', options: { importLoaders: 1 } }
+                        { loader: 'css-loader', options: { importLoaders: 1, minimize: true } }
                     ]
                 })
             }
