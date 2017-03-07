@@ -2,6 +2,6 @@
   {
     "inputFile": "wwwroot/styles/_styles.scss",
     "outputFile": "wwwroot/styles/_styles.css",
-    "minify": { "enabled": false }
+    "minify": { "enabled": true }
   }
 ]
