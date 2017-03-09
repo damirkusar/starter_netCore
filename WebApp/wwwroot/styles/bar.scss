@@ -17,6 +17,17 @@
     border-style: solid;
     border-width: 1px;
     padding: 0.75em;
+    border-color: $color-grey-20;
+    background-color: $color-white;
+}
+
+.default-bar-item:hover,
+.default-bar-item:active,
+.default-bar-item:focus
+{
+    border-color: $color-grey-20;
+    background-color: $color-grey-10;
+    cursor: pointer;
 }
 
 .default-bar.dropdown-menu {

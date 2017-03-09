@@ -16,28 +16,7 @@
 	background: $color-red-100; 
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
+
 ::-webkit-scrollbar-thumb:window-inactive {
     background: $color-grey-10; 
-}
-
-.absolut-center {
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-}
-
-.custom-modal {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 10000;
-    background-color: transparent;
-    background-color: rgba(0, 0, 0, 0.5);
 }
