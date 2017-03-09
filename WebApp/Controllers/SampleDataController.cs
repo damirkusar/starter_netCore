@@ -58,5 +58,37 @@ namespace WebApp.Controllers
                 return this.BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("GetSampleDataSecuredAdmin")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetSampleDataSecuredAdmin()
+        {
+            try
+            {
+                var localization = this.dataLayer.GetLocalisations();
+                return this.Ok(localization);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("GetSampleDataSecuredSuperAdmin")]
+        [Authorize(Roles = "superadmin")]
+        public IActionResult GetSampleDataSecuredSuperAdmin()
+        {
+            try
+            {
+                var localization = this.dataLayer.GetLocalisations();
+                return this.Ok(localization);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+        }
     }
 }
