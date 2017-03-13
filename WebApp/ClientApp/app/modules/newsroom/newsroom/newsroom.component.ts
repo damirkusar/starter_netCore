@@ -2,7 +2,7 @@ import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, 
 import { Router, Resolve, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
 import { LoggerService } from '../../../services/logger.service';
-import { INews, News } from '../services/news.service';
+import { INews } from '../services/news.service';
 
 @Component({
     selector: 'news-room',

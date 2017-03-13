@@ -12,17 +12,6 @@ export interface INews {
     content?:string;
 }
 
-export class News implements INews {
-    id?: string;
-    title?: string;
-    content?:string;
-
-    constructor(title?: string, content?: string) {
-        this.title = title;
-        this.content = content;
-    }
-}
-
 @Injectable()
 export class NewsService {
     private newsUrl = './news.json';

@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import './rxjs-operators';
 import { LoggerService } from './logger.service';
-import { IErrorMessage, ErrorMessage } from "../models/errorMessage";
+import { IErrorMessage } from "../models/errorMessage";
 
 @Injectable()
 export class HttpErrorHandlerService {
@@ -13,9 +13,12 @@ export class HttpErrorHandlerService {
     responseError(errorResponse: Response | any) {
         let errMsg: IErrorMessage;
         if (errorResponse instanceof Response) {
-            errMsg = new ErrorMessage(errorResponse.status, errorResponse.statusText);
+            errMsg = { status: errorResponse.status, message: errorResponse.statusText };
         } else {
-            errMsg = new ErrorMessage(errorResponse.status ? errorResponse.status : -1, errorResponse.message ? errorResponse.message : errorResponse.toString());
+            errMsg = {
+                status: errorResponse.status ? errorResponse.status : -1,
+                message: errorResponse.message ? errorResponse.message : errorResponse.toString()
+            };
         }
 
         this.errorOccured.emit(errMsg);
