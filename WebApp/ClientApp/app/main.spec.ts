@@ -1,10 +1,12 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router, Resolve, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Localization, LocaleService, TranslationService, LocalizationModule } from 'angular-l10n';
 import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
-import { UniversalModule } from 'angular2-universal';
 
 //import { By } from "@angular/platform-browser";
 //import { DebugElement } from "@angular/core";
@@ -32,7 +34,10 @@ export class MainSpec {
         let declarations = [component];
 
         let imports = [
-            UniversalModule,
+            BrowserAnimationsModule,
+            BrowserModule,
+            HttpModule,
+            JsonpModule,
             FormsModule,
             LocalStorageModule.withConfig({
                 prefix: 'wepapp-test',

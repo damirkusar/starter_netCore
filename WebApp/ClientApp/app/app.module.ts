@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UniversalModule } from 'angular2-universal';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { FormsModule } from '@angular/forms';
@@ -32,11 +32,10 @@ import { LoaderService } from './services/loader.service';
     ],
     imports: [
         // Angular Modules
-        //BrowserModule,
-        //CommonModule,
-        //HttpModule,
-        //JsonpModule,
-        UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpModule,
+        JsonpModule,
         FormsModule,
         RouterModule.forRoot([
             {

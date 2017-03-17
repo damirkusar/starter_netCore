@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UniversalModule } from 'angular2-universal';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-
 import { LocalizationModule } from 'angular-l10n';
 
 import { AdminComponent } from './admin/admin.component';
@@ -16,7 +17,11 @@ import { CanDeactivateGuardService } from '../../services/canDeactivateGuard.ser
     ],
     imports: [
         // Angular Modules
-        UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        //UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpModule,
+        JsonpModule,
         FormsModule,
         RouterModule.forChild([
             {

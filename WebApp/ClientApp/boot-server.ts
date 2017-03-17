@@ -1,16 +1,17 @@
-import 'angular2-universal-polyfills';
-import './_workaround.universal.ts'; // temporary until 2.1.1 things are patched in Core
 //import './_workaround.prerendering';
 import 'zone.js';
+import 'reflect-metadata';
+import '@angular/animations';
+import '@angular/animations/browser';
 import { enableProdMode } from '@angular/core';
-import { platformNodeDynamic } from 'angular2-universal';
+import { platformDynamicServer, platformServer } from '@angular/platform-server';
 
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 
 import { AppModule } from './app/app.module';
 
 enableProdMode();
-const platform = platformNodeDynamic();
+const platform = platformDynamicServer();
 
 export default createServerRenderer(params => {
     return new Promise<RenderResult>((resolve, reject) => {
@@ -31,7 +32,7 @@ export default createServerRenderer(params => {
             }
         });
 
-        return requestZone.run<Promise<string>>(() => platform.serializeModule(AppModule))
+        return requestZone.run<Promise<string>>(() => platform.bootstrapModule(AppModule))
             .then(html => {
                     resolve({ html: html });
                 },

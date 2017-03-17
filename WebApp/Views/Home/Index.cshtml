@@ -2,14 +2,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<app asp-prerender-module="ClientApp/dist/main-server">
+<app>
     <div class='custom-modal' style="background: white">
         <div class="loader absolut-center"></div>
     </div>
 </app>
 
+@*<app asp-prerender-module="ClientApp/dist/main-server">
+        <div class='custom-modal' style="background: white">
+            <div class="loader absolut-center"></div>
+        </div>
+    </app>*@
+
 <script src="~/dist/vendor.js" asp-append-version="false"></script>
+<script src="~/scripts/_scripts.js" asp-append-version="false"></script>
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="false"></script>
 }
-<script src="~/scripts/_scripts.js" asp-append-version="false"></script>

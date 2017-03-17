@@ -25,6 +25,8 @@ module.exports = {
     },
     entry: {
         vendor: [
+            '@angular/animations',
+            '@angular/animations/browser',
             '@angular/common',
             '@angular/compiler',
             '@angular/core',
@@ -34,8 +36,6 @@ module.exports = {
             '@angular/router',
             '@angular/platform-server',
             'angular-2-local-storage',
-            'angular2-universal',
-            'angular2-universal-polyfills',
             'angular-l10n',
             'aspnet-prerendering',
             'bootstrap',
@@ -44,6 +44,7 @@ module.exports = {
             'es6-promise',
             'font-awesome/css/font-awesome.css',
             'jquery',
+            'reflect-metadata',
             'tether',
             'tether/dist/css/tether.css',
             'zone.js'
