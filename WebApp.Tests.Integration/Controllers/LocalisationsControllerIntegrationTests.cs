@@ -1,42 +1,40 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-using NUnit.Framework;
 using WebApp.Controllers;
 using WebApp.DataAccessLayer.Models;
+using Xunit;
 
 namespace WebApp.Tests.Integration.Controllers
 {
-    [TestFixture]
     public class LocalisationsControllerIntegrationTest
     {
         private LocalisationsController controller;
 
-        [SetUp]
-        public void Setup()
+        public LocalisationsControllerIntegrationTest()
         {
             this.controller = new LocalisationsController(DbContextFactory.DataAccessLayerInstance);
         }
 
-        [Test]
+        [Fact]
         public void GetLocalisations_DE_OkObjectResult()
         {
             var localisations = this.controller.GetLocalisations("DE");
-            Assert.That(localisations, Is.TypeOf<OkObjectResult>());
+            Assert.IsType<OkObjectResult>(localisations);
         }
 
-        [Test]
+        [Fact]
         public void GetLocalisations_DE_Has_Localisations()
         {
             var localisations = (List<Localisation>)((OkObjectResult)this.controller.GetLocalisations("DE")).Value;
-            Assert.That(localisations.Count, Is.EqualTo(0));
+            Assert.Equal(0, localisations.Count);
         }
 
-        [Test]
+        [Fact]
         public void GetLocalisationsAsJson_DE_Has_Localisations()
         {
             var localisations = (JObject)((OkObjectResult)this.controller.GetLocalisationsAsJson("DE")).Value;
-            Assert.That(localisations.Count, Is.EqualTo(0));
+            Assert.Equal(0, localisations.Count);
         }
     }
 }

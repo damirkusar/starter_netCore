@@ -3,14 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Newtonsoft.Json.Linq;
-using NUnit.Framework;
 using WebApp.Controllers;
 using WebApp.DataAccessLayer;
 using WebApp.DataAccessLayer.Models;
+using Xunit;
 
 namespace WebApp.Tests.Controllers
 {
-    [TestFixture]
     public class LocalisationsControllerTests
     {
         private Mock<DataLayer> dataLayerMock;
@@ -18,8 +17,7 @@ namespace WebApp.Tests.Controllers
         private List<Localisation> localisations;
         private Localisation localisation;
 
-        [SetUp]
-        public void Setup()
+        public LocalisationsControllerTests()
         {
             this.localisation = new Localisation
             {
@@ -51,61 +49,61 @@ namespace WebApp.Tests.Controllers
             return jObject;
         }
 
-        [Test]
+        [Fact]
         public void GetLocalisations_WithoutParameter_OkObjectResult_CountIsCorrect()
         {
             var data = this.controller.GetLocalisations();
             var dataValue = (List<Localisation>)((OkObjectResult)data).Value;
-            Assert.That(data, Is.TypeOf<OkObjectResult>());
-            Assert.That(dataValue.Count, Is.EqualTo(1));
+            Assert.IsType<OkObjectResult>(data);
+            Assert.Equal(1, dataValue.Count);
         }
 
-        [Test]
+        [Fact]
         public void GetLocalisations_WithParameter_OkObjectResult_CountIsCorrect()
         {
             var data = this.controller.GetLocalisations("en");
             var dataValue = (List<Localisation>)((OkObjectResult)data).Value;
-            Assert.That(data, Is.TypeOf<OkObjectResult>());
-            Assert.That(dataValue.Count, Is.EqualTo(1));
+            Assert.IsType<OkObjectResult>(data);
+            Assert.Equal(1, dataValue.Count);
         }
 
-        [Test]
+        [Fact]
         public void GetLocalisationsAsJson_WithoutParameter_OkObjectResult_CountIsCorrect()
         {
             var data = this.controller.GetLocalisationsAsJson();
             var dataValue = (JObject)((OkObjectResult)data).Value;
-            Assert.That(data, Is.TypeOf<OkObjectResult>());
-            Assert.That(dataValue.Count, Is.EqualTo(1));
+            Assert.IsType<OkObjectResult>(data);
+            Assert.Equal(1, dataValue.Count);
         }
 
-        [Test]
+        [Fact]
         public void GetLocalisationsAsJson_WithParameter_OkObjectResult_CountIsCorrect()
         {
             var data = this.controller.GetLocalisationsAsJson("en");
             var dataValue = (JObject)((OkObjectResult)data).Value;
-            Assert.That(data, Is.TypeOf<OkObjectResult>());
-            Assert.That(dataValue.Count, Is.EqualTo(1));
+            Assert.IsType<OkObjectResult>(data);
+            Assert.Equal(1, dataValue.Count);
         }
 
-        [Test]
+        [Fact]
         public void UpdateLocalisation_OkObjectResult()
         {
             var data = this.controller.UpdateLocalisation(this.localisation);
-            Assert.That(data, Is.TypeOf<OkObjectResult>());
+            Assert.IsType<OkObjectResult>(data);
         }
 
-        [Test]
+        [Fact]
         public void AddLocalisation_OkObjectResult()
         {
             var data = this.controller.AddLocalisation(this.localisation);
-            Assert.That(data, Is.TypeOf<OkObjectResult>());
+            Assert.IsType<OkObjectResult>(data);
         }
 
-        [Test]
+        [Fact]
         public void RemoveLocalisation_OkObjectResult()
         {
             var data = this.controller.AddLocalisation(this.localisation);
-            Assert.That(data, Is.TypeOf<OkObjectResult>());
+            Assert.IsType<OkObjectResult>(data);
         }
     }
 }
