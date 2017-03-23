@@ -1,6 +1,8 @@
-# AngularMeetsNetCore is a seed for Angular and Asp.Net Core applications
+# angularXcore is a seed for Angular X and Asp.Net Core applications
 
-This seed is an extention of Steve Sanderson´s / Mads Kristensen's 
+Which version of Angular is currently used you will see under the releases. 
+
+This seed is an extention of Steve SandersonÂ´s / Mads Kristensen's 
 [ASP.NET Core + Angular 2 template for Visual Studio](http://blog.stevensanderson.com/2016/10/04/angular2-template-for-visual-studio).
 [ASP.NET Core Template Pack](https://github.com/ligershark/CoreTemplatePack)
 
@@ -13,7 +15,7 @@ Localization is also included with the following librarie: [angular-l10n](https:
 
 Testing for Backend and Frontend is included as well. 
 
-Here is Steve Sanderson´s [README](https://github.com/damirkusar/AngularMeetsNetCore/blob/master/WebApp/README.md) of the template.
+Here is Steve SandersonÂ´s [README](https://github.com/damirkusar/AngularMeetsNetCore/blob/master/WebApp/README.md) of the template.
 
 # Getting Started
 
@@ -39,7 +41,7 @@ If you update Node for example, and you have already installed node_modules, you
 
 # Pre-Rendering
 
-Pre-Rendering is enabled.
+Pre-Rendering is currently disabled.
 There is a workaround in boot-server.ts for navigator, browser and window which is not defined on server side for libraries which are not ready yet for prerendering. 
 It is currently commented out because all used libraries are now supporting Pre-Rendering. 
 
