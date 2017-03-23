@@ -1,9 +1,9 @@
-﻿import { Injectable, EventEmitter } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import '../../../services/rxjs-operators';
-import { LoggerService } from '../../../services/logger.service';
-import { LoaderService } from '../../../services/loader.service';
+import '../../shared/services/rxjs-operators';
+import { LoggerService } from '../../shared/services/logger.service';
+import { LoaderService } from '../../shared/services/loader.service';
 import { INews, NewsService } from './news.service';
 
 @Injectable()

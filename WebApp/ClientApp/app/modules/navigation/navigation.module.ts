@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpModule, JsonpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { LocalizationModule } from 'angular-l10n';
+
+import { AuthGuardService } from '../shared/services/authGuard.service';
+import { CanDeactivateGuardService } from '../shared/services/canDeactivateGuard.service';
+
+import { SharedModule } from '../shared/shared.module';
 
 import { NavigationComponent } from './navigation/navigation.component';
 
@@ -23,15 +25,12 @@ import { NavMenuElementsNotificationComponent } from './components/navmenu-eleme
     ],
     imports: [
         // Angular Modules
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpModule,
-        JsonpModule,
-        FormsModule,
+        CommonModule,
         RouterModule.forRoot([
         ]),
-        LocalizationModule.forChild()
+        LocalizationModule.forChild(),
         // My Modules
+        SharedModule
     ],
     exports: [NavigationComponent],
     providers: [

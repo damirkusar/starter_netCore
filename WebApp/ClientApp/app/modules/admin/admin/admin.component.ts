@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { LoggerService } from '../../../services/logger.service';
+import { LoggerService } from '../../shared/services/logger.service';
 
 @Component({
     selector: 'admin',
@@ -23,10 +23,7 @@ export class AdminComponent extends Localization implements OnChanges, OnInit, D
     ngOnDestroy(): void { }
 
     canDeactivate(): Promise<boolean> | boolean {
-        // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
         this.logger.debug(`AdminComponent-canDeactivate`);
-        // Otherwise ask the user with the dialog service and return its
-        // promise which resolves to true or false when the user decides
         return true;
     }
 }

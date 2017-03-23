@@ -10,7 +10,6 @@ import { NavMenuElementsNotificationComponent } from '../components/navmenu-elem
 describe('NavigationComponent', () => {
     beforeEach(() => {
         this.spec = new MainSpec();
-        //this.spec.init(NavigationComponent);
         this.spec.init(NavigationComponent,
             [
                 NavMenuTopComponent,

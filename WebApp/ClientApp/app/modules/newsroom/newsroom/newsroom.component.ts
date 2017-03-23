@@ -1,7 +1,8 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
-import { Router, Resolve, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { LoggerService } from '../../../services/logger.service';
+
+import { Router, Resolve, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
+import { LoggerService } from '../../shared/services/logger.service';
 import { INews } from '../services/news.service';
 
 @Component({
@@ -34,10 +35,7 @@ export class NewsRoomComponent extends Localization implements OnChanges, OnInit
     ngOnDestroy(): void { }
 
     canDeactivate(): Promise<boolean> | boolean {
-        // Allow synchronous navigation (`true`) if nothing is unchanged
         this.logger.debug(`NewsRoomComponent-canDeactivate`);
-        // Otherwise ask the user with the dialog service and return its
-        // promise which resolves to true or false when the user decides
         return true;
     }
 }

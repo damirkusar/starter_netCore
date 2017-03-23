@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let canActivate = true;
-        
+
         if (route.data['auth']) {
             this.logger.log(`Auth: ${route.data['auth']}`);
             canActivate = this.authService.isLoggedIn();
@@ -25,7 +25,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
 
         if (!canActivate) {
             this.logger.error(`Can not activate: ${state.url}`);
-            this.router.navigate(['/home']); 
+            this.router.navigate(['/home']);
         }
 
         return canActivate;

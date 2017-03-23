@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { LoggerService } from '../../../../services/logger.service';
+import { LoggerService } from '../../../shared/services/logger.service';
 
 @Component({
     selector: 'navmenu-elements-notification',

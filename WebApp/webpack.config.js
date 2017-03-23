@@ -14,17 +14,30 @@ var sharedConfig = {
     },
     module: {
         rules: [
-            { test: /\.ts$/, include: /ClientApp/, loader: 'ts-loader', query: { silent: true } },
-            { test: /\.html$/, loader: 'raw-loader' },
-            { test: /\.css$/, loader: 'to-string-loader!css' },
-            { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'url-loader', query: { limit: 25000 } },
+            {
+                test: /\.ts$/,
+                include: /ClientApp/,
+                exclude: [/\.(spec|e2e)\.ts$/],
+                use: [{ loader: 'ts-loader' }, { loader: 'angular2-template-loader' }]
+            },
+            {
+                test: /\.(html|css)$/, loader: 'raw-loader'
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|svg)$/,
+                loader: 'url-loader',
+                query: { limit: 25000 }
+            },
             {
                 test: /\.scss$/,
                 include: /ClientApp/,
                 exclude: /node_modules/,
                 use: [{ loader: 'raw-loader' }, { loader: 'sass-loader' }]
             },
-            { include: /ClientApp/, loader: 'angular-router-loader' }
+            {
+                include: /ClientApp/,
+                loader: 'angular-router-loader'
+            }
         ]
     }
 };

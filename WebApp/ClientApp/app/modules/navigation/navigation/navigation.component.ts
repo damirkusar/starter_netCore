@@ -1,12 +1,13 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { ICredentials } from '../../../models/credentials';
-import { IUser } from '../../../models/user';
-import { IToken } from '../../../models/token';
-import { AccountService } from '../../../services/account.service';
-import { AuthService } from '../../../services/auth.service';
-import { LoaderService } from '../../../services/loader.service';
-import { LoggerService } from '../../../services/logger.service';
+
+import { ICredentials } from '../../shared/models/credentials';
+import { IUser } from '../../shared/models/user';
+import { IToken } from '../../shared/models/token';
+import { AccountService } from '../../shared/services/account.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { LoaderService } from '../../shared/services/loader.service';
+import { LoggerService } from '../../shared/services/logger.service';
 
 @Component({
     selector: 'navigation',

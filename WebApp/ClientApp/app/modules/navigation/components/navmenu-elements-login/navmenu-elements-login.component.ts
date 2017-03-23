@@ -1,14 +1,13 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { IUser } from '../../../../models/user';
-import { ICredentials } from '../../../../models/credentials';
-import { LoggerService } from '../../../../services/logger.service';
+import { IUser } from '../../../shared/models/user';
+import { ICredentials } from '../../../shared/models/credentials';
+import { LoggerService } from '../../../shared/services/logger.service';
 
 @Component({
     selector: 'navmenu-elements-login',
     template: require('./navmenu-elements-login.component.html'),
     styles: [require('./navmenu-elements-login.component.scss')]
-
 })
 export class NavMenuElementsLoginComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     private loggedIn: boolean;

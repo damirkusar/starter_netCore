@@ -13,7 +13,7 @@ export class HttpErrorHandlerService {
     responseError(errorResponse: Response | any) {
         let errMsg: IErrorMessage;
         if (errorResponse instanceof Response) {
-            errMsg = { status: errorResponse.status, message: errorResponse.statusText };
+            errMsg = {status: errorResponse.status, message: errorResponse.statusText};
         } else {
             errMsg = {
                 status: errorResponse.status ? errorResponse.status : -1,

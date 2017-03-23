@@ -12,15 +12,19 @@ import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage
 //import { DebugElement } from "@angular/core";
 //import { MockBackend, MockConnection } from '@angular/http/testing';
 
-import { HttpErrorHandlerService } from './services/httpErrorHandler.service';
-import { HttpOptionsService } from './services/httpOptions.service';
-import { AuthGuardService } from './services/authGuard.service';
-import { CanDeactivateGuardService } from './services/canDeactivateGuard.service';
+import { SharedModule } from './modules/shared/shared.module';
 
-import { AccountService } from './services/account.service';
-import { AuthService } from './services/auth.service';
-import { LoggerService } from './services/logger.service';
-import { LoaderService } from './services/loader.service';
+import { HttpErrorHandlerService } from './modules/shared/services/httpErrorHandler.service';
+import { HttpOptionsService } from './modules/shared/services/httpOptions.service';
+import { AuthGuardService } from './modules/shared/services/authGuard.service';
+import { CanDeactivateGuardService } from './modules/shared/services/canDeactivateGuard.service';
+
+import { AccountService } from './modules/shared/services/account.service';
+import { AuthService } from './modules/shared/services/auth.service';
+import { LoggerService } from './modules/shared/services/logger.service';
+import { LoaderService } from './modules/shared/services/loader.service';
+
+import { FilterPipe } from './modules/shared/pipes/filter.pipe';
 
 export class MainSpec {
     fixture: any;
@@ -30,6 +34,45 @@ export class MainSpec {
     constructor() { }
 
     init(component, additionalDeclarations, additionalImports, additionalProviders): void {
+        if (!additionalImports) {
+            additionalImports = [];
+        }
+        additionalImports.push(SharedModule);
+
+        this.initWithoutSharedModule(component, additionalDeclarations, additionalImports, additionalProviders);
+    }
+
+    initForSharedComponents(component, additionalDeclarations, additionalImports, additionalProviders): void {
+        if (!additionalDeclarations) {
+            additionalDeclarations = [];
+        }
+        additionalDeclarations = additionalDeclarations.concat([FilterPipe]);
+
+        if (!additionalImports) {
+            additionalImports = [];
+        }
+        additionalImports = additionalImports.concat([]);
+
+        if (!additionalProviders) {
+            additionalProviders = [];
+        }
+        additionalProviders = additionalProviders.concat(
+            [
+                HttpErrorHandlerService,
+                HttpOptionsService,
+                AuthGuardService,
+                CanDeactivateGuardService,
+                AuthService,
+                AccountService,
+                LoggerService,
+                LoaderService
+            ]
+        );
+
+        this.initWithoutSharedModule(component, additionalDeclarations, additionalImports, additionalProviders);
+    }
+
+    private initWithoutSharedModule(component, additionalDeclarations, additionalImports, additionalProviders): void {
         console.info('Initalizing Tests for', component.name);
         let declarations = [component];
 
@@ -48,15 +91,7 @@ export class MainSpec {
         ];
 
         let providers = [
-            { provide: APP_BASE_HREF, useValue: '/' },
-            HttpErrorHandlerService,
-            HttpOptionsService,
-            AuthGuardService,
-            CanDeactivateGuardService,
-            AccountService,
-            AuthService,
-            LoaderService,
-            LoggerService
+            { provide: APP_BASE_HREF, useValue: '/' }
         ];
 
         //console.info('additionalDeclarations', additionalDeclarations);
@@ -64,21 +99,15 @@ export class MainSpec {
         //console.info('additionalProviders', additionalProviders);
 
         if (additionalDeclarations) {
-            for (let ad of additionalDeclarations) {
-                declarations.push(ad);
-            }
+            declarations = declarations.concat(additionalDeclarations);
         }
 
         if (additionalImports) {
-            for (let ai of additionalImports) {
-                imports.push(ai);
-            }
+            imports = imports.concat(additionalImports);
         }
 
         if (additionalProviders) {
-            for (let ap of additionalProviders) {
-                providers.push(ap);
-            }
+            providers = providers.concat(additionalProviders);
         }
 
         TestBed.configureTestingModule({

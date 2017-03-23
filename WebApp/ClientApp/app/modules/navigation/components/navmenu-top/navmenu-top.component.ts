@@ -1,14 +1,13 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { ICredentials } from '../../../../models/credentials';
-import { IUser } from '../../../../models/user';
-import { LoggerService } from '../../../../services/logger.service';
+import { ICredentials } from '../../../shared/models/credentials';
+import { IUser } from '../../../shared/models/user';
+import { LoggerService } from '../../../shared/services/logger.service';
 
 @Component({
     selector: 'navmenu-top',
     template: require('./navmenu-top.component.html'),
     styles: [require('./navmenu-top.component.scss')]
-
 })
 export class NavMenuTopComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     private loggedIn: boolean;

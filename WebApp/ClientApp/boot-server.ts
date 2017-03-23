@@ -1,4 +1,5 @@
 //import './_workaround.prerendering';
+import 'es6-shim';
 import 'zone.js';
 import 'reflect-metadata';
 import '@angular/animations';
@@ -16,7 +17,7 @@ const platform = platformDynamicServer();
 export default createServerRenderer(params => {
     return new Promise<RenderResult>((resolve, reject) => {
         const requestZone = Zone.current.fork({
-            name: 'angular-universal request',
+            name: 'angularXcore request',
             properties: {
                 ngModule: AppModule,
                 baseUrl: '/',

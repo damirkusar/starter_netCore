@@ -124,6 +124,8 @@ namespace WebApp
             // Add framework services.
             services.AddMvc();
             services.AddOptions();
+            services.AddNodeServices();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<DataLayer, DataLayer>();
         }

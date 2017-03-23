@@ -1,5 +1,9 @@
+import 'es6-shim';
 import 'zone.js';
 import 'reflect-metadata';
+import 'bootstrap';
+import '@angular/animations';
+import '@angular/animations/browser';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
@@ -10,7 +14,7 @@ import '@angular/animations/browser';
 // Enable either Hot Module Reloading or production mode
 if (module['hot']) {
     module['hot'].accept();
-    module['hot'].dispose(() => { platform.destroy(); });
+    module['hot'].dispose(() => { });
 } else {
     enableProdMode();
 }
