@@ -78,10 +78,4 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="ClientApp\app\components\home\home.spec.ts">
-      <DependentUpon>home.component.ts</DependentUpon>
-    </None>
-  </ItemGroup>
-
 </Project>
