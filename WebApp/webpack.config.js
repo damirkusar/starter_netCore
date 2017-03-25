@@ -1,4 +1,6 @@
 var isDevBuild = process.argv.indexOf('--env.prod') < 0;
+console.log("webpack.config isDevBuild", isDevBuild);
+
 var path = require('path');
 var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
@@ -46,7 +48,7 @@ var sharedConfig = {
 var clientBundleConfig = merge(sharedConfig, {
     entry: { 'main-client': './ClientApp/boot-client.ts' },
     output: { path: path.join(__dirname, './wwwroot/dist') },
-    devtool: isDevBuild ? 'inline-source-map' : null,
+    devtool: isDevBuild ? 'eval' : 'source-map',
     plugins: [
         new webpack.DllReferencePlugin({
             context: __dirname,
@@ -67,7 +69,7 @@ var serverBundleConfig = merge(sharedConfig, {
         path: path.join(__dirname, './ClientApp/dist')
     },
     target: 'node',
-    devtool: 'inline-source-map',
+    devtool: isDevBuild ? 'eval' : 'source-map',
     externals: [nodeExternals({ whitelist: [allFilenamesExceptJavaScript] })] // Don't bundle .js files from node_modules
 });
 

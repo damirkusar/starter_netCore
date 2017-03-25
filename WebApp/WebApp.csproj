@@ -9,7 +9,21 @@
     <OutputType>Exe</OutputType>
     <PackageId>WebApp</PackageId>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
+    <PreBuildEvent />
   </PropertyGroup>
+  
+  <Target Name="PrecompileScript" BeforeTargets="Build" Condition="'$(Configuration)'=='Debug'">
+    <Exec Command="echo pre-compile $(Configuration)" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --env.dev --config webpack.config.vendor.js" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --env.dev --config webpack.config.js" />
+  </Target>
+
+  <Target Name="PrepublishScript" BeforeTargets="Publish">
+    <Exec Command="echo pre-publish $(Configuration)" />
+    <Exec Command="npm install" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod --config webpack.config.vendor.js" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod --config webpack.config.js" />
+  </Target>
 
   <ItemGroup>
     <None Update="ClientApp\dist\**\*;node_modules\**\*;Views\**\*;wwwroot\**\*;nlog.config">
@@ -19,7 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebApp.DataAccessLayer\WebApp.DataAccessLayer.csproj" />
-  </ItemGroup>
+  </ItemGroup>  
 
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.Validation" Version="1.0.0-*" />
@@ -62,32 +76,9 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.3.0" />
   </ItemGroup>
 
-  <Target Name="PrecompileScript" BeforeTargets="BeforeBuild">
-    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js" />
-    <Exec Command="node node_modules/webpack/bin/webpack.js" />
-  </Target>
-
-  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
-    <Exec Command="npm install" />
-    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod" />
-    <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod" />
-  </Target>
-
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="appsettings.development.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="appsettings.production.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="appsettings.staging.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
 </Project>

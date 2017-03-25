@@ -23,7 +23,7 @@ export class HomeComponent extends Localization  implements OnChanges, OnInit, D
         this.authService.loggedInUpdated.subscribe(
             (isLoggedIn) => {
                 if (!isLoggedIn) {
-                    this.fullName = '';
+                    this.fullName = 'Guest';
                 }
             }
         );

@@ -18,14 +18,14 @@ export class AppComponent extends Localization implements OnChanges, OnInit, DoC
         public translation: TranslationService) {
         super(locale, translation);
 
-        this.locale.AddConfiguration()
-            .AddLanguages(['de', 'en'])
-            .DefineDefaultLocale('de', 'CH')
-            .DefineCurrency('CHF')
-            .SetCookieExpiration(30);
+        this.locale.addConfiguration()
+            .addLanguages(['de', 'en'])
+            .defineDefaultLocale('de', 'CH')
+            .defineCurrency('CHF')
+            .setCookieExpiration(30);
         this.locale.init();
 
-        this.translation.AddConfiguration().AddWebAPIProvider('/api/localisations/json/', 'json');
+        this.translation.addConfiguration().addWebAPIProvider('/api/localisations/json/', 'json');
         this.translation.translationError.subscribe((error: any) => console.log(error));
         this.translation.init();
     }

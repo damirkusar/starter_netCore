@@ -1,4 +1,6 @@
 var isDevBuild = process.argv.indexOf('--env.prod') < 0;
+console.log("webpack.config.vendor isDevBuild", isDevBuild);
+
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');

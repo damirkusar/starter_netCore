@@ -141,9 +141,11 @@ namespace WebApp
             env.ConfigureNLog("nlog.config");
             LogManager.Configuration.Variables["connectionString"] = this.Configuration.GetConnectionString("DefaultLogConnection");
             LogManager.Configuration.Variables["configDir"] = "C:\\temp\\";
+            var logger = LogManager.GetCurrentClassLogger();
 
             if (env.IsDevelopment())
             {
+                logger.Trace($"Environment in WebApp isDevelopment: {env.EnvironmentName}");
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
@@ -152,6 +154,7 @@ namespace WebApp
             }
             else
             {
+                logger.Trace($"Environment in WebApp !isDevelopment: {env.EnvironmentName}");
                 app.UseExceptionHandler("/Home/Error");
             }
 
@@ -196,9 +199,6 @@ namespace WebApp
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
-
-            var logger = LogManager.GetCurrentClassLogger();
-            logger.Trace($"Environment in WebApp is {env.EnvironmentName}");
 
             this.InitializeAsync(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
         }
