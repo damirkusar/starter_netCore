@@ -2,7 +2,7 @@ import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, 
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
 
 import { Router, Resolve, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
-import { LoggerService } from '../../shared/services/logger.service';
+import { LoggerService } from '../../../core/services/logger.service';
 import { INews } from '../services/news.service';
 
 @Component({

@@ -7,50 +7,43 @@ import { LocalStorageModule, ILocalStorageServiceConfig } from 'angular-2-local-
 import { FormsModule } from '@angular/forms';
 import { LocalizationModule } from 'angular-l10n';
 
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { NavigationModule } from './navigation/navigation.module';
+
+import { AppComponent } from './core/components/app/app.component';
+
+import { AuthGuardService } from './core/services/authGuard.service';
+import { CanDeactivateGuardService } from './core/services/canDeactivateGuard.service';
+
 import { AdminModule } from './modules/admin/admin.module';
 import { ContactModule } from './modules/contact/contact.module';
-import { NavigationModule } from './modules/navigation/navigation.module';
+import { HomeModule } from './modules/home/home.module';
 import { NewsRoomModule } from './modules/newsroom/newsroom.module';
-
-import { SharedModule } from './modules/shared/shared.module';
-import { AppComponent } from './components/app/app.component';
-import { HomeComponent } from './components/home/home.component';
-
-import { AuthGuardService } from './modules/shared/services/authGuard.service';
-import { CanDeactivateGuardService } from './modules/shared/services/canDeactivateGuard.service';
-
 
 @NgModule({
     bootstrap: [AppComponent],
     declarations: [
-        AppComponent,
-        HomeComponent
+        AppComponent
     ],
     imports: [
         // Angular Modules
         BrowserModule,
         RouterModule.forRoot([
-            {
-                path: 'home',
-                component: HomeComponent,
-                data: { auth: false },
-                canActivate: [AuthGuardService],
-                canDeactivate: [CanDeactivateGuardService],
-                canActivateChild: [AuthGuardService],
-                children: []
-            },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: '**', redirectTo: 'home' }
         ]),
         LocalStorageModule.withConfig({
-            prefix: 'webapp',
+            prefix: 'angularXcore',
             storageType: 'localStorage'
         }),
         LocalizationModule.forRoot(),
         // My Modules
+        CoreModule,
         SharedModule,
         AdminModule,
         ContactModule,
+        HomeModule,
         NavigationModule,
         NewsRoomModule
     ],

@@ -8,23 +8,20 @@ import { CanDeactivateGuardService } from '../../core/services/canDeactivateGuar
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { NewsRoomComponent } from './newsroom/newsroom.component';
-import { NewsService } from './services/news.service';
-import { NewsResolverService } from './services/newsResolver.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
     declarations: [
-        NewsRoomComponent
+        HomeComponent
     ],
     imports: [
         // Angular Modules
         CommonModule,
         RouterModule.forChild([
             {
-                path: 'news-room',
-                component: NewsRoomComponent,
-                data: { auth: true },
-                resolve: { news: NewsResolverService },
+                path: 'home',
+                component: HomeComponent,
+                data: { auth: false },
                 canActivate: [AuthGuardService],
                 canDeactivate: [CanDeactivateGuardService],
                 canActivateChild: [AuthGuardService],
@@ -35,11 +32,9 @@ import { NewsResolverService } from './services/newsResolver.service';
         // My Modules
         SharedModule
     ],
-    exports: [NewsRoomComponent],
+    exports: [HomeComponent],
     providers: [
-        NewsService,
-        NewsResolverService
     ]
 })
-export class NewsRoomModule {
+export class HomeModule {
 }

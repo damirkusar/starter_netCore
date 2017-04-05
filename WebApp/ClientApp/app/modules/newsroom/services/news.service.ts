@@ -1,10 +1,9 @@
 ﻿import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import '../../shared/services/rxjs-operators';
-import { LoggerService } from '../../shared/services/logger.service';
-import { HttpErrorHandlerService } from '../../shared/services/httpErrorHandler.service';
-import { HttpOptionsService } from '../../shared/services/httpOptions.service';
+import { LoggerService } from '../../../core/services/logger.service';
+import { HttpErrorHandlerService } from '../../../core/services/httpErrorHandler.service';
+import { HttpOptionsService } from '../../../core/services/httpOptions.service';
 
 export interface INews {
     id?: string;

@@ -3,12 +3,14 @@ import { Localization, LocaleService, TranslationService } from 'angular-l10n';
 import { LoggerService } from '../../../core/services/logger.service';
 
 @Component({
-    selector: 'contact',
-    template: require('./contact.component.html'),
-    styles: [require('./contact.component.scss')]
+    selector: 'navmenu-elements-notification',
+    template: require('./navmenu-elements-notification.component.html'),
+    styles: [require('./navmenu-elements-notification.component.scss')]
+
 })
-export class ContactComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
-    constructor(private logger: LoggerService,
+export class NavMenuElementsNotificationComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
+    constructor(
+        private logger: LoggerService,
         public locale: LocaleService,
         public translation: TranslationService) {
         super(locale, translation);
@@ -21,9 +23,4 @@ export class ContactComponent extends Localization implements OnChanges, OnInit,
     ngDoCheck(): void { }
 
     ngOnDestroy(): void { }
-
-    canDeactivate(): Promise<boolean> | boolean {
-        this.logger.debug(`ContactComponent-canDeactivate`);
-        return true;
-    }
 }

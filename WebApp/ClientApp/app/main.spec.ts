@@ -12,19 +12,20 @@ import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage
 //import { DebugElement } from "@angular/core";
 //import { MockBackend, MockConnection } from '@angular/http/testing';
 
-import { SharedModule } from './modules/shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
-import { HttpErrorHandlerService } from './modules/shared/services/httpErrorHandler.service';
-import { HttpOptionsService } from './modules/shared/services/httpOptions.service';
-import { AuthGuardService } from './modules/shared/services/authGuard.service';
-import { CanDeactivateGuardService } from './modules/shared/services/canDeactivateGuard.service';
+import { HttpErrorHandlerService } from './core/services/httpErrorHandler.service';
+import { HttpOptionsService } from './core/services/httpOptions.service';
+import { AuthGuardService } from './core/services/authGuard.service';
+import { CanDeactivateGuardService } from './core/services/canDeactivateGuard.service';
 
-import { AccountService } from './modules/shared/services/account.service';
-import { AuthService } from './modules/shared/services/auth.service';
-import { LoggerService } from './modules/shared/services/logger.service';
-import { LoaderService } from './modules/shared/services/loader.service';
+import { AccountService } from './core/services/account.service';
+import { AuthService } from './core/services/auth.service';
+import { LoggerService } from './core/services/logger.service';
+import { LoaderService } from './core/services/loader.service';
 
-import { FilterPipe } from './modules/shared/pipes/filter.pipe';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 export class MainSpec {
     fixture: any;
@@ -57,16 +58,7 @@ export class MainSpec {
             additionalProviders = [];
         }
         additionalProviders = additionalProviders.concat(
-            [
-                HttpErrorHandlerService,
-                HttpOptionsService,
-                AuthGuardService,
-                CanDeactivateGuardService,
-                AuthService,
-                AccountService,
-                LoggerService,
-                LoaderService
-            ]
+            []
         );
 
         this.initWithoutSharedModule(component, additionalDeclarations, additionalImports, additionalProviders);
@@ -77,13 +69,14 @@ export class MainSpec {
         let declarations = [component];
 
         let imports = [
+            CoreModule,
             BrowserAnimationsModule,
             BrowserModule,
             HttpModule,
             JsonpModule,
             FormsModule,
             LocalStorageModule.withConfig({
-                prefix: 'wepapp-test',
+                prefix: 'angularXcore-test',
                 storageType: 'localStorage'
             }),
             LocalizationModule.forRoot(),

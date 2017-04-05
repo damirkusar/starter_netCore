@@ -82,4 +82,10 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ClientApp\app\core\models\" />
+    <Folder Include="ClientApp\app\core\pipes\" />
+    <Folder Include="ClientApp\app\shared\services\" />
+  </ItemGroup>
+
 </Project>
