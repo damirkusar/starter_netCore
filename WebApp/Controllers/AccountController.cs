@@ -12,6 +12,7 @@ namespace WebApp.Controllers
 {
     [Authorize]
     [Route("api/Account")]
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;

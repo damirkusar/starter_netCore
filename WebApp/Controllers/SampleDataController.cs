@@ -7,8 +7,9 @@ using WebApp.DataAccessLayer.Models;
 
 namespace WebApp.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     [Route("api/sample")]
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class SampleDataController : Controller
     {
         private readonly DataLayer dataLayer;
@@ -22,7 +23,6 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [Route("CreateSampleData")]
-        [AllowAnonymous]
         public void CreateSampleData()
         {
             this.dataLayer.AddLocalisation(new Localisation {Key = "TestKey", Language = "DE", Value = "TestValue"});
@@ -30,7 +30,6 @@ namespace WebApp.Controllers
 
         [HttpGet]
         [Route("GetSampleData")]
-        [AllowAnonymous]
         public IActionResult GetSampleData()
         {
             try
@@ -46,6 +45,7 @@ namespace WebApp.Controllers
 
         [HttpGet]
         [Route("GetSampleDataSecured")]
+        [Authorize]
         public IActionResult GetSampleDataSecured()
         {
             try

@@ -10,6 +10,7 @@ namespace WebApp.Controllers
 {
     [AllowAnonymous]
     [Route("api/localisations")]
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class LocalisationsController : Controller
     {
         private readonly DataLayer dataLayer;

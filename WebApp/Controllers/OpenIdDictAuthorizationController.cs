@@ -12,6 +12,7 @@ using AspNet.Security.OpenIdConnect.Extensions;
 using AspNet.Security.OpenIdConnect.Primitives;
 using AspNet.Security.OpenIdConnect.Server;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +26,9 @@ using WebApp.DataAccessLayer.Models;
 
 namespace WebApp.Controllers
 {
+    [AllowAnonymous]
+    [Route("connect")]
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class OpenIdDictAuthorizationController : Controller
     {
         private readonly OpenIddictApplicationManager<OpenIddictApplication> applicationManager;
@@ -46,9 +50,10 @@ namespace WebApp.Controllers
             this.logger = LogManager.GetCurrentClassLogger();
         }
 
-        [HttpPost("~/connect/token")]
+        [HttpPost]
+        [Route("token")]
         [Produces("application/json")]
-        public async Task<IActionResult> Token(OpenIdConnectRequest request)
+        public async Task<IActionResult> Token([FromBody] OpenIdConnectRequest request)
         {
             this.logger.Trace($"Token called with request: {request.ToJson()}");
             if (request.IsPasswordGrantType())

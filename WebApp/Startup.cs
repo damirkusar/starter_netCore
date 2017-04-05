@@ -17,6 +17,7 @@ using NLog.Extensions.Logging;
 using NLog.Web;
 using OpenIddict.Core;
 using OpenIddict.Models;
+using Swashbuckle.AspNetCore.Swagger;
 using WebApp.DataAccessLayer;
 using WebApp.DataAccessLayer.Models;
 
@@ -126,6 +127,17 @@ namespace WebApp
             services.AddOptions();
             services.AddNodeServices();
 
+            services.AddSwaggerGen(c =>
+          {
+              c.SwaggerDoc("v1", new Info { Title = "angularXcore API", Version = "v1" });
+              c.AddSecurityDefinition("OpenIdDict", new OAuth2Scheme
+              {
+                  Type = "oauth2",
+                  Flow = "password",
+                  TokenUrl = "/connect/token"
+              });
+          });
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<DataLayer, DataLayer>();
         }
@@ -185,6 +197,12 @@ namespace WebApp
                         .AllowAnyMethod()
                         .AllowAnyOrigin()
             );
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "angularXcore v1");
+            });
 
             app.UseOAuthValidation();
             app.UseOpenIddict();

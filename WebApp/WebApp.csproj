@@ -73,6 +73,7 @@
     <PackageReference Include="OpenIddict" Version="1.0.0-*" />
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="1.0.0-*" />
     <PackageReference Include="OpenIddict.Mvc" Version="1.0.0-*" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0-rc3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.3.0" />
   </ItemGroup>
 
