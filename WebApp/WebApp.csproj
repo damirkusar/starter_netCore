@@ -83,6 +83,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\app\core\components\" />
     <Folder Include="ClientApp\app\core\models\" />
     <Folder Include="ClientApp\app\core\pipes\" />
     <Folder Include="ClientApp\app\shared\services\" />

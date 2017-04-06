@@ -18,7 +18,6 @@ import { NewsResolverService } from './services/newsResolver.service';
     ],
     imports: [
         // Angular Modules
-        CommonModule,
         RouterModule.forChild([
             {
                 path: 'news-room',
@@ -31,7 +30,6 @@ import { NewsResolverService } from './services/newsResolver.service';
                 children: []
             }
         ]),
-        LocalizationModule.forChild(),
         // My Modules
         SharedModule
     ],

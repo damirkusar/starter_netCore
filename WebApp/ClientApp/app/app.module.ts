@@ -11,7 +11,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { NavigationModule } from './navigation/navigation.module';
 
-import { AppComponent } from './core/components/app/app.component';
+import { AppComponent } from './app.component';
 
 import { AuthGuardService } from './core/services/authGuard.service';
 import { CanDeactivateGuardService } from './core/services/canDeactivateGuard.service';

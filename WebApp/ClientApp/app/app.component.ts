@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { LoaderService } from '../../services/loader.service';
-import { LoggerService } from '../../services/logger.service';
+import { LoaderService } from './core/services/loader.service';
+import { LoggerService } from './core/services/logger.service';
 
 @Component({
     selector: 'app',

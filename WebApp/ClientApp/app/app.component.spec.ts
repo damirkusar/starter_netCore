@@ -1,9 +1,8 @@
 import { } from 'jasmine';
-import { MainSpec } from '../../../main.spec';
+import { MainSpec } from './main.spec';
 import { AppComponent } from './app.component';
 
-import { NavigationModule } from '../../../navigation/navigation.module';
-
+import { NavigationModule } from './navigation/navigation.module';
 
 describe('AppComponent', () => {
     beforeEach(() => {

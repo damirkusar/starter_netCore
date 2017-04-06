@@ -22,7 +22,7 @@ import { ReplacePipe } from './pipes/replace.pipe';
     ],
     imports: [
         // Angular Modules
-        BrowserModule,
+        CommonModule,
         BrowserAnimationsModule,
         HttpModule,
         JsonpModule,
@@ -32,7 +32,9 @@ import { ReplacePipe } from './pipes/replace.pipe';
         // My Modules
     ],
     exports: [
+        LocalizationModule,
         // Main
+        CommonModule,
         BrowserAnimationsModule,
         HttpModule,
         JsonpModule,

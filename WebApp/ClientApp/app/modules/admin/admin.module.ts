@@ -16,7 +16,6 @@ import { AdminComponent } from './admin/admin.component';
     ],
     imports: [
         // Angular Modules
-        CommonModule,
         RouterModule.forChild([
             {
                 path: 'admin',
@@ -28,7 +27,6 @@ import { AdminComponent } from './admin/admin.component';
                 children: []
             }
         ]),
-        LocalizationModule.forChild(),
         // My Modules
         SharedModule
     ],

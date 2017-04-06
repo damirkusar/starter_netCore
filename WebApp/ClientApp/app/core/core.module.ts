@@ -32,10 +32,6 @@ import { LoggerService } from './services/logger.service';
     ],
     exports: [
         // Main
-        BrowserAnimationsModule,
-        HttpModule,
-        JsonpModule,
-        FormsModule
     ],
     providers: [
         HttpErrorHandlerService,

@@ -16,7 +16,6 @@ import { HomeComponent } from './home/home.component';
     ],
     imports: [
         // Angular Modules
-        CommonModule,
         RouterModule.forChild([
             {
                 path: 'home',
@@ -28,7 +27,6 @@ import { HomeComponent } from './home/home.component';
                 children: []
             }
         ]),
-        LocalizationModule.forChild(),
         // My Modules
         SharedModule
     ],

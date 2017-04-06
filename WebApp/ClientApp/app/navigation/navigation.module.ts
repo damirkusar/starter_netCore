@@ -25,10 +25,8 @@ import { NavMenuElementsNotificationComponent } from './components/navmenu-eleme
     ],
     imports: [
         // Angular Modules
-        CommonModule,
         RouterModule.forRoot([
         ]),
-        LocalizationModule.forChild(),
         // My Modules
         SharedModule
     ],

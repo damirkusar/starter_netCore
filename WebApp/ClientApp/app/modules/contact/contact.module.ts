@@ -16,7 +16,6 @@ import { ContactComponent } from './contact/contact.component';
     ],
     imports: [
         // Angular Modules
-        CommonModule,
         RouterModule.forChild([
             {
                 path: 'contact',
@@ -28,7 +27,6 @@ import { ContactComponent } from './contact/contact.component';
                 children: []
             }
         ]),
-        LocalizationModule.forChild(),
         // My Modules
         SharedModule
     ],
