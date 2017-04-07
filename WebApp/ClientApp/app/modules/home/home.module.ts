@@ -8,7 +8,7 @@ import { CanDeactivateGuardService } from '../../core/services/canDeactivateGuar
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
     declarations: [

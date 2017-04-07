@@ -8,12 +8,12 @@ import { CanDeactivateGuardService } from '../core/services/canDeactivateGuard.s
 
 import { SharedModule } from '../shared/shared.module';
 
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
-import { NavMenuTopComponent } from './components/navmenu-top/navmenu-top.component';
-import { NavMenuElementsLocalizationComponent } from './components/navmenu-elements-localization/navmenu-elements-localization.component';
-import { NavMenuElementsLoginComponent } from './components/navmenu-elements-login/navmenu-elements-login.component';
-import { NavMenuElementsNotificationComponent } from './components/navmenu-elements-notification/navmenu-elements-notification.component';
+import { NavMenuTopComponent } from './directives/navmenu-top/navmenu-top.component';
+import { NavMenuElementsLocalizationComponent } from './directives/navmenu-elements-localization/navmenu-elements-localization.component';
+import { NavMenuElementsLoginComponent } from './directives/navmenu-elements-login/navmenu-elements-login.component';
+import { NavMenuElementsNotificationComponent } from './directives/navmenu-elements-notification/navmenu-elements-notification.component';
 
 @NgModule({
     declarations: [

@@ -1,5 +1,5 @@
 import { } from 'jasmine';
-import { MainSpec } from '../../../main.spec';
+import { MainSpec } from '../../../../main.spec';
 import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {

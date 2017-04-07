@@ -8,7 +8,7 @@ import { CanDeactivateGuardService } from '../../core/services/canDeactivateGuar
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { NewsRoomComponent } from './newsroom/newsroom.component';
+import { NewsRoomComponent } from './components/newsroom/newsroom.component';
 import { NewsService } from './services/news.service';
 import { NewsResolverService } from './services/newsResolver.service';
 
