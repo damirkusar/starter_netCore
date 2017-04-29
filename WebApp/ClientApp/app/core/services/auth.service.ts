@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 //import { TimerObservable } from "rxjs/observable/TimerObservable";
 //import { Observable } from 'rxjs/Rx';
-import './rxjs-operators';
 import { IErrorMessage } from '../../shared/models/errorMessage';
 import { ICredentials } from '../../shared/models/credentials';
 import { IUser } from '../../shared/models/user';

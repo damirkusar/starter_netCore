@@ -2,7 +2,6 @@
 import { Http, Response, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Observable } from 'rxjs/Observable';
-import './rxjs-operators';
 import { LoggerService } from './logger.service';
 
 @Injectable()

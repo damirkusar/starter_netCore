@@ -1,7 +1,6 @@
 ﻿import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import './rxjs-operators';
 import { ICredentials } from '../../shared/models/credentials';
 import { IUser } from '../../shared/models/user';
 import { IToken } from '../../shared/models/token';

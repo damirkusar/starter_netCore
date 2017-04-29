@@ -1,42 +1,40 @@
 //import './_workaround.prerendering';
-import 'es6-shim';
-import 'zone.js';
-import 'reflect-metadata';
-import '@angular/animations';
-import '@angular/animations/browser';
-import { enableProdMode } from '@angular/core';
-import { platformServer } from '@angular/platform-server';
-
+import './polyfills/server.polyfills';
+import { enableProdMode, InjectionToken } from '@angular/core'; import { INITIAL_CONFIG } from '@angular/platform-server';
+import { APP_BASE_HREF } from '@angular/common';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 
+export const ORIGIN_URL = new InjectionToken<string>('ORIGIN_URL');
+export const REQUEST = new InjectionToken<string>('REQUEST');
+// Grab the (Node) server-specific NgModule
 import { AppModule } from './app/app.module';
+// Temporary * the engine will be on npm soon (`@universal/ng-aspnetcore-engine`)
+import { ngAspnetCoreEngine, IEngineOptions, createTransferScript } from './polyfills/temporary-aspnetcore-engine';
 
 enableProdMode();
-const platform = platformServer();
 
-export default createServerRenderer(params => {
-    return new Promise<RenderResult>((resolve, reject) => {
-        const requestZone = Zone.current.fork({
-            name: 'angularXcore request',
-            properties: {
-                ngModule: AppModule,
-                baseUrl: '/',
-                requestUrl: params.url,
-                originUrl: params.origin,
-                preboot: false,
-                document: '<app></app>'
-            },
-            onHandleError: (parentZone, currentZone, targetZone, error) => {
-                // If any error occurs while rendering the module, reject the whole operation
-                reject(error);
-                return true;
-            }
+export default createServerRenderer((params: BootFuncParams) => {
+
+    // Platform-server provider configuration
+    const setupOptions: IEngineOptions = {
+        appSelector: '<app></app>',
+        ngModule: AppModule,
+        request: params,
+        providers: [
+            // Optional - Any other Server providers you want to pass (remember you'll have to provide them for the Browser as well)
+        ]
+    };
+
+    return ngAspnetCoreEngine(setupOptions).then(response => {
+        // Apply your transferData to response.globals
+        response.globals.transferData = createTransferScript({
+            someData: 'Transfer this to the client on the window.TRANSFER_CACHE {} object',
+            fromDotnet: params.data.thisCameFromDotNET // example of data coming from dotnet, in HomeController
         });
 
-        return requestZone.run<Promise<string>>(() => platform.bootstrapModule(AppModule))
-            .then(html => {
-                    resolve({ html: html });
-                },
-                reject);
+        return ({
+            html: response.html,
+            globals: response.globals
+        });
     });
-})
+});
