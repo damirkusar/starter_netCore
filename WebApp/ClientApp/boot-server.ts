@@ -5,14 +5,14 @@ import 'reflect-metadata';
 import '@angular/animations';
 import '@angular/animations/browser';
 import { enableProdMode } from '@angular/core';
-import { platformDynamicServer, platformServer } from '@angular/platform-server';
+import { platformServer } from '@angular/platform-server';
 
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 
 import { AppModule } from './app/app.module';
 
 enableProdMode();
-const platform = platformDynamicServer();
+const platform = platformServer();
 
 export default createServerRenderer(params => {
     return new Promise<RenderResult>((resolve, reject) => {
