@@ -8,7 +8,7 @@ import { CanDeactivateGuardService } from '../core/services/canDeactivateGuard.s
 
 import { SharedModule } from '../shared/shared.module';
 
-import { NavigationComponent } from './components/navigation/navigation.component';
+import { NavigationComponent } from './navigation.component';
 
 import { NavMenuTopComponent } from './directives/navmenu-top/navmenu-top.component';
 import { NavMenuElementsLocalizationComponent } from './directives/navmenu-elements-localization/navmenu-elements-localization.component';

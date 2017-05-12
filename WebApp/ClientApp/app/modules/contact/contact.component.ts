@@ -1,13 +1,13 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { LoggerService } from '../../../../core/services/logger.service';
+import { LoggerService } from '../../core/services/logger.service';
 
 @Component({
-    selector: 'admin',
-    template: require('./admin.component.html'),
-    styles: [require('./admin.component.scss')]
+    selector: 'contact',
+    template: require('./contact.component.html'),
+    styles: [require('./contact.component.scss')]
 })
-export class AdminComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
+export class ContactComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     constructor(private logger: LoggerService,
         public locale: LocaleService,
         public translation: TranslationService) {
@@ -23,7 +23,7 @@ export class AdminComponent extends Localization implements OnChanges, OnInit, D
     ngOnDestroy(): void { }
 
     canDeactivate(): Promise<boolean> | boolean {
-        this.logger.debug(`AdminComponent-canDeactivate`);
+        this.logger.debug(`ContactComponent-canDeactivate`);
         return true;
     }
 }

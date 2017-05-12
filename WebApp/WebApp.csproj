@@ -96,17 +96,23 @@
     <Folder Include="ClientApp\app\core\directives\" />
     <Folder Include="ClientApp\app\core\models\" />
     <Folder Include="ClientApp\app\core\pipes\" />
+    <Folder Include="ClientApp\app\modules\admin\components\" />
     <Folder Include="ClientApp\app\modules\admin\directives\" />
     <Folder Include="ClientApp\app\modules\admin\container\" />
+    <Folder Include="ClientApp\app\modules\contact\components\" />
     <Folder Include="ClientApp\app\modules\contact\container\" />
     <Folder Include="ClientApp\app\modules\contact\directives\" />
+    <Folder Include="ClientApp\app\modules\home\components\" />
     <Folder Include="ClientApp\app\modules\home\container\" />
     <Folder Include="ClientApp\app\modules\home\directives\" />
+    <Folder Include="ClientApp\app\modules\newsroom\components\" />
     <Folder Include="ClientApp\app\modules\newsroom\container\" />
     <Folder Include="ClientApp\app\modules\newsroom\directives\" />
+    <Folder Include="ClientApp\app\navigation\components\" />
     <Folder Include="ClientApp\app\navigation\container\" />
     <Folder Include="ClientApp\app\shared\components\" />
     <Folder Include="ClientApp\app\shared\container\" />
+    <Folder Include="ClientApp\app\shared\services\" />
     <Folder Include="ClientApp\app\shared\services\" />
   </ItemGroup>
 

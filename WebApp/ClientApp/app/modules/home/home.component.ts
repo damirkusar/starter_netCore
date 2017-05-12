@@ -1,8 +1,8 @@
 import { Component, OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { AccountService } from '../../../../core/services/account.service';
-import { AuthService } from '../../../../core/services/auth.service';
-import { LoggerService } from '../../../../core/services/logger.service';
+import { AccountService } from '../../core/services/account.service';
+import { AuthService } from '../../core/services/auth.service';
+import { LoggerService } from '../../core/services/logger.service';
 
 @Component({
     selector: 'home',

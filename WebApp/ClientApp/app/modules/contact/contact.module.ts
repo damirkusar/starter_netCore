@@ -8,7 +8,7 @@ import { CanDeactivateGuardService } from '../../core/services/canDeactivateGuar
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { ContactComponent } from './components/contact/contact.component';
+import { ContactComponent } from './contact.component';
 
 @NgModule({
     declarations: [

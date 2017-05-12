@@ -1,5 +1,5 @@
 import { } from 'jasmine';
-import { MainSpec } from '../../../../main.spec';
+import { MainSpec } from '../../main.spec';
 import { ContactComponent } from './contact.component';
 
 describe('ContactComponent', () => {
