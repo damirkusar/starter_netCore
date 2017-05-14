@@ -54,7 +54,6 @@
   "devDependencies": {
     "@types/jasmine": "^2.5.43",
     "@types/jest": "^19.2.3",
-    "identity-obj-proxy": "^3.0.0",
     "jasmine": "^2.5.3",
     "jest": "^20.0.0",
     "jest-preset-angular": "^2.0.1",
@@ -91,7 +90,7 @@
     ],
     "moduleNameMapper": {
       "(.*)": "<rootDir>/ClientApp/$1",
-      "\\.(scss|css|less)$": "identity-obj-proxy"
+      "\\.(scss|css|less)$": "<rootDir>/ClientApp/test/jestStyleMock.js"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!@ngrx)"
