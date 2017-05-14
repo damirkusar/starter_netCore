@@ -15,8 +15,8 @@
     "@angular/platform-browser-dynamic": "4.1.0",
     "@angular/platform-server": "4.1.0",
     "@angular/router": "4.1.0",
-    "@types/node": "^6.0.38",
     "@types/file-saver": "0.0.0",
+    "@types/node": "^6.0.38",
     "angular-2-local-storage": "^1.0.0",
     "angular-l10n": "^3.0.0",
     "angular-router-loader": "^0.5.0",
@@ -54,6 +54,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.5.43",
     "@types/jest": "^19.2.3",
+    "identity-obj-proxy": "^3.0.0",
     "jasmine": "^2.5.3",
     "jest": "^20.0.0",
     "jest-preset-angular": "^2.0.1",
@@ -89,7 +90,8 @@
       "html"
     ],
     "moduleNameMapper": {
-      "(.*)": "<rootDir>/ClientApp/$1"
+      "(.*)": "<rootDir>/ClientApp/$1",
+      "\\.(scss|css|less)$": "identity-obj-proxy"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!@ngrx)"

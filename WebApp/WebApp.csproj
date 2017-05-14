@@ -20,7 +20,7 @@
 
   <Target Name="PrepublishScript" BeforeTargets="Publish">
     <Exec Command="echo pre-publish $(Configuration)" />
-    <Exec Command="npm install" />
+    <Exec Command="yarn install" />
     <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod --config webpack.config.vendor.js" />
     <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod --config webpack.config.js" />
   </Target>
