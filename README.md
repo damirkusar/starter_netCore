@@ -2,10 +2,6 @@
 
 Which version of Angular is currently used you will see under the releases. 
 
-This seed is an extention of Steve Sanderson´s / Mads Kristensen's 
-[ASP.NET Core + Angular 2 template for Visual Studio](http://blog.stevensanderson.com/2016/10/04/angular2-template-for-visual-studio).
-[ASP.NET Core Template Pack](https://github.com/ligershark/CoreTemplatePack)
-
 It includes [Asp.Net Core Identity](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity) and 
 token based authentication with [OpenIdDict](https://github.com/openiddict/openiddict-core).
 
