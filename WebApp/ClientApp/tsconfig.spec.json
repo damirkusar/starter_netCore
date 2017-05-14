@@ -11,6 +11,7 @@
     ]
   },
   "files": [
+    "test/jestSetup.ts"
   ],
   "include": [
     "**/*.spec.ts",
