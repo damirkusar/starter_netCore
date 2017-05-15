@@ -6,7 +6,7 @@ import { LoggerService } from './core/services/logger.service';
 @Component({
     selector: 'app',
     template: require('./app.component.html'),
-    styles: [require('./app.component.scss')]
+    styles: ['./app.component.scss']
 })
 export class AppComponent extends Localization implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
     showModal: boolean;

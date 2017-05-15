@@ -18,23 +18,21 @@ var sharedConfig = {
         rules: [
             {
                 test: /\.ts$/,
-                include: /ClientApp/,
                 exclude: [/\.(spec|e2e)\.ts$/],
-                use: [{ loader: 'ts-loader' }, { loader: 'angular2-template-loader' }]
+                loaders: ['awesome-typescript-loader', 'angular2-template-loader']
             },
             {
-                test: /\.(html|css)$/, loader: 'raw-loader'
+                test: /\.(html)$/, loader: 'html-loader'
+            },
+            {
+                test: /\.(css|scss)/,
+                exclude: /node_modules/,
+                loaders: ['to-string-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg)$/,
                 loader: 'url-loader',
                 query: { limit: 25000 }
-            },
-            {
-                test: /\.scss$/,
-                include: /ClientApp/,
-                exclude: /node_modules/,
-                use: [{ loader: 'raw-loader' }, { loader: 'sass-loader' }]
             },
             {
                 include: /ClientApp/,

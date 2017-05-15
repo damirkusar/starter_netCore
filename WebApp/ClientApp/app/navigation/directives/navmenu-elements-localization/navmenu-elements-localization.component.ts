@@ -8,7 +8,7 @@ import { LoggerService } from '../../../core/services/logger.service';
 @Component({
     selector: 'navmenu-elements-localization',
     template: require('./navmenu-elements-localization.component.html'),
-    styles: [require('./navmenu-elements-localization.component.scss')]
+    styles: ['./navmenu-elements-localization.component.scss']
 })
 export class NavMenuElementsLocalizationComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     constructor(private logger: LoggerService,

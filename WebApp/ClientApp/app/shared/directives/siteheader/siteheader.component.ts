@@ -4,8 +4,8 @@ import { LoggerService } from '../../../core/services/logger.service';
 
 @Component({
     selector: 'site-header',
-    template: require('./siteheader.component.html'),
-    styles: [require('./siteheader.component.scss')]
+    template: './siteheader.component.html',
+    styles: ['./siteheader.component.scss']
 })
 export class SiteHeaderComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     filterValue: string;

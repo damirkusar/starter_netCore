@@ -22,7 +22,7 @@ import { NewsResolverService } from './services/newsResolver.service';
             {
                 path: 'news-room',
                 component: NewsRoomComponent,
-                data: { auth: true },
+                data: { auth: true, roles:['admin'] },
                 resolve: { news: NewsResolverService },
                 canActivate: [AuthGuardService],
                 canDeactivate: [CanDeactivateGuardService],

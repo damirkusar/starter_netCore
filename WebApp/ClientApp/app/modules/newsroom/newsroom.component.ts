@@ -8,7 +8,7 @@ import { INews } from './services/news.service';
 @Component({
     selector: 'news-room',
     template: require('./newsroom.component.html'),
-    styles: [require('./newsroom.component.scss')]
+    styles: ['./newsroom.component.scss']
 })
 export class NewsRoomComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     news: INews;

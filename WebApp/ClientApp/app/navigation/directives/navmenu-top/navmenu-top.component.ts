@@ -7,7 +7,7 @@ import { LoggerService } from '../../../core/services/logger.service';
 @Component({
     selector: 'navmenu-top',
     template: require('./navmenu-top.component.html'),
-    styles: [require('./navmenu-top.component.scss')]
+    styles: ['./navmenu-top.component.scss']
 })
 export class NavMenuTopComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     private loggedIn: boolean;

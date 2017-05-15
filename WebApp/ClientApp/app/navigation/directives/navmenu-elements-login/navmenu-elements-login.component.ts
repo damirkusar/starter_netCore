@@ -7,7 +7,7 @@ import { LoggerService } from '../../../core/services/logger.service';
 @Component({
     selector: 'navmenu-elements-login',
     template: require('./navmenu-elements-login.component.html'),
-    styles: [require('./navmenu-elements-login.component.scss')]
+    styles: ['./navmenu-elements-login.component.scss']
 })
 export class NavMenuElementsLoginComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     private loggedIn: boolean;

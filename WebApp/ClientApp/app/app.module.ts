@@ -16,8 +16,6 @@ import { AppComponent } from './app.component';
 import { AuthGuardService } from './core/services/authGuard.service';
 import { CanDeactivateGuardService } from './core/services/canDeactivateGuard.service';
 
-import { AdminModule } from './modules/admin/admin.module';
-import { ContactModule } from './modules/contact/contact.module';
 import { HomeModule } from './modules/home/home.module';
 import { NewsRoomModule } from './modules/newsroom/newsroom.module';
 
@@ -41,8 +39,6 @@ import { NewsRoomModule } from './modules/newsroom/newsroom.module';
         // My Modules
         CoreModule,
         SharedModule,
-        AdminModule,
-        ContactModule,
         HomeModule,
         NavigationModule,
         NewsRoomModule

@@ -12,7 +12,7 @@ import { LoggerService } from '../core/services/logger.service';
 @Component({
     selector: 'navigation',
     template: require('./navigation.component.html'),
-    styles: [require('./navigation.component.scss')]
+    styles: ['./navigation.component.scss']
 })
 export class NavigationComponent extends Localization implements OnChanges, OnInit, DoCheck, OnDestroy {
     isLoggedIn: boolean;

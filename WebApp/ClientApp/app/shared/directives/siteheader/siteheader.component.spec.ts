@@ -9,7 +9,6 @@ describe('SiteHeaderComponent', () => {
     });
 
     afterEach(() => {
-        this.spec.destroy();
     });
 
     it('should create Component', () => {

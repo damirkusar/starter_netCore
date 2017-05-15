@@ -7,7 +7,7 @@ import { LoggerService } from '../../core/services/logger.service';
 @Component({
     selector: 'home',
     template: require('./home.component.html'),
-    styles: [require('./home.component.scss')]
+    styles: ['./home.component.scss']
 })
 export class HomeComponent extends Localization  implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
     fullName: string;
