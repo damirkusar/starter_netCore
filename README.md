@@ -11,12 +11,10 @@ Localization is also included with the following librarie: [angular-l10n](https:
 
 Testing for Backend and Frontend is included as well. 
 
-Here is Steve Sanderson´s [README](https://github.com/damirkusar/AngularMeetsNetCore/blob/master/WebApp/README.md) of the template.
-
 # Getting Started
 
 ## Pre requirements
-1. Do be able to compile the styles in wwwroot/dist/styles with VS, you will need to install the VS extention "Web Compiler".
+1. To be able to compile the styles in wwwroot/dist/styles with VS, you will need to install the VS extention "Web Compiler".
 2. You will need to have webpack installed globally <npm install -g webpack>
 3. You will also need [nodeJS](https://nodejs.org/en/) installed 
 4. You will also need [.net core tools](https://www.microsoft.com/net/core#windowsvs2015) with [.net core 1.1](https://www.microsoft.com/net/download/core) installed
