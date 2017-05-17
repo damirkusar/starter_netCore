@@ -32,6 +32,13 @@
     <Delete Files="@(FilesToDelete)" />
     <RemoveDir Directories="ClientApp\dist; wwwroot\dist" />
   </Target>
+  
+  <ItemGroup>
+    <Compile Remove="ClientApp\app\shared\components\**" />
+    <Content Remove="ClientApp\app\shared\components\**" />
+    <EmbeddedResource Remove="ClientApp\app\shared\components\**" />
+    <None Remove="ClientApp\app\shared\components\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="ClientApp\dist\**\*;node_modules\**\*;Views\**\*;wwwroot\**\*;nlog.config">
@@ -105,7 +112,6 @@
     <Folder Include="ClientApp\app\modules\newsroom\directives\" />
     <Folder Include="ClientApp\app\navigation\components\" />
     <Folder Include="ClientApp\app\navigation\container\" />
-    <Folder Include="ClientApp\app\shared\components\" />
     <Folder Include="ClientApp\app\shared\container\" />
     <Folder Include="ClientApp\app\shared\services\" />
     <Folder Include="ClientApp\app\shared\services\" />
