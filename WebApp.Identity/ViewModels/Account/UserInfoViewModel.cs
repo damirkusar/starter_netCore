@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using WebApp.DataAccessLayer.Models;
 
-namespace WebApp.ViewModels.Account
+namespace WebApp.Identity.ViewModels.Account
 {
     public class UserInfoViewModel
     {

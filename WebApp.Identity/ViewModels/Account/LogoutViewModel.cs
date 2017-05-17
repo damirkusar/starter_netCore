@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace WebApp.ViewModels.Account
+namespace WebApp.Identity.ViewModels.Account
 {
     public class LogoutViewModel
     {

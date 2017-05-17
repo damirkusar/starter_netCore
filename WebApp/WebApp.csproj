@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebApp.DataAccessLayer\WebApp.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\WebApp.Identity\WebApp.Identity.csproj" />
   </ItemGroup>  
 
   <ItemGroup>

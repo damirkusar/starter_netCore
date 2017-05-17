@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using NLog;
 using NuGet.Protocol.Core.v3;
 using WebApp.DataAccessLayer.Models;
-using WebApp.ViewModels.Account;
+using WebApp.Identity.ViewModels.Account;
 
-namespace WebApp.Controllers
+namespace WebApp.Identity.Controllers
 {
     [Authorize]
     [Route("api/Account")]

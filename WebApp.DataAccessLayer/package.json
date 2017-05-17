@@ -2,7 +2,7 @@
   "name": "webapp.dataaccesslayer",
   "version": "1.0.0",
   "license": "UNLICENSED",
-  "repository": "https://github.com/damirkusar/AngularMeetsNetCore",
+  "repository": "https://github.com/damirkusar/angularXcore",
   "dependencies": {
   },
   "devDependencies": {
