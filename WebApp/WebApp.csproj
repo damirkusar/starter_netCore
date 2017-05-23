@@ -113,6 +113,7 @@
     <Folder Include="ClientApp\app\navigation\components\" />
     <Folder Include="ClientApp\app\navigation\container\" />
     <Folder Include="ClientApp\app\shared\container\" />
+    <Folder Include="ClientApp\app\shared\directives\" />
     <Folder Include="ClientApp\app\shared\services\" />
     <Folder Include="ClientApp\app\shared\services\" />
   </ItemGroup>

@@ -4,7 +4,6 @@ import { NavMenuTopComponent } from './navmenu-top.component';
 
 import { NavMenuElementsLocalizationComponent } from '../navmenu-elements-localization/navmenu-elements-localization.component';
 import { NavMenuElementsLoginComponent } from '../navmenu-elements-login/navmenu-elements-login.component';
-import { NavMenuElementsNotificationComponent } from '../navmenu-elements-notification/navmenu-elements-notification.component';
 
 describe('NavMenuTopComponent', () => {
     beforeEach(() => {
@@ -12,8 +11,7 @@ describe('NavMenuTopComponent', () => {
         this.spec.init(NavMenuTopComponent,
             [
                 NavMenuElementsLocalizationComponent,
-                NavMenuElementsLoginComponent,
-                NavMenuElementsNotificationComponent
+                NavMenuElementsLoginComponent
             ]);
     });
 

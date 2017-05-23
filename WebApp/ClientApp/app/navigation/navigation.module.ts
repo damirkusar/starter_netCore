@@ -13,15 +13,13 @@ import { NavigationComponent } from './navigation.component';
 import { NavMenuTopComponent } from './directives/navmenu-top/navmenu-top.component';
 import { NavMenuElementsLocalizationComponent } from './directives/navmenu-elements-localization/navmenu-elements-localization.component';
 import { NavMenuElementsLoginComponent } from './directives/navmenu-elements-login/navmenu-elements-login.component';
-import { NavMenuElementsNotificationComponent } from './directives/navmenu-elements-notification/navmenu-elements-notification.component';
 
 @NgModule({
     declarations: [
         NavigationComponent,
         NavMenuTopComponent,
         NavMenuElementsLocalizationComponent,
-        NavMenuElementsLoginComponent,
-        NavMenuElementsNotificationComponent
+        NavMenuElementsLoginComponent
     ],
     imports: [
         // Angular Modules

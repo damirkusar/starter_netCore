@@ -7,8 +7,6 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { LocalizationModule } from 'angular-l10n';
 
-import { SiteHeaderComponent } from './directives/siteheader/siteheader.component';
-
 import { FilterPipe } from './pipes/filter.pipe';
 import { ReplacePipe } from './pipes/replace.pipe';
 
@@ -16,9 +14,8 @@ import { ReplacePipe } from './pipes/replace.pipe';
     declarations: [
         // Pipes
         FilterPipe,
-        ReplacePipe,
+        ReplacePipe
         // Components
-        SiteHeaderComponent
     ],
     imports: [
         // Angular Modules
@@ -41,9 +38,8 @@ import { ReplacePipe } from './pipes/replace.pipe';
         FormsModule,
         // Pipes
         FilterPipe,
-        ReplacePipe,
+        ReplacePipe
         // Components
-        SiteHeaderComponent
     ],
     providers: []
 })
