@@ -60,7 +60,14 @@
     "@types/jest": "^19.2.3",
     "jasmine": "^2.5.3",
     "jest": "^20.0.0",
-    "jest-preset-angular": "^2.0.1"
+    "jest-preset-angular": "^2.0.1",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-remap-istanbul": "^0.6.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.3"
   },
   "jest": {
     "preset": "jest-preset-angular",
@@ -94,15 +101,15 @@
     ]
   },
   "scripts": {
-    "test": "jest",
-    "test:watch": "npm run test -- --watch",
-    "test:ci": "npm run test -- --runInBand",
-    "test:coverage": "npm run test -- --coverage",
+    "jest": "jest",
+    "jest:watch": "npm run test -- --watch",
+    "jest:ci": "npm run test -- --runInBand",
+    "jest:coverage": "npm run test -- --coverage",
+    "karma": "karma start .\\karma.conf.js --single-run",
+    "karma:watch": "karma start .\\karma.conf.js --no-single-run",
     "prebuild:dev": "webpack --progress --color --env.dev --config webpack.config.vendor.js",
     "build:dev": "webpack --progress --color --env.dev --config webpack.config.js",
     "prebuild:prod": "webpack --progress --color --env.prod --config webpack.config.vendor.js",
-    "build:prod": "webpack --progress --color --env.prod --config webpack.config.js",
-    "webpack": "webpack --config webpack.config.js",
-    "webpack-vendor": "webpack --config webpack.config.vendor.js"
+    "build:prod": "webpack --progress --color --env.prod --config webpack.config.js"
   }
 }
