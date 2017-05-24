@@ -15,7 +15,7 @@
   
   <Target Name="PrecompileScript" BeforeTargets="Build" Condition="'$(Configuration)'=='Debug'">
     <Exec Command="echo pre-compile $(Configuration)" />
-    
+    <Exec Command="npm run build:dev:aot" />
   </Target>
 
   <Target Name="PrepublishScript" BeforeTargets="Publish">
@@ -98,34 +98,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\app\core\components\" />
-    <Folder Include="ClientApp\app\core\container\" />
-    <Folder Include="ClientApp\app\core\directives\" />
-    <Folder Include="ClientApp\app\core\models\" />
-    <Folder Include="ClientApp\app\core\pipes\" />
-    <Folder Include="ClientApp\app\modules\home\components\" />
-    <Folder Include="ClientApp\app\modules\home\container\" />
-    <Folder Include="ClientApp\app\modules\home\directives\" />
-    <Folder Include="ClientApp\app\modules\newsroom\components\" />
-    <Folder Include="ClientApp\app\modules\newsroom\container\" />
-    <Folder Include="ClientApp\app\modules\newsroom\directives\" />
-    <Folder Include="ClientApp\app\navigation\components\" />
-    <Folder Include="ClientApp\app\navigation\container\" />
-    <Folder Include="ClientApp\app\shared\container\" />
-    <Folder Include="ClientApp\app\shared\directives\" />
-    <Folder Include="ClientApp\app\shared\services\" />
-    <Folder Include="ClientApp\app\shared\services\" />
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties package_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

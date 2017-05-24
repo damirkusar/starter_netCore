@@ -36,66 +36,52 @@ function GetAotPlugin() {
     return aotPlugin;
 }
 
-// Configuration in common to both client-side and server-side bundles
-var SharedConfig = {};
-var Config = {
-    resolve: { extensions: ['.js', '.ts'] },
-    output: {
-        filename: '[name].js',
-        publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                exclude: [/\.(spec|e2e)\.ts$/],
-                use: [{ loader: '@ngtools/webpack' }]
-            },
-            { test: /\.css$/, loader: ['to-string-loader', 'css-loader'] },
-            { test: /\.html$/, loader: 'html-loader' },
-            { test: /\.scss$/, loaders: ['to-string-loader', 'css-loader', 'sass-loader'] },
-            { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'url-loader', query: { limit: 25000 } },
-            { include: /ClientApp/, loader: 'angular-router-loader' }
-        ]
-    },
-    plugins: [
-        GetAotPlugin()
-    ]
-};
-
-if (isAotBuild) {
-    console.log("webpack.config isAotBuild");
-    SharedConfig = merge({
+var Config = {};
+function GetAotConfig() {
+    return {
+        resolve: { extensions: ['.js', '.ts'] },
+        output: {
+            filename: '[name].js',
+            publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
+        },
         module: {
             rules: [
-                {
-                    test: /\.ts$/,
-                    exclude: [/\.(spec|e2e)\.ts$/],
-                    use: [{ loader: '@ngtools/webpack' }]
-                }
+                { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], use: [{ loader: '@ngtools/webpack' }] },
+                { test: /\.css$/, loader: ['to-string-loader', 'css-loader'] },
+                { test: /\.html$/, loader: 'html-loader' },
+                { test: /\.scss$/, loaders: ['to-string-loader', 'css-loader', 'sass-loader'] },
+                { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'url-loader', query: { limit: 25000 } },
+                { include: /ClientApp/, loader: 'angular-router-loader' }
             ]
         },
         plugins: [
             GetAotPlugin()
         ]
-    }, Config);
-} else {
-    console.log("webpack.config isNormalBuild");
-    SharedConfig = merge({
+    }
+}
+
+function GetNormalConfig() {
+    return {
+        resolve: { extensions: ['.js', '.ts'] },
+        output: {
+            filename: '[name].js',
+            publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
+        },
         module: {
             rules: [
-                {
-                    test: /\.ts$/,
-                    exclude: [/\.(spec|e2e)\.ts$/],
-                    loaders: ['ts-loader', 'angular2-template-loader']
-                }
+                { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['ts-loader', 'angular2-template-loader'] },
+                { test: /\.css$/, loader: ['to-string-loader', 'css-loader'] },
+                { test: /\.html$/, loader: 'html-loader' },
+                { test: /\.scss$/, loaders: ['to-string-loader', 'css-loader', 'sass-loader'] },
+                { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'url-loader', query: { limit: 25000 } },
+                { include: /ClientApp/, loader: 'angular-router-loader' }
             ]
         }
-    }, Config);
+    }
 }
 
 // Configuration for client-side bundle suitable for running in browsers
-var ClientBundleConfig = merge(Config, {
+var ClientBundleConfig = merge(GetAotConfig(), {
     entry: { 'main-client': './ClientApp/boot-client.ts' },
     output: { path: path.join(__dirname, './wwwroot/dist') },
     devtool: 'inline-source-map',
