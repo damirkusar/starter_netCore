@@ -2,6 +2,7 @@ import './polyfills/browser.polyfills';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
+//import { AppModule  } from './ngfactory/ClientApp/app/app.module.ngfactory';
 const rootElemTagName = 'app'; // Update this if you change your root component selector
 
 // Enable either Hot Module Reloading or production mode

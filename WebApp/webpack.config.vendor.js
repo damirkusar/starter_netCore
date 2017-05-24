@@ -1,5 +1,9 @@
-var isDevBuild = process.argv.indexOf('--env.prod') < 0;
+var isDevBuild = process.argv.indexOf('--env.dev') > 0;
+var isProdBuild = process.argv.indexOf('--env.prod') > 0;
+var isAotBuild = process.argv.indexOf('aot') > 0;
 console.log("webpack.config.vendor isDevBuild", isDevBuild);
+console.log("webpack.config.vendor isProdBuild", isProdBuild);
+console.log("webpack.config.vendor isAotBuild", isAotBuild);
 
 var path = require('path');
 var webpack = require('webpack');

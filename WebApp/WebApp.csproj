@@ -9,20 +9,19 @@
     <OutputType>Exe</OutputType>
     <PackageId>WebApp</PackageId>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
+	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <PreBuildEvent />
   </PropertyGroup>
   
   <Target Name="PrecompileScript" BeforeTargets="Build" Condition="'$(Configuration)'=='Debug'">
     <Exec Command="echo pre-compile $(Configuration)" />
-    <Exec Command="node node_modules/webpack/bin/webpack.js --env.dev --config webpack.config.vendor.js" />
-    <Exec Command="node node_modules/webpack/bin/webpack.js --env.dev --config webpack.config.js" />
+    
   </Target>
 
   <Target Name="PrepublishScript" BeforeTargets="Publish">
     <Exec Command="echo pre-publish $(Configuration)" />
     <Exec Command="yarn install" />
-    <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod --config webpack.config.vendor.js" />
-    <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod --config webpack.config.js" />
+	<Exec Command="npm run build:prod:aot" />
   </Target>
   
   <Target Name="CleanDist" AfterTargets="Clean">
@@ -116,6 +115,15 @@
     <Folder Include="ClientApp\app\shared\directives\" />
     <Folder Include="ClientApp\app\shared\services\" />
     <Folder Include="ClientApp\app\shared\services\" />
+    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties package_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>

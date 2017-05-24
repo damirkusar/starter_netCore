@@ -1,5 +1,8 @@
 {
   "compileOnSave": true,
+  "angularCompilerOptions": {
+    "entryModule": "./ClientApp/app/app.module#AppModule"
+  },
   "compilerOptions": {
     "moduleResolution": "node",
     "target": "es5",
@@ -10,6 +13,7 @@
     "lib": [ "es6", "dom" ],
     "types": [ "node", "file-saver" ]
   },
+  "include": [ "ClientApp" ],
   "exclude": [ "bin", "node_modules" ],
   "atom": { "rewriteTsconfig": false }
 }
