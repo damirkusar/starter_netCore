@@ -1,9 +1,4 @@
-/*
- * Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
- * See https://github.com/openiddict/openiddict-core for more information concerning
- * the license and the contributors participating to this project.
- */
-
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -23,31 +18,84 @@ using NuGet.Protocol.Core.v3;
 using OpenIddict.Core;
 using OpenIddict.Models;
 using WebApp.DataAccessLayer.Models;
+using WebApp.Identity.ViewModels.Account;
 
 namespace WebApp.Identity.Controllers
 {
     [AllowAnonymous]
-    [Route("connect")]
     [ApiExplorerSettings(IgnoreApi = false)]
-    public class OpenIdDictAuthorizationController : Controller
+    [Route("api/auth")]
+    public class AuthorizationController : Controller
     {
         private readonly OpenIddictApplicationManager<OpenIddictApplication> applicationManager;
+        private readonly OpenIddictTokenManager<OpenIddictToken> tokenManager;
         private readonly IOptions<IdentityOptions> identityOptions;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly Logger logger;
 
-        public OpenIdDictAuthorizationController(
+        public AuthorizationController(
             OpenIddictApplicationManager<OpenIddictApplication> applicationManager,
+            OpenIddictTokenManager<OpenIddictToken> tokenManager,
             IOptions<IdentityOptions> identityOptions,
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager)
         {
             this.applicationManager = applicationManager;
+            this.tokenManager = tokenManager;
             this.identityOptions = identityOptions;
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.logger = LogManager.GetCurrentClassLogger();
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult Login([FromBody] LoginViewModel loginViewModel)
+        {
+            try
+            {
+                this.logger.Trace($"Login called with ViewModel: {loginViewModel.ToJson()}");
+                if (this.ModelState.IsValid)
+                {
+                    var result =
+                        this.signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password,
+                            loginViewModel.RememberMe, false).Result;
+
+                    if (result.Succeeded)
+                    {
+                        var user = this.userManager.FindByEmailAsync(loginViewModel.Email).Result;
+                        user.AssignedRoles = this.userManager.GetRolesAsync(user).Result;
+                        return this.Ok(user);
+                    }
+
+                    this.ModelState.AddModelError("", "Invalid login!");
+                }
+
+                return this.BadRequest(loginViewModel);
+            }
+            catch (Exception exception)
+            {
+                this.logger.Error(exception, $"Error in Login with ViewModel: {loginViewModel.ToJson()}");
+                return this.BadRequest(exception);
+            }
+        }
+
+        [HttpPost]
+        [Route("Logout")]
+        public IActionResult Logout()
+        {
+            try
+            {
+                this.logger.Trace($"Logout called");
+                this.signInManager.SignOutAsync().Wait();
+                return this.Ok();
+            }
+            catch (Exception exception)
+            {
+                this.logger.Error(exception, $"Error in Logout");
+                return this.BadRequest(exception);
+            }
         }
 
         [HttpPost]
@@ -78,6 +126,8 @@ namespace WebApp.Identity.Controllers
         {
             this.logger.Trace($"Token GrantType is Password");
             var user = await this.userManager.FindByNameAsync(request.Username);
+            //var success = await this.Test(user);
+
             if (user == null)
             {
                 this.logger.Error($"Error in Token: The username/password couple is invalid");
@@ -148,8 +198,7 @@ namespace WebApp.Identity.Controllers
             return this.SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
         }
 
-        private async Task<AuthenticationTicket> CreatePasswordGrantTypeTicketAsync(OpenIdConnectRequest request,
-            ApplicationUser user)
+        private async Task<AuthenticationTicket> CreatePasswordGrantTypeTicketAsync(OpenIdConnectRequest request, ApplicationUser user)
         {
             // Create a new ClaimsPrincipal containing the claims that
             // will be used to create an id_token, a token or a code.
@@ -190,12 +239,9 @@ namespace WebApp.Identity.Controllers
 
                 // Only add the iterated claim to the id_token if the corresponding scope was granted to the client application.
                 // The other claims will only be added to the access_token, which is encrypted when using the default format.
-                if ((claim.Type == OpenIdConnectConstants.Claims.Name &&
-                     ticket.HasScope(OpenIdConnectConstants.Scopes.Profile)) ||
-                    (claim.Type == OpenIdConnectConstants.Claims.Email &&
-                     ticket.HasScope(OpenIdConnectConstants.Scopes.Email)) ||
-                    (claim.Type == OpenIdConnectConstants.Claims.Role &&
-                     ticket.HasScope(OpenIddictConstants.Claims.Roles)))
+                if ((claim.Type == OpenIdConnectConstants.Claims.Name && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile)) ||
+                    (claim.Type == OpenIdConnectConstants.Claims.Email && ticket.HasScope(OpenIdConnectConstants.Scopes.Email)) ||
+                    (claim.Type == OpenIdConnectConstants.Claims.Role && ticket.HasScope(OpenIddictConstants.Claims.Roles)))
                 {
                     destinations.Add(OpenIdConnectConstants.Destinations.IdentityToken);
                 }
@@ -216,8 +262,7 @@ namespace WebApp.Identity.Controllers
                 await this.applicationManager.FindByClientIdAsync(request.ClientId, this.HttpContext.RequestAborted);
             if (application == null)
             {
-                this.logger.Error(
-                    $"Error in Token: The client application ({request.ClientId}) was not found in the database");
+                this.logger.Error($"Error in Token: The client application ({request.ClientId}) was not found in the database");
                 return this.BadRequest(new OpenIdConnectResponse
                 {
                     Error = OpenIdConnectConstants.Errors.InvalidClient,
@@ -230,9 +275,7 @@ namespace WebApp.Identity.Controllers
 
             return this.SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
         }
-
-        private AuthenticationTicket CreateClientCredentialsGrantTypeTicket(OpenIdConnectRequest request,
-            OpenIddictApplication application)
+        private AuthenticationTicket CreateClientCredentialsGrantTypeTicket(OpenIdConnectRequest request, OpenIddictApplication application)
         {
             // Create a new ClaimsIdentity containing the claims that
             // will be used to create an id_token, a token or a code.

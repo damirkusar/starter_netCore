@@ -5,10 +5,9 @@ using WebApp.DataAccessLayer.Models;
 
 namespace WebApp.DataAccessLayer
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
+    public class IdDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public IdDbContext(DbContextOptions<IdDbContext> options): base(options)
         {
             //nothing here
         }
@@ -57,6 +56,7 @@ namespace WebApp.DataAccessLayer
                 users.Property(p => p.Email).HasColumnType("varchar(320)").IsRequired(true);
                 users.Property(p => p.FirstName).HasColumnType("varchar(64)").IsRequired(true);
                 users.Property(p => p.LastName).HasColumnType("varchar(64)").IsRequired(true);
+                users.Property(p => p.Image).HasColumnType("varchar(max)");
                 users.Property(p => p.NormalizedEmail).HasColumnType("varchar(320)");
                 users.Property(p => p.NormalizedUserName).HasColumnType("varchar(320)");
                 users.Property(p => p.PhoneNumber).HasColumnType("varchar(32)");

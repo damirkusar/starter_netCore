@@ -15,10 +15,10 @@ import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
-import { HttpErrorHandlerService } from './core/services/httpErrorHandler.service';
-import { HttpOptionsService } from './core/services/httpOptions.service';
-import { AuthGuardService } from './core/services/authGuard.service';
-import { CanDeactivateGuardService } from './core/services/canDeactivateGuard.service';
+import { HttpErrorHandlerService } from './core/services/http-error-handler.service';
+import { HttpOptionsService } from './core/services/http-options.service';
+import { AuthGuardService } from './core/services/auth-guard.service';
+import { CanDeactivateGuardService } from './core/services/can-deactivate-guard.service';
 
 import { AccountService } from './core/services/account.service';
 import { AuthService } from './core/services/auth.service';

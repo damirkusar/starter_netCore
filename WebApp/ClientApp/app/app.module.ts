@@ -13,8 +13,8 @@ import { NavigationModule } from './navigation/navigation.module';
 
 import { AppComponent } from './app.component';
 
-import { AuthGuardService } from './core/services/authGuard.service';
-import { CanDeactivateGuardService } from './core/services/canDeactivateGuard.service';
+import { AuthGuardService } from './core/services/auth-guard.service';
+import { CanDeactivateGuardService } from './core/services/can-deactivate-guard.service';
 
 import { HomeModule } from './modules/home/home.module';
 import { NewsRoomModule } from './modules/newsroom/newsroom.module';

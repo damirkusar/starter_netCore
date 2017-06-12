@@ -9,13 +9,13 @@ import { LoggerService } from '../../core/services/logger.service';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent extends Localization  implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
+export class HomeComponent extends Localization implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
     fullName: string;
 
     constructor(private logger: LoggerService, private authService: AuthService, private accountService: AccountService, public translation: TranslationService, public locale: LocaleService) {
         super(locale, translation);
     }
-    
+
     ngOnChanges(changes: Object): void { }
 
     ngOnInit(): void {
@@ -28,17 +28,18 @@ export class HomeComponent extends Localization  implements OnChanges, OnInit, D
             }
         );
 
-        this.accountService.loggedInUserUpdated.subscribe(
+        this.authService.loggedInUserUpdated.subscribe(
             (user) => {
                 if (user != null) {
                     this.fullName = `${user.firstName} ${user.lastName}`;
+                    this.setFullName();
                 }
             }
         );
     }
 
     setFullName(): void {
-        let currentUser = this.accountService.getLoggedInUser();
+        let currentUser = this.authService.getLoggedInUser();
         if (currentUser != null) {
             this.fullName = `${currentUser.firstName} ${currentUser.lastName}`;
         } else {

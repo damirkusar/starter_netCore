@@ -3,8 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LocalizationModule } from 'angular-l10n';
 
-import { AuthGuardService } from '../../core/services/authGuard.service';
-import { CanDeactivateGuardService } from '../../core/services/canDeactivateGuard.service';
+import { AuthGuardService } from '../../core/services/auth-guard.service';
+import { CanDeactivateGuardService } from '../../core/services/can-deactivate-guard.service';
 
 import { SharedModule } from '../../shared/shared.module';
 

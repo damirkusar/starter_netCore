@@ -10,47 +10,26 @@ using WebApp.Identity.ViewModels.Account;
 
 namespace WebApp.Identity.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     [Route("api/Account")]
     [ApiExplorerSettings(IgnoreApi = false)]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly SignInManager<ApplicationUser> loginManager;
         private readonly RoleManager<ApplicationRole> roleManager;
         private readonly Logger logger;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> loginManager,
             RoleManager<ApplicationRole> roleManager)
         {
             this.userManager = userManager;
-            this.loginManager = loginManager;
             this.roleManager = roleManager;
             this.logger = LogManager.GetCurrentClassLogger();
         }
 
-        [HttpGet]
-        [Route("UserInfo")]
-        public IActionResult GetUserInfo()
-        {
-            try
-            {
-                this.logger.Trace($"GetUserInfo called");
-                var userInfo = this.CreateUserInfo();
-                return this.Ok(userInfo);
-            }
-            catch (Exception exception)
-            {
-                this.logger.Error(exception, $"Error in GetUserInfo");
-                return this.BadRequest(exception);
-            }
-        }
-
         [HttpPost]
         [Route("Register")]
-        [AllowAnonymous]
         public IActionResult Register([FromBody] RegisterViewModel registerViewModel)
         {
             try
@@ -66,10 +45,22 @@ namespace WebApp.Identity.Controllers
                     UserName = registerViewModel.Email,
                     Email = registerViewModel.Email,
                     FirstName = registerViewModel.FirstName,
-                    LastName = registerViewModel.LastName
+                    LastName = registerViewModel.LastName,
+                    LockoutEnabled = true
                 };
 
-                var result = this.userManager.CreateAsync(user, registerViewModel.Password).Result;
+                IdentityResult result;
+                if (registerViewModel.Password == null)
+                {
+                    user.GeneratedPassword = this.GeneratePassword();
+                    result = this.userManager.CreateAsync(user, user.GeneratedPassword).Result;
+                }
+                else
+                {
+                    result = this.userManager.CreateAsync(user, registerViewModel.Password).Result;
+
+                }
+
                 if (!result.Succeeded)
                 {
                     return this.GetErrorResult(result);
@@ -77,9 +68,10 @@ namespace WebApp.Identity.Controllers
 
                 if (this.userManager.Users.Count() == 1)
                 {
-                    return this.AssignFirstCreatedUserAsAdmin(user);
+                    user = this.AssignFirstCreatedUserAsAdmin(user);
                 }
 
+                user = this.userManager.FindByEmailAsync(user.Email).Result;
                 return this.Ok(user);
             }
             catch (Exception exception)
@@ -89,7 +81,12 @@ namespace WebApp.Identity.Controllers
             }
         }
 
-        private IActionResult AssignFirstCreatedUserAsAdmin(ApplicationUser user)
+        private string GeneratePassword()
+        {
+            return $"AnuglarXCore{new Random().Next(1111)}$";
+        }
+
+        private ApplicationUser AssignFirstCreatedUserAsAdmin(ApplicationUser user)
         {
             try
             {
@@ -105,7 +102,7 @@ namespace WebApp.Identity.Controllers
                     {
                         this.ModelState.AddModelError("", "Error while creating role!");
                         {
-                            return this.StatusCode(500, this.ModelState);
+                            throw new InvalidOperationException($"Could not crate admin role");
                         }
                     }
                 }
@@ -114,62 +111,73 @@ namespace WebApp.Identity.Controllers
                 if (!addUserToRoleResult.Succeeded)
                 {
                     {
-                        return this.GetErrorResult(addUserToRoleResult);
+                        throw new InvalidOperationException($"Could not assign user {user} to admin role");
                     }
                 }
-                return this.Ok(user);
+                return (user);
             }
             catch (Exception exception)
             {
                 this.logger.Error(exception, $"Error in AssignFirstCreatedUserAsAdmin with User: {user.ToJson()}");
-                return this.BadRequest(exception);
+                throw;
             }
         }
 
         [HttpPost]
-        [Route("Login")]
-        [AllowAnonymous]
-        public IActionResult Login([FromBody] LoginViewModel loginViewModel)
+        [Route("changePassword")]
+        public IActionResult ChangePassword([FromBody] ChangePasswordViewModel viewModel)
         {
             try
             {
-                this.logger.Trace($"Login called with ViewModel: {loginViewModel.ToJson()}");
+                this.logger.Trace($"ChangePassword called with ViewModel: {viewModel.ToJson()}");
                 if (this.ModelState.IsValid)
                 {
-                    var result =
-                        this.loginManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password,
-                            loginViewModel.RememberMe, false).Result;
+                    var user = this.userManager.GetUserAsync(this.User).Result;
+                    var result = this.userManager.ChangePasswordAsync(user, viewModel.CurrentPassword, viewModel.NewPassword).Result;
 
                     if (result.Succeeded)
                     {
-                        return this.Ok(loginViewModel);
+                        return this.Ok();
                     }
 
-                    this.ModelState.AddModelError("", "Invalid login!");
+                    this.ModelState.AddModelError("", "Error in changing password!");
                 }
 
-                return this.BadRequest(loginViewModel);
+                return this.BadRequest();
             }
             catch (Exception exception)
             {
-                this.logger.Error(exception, $"Error in Login with ViewModel: {loginViewModel.ToJson()}");
+                this.logger.Error(exception, $"Error in ChangePassword with ViewModel: {viewModel.ToJson()}");
                 return this.BadRequest(exception);
             }
         }
 
         [HttpPost]
-        [Route("Logout")]
-        public IActionResult Logout()
+        [Route("forceChangePassword")]
+        public IActionResult ForceChangePassword([FromBody] ForceChangePasswordViewModel viewModel)
         {
             try
             {
-                this.logger.Trace($"Logout called");
-                this.loginManager.SignOutAsync().Wait();
-                return this.Ok();
+                this.logger.Trace($"ForceChangePassword called with ViewModel: {viewModel.ToJson()}");
+                if (this.ModelState.IsValid)
+                {
+                    var user = this.userManager.FindByEmailAsync(viewModel.Email).Result;
+                    var passwordToken = this.userManager.GeneratePasswordResetTokenAsync(user).Result;
+                    var result = this.userManager.ResetPasswordAsync(user, passwordToken, viewModel.NewPassword).Result;
+
+                    if (result.Succeeded)
+                    {
+                        return this.Ok();
+                    }
+
+                    this.ModelState.AddModelError("", "Error in changing password!");
+                }
+
+                return this.BadRequest();
             }
             catch (Exception exception)
             {
-                this.logger.Error(exception, $"Error in Logout");
+                this.logger.Error(exception, $"Error in ForceChangePassword with ViewModel: {viewModel.ToJson()}");
                 return this.BadRequest(exception);
             }
         }
@@ -201,26 +209,6 @@ namespace WebApp.Identity.Controllers
             }
 
             return null;
-        }
-
-        private UserInfoViewModel CreateUserInfo()
-        {
-            try
-            {
-                this.logger.Trace($"CreateUserInfo called");
-                var user = this.userManager.GetUserAsync(this.User).Result;
-                var userInfo = new UserInfoViewModel(user)
-                {
-                    AssignedRoles = this.userManager.GetRolesAsync(user).Result
-                };
-
-                return userInfo;
-            }
-            catch (Exception exception)
-            {
-                this.logger.Error(exception, $"Error in CreateUserInfo");
-                throw;
-            }
         }
     }
 }

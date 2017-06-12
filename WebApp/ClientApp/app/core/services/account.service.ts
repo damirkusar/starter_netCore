@@ -1,12 +1,10 @@
 ﻿import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { ICredentials } from '../../shared/models/credentials';
-import { IUser } from '../../shared/models/user';
-import { IToken } from '../../shared/models/token';
-import { HttpOptionsService } from './httpOptions.service';
+import { IUser } from '../../shared/models/models';
+import { HttpOptionsService } from './http-options.service';
 import { AuthService } from './auth.service';
-import { HttpErrorHandlerService } from './httpErrorHandler.service';
+import { HttpErrorHandlerService } from './http-error-handler.service';
 import { LoggerService } from './logger.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -14,25 +12,13 @@ const accountApi: string = '/api/account';
 
 @Injectable()
 export class AccountService {
-    loggedInUserUpdated: EventEmitter<IUser> = new EventEmitter<IUser>();
 
     constructor(private logger: LoggerService, private httpErrorHandlerService: HttpErrorHandlerService, private httpOptions: HttpOptionsService, private localStorageService: LocalStorageService, private http: Http) {
     }
-    
-    getUserInfo(): Observable<IUser> {
-        return this.http.get(`${accountApi}/userinfo`, this.httpOptions.getDefaultOptions())
-            .map(response => this.extractData(response as Response))
+
+    register(settings): any {
+        return this.http.post(`${accountApi}/Register`, settings, this.httpOptions.getDefaultOptions())
+            .map((response: Response) => response.json())
             .catch(error => this.httpErrorHandlerService.responseError(error));
-    }
-
-    getLoggedInUser(): IUser {
-        return this.localStorageService.get('loggedInUser');
-    }
-
-    private extractData(res: Response) {
-        let body:IUser = res.json();
-        this.localStorageService.set('loggedInUser', body);
-        this.loggedInUserUpdated.emit(body);
-        return body || {};
     }
 }

@@ -17,6 +17,7 @@ using OpenIddict.Core;
 using OpenIddict.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApp.DataAccessLayer;
+using WebApp.Identity;
 using WebApp.Identity.Extensions;
 
 namespace WebApp
@@ -41,7 +42,7 @@ namespace WebApp
             services.AddCors();
 
             services.AddDbContext<DataDbContext>(
-                options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultDataConnection")));
+                options => options.UseSqlServer(this.Configuration.GetConnectionString("DataConnection")));
 
             // Add identity services from WebApp.Identiy.
             services.ConfigureIdentity(this.Configuration);
@@ -75,7 +76,7 @@ namespace WebApp
             loggerFactory.AddNLog();
             app.AddNLogWeb();
             env.ConfigureNLog("nlog.config");
-            LogManager.Configuration.Variables["connectionString"] = this.Configuration.GetConnectionString("DefaultLogConnection");
+            LogManager.Configuration.Variables["connectionString"] = this.Configuration.GetConnectionString("LogConnection");
             LogManager.Configuration.Variables["configDir"] = "C:\\temp\\";
             var logger = LogManager.GetCurrentClassLogger();
 
@@ -122,30 +123,7 @@ namespace WebApp
                     defaults: new { controller = "Home", action = "Index" });
             });
 
-            this.InitializeAsync(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
-        }
-
-        private async Task InitializeAsync(IServiceProvider services, CancellationToken cancellationToken)
-        {
-            // Create a new service scope to ensure the database context is correctly disposed when this methods returns.
-            using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                await context.Database.EnsureCreatedAsync(cancellationToken);
-
-                var manager = scope.ServiceProvider.GetRequiredService<OpenIddictApplicationManager<OpenIddictApplication>>();
-
-                if (await manager.FindByClientIdAsync("TestClient", cancellationToken) == null)
-                {
-                    var application = new OpenIddictApplication
-                    {
-                        ClientId = "TestClient",
-                        DisplayName = "My TestClient application"
-                    };
-
-                    await manager.CreateAsync(application, "388D45FA-B36B-4988-BA59-B187D329C207", cancellationToken);
-                }
-            }
+            Initializer.CreateTestClient(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
         }
     }
 }

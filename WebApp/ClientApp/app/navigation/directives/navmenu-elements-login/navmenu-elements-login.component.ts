@@ -1,7 +1,6 @@
 import { Component, OnChanges, OnInit, DoCheck, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
-import { IUser } from '../../../shared/models/user';
-import { ICredentials } from '../../../shared/models/credentials';
+import { IUser, ICredentials } from '../../../shared/models/models';
 import { LoggerService } from '../../../core/services/logger.service';
 
 @Component({

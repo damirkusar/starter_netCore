@@ -2,8 +2,8 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { LoggerService } from '../../../core/services/logger.service';
-import { HttpErrorHandlerService } from '../../../core/services/httpErrorHandler.service';
-import { HttpOptionsService } from '../../../core/services/httpOptions.service';
+import { HttpErrorHandlerService } from '../../../core/services/http-error-handler.service';
+import { HttpOptionsService } from '../../../core/services/http-options.service';
 
 export interface INews {
     id?: string;

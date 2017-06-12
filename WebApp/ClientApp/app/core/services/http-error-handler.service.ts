@@ -2,7 +2,7 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { LoggerService } from './logger.service';
-import { IErrorMessage } from "../../shared/models/errorMessage";
+import { IErrorMessage } from "../../shared/models/models";
 
 @Injectable()
 export class HttpErrorHandlerService {
