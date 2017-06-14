@@ -42,7 +42,7 @@ namespace WebApp.Identity.Controllers
 
                 var user = new ApplicationUser
                 {
-                    UserName = registerViewModel.Email,
+                    UserName = registerViewModel.UserName,
                     Email = registerViewModel.Email,
                     FirstName = registerViewModel.FirstName,
                     LastName = registerViewModel.LastName,

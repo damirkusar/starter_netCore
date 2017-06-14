@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
 using WebApp.DataAccessLayer.Models;
-using WebApp.Identity.ViewModels.Account;
 
 namespace WebApp.Controllers
 {

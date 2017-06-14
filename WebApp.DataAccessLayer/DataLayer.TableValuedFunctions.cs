@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using WebApp.DataAccessLayer.Models;
-
-namespace WebApp.DataAccessLayer
+﻿namespace WebApp.DataAccessLayer
 {
     public partial class DataLayer
     {

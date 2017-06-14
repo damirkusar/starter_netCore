@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using WebApp.DataAccessLayer.Views;
-
-namespace WebApp.DataAccessLayer
+﻿namespace WebApp.DataAccessLayer
 {
     public partial class DataLayer
     {

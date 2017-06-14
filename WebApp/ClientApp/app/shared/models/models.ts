@@ -20,9 +20,19 @@ export interface IToken {
 export interface IUser {
     id?: string;
     email?: string;
+    userName?: string;
     firstName?: string;
     lastName?: string;
     phoneNumber?: string;
     image?: string;
     assignedRoles?: string[];
+}
+
+export interface IUserRegister {
+    email?: string;
+    userName?: string;
+    firstName?: string;
+    lastName?: string;
+    password?: string;
+    confirmPassword?: string;
 }

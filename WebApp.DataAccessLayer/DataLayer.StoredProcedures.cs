@@ -1,8 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-
-namespace WebApp.DataAccessLayer
+﻿namespace WebApp.DataAccessLayer
 {
     public partial class DataLayer
     {
