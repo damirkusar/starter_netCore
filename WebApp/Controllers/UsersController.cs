@@ -26,6 +26,8 @@ namespace WebApp.Controllers
             this.logger = LogManager.GetCurrentClassLogger();
         }
 
+        [Authorize(ActiveAuthenticationSchemes = "Bearer")]
+        [Authorize(ActiveAuthenticationSchemes = "Cookie")]
         [HttpGet]
         [Route("UserInfo")]
         public IActionResult GetUserInfo()

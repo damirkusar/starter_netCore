@@ -32,8 +32,9 @@ namespace WebApp.Identity.Extensions
                 o.Password.RequireUppercase = true;
                 o.Password.RequireNonAlphanumeric = true;
                 o.Password.RequiredLength = 6;
-                o.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromHours(24);
                 o.Cookies.ExternalCookie.ExpireTimeSpan = TimeSpan.FromHours(24);
+                o.Cookies.ApplicationCookie.AuthenticationScheme = "Cookie";
+                o.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromHours(24);
                 o.Cookies.ApplicationCookie.LoginPath = "/api/auth/login";
                 o.Cookies.ApplicationCookie.LogoutPath = "/api/auth/logout";
                 o.Cookies.ApplicationCookie.CookieName = "AngularXCore";
