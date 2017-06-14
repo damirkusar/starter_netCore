@@ -10,13 +10,34 @@ namespace WebApp.DataAccessLayer.JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var user = (value as ApplicationUser);
-            user.ConcurrencyStamp = null;
-            user.PasswordHash = null;
-            user.SecurityStamp = null;
+            var user = value as ApplicationUser;
+            user.ConcurrencyStamp = string.Empty;
+            user.PasswordHash = string.Empty;
+            user.SecurityStamp = string.Empty;
 
             writer.WriteStartObject();
-            writer.WriteRaw(user.ToJson());
+
+            writer.WritePropertyName("Id");
+            writer.WriteValue(user.Id);
+            writer.WritePropertyName("FirstName");
+            writer.WriteValue(user.FirstName);
+            writer.WritePropertyName("LastName");
+            writer.WriteValue(user.LastName);
+            writer.WritePropertyName("UserName");
+            writer.WriteValue(user.UserName);
+            writer.WritePropertyName("Email");
+            writer.WriteValue(user.Email);
+            writer.WritePropertyName("Image");
+            writer.WriteValue(user.Image);
+            writer.WritePropertyName("AssignedRoles");
+
+            writer.WriteStartArray();
+            foreach (var userAssignedRole in user.AssignedRoles)
+            {
+                writer.WriteValue(userAssignedRole);
+            }
+            writer.WriteEndArray();
+
             writer.WriteEndObject();
         }
 
