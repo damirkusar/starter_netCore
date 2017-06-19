@@ -109,7 +109,7 @@ export class AuthService {
         this.logger.debug(`Loggin in...`);
         this.loaderService.setShowModal(true);
 
-        var login = this.http.post(`${authApi}/login`, { email: credentials.username, password: credentials.password }, this.httpOptionsService.getDefaultOptions())
+        var login = this.http.post(`${authApi}/login`, { userName: credentials.userName, password: credentials.password }, this.httpOptionsService.getDefaultOptions())
             .map((response: Response) => {
                 return response;
             })

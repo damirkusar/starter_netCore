@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
 import { Localization, LocaleService, TranslationService } from 'angular-l10n';
+import { IUser } from '../../shared/models/models';
 import { AccountService } from '../../core/services/account.service';
 import { AuthService } from '../../core/services/auth.service';
 import { LoggerService } from '../../core/services/logger.service';
@@ -31,7 +32,7 @@ export class HomeComponent extends Localization implements OnChanges, OnInit, Do
         this.authService.loggedInUserUpdated.subscribe(
             (user) => {
                 if (user != null) {
-                    this.fullName = `${user.firstName} ${user.lastName}`;
+                    //this.fullName = `${user.firstName} ${user.lastName}`;
                     this.setFullName();
                 }
             }
@@ -39,7 +40,8 @@ export class HomeComponent extends Localization implements OnChanges, OnInit, Do
     }
 
     setFullName(): void {
-        let currentUser = this.authService.getLoggedInUser();
+        let currentUser: IUser = this.authService.getLoggedInUser();
+        this.logger.log("Hello current", currentUser.firstName);
         if (currentUser != null) {
             this.fullName = `${currentUser.firstName} ${currentUser.lastName}`;
         } else {

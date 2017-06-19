@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [Facade]
+    AUTHORIZATION [dbo];
+

@@ -2,6 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using WebApp.DataAccessLayer.Models;
+using WebApp.DataAccessLayer.Views;
 
 namespace WebApp.DataAccessLayer
 {
@@ -14,7 +15,7 @@ namespace WebApp.DataAccessLayer
 
         public virtual List<Localisation> GetLocalisations(string language)
         {
-            return this.dataDbContext.Localisations.Where(x => x.Language.Equals(language)).ToList();
+            return this.dataDbContext.Localisations.Where(x => x.LanguageIsoAlpha2.Equals(language)).ToList();
         }
 
         public virtual JObject GetLocalisationsAsJson()
@@ -59,7 +60,8 @@ namespace WebApp.DataAccessLayer
 
         public virtual string CreateLocalizationKey(Localisation localization)
         {
-            var key = localization.Container != null ? $"{localization.Container}_{localization.Key}" : $"{localization.Key}";
+            //var key = localization.Container != null ? $"{localization.}_{localization.Key}" : $"{localization.Key}";
+            var key = $"{localization.Key}";
             return key;
         }
     }

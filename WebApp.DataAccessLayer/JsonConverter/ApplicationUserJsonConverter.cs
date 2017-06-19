@@ -32,9 +32,12 @@ namespace WebApp.DataAccessLayer.JsonConverter
             writer.WritePropertyName("AssignedRoles");
 
             writer.WriteStartArray();
-            foreach (var userAssignedRole in user.AssignedRoles)
+            if (user.AssignedRoles != null)
             {
-                writer.WriteValue(userAssignedRole);
+                foreach (var userAssignedRole in user.AssignedRoles)
+                {
+                    writer.WriteValue(userAssignedRole);
+                }
             }
             writer.WriteEndArray();
 

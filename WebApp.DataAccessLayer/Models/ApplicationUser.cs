@@ -7,7 +7,7 @@ using WebApp.DataAccessLayer.JsonConverter;
 
 namespace WebApp.DataAccessLayer.Models
 {
-    [JsonConverter(typeof(ApplicationUserJsonConverter))]
+    //[JsonConverter(typeof(ApplicationUserJsonConverter))]
     public class ApplicationUser : IdentityUser<Guid>
     {
         public string FirstName { get; set; }
@@ -33,12 +33,6 @@ namespace WebApp.DataAccessLayer.Models
         public override bool LockoutEnabled { get; set; }
         [JsonIgnore]
         public override DateTimeOffset? LockoutEnd { get; set; }
-        [JsonIgnore]
-        public override ICollection<IdentityUserLogin<Guid>> Logins { get; }
-        [JsonIgnore]
-        public override ICollection<IdentityUserRole<Guid>> Roles { get; }
-        [JsonIgnore]
-        public override ICollection<IdentityUserClaim<Guid>> Claims { get; }
         [JsonIgnore]
         public override int AccessFailedCount { get; set; }
     }

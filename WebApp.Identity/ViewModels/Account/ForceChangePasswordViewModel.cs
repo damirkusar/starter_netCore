@@ -4,8 +4,11 @@ namespace WebApp.Identity.ViewModels.Account
 {
     public class ForceChangePasswordViewModel
     {
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        //[DataType(DataType.EmailAddress)]
+        //public string Email { get; set; }
+
+        [Required]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

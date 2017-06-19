@@ -40,6 +40,12 @@ namespace WebApp.Identity.Controllers
                     return this.BadRequest(this.ModelState);
                 }
 
+                var dbUser = this.userManager.FindByEmailAsync(registerViewModel.Email).Result;
+                if (dbUser != null)
+                {
+                    return this.BadRequest("Email is already taken");
+                }
+
                 var user = new ApplicationUser
                 {
                     UserName = registerViewModel.UserName,
@@ -58,7 +64,6 @@ namespace WebApp.Identity.Controllers
                 else
                 {
                     result = this.userManager.CreateAsync(user, registerViewModel.Password).Result;
-
                 }
 
                 if (!result.Succeeded)
@@ -71,7 +76,7 @@ namespace WebApp.Identity.Controllers
                     user = this.AssignFirstCreatedUserAsAdmin(user);
                 }
 
-                user = this.userManager.FindByEmailAsync(user.Email).Result;
+                user = this.userManager.FindByNameAsync(user.UserName).Result;
                 return this.Ok(user);
             }
             catch (Exception exception)
@@ -161,7 +166,7 @@ namespace WebApp.Identity.Controllers
                 this.logger.Trace($"ForceChangePassword called with ViewModel: {viewModel.ToJson()}");
                 if (this.ModelState.IsValid)
                 {
-                    var user = this.userManager.FindByEmailAsync(viewModel.Email).Result;
+                    var user = this.userManager.FindByNameAsync(viewModel.UserName).Result;
                     var passwordToken = this.userManager.GeneratePasswordResetTokenAsync(user).Result;
                     var result = this.userManager.ResetPasswordAsync(user, passwordToken, viewModel.NewPassword).Result;
 

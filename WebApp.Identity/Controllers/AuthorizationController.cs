@@ -59,12 +59,12 @@ namespace WebApp.Identity.Controllers
                 if (this.ModelState.IsValid)
                 {
                     var result =
-                        this.signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password,
-                            loginViewModel.RememberMe, false).Result;
+                        this.signInManager.PasswordSignInAsync(
+                            loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false).Result;
 
                     if (result.Succeeded)
                     {
-                        var user = this.userManager.FindByEmailAsync(loginViewModel.Email).Result;
+                        var user = this.userManager.FindByNameAsync(loginViewModel.UserName).Result;
                         user.AssignedRoles = this.userManager.GetRolesAsync(user).Result;
                         return this.Ok(user);
                     }

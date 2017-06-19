@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Identity", "WebApp.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.DataAccessLayer.Tests", "WebApp.DataAccessLayer.Tests\WebApp.DataAccessLayer.Tests.csproj", "{AD124204-B5A2-4D38-8558-C3F45CFE6426}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WebApp.Database", "WebApp.Database\WebApp.Database.sqlproj", "{1D1EF301-4D4E-4C99-A874-A138D7D236E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,12 @@ Global
 		{AD124204-B5A2-4D38-8558-C3F45CFE6426}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD124204-B5A2-4D38-8558-C3F45CFE6426}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD124204-B5A2-4D38-8558-C3F45CFE6426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

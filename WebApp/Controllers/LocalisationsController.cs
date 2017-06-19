@@ -5,6 +5,7 @@ using NLog;
 using NuGet.Protocol.Core.v3;
 using WebApp.DataAccessLayer;
 using WebApp.DataAccessLayer.Models;
+using WebApp.DataAccessLayer.Views;
 
 namespace WebApp.Controllers
 {

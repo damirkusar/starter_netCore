@@ -32,15 +32,15 @@
     <div id="loginbar" class="default-bar float-xs-right dropdown-menu dropdown-menu-right">
         <div class="default-bar-items">
             <div class="default-bar-item" [ngClass]="{'outline-color-red-100': loginError}">
-                <form novalidate #loginForm="ngForm" (ngSubmit)="login({username: email.value, password: password.value}, $event)">
+                <form novalidate #loginForm="ngForm" (ngSubmit)="login({userName: userName.value, password: password.value}, $event)">
                     <div class="form-group">
-                        <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" #email>
+                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter username" #userName>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="Password" #password>
                     </div>
                     <div class="text-xs-right">
-                        <button class="btn bg-color-green-100" (click)="login({username: email.value, password: password.value}, $event)">Login</button>
+                        <button class="btn bg-color-green-100">Login</button>
                     </div>
                 </form>
             </div>
