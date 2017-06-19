@@ -7,7 +7,7 @@ using WebApp.DataAccessLayer.JsonConverter;
 
 namespace WebApp.DataAccessLayer.Models
 {
-    //[JsonConverter(typeof(ApplicationUserJsonConverter))]
+    [JsonConverter(typeof(ApplicationUserJsonConverter))]
     public class ApplicationUser : IdentityUser<Guid>
     {
         public string FirstName { get; set; }

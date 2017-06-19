@@ -11,9 +11,6 @@ namespace WebApp.DataAccessLayer.JsonConverter
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var user = value as ApplicationUser;
-            user.ConcurrencyStamp = string.Empty;
-            user.PasswordHash = string.Empty;
-            user.SecurityStamp = string.Empty;
 
             writer.WriteStartObject();
 
