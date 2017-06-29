@@ -41,6 +41,7 @@ module.exports = {
             '@angular/platform-browser-dynamic',
             '@angular/router',
             '@angular/platform-server',
+            '@ng-bootstrap/ng-bootstrap',
             'angular-2-local-storage',
             'angular-l10n',
             'aspnet-prerendering',

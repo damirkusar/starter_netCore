@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LocalizationModule } from 'angular-l10n';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthGuardService } from '../../core/services/auth-guard.service';
 import { CanDeactivateGuardService } from '../../core/services/can-deactivate-guard.service';
@@ -27,6 +28,7 @@ import { HomeComponent } from './home.component';
                 children: []
             }
         ]),
+        NgbModule,
         // My Modules
         SharedModule
     ],

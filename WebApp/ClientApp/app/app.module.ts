@@ -6,6 +6,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { LocalStorageModule, ILocalStorageServiceConfig } from 'angular-2-local-storage';
 import { FormsModule } from '@angular/forms';
 import { LocalizationModule } from 'angular-l10n';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
@@ -36,6 +37,7 @@ import { NewsRoomModule } from './modules/newsroom/newsroom.module';
             storageType: 'localStorage'
         }),
         LocalizationModule.forRoot(),
+        NgbModule.forRoot(),
         // My Modules
         CoreModule,
         SharedModule,
