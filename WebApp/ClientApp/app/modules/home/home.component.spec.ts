@@ -25,7 +25,7 @@ describe('HomeComponent', () => {
     });
 
     it(`should have a h1 element with empty string`, () => {
-        expect(this.spec.element.querySelectorAll('h1')[0].textContent).toEqual(""); 
+        expect(this.spec.element.querySelectorAll('h1')[0].textContent).toEqual("welcome"); 
     });
 
     it(`should have a p element with correct`, () => {

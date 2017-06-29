@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebApp.DataAccessLayer.Models;
 using WebApp.DataAccessLayer.Views;
 
 namespace WebApp.DataAccessLayer

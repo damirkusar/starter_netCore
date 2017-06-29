@@ -1,7 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using NuGet.Protocol.Core.v3;
 using WebApp.DataAccessLayer.Models;
 
 namespace WebApp.DataAccessLayer.JsonConverter
@@ -11,32 +10,38 @@ namespace WebApp.DataAccessLayer.JsonConverter
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var user = value as ApplicationUser;
+            //user.FullName = $"{user.FirstName} {user.LastName}";
 
             writer.WriteStartObject();
 
-            writer.WritePropertyName("Id");
-            writer.WriteValue(user.Id);
-            writer.WritePropertyName("FirstName");
-            writer.WriteValue(user.FirstName);
-            writer.WritePropertyName("LastName");
-            writer.WriteValue(user.LastName);
-            writer.WritePropertyName("UserName");
-            writer.WriteValue(user.UserName);
-            writer.WritePropertyName("Email");
-            writer.WriteValue(user.Email);
-            writer.WritePropertyName("Image");
-            writer.WriteValue(user.Image);
-            writer.WritePropertyName("AssignedRoles");
-
-            writer.WriteStartArray();
-            if (user.AssignedRoles != null)
+            if (user != null)
             {
-                foreach (var userAssignedRole in user.AssignedRoles)
+                writer.WritePropertyName("id");
+                writer.WriteValue(user.Id);
+                writer.WritePropertyName("firstName");
+                writer.WriteValue(user.FirstName);
+                writer.WritePropertyName("lastName");
+                writer.WriteValue(user.LastName);
+                writer.WritePropertyName("fullName");
+                writer.WriteValue(user.FullName);
+                writer.WritePropertyName("userName");
+                writer.WriteValue(user.UserName);
+                writer.WritePropertyName("email");
+                writer.WriteValue(user.Email);
+                writer.WritePropertyName("image");
+                writer.WriteValue(user.Image);
+                writer.WritePropertyName("assignedRoles");
+
+                writer.WriteStartArray();
+                if (user.AssignedRoles != null)
                 {
-                    writer.WriteValue(userAssignedRole);
+                    foreach (var userAssignedRole in user.AssignedRoles)
+                    {
+                        writer.WriteValue(userAssignedRole);
+                    }
                 }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
 
             writer.WriteEndObject();
         }

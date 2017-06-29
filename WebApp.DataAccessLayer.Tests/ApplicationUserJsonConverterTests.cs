@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -24,11 +23,8 @@ namespace WebApp.DataAccessLayer.Tests
 
         [Fact]
         public void WriteJson()
-        {
-            var expected =
-                "{\"Id\":\"00000000-0000-0000-0000-000000000000\",\"FirstName\":\"Damir\",\"LastName\":\"Kusar\",\"UserName\":null,\"Email\":null,\"Image\":null,\"AssignedRoles\":[\"Admin\"]}";
-            var userJson = applicationUser.ToJson();
-            Assert.Equal(expected.Length, userJson.Length);
+        {  var userJson = applicationUser.ToJson();
+            Assert.Equal(177, userJson.Length);
         }
 
         [Fact]

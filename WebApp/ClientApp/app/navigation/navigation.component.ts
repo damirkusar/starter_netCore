@@ -30,7 +30,9 @@ export class NavigationComponent extends Localization implements OnChanges, OnIn
     ngOnChanges(changes: Object): void { }
 
     ngOnInit(): void {
-        this.authService.loggedInUserUpdated.subscribe((user: IUser) => {
+        this.isLoggedIn = this.authService.isLoggedIn();
+        this.loggedInUser = this.accountService.getLoggedInUser();
+        this.accountService.loggedInUserUpdated.subscribe((user: IUser) => {
             this.loggedInUser = user;
         });
 
@@ -44,7 +46,7 @@ export class NavigationComponent extends Localization implements OnChanges, OnIn
     ngDoCheck(): void { }
 
     ngOnDestroy(): void {
-        this.authService.loggedInUserUpdated.unsubscribe();
+        this.accountService.loggedInUserUpdated.unsubscribe();
         this.authService.loggedInUpdated.unsubscribe();
     }
 

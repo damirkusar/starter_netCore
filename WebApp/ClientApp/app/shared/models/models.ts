@@ -1,13 +1,16 @@
 ﻿export interface ICredentials {
-    userName: string;
+    username: string;
     password: string;
-    grant_type?:string;
+    grant_type?: string;
     scope?: string;
 }
 
 export interface IErrorMessage {
     status: number;
-    message: string;
+    statusText: string;
+    error?: string;
+    error_description?: string;
+    message?: string;
 }
 
 export interface IToken {
@@ -23,6 +26,7 @@ export interface IUser {
     userName?: string;
     firstName?: string;
     lastName?: string;
+    fullName?: string;
     phoneNumber?: string;
     image?: string;
     assignedRoles?: string[];

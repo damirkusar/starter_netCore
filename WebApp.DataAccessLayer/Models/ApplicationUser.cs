@@ -14,7 +14,9 @@ namespace WebApp.DataAccessLayer.Models
         public string LastName { get; set; }
         public string Image { get; set; }
 
-        [NotMapped] 
+        [NotMapped]
+        public string FullName => $"{this.FirstName} {this.LastName}";
+        [NotMapped]
         public ICollection<string> AssignedRoles { get; set; }
         [NotMapped]
         public string GeneratedPassword { get; set; }

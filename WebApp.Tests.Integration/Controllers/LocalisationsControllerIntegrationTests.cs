@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using WebApp.Controllers;
-using WebApp.DataAccessLayer.Models;
 using WebApp.DataAccessLayer.Views;
 using Xunit;
 

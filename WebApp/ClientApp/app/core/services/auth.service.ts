@@ -14,7 +14,6 @@ const authApi: string = '/api/auth';
 
 @Injectable()
 export class AuthService {
-    loggedInUserUpdated: EventEmitter<IUser> = new EventEmitter<IUser>();
     loggedInUpdated = new EventEmitter();
     logoutTimerObservable: any;
 
@@ -33,6 +32,14 @@ export class AuthService {
                 this.handleHttpErrors(errorMessage);
             }
         );
+
+        this.accountService.loggedInUserUpdated.subscribe((user: IUser) => {
+            if (user) {
+                this.startLogoutTimer();
+                this.updateLoggedIn(true);
+                this.loaderService.setShowModal(false);
+            }
+        });
     }
 
     private handleHttpErrors(error: IErrorMessage) {
@@ -45,7 +52,21 @@ export class AuthService {
         }
     }
 
-    private startLogoutTimer(logoutInHours?: number) {
+    init() {
+        //this.loadCurrentUser();
+    }
+
+    private setLogoutTimer(logoutInSeconds?: number) {
+        logoutInSeconds = logoutInSeconds || 86400; // 86400 seconds are 24 hours
+
+        let date = new Date();
+
+        date.setSeconds(date.getSeconds() + logoutInSeconds - 30);
+        let logoutTimeInMillis = date.getTime();
+        this.localStorageService.set('logoutTimeInMillis', logoutTimeInMillis);
+    }
+
+    private startLogoutTimer() {
         let logoutTimeInMillis = this.getLogoutTimeInMillis();
         if (logoutTimeInMillis == null) {
             this.setLogoutTimer();
@@ -56,16 +77,6 @@ export class AuthService {
         if ((this.logoutTimerObservable == null || this.logoutTimerObservable.closed) && logoutTimeInMillis != null) {
             this.activateLogoutTimer(logoutTimeDate);
         }
-    }
-
-    private setLogoutTimer(logoutInHours?: number) {
-        logoutInHours = logoutInHours || 24;
-
-        let date = new Date();
-
-        date.setHours(date.getHours() + logoutInHours);
-        let logoutTimeInMillis = date.getTime();
-        this.localStorageService.set('logoutTimeInMillis', logoutTimeInMillis);
     }
 
     private activateLogoutTimer(date: Date) {
@@ -88,8 +99,12 @@ export class AuthService {
         this.loggedInUpdated.emit(loggedIn);
     }
 
+    private loadCurrentUser() {
+        this.accountService.getUserInfoAfterLogin().subscribe(x => { }, error => this.logger.error(error));
+    }
+
     isInRole(allowedRoles: string[]): boolean {
-        let loggedInUser: IUser = this.getLoggedInUser();
+        let loggedInUser: IUser = this.accountService.getLoggedInUser();
         if (loggedInUser && loggedInUser.assignedRoles) {
             let userRoles = loggedInUser.assignedRoles;
             let userRolesMapped = userRoles.map(userRole => userRole.toLowerCase());
@@ -105,11 +120,19 @@ export class AuthService {
         return this.localStorageService.get('loggedIn') === true;
     }
 
-    login(credentials: ICredentials) {
-        this.logger.debug(`Loggin in...`);
+    login(credentials: ICredentials): void {
+        this.logger.debug(`Logging in...`);
         this.loaderService.setShowModal(true);
 
-        var login = this.http.post(`${authApi}/login`, { userName: credentials.userName, password: credentials.password }, this.httpOptionsService.getDefaultOptions())
+        credentials.grant_type = 'password';
+        credentials.scope = 'openid';
+        var params = `grant_type=${credentials.grant_type}&scope=${credentials.scope}&username=${credentials.username}&password=${credentials.password}`;
+        this.logger.log(`Logging in...`, params);
+
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let options = new RequestOptions({ headers: headers });
+
+        var login = this.http.post(`${authApi}/token`, params, options)
             .map((response: Response) => {
                 return response;
             })
@@ -118,15 +141,15 @@ export class AuthService {
                 return this.httpErrorHandlerService.responseError(error);
             });
 
-
         login.subscribe((response: Response) => {
-            var currentUser: IUser = response.json();
-            this.localStorageService.set('loggedInUser', currentUser);
-            this.loggedInUserUpdated.emit(currentUser);
             this.updateLoggedIn(true);
-            this.setLogoutTimer();
+
+            let token: IToken = response.json();
+            this.localStorageService.set('token', `${token.token_type} ${token.access_token}`);
+
+            this.setLogoutTimer(token.expires_in);
             this.startLogoutTimer();
-            this.loaderService.setShowModal(false);
+            this.loadCurrentUser();
         },
             error => {
                 this.loaderService.setShowModal(false);
@@ -135,79 +158,69 @@ export class AuthService {
     }
 
     logout() {
+        this.logger.debug("Logging out...");
         this.updateLoggedIn(false);
+        this.accountService.logoutCurrentUser(); // AccountService
+        this.localStorageService.set('token', undefined);
         this.localStorageService.set('logoutTimeInMillis', undefined);
-
-        this.logoutCurrentUser();
 
         if (this.logoutTimerObservable) {
             this.logoutTimerObservable.unsubscribe();
             this.logoutTimerObservable = undefined;
         }
 
-        var logout = this.http.post(`${authApi}/logout`, {}, this.httpOptionsService.getDefaultOptions())
-            .map(response => { this.logger.log('logout', response) })
-            .catch(error => {
-                return this.httpErrorHandlerService.responseError(error);
-            });
+        this.router.navigate(['/dashboard']);
 
-        logout.subscribe();
-        this.router.navigate(['/home']);
         this.logger.debug("Logged out...");
     }
 
-    logoutCurrentUser() {
-        this.localStorageService.set('loggedInUser', undefined);
-        this.loggedInUserUpdated.emit(undefined);
-    }
+    //loginCookie(credentials: ICredentials): void {
+    //    this.logger.debug(`Logging in...`);
+    //    this.loaderService.setShowModal(true);
 
-    getLoggedInUser(): IUser {
-        return this.localStorageService.get('loggedInUser');
-    }
-
-    //logoutToken() {
-    //    this.logger.debug("Loging out...");
-    //    this.router.navigate(['/home']);
-    //    this.localStorageService.set('loggedIn', undefined);
-    //    this.localStorageService.set('token', undefined);
-    //    this.localStorageService.set('logoutTimeInMillis', undefined);
-    //    this.localStorageService.set('loggedInUser', undefined); // AccountService
-    //    this.logoutTimerObservable.unsubscribe();
-    //    this.logoutTimerObservable = undefined;
-    //    this.loggedInUpdated.emit(false);
-    //}
-
-    //loginToken(credentials: ICredentials): Observable<IToken> {
-    //    this.logger.debug(`Login in...`);
-
-    //    credentials.grant_type = 'password';
-    //    credentials.scope = 'openid';
-    //    var params = `grant_type=${credentials.grant_type}&scope=${credentials.scope}&username=${credentials.username}&password=${credentials.password}`;
-
-    //    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    //    let options = new RequestOptions({ headers: headers });
-
-    //    return this.http.post(`${authApi}/token`, params, options)
-    //        .map(response => this.extractSuccessTokenData(response as Response))
+    //    var login = this.http.post(`${authApi}/login`, { email: credentials.username, password: credentials.password }, this.httpOptionsService.getDefaultOptions())
+    //        .map((response: Response) => {
+    //            return response;
+    //        })
     //        .catch(error => {
+    //            this.loaderService.setShowModal(false);
+    //            return this.httpErrorHandlerService.responseError(error);
+    //        });
+
+
+    //    login.subscribe((response: Response) => {
+    //        this.setLogoutTimer();
+    //        //this.loadCurrentUser();
+
+    //        let user: IUser = response.json();
+    //        this.localStorageService.set('loggedInUser', user);
+    //        this.accountService.loggedInUserUpdated.emit(user);
+    //    },
+    //        error => {
+    //            this.loaderService.setShowModal(false);
     //            return this.httpErrorHandlerService.responseError(error);
     //        });
     //}
 
-    //extractSuccessTokenData(res: Response) {
-    //    let token: IToken = res.json();
-    //    this.localStorageService.set('loggedIn', true);
-    //    this.localStorageService.set('token', `${token.token_type} ${token.access_token}`);
+    //logoutCookie() {
+    //    this.updateLoggedIn(false);
+    //    this.localStorageService.set('logoutTimeInMillis', undefined);
 
-    //    let date = new Date();
-    //    date.setSeconds(date.getSeconds() + token.expires_in);
-    //    date.setMinutes(date.getMinutes() - 1);
-    //    let time = date.getTime();
-    //    this.localStorageService.set('logoutTimeInMillis', time);
-    //    this.startLogoutTimer();
+    //    this.accountService.logoutCurrentUser(); // AccountService
 
-    //    this.loggedInUpdated.emit(true);
+    //    if (this.logoutTimerObservable) {
+    //        this.logoutTimerObservable.unsubscribe();
+    //        this.logoutTimerObservable = undefined;
+    //    }
 
-    //    return token || {};
+    //    var logout = this.http.post(`${authApi}/logout`, {}, this.httpOptionsService.getDefaultOptions())
+    //        .map(response => { this.logger.log('logout', response) })
+    //        .catch(error => {
+    //            return this.httpErrorHandlerService.responseError(error);
+    //        });
+
+    //    logout.subscribe();
+    //    this.router.navigate(['/dashboard']);
+    //    this.logger.debug("Logged out...");
     //}
 }

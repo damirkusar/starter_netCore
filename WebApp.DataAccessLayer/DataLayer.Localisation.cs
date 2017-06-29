@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using WebApp.DataAccessLayer.Models;
 using WebApp.DataAccessLayer.Views;
 
 namespace WebApp.DataAccessLayer

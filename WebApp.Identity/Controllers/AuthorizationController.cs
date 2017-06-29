@@ -81,7 +81,6 @@ namespace WebApp.Identity.Controllers
             }
         }
 
-        [Authorize]
         [HttpPost]
         [Route("Logout")]
         public IActionResult Logout()

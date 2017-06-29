@@ -5,7 +5,6 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using WebApp.Controllers;
 using WebApp.DataAccessLayer;
-using WebApp.DataAccessLayer.Models;
 using WebApp.DataAccessLayer.Views;
 using Xunit;
 
@@ -23,7 +22,7 @@ namespace WebApp.Tests.Controllers
             this.localisation = new Localisation
             {
                 Key = "TestKey",
-                Language = "en",
+                LanguageIsoAlpha2 = "en",
                 Value = "Hello World"
             };
 

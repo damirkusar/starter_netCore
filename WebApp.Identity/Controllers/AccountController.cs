@@ -10,9 +10,10 @@ using WebApp.Identity.ViewModels.Account;
 
 namespace WebApp.Identity.Controllers
 {
-    [AllowAnonymous]
-    [Route("api/Account")]
+    [Authorize]
+    [Authorize(ActiveAuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(IgnoreApi = false)]
+    [Route("api/Account")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -28,6 +29,7 @@ namespace WebApp.Identity.Controllers
             this.logger = LogManager.GetCurrentClassLogger();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("Register")]
         public IActionResult Register([FromBody] RegisterViewModel registerViewModel)

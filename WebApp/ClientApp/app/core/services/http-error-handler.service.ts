@@ -12,11 +12,33 @@ export class HttpErrorHandlerService {
     responseError(errorResponse: Response | any) {
         let errMsg: IErrorMessage;
         if (errorResponse instanceof Response) {
-            errMsg = {status: errorResponse.status, message: errorResponse.statusText};
+            errMsg = { status: errorResponse.status, statusText: errorResponse.statusText };
+
+            if (errorResponse['_body'] != null) {
+                try {
+                    var body = JSON.parse(errorResponse['_body']);
+                    if (body.message != null) {
+                        errMsg.message = body.message;
+                    }
+
+                    if (body.error != null) {
+                        errMsg.error = body.error;
+                    }
+
+                    if (body.error_description != null) {
+                        errMsg.error_description = body.error_description;
+                    }
+                } catch (e) {
+
+                }
+
+            }
         } else {
             errMsg = {
-                status: errorResponse.status ? errorResponse.status : -1,
-                message: errorResponse.message ? errorResponse.message : errorResponse.toString()
+                status: errorResponse['status'],
+                statusText: errorResponse['statusText'],
+                error: errorResponse['error'],
+                error_description: errorResponse['error_description']
             };
         }
 

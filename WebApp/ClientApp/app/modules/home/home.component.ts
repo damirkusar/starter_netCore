@@ -12,6 +12,7 @@ import { LoggerService } from '../../core/services/logger.service';
 })
 export class HomeComponent extends Localization implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
     fullName: string;
+    greeting: string;
 
     constructor(private logger: LoggerService, private authService: AuthService, private accountService: AccountService, public translation: TranslationService, public locale: LocaleService) {
         super(locale, translation);
@@ -29,24 +30,31 @@ export class HomeComponent extends Localization implements OnChanges, OnInit, Do
             }
         );
 
-        this.authService.loggedInUserUpdated.subscribe(
+        this.accountService.loggedInUserUpdated.subscribe(
             (user) => {
-                if (user != null) {
-                    //this.fullName = `${user.firstName} ${user.lastName}`;
-                    this.setFullName();
-                }
+                this.setFullName();
+            }
+        );
+
+        this.translation.translationChanged.subscribe(
+            () => {
+                this.translate();
             }
         );
     }
 
     setFullName(): void {
-        let currentUser: IUser = this.authService.getLoggedInUser();
-        this.logger.log("Hello current", currentUser.firstName);
+        let currentUser: IUser = this.accountService.getLoggedInUser();
         if (currentUser != null) {
-            this.fullName = `${currentUser.firstName} ${currentUser.lastName}`;
+            this.fullName = `${currentUser.fullName}`;
         } else {
             this.fullName = 'Guest';
         }
+        this.translate();
+    }
+
+    translate() {
+        this.greeting = this.translation.translate('welcome', { fullname: this.fullName });
     }
 
     ngDoCheck(): void { }

@@ -8,8 +8,9 @@ using WebApp.DataAccessLayer.Models;
 namespace WebApp.Controllers
 {
     [Authorize]
-    [Route("api/Users")]
+    [Authorize(ActiveAuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(IgnoreApi = false)]
+    [Route("api/Users")]
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -25,8 +26,6 @@ namespace WebApp.Controllers
             this.logger = LogManager.GetCurrentClassLogger();
         }
 
-        [Authorize(ActiveAuthenticationSchemes = "Bearer")]
-        [Authorize(ActiveAuthenticationSchemes = "Cookie")]
         [HttpGet]
         [Route("UserInfo")]
         public IActionResult GetUserInfo()
