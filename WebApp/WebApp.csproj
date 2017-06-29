@@ -100,6 +100,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 
 </Project>

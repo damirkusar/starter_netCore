@@ -127,7 +127,6 @@ export class AuthService {
         credentials.grant_type = 'password';
         credentials.scope = 'openid';
         var params = `grant_type=${credentials.grant_type}&scope=${credentials.scope}&username=${credentials.username}&password=${credentials.password}`;
-        this.logger.log(`Logging in...`, params);
 
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
