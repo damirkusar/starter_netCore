@@ -4,11 +4,11 @@
     <Description>#</Description>
     <Authors>Damir Kusar</Authors>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <RuntimeFrameworkVersion>1.1.2</RuntimeFrameworkVersion>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>WebApp</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>WebApp</PackageId>
-    <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
 	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <PreBuildEvent />
   </PropertyGroup>
@@ -84,7 +84,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.2" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-*" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.4.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.4.1" />
     <PackageReference Include="OpenIddict" Version="1.0.0-*" />
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="1.0.0-*" />
     <PackageReference Include="OpenIddict.Mvc" Version="1.0.0-*" />
@@ -98,6 +98,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 

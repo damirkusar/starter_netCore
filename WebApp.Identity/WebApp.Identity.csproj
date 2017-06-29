@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <AssemblyName>WebApp.Identity</AssemblyName>
     <PackageId>WebApp.Identity</PackageId>
-    <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>1.1.2</RuntimeFrameworkVersion>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -27,7 +27,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.1.0-*" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.2" />
 	<PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-*" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.4.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.4.1" />
   </ItemGroup>
 
   <ItemGroup>
