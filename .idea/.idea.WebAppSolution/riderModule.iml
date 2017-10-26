@@ -1,38 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="RIDER_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.2.0/build/netcoreapp1.0/xunit.runner.reporters.netstandard15.dll">
-      <sourceFolder url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.2.0/build/netcoreapp1.0/xunit.runner.reporters.netstandard15.dll" isTestSource="false" />
-    </content>
-    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.2.0/build/netcoreapp1.0/xunit.runner.utility.netstandard15.dll">
-      <sourceFolder url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.2.0/build/netcoreapp1.0/xunit.runner.utility.netstandard15.dll" isTestSource="false" />
-    </content>
-    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.2.0/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll">
-      <sourceFolder url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.2.0/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../..">
-      <sourceFolder url="file://$MODULE_DIR$/../../README.md" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../WebApp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../WebApp.DataAccessLayer" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../WebApp.DataAccessLayer.Tests" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../WebApp.Database/WebApp.Database.sqlproj" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../WebApp.Identity" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../WebApp.Tests" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../WebApp.Tests.Integration" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.DataAccessLayer.Tests/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.DataAccessLayer.Tests/obj" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.DataAccessLayer/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.DataAccessLayer/obj" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.Identity/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.Identity/obj" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.Tests.Integration/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.Tests.Integration/obj" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.Tests/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp.Tests/obj" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/../../WebApp/obj" />
-      <excludeFolder url="file://$MODULE_DIR$/../../packages" />
-    </content>
+    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.2.0/build/netcoreapp1.0/xunit.runner.reporters.netstandard15.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.2.0/build/netcoreapp1.0/xunit.runner.utility.netstandard15.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.2.0/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" />
+    <content url="file://$MODULE_DIR$/../.." />
+    <content url="file://C:/temp" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
