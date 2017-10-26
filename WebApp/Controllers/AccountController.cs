@@ -8,7 +8,7 @@ using NuGet.Protocol.Core.v3;
 using WebApp.DataAccessLayer.Models;
 using WebApp.Identity.ViewModels.Account;
 
-namespace WebApp.Identity.Controllers
+namespace WebApp.Controllers
 {
     [Authorize]
     [Authorize(ActiveAuthenticationSchemes = "Bearer")]

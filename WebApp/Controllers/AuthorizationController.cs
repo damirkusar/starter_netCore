@@ -20,7 +20,7 @@ using OpenIddict.Models;
 using WebApp.DataAccessLayer.Models;
 using WebApp.Identity.ViewModels.Account;
 
-namespace WebApp.Identity.Controllers
+namespace WebApp.Controllers
 {
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = false)]
