@@ -31,16 +31,9 @@
     <Delete Files="@(FilesToDelete)" />
     <RemoveDir Directories="ClientApp\dist; wwwroot\dist" />
   </Target>
-  
-  <ItemGroup>
-    <Compile Remove="ClientApp\app\shared\components\**" />
-    <Content Remove="ClientApp\app\shared\components\**" />
-    <EmbeddedResource Remove="ClientApp\app\shared\components\**" />
-    <None Remove="ClientApp\app\shared\components\**" />
-  </ItemGroup>
 
   <ItemGroup>
-    <None Update="ClientApp\dist\**\*;node_modules\**\*;Views\**\*;wwwroot\**\*;nlog.config">
+    <None Update="node_modules\**\*;Views\**\*;wwwroot\**\*;nlog.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>

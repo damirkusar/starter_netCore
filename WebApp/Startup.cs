@@ -24,10 +24,11 @@ namespace WebApp
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                //.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
             this.Configuration = builder.Build();
+
+            env.ConfigureNLog("nlog.config");
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -45,9 +46,16 @@ namespace WebApp
 
             // Add framework services.
             services.AddMvc();
-            services.AddMvc().AddApplicationPart(Assembly.Load(new AssemblyName("WebApp.Identity")));
             services.AddOptions();
             services.AddNodeServices();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<DataLayer, DataLayer>();
+
+            // Swagger
+            services.ConfigureSwaggerGen(options =>
+                options.CustomSchemaIds(schemaId => schemaId.FullName)
+            );
 
             services.AddSwaggerGen(c =>
           {
@@ -59,9 +67,6 @@ namespace WebApp
                   TokenUrl = "/api/auth/token"
               });
           });
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<DataLayer, DataLayer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,31 +75,31 @@ namespace WebApp
             loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             loggerFactory.AddNLog();
+
             app.AddNLogWeb();
-            env.ConfigureNLog("nlog.config");
+
             LogManager.Configuration.Variables["connectionString"] = this.Configuration.GetConnectionString("LogConnection");
             LogManager.Configuration.Variables["configDir"] = "C:\\temp\\";
-            var logger = LogManager.GetCurrentClassLogger();
 
             if (env.IsDevelopment())
             {
-                logger.Trace($"Environment in WebApp isDevelopment: {env.EnvironmentName}");
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                {
-                    HotModuleReplacement = true
-                });
             }
             else
             {
-                logger.Trace($"Environment in WebApp !isDevelopment: {env.EnvironmentName}");
-                app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            // Add identity services from WebApp.Identiy.
+            // Configure business layer
             app.ConfigureIdentity();
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+                await next();
+            });
 
             app.UseCors(builder =>
                 builder.AllowAnyHeader()
