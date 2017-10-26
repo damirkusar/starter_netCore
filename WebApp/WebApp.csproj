@@ -1,5 +1,4 @@
 ﻿<Project ToolsVersion="15.0" Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <Description>#</Description>
     <Authors>Damir Kusar</Authors>
@@ -9,40 +8,30 @@
     <AssemblyName>WebApp</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>WebApp</PackageId>
-	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <PreBuildEvent />
   </PropertyGroup>
-  
   <Target Name="PrecompileScript" BeforeTargets="Build" Condition="'$(Configuration)'=='Debug'">
     <Exec Command="echo pre-compile $(Configuration)" />
-    <Exec Command="npm run build:dev:aot" />
   </Target>
-
   <Target Name="PrepublishScript" BeforeTargets="Publish">
     <Exec Command="echo pre-publish $(Configuration)" />
-    <Exec Command="yarn install" />
-	<Exec Command="npm run build:prod:aot" />
   </Target>
-  
   <Target Name="CleanDist" AfterTargets="Clean">
     <ItemGroup>
-      <FilesToDelete Include="ClientApp\dist\**; wwwroot\dist\**" />
     </ItemGroup>
     <Delete Files="@(FilesToDelete)" />
     <RemoveDir Directories="ClientApp\dist; wwwroot\dist" />
   </Target>
-
   <ItemGroup>
     <None Update="node_modules\**\*;Views\**\*;wwwroot\**\*;nlog.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\WebApp.DataAccessLayer\WebApp.DataAccessLayer.csproj" />
     <ProjectReference Include="..\WebApp.Identity\WebApp.Identity.csproj" />
-  </ItemGroup>  
-
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.Validation" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.AngularServices" Version="1.1.0-*" />
@@ -84,16 +73,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.3.1" />
   </ItemGroup>
-
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot" />
   </ItemGroup>
-
 </Project>

@@ -6,12 +6,14 @@ namespace WebApp.Controllers
     {
         public IActionResult Index()
         {
-            return this.View();
+            return this.Redirect("/swagger");
         }
 
         public IActionResult Error()
         {
-            return this.View();
+            //return this.InternalError();            
+            return this.Redirect("/swagger");
+
         }
     }
 }

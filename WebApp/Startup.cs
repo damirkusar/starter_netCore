@@ -1,9 +1,6 @@
-using System.Reflection;
-using System.Threading;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +10,6 @@ using NLog.Extensions.Logging;
 using NLog.Web;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApp.DataAccessLayer;
-using WebApp.Identity;
 using WebApp.Identity.Extensions;
 
 namespace WebApp
@@ -58,15 +54,15 @@ namespace WebApp
             );
 
             services.AddSwaggerGen(c =>
-          {
-              c.SwaggerDoc("v1", new Info { Title = "angularXcore API", Version = "v1" });
-              c.AddSecurityDefinition("OpenIdDict", new OAuth2Scheme
-              {
-                  Type = "oauth2",
-                  Flow = "password",
-                  TokenUrl = "/api/auth/token"
-              });
-          });
+            {
+                c.SwaggerDoc("v1", new Info {Title = "angularXcore API", Version = "v1"});
+                c.AddSecurityDefinition("OpenIdDict", new OAuth2Scheme
+                {
+                    Type = "oauth2",
+                    Flow = "password",
+                    TokenUrl = "/api/auth/token"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,7 +74,8 @@ namespace WebApp
 
             app.AddNLogWeb();
 
-            LogManager.Configuration.Variables["connectionString"] = this.Configuration.GetConnectionString("LogConnection");
+            LogManager.Configuration.Variables["connectionString"] =
+                this.Configuration.GetConnectionString("LogConnection");
             LogManager.Configuration.Variables["configDir"] = "C:\\temp\\";
 
             if (env.IsDevelopment())
@@ -103,28 +100,22 @@ namespace WebApp
 
             app.UseCors(builder =>
                 builder.AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin()
+                    .WithExposedHeaders("Content-Disposition", "Content-Type")
             );
 
             app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "angularXcore v1");
-            });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "angularXcore v1"); });
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
             });
 
-            Initializer.CreateTestClient(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
+//            Initializer.CreateTestClient(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
         }
     }
 }
