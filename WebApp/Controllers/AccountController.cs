@@ -4,14 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
-using NuGet.Protocol.Core.v3;
 using WebApp.DataAccessLayer.Models;
 using WebApp.Identity.ViewModels.Account;
 
 namespace WebApp.Controllers
 {
     [Authorize]
-    [Authorize(ActiveAuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/Account")]
     public class AccountController : Controller
@@ -36,7 +35,6 @@ namespace WebApp.Controllers
         {
             try
             {
-                this.logger.Trace($"Register called with ViewModel: {registerViewModel.ToJson()}");
                 if (!this.ModelState.IsValid)
                 {
                     return this.BadRequest(this.ModelState);
@@ -57,25 +55,10 @@ namespace WebApp.Controllers
                     LockoutEnabled = true
                 };
 
-                IdentityResult result;
-                if (registerViewModel.Password == null)
-                {
-                    user.GeneratedPassword = this.GeneratePassword();
-                    result = this.userManager.CreateAsync(user, user.GeneratedPassword).Result;
-                }
-                else
-                {
-                    result = this.userManager.CreateAsync(user, registerViewModel.Password).Result;
-                }
-
+                var result = this.userManager.CreateAsync(user, registerViewModel.Password).Result;
                 if (!result.Succeeded)
                 {
                     return this.GetErrorResult(result);
-                }
-
-                if (this.userManager.Users.Count() == 1)
-                {
-                    user = this.AssignFirstCreatedUserAsAdmin(user);
                 }
 
                 user = this.userManager.FindByNameAsync(user.UserName).Result;
@@ -83,52 +66,10 @@ namespace WebApp.Controllers
             }
             catch (Exception exception)
             {
-                this.logger.Error(exception, $"Error in Register with ViewModel: {registerViewModel.ToJson()}");
                 return this.BadRequest(exception);
             }
         }
 
-        private string GeneratePassword()
-        {
-            return $"AnuglarXCore{new Random().Next(1111)}$";
-        }
-
-        private ApplicationUser AssignFirstCreatedUserAsAdmin(ApplicationUser user)
-        {
-            try
-            {
-                this.logger.Trace($"AssignFirstCreatedUserAsAdmin called with User: {user.ToJson()}");
-                if (!this.roleManager.RoleExistsAsync("admin").Result)
-                {
-                    var role = new ApplicationRole()
-                    {
-                        Name = "admin"
-                    };
-                    var roleResult = this.roleManager.CreateAsync(role).Result;
-                    if (!roleResult.Succeeded)
-                    {
-                        this.ModelState.AddModelError("", "Error while creating role!");
-                        {
-                            throw new InvalidOperationException($"Could not crate admin role");
-                        }
-                    }
-                }
-
-                var addUserToRoleResult = this.userManager.AddToRoleAsync(user, "admin").Result;
-                if (!addUserToRoleResult.Succeeded)
-                {
-                    {
-                        throw new InvalidOperationException($"Could not assign user {user} to admin role");
-                    }
-                }
-                return (user);
-            }
-            catch (Exception exception)
-            {
-                this.logger.Error(exception, $"Error in AssignFirstCreatedUserAsAdmin with User: {user.ToJson()}");
-                throw;
-            }
-        }
 
         [HttpPost]
         [Route("changePassword")]
@@ -136,7 +77,6 @@ namespace WebApp.Controllers
         {
             try
             {
-                this.logger.Trace($"ChangePassword called with ViewModel: {viewModel.ToJson()}");
                 if (this.ModelState.IsValid)
                 {
                     var user = this.userManager.GetUserAsync(this.User).Result;
@@ -154,7 +94,6 @@ namespace WebApp.Controllers
             }
             catch (Exception exception)
             {
-                this.logger.Error(exception, $"Error in ChangePassword with ViewModel: {viewModel.ToJson()}");
                 return this.BadRequest(exception);
             }
         }
@@ -165,7 +104,6 @@ namespace WebApp.Controllers
         {
             try
             {
-                this.logger.Trace($"ForceChangePassword called with ViewModel: {viewModel.ToJson()}");
                 if (this.ModelState.IsValid)
                 {
                     var user = this.userManager.FindByNameAsync(viewModel.UserName).Result;
@@ -184,7 +122,6 @@ namespace WebApp.Controllers
             }
             catch (Exception exception)
             {
-                this.logger.Error(exception, $"Error in ForceChangePassword with ViewModel: {viewModel.ToJson()}");
                 return this.BadRequest(exception);
             }
         }

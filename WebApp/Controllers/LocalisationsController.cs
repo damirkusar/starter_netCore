@@ -2,7 +2,6 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
-using NuGet.Protocol.Core.v3;
 using WebApp.DataAccessLayer;
 using WebApp.DataAccessLayer.Views;
 
@@ -97,7 +96,6 @@ namespace WebApp.Controllers
             }
             catch (Exception exception)
             {
-                this.logger.Error(exception, $"Error in UpdateLocalisation with localisation object: {localisation.ToJson()}");
                 return this.BadRequest(exception);
             }
         }
@@ -113,7 +111,6 @@ namespace WebApp.Controllers
             }
             catch (Exception exception)
             {
-                this.logger.Error($"Error in AddLocalisation with localisation object: {localisation.ToJson()}");
                 return this.BadRequest(exception);
             }
         }
@@ -129,7 +126,6 @@ namespace WebApp.Controllers
             }
             catch (Exception exception)
             {
-                this.logger.Error($"Error in RemoveLocalisation with localisation object: {localisation.ToJson()}");
                 return this.BadRequest(exception);
             }
         }

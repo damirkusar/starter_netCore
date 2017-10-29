@@ -6,9 +6,7 @@ namespace WebApp.Identity.Extensions
     {
         public static IApplicationBuilder ConfigureIdentity(this IApplicationBuilder app)
         {
-            app.UseIdentity();
-            app.UseOAuthValidation();
-            app.UseOpenIddict();
+            app.UseAuthentication();
 
             //app.UseGoogleAuthentication(new GoogleOptions()
             //{

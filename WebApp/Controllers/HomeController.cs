@@ -8,12 +8,5 @@ namespace WebApp.Controllers
         {
             return this.Redirect("/swagger");
         }
-
-        public IActionResult Error()
-        {
-            //return this.InternalError();            
-            return this.Redirect("/swagger");
-
-        }
     }
 }

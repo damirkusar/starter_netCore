@@ -8,7 +8,7 @@ using WebApp.DataAccessLayer.Models;
 namespace WebApp.Controllers
 {
     [Authorize]
-    [Authorize(ActiveAuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/Users")]
     public class UsersController : Controller
@@ -49,7 +49,6 @@ namespace WebApp.Controllers
             {
                 this.logger.Trace($"CreateUserInfo called");
                 var user = this.userManager.GetUserAsync(this.User).Result;
-                user.AssignedRoles = this.userManager.GetRolesAsync(user).Result;
 
                 return user;
             }

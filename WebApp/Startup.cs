@@ -5,9 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NLog;
-using NLog.Extensions.Logging;
-using NLog.Web;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApp.DataAccessLayer;
 using WebApp.Identity.Extensions;
@@ -16,6 +13,8 @@ namespace WebApp
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -23,11 +22,7 @@ namespace WebApp
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
             this.Configuration = builder.Build();
-
-            env.ConfigureNLog("nlog.config");
         }
-
-        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,7 +38,6 @@ namespace WebApp
             // Add framework services.
             services.AddMvc();
             services.AddOptions();
-            services.AddNodeServices();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<DataLayer, DataLayer>();
@@ -68,15 +62,15 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-            loggerFactory.AddNLog();
+            //loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
+            //loggerFactory.AddDebug();
+            //loggerFactory.AddNLog();
 
-            app.AddNLogWeb();
+            //app.AddNLogWeb();
 
-            LogManager.Configuration.Variables["connectionString"] =
-                this.Configuration.GetConnectionString("LogConnection");
-            LogManager.Configuration.Variables["configDir"] = "C:\\temp\\";
+            //LogManager.Configuration.Variables["connectionString"] =
+            //    this.Configuration.GetConnectionString("LogConnection");
+            //LogManager.Configuration.Variables["configDir"] = "C:\\temp\\";
 
             if (env.IsDevelopment())
             {

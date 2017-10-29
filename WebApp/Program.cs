@@ -1,27 +1,45 @@
+using System;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using NLog.Web;
 
 namespace WebApp
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .AddCommandLine(args)
-                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
-                .Build();
+            // NLog: setup the logger first to catch all errors
+            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            try
+            {
+                logger.Debug("init main");
 
-            var host = new WebHostBuilder()
-                .UseConfiguration(config)
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
+                var config = new ConfigurationBuilder()
+                    .AddEnvironmentVariables(prefix: "ASPNETCORE_")
+                    .AddCommandLine(args)
+                    .Build();
 
-            host.Run();
+                var host = new WebHostBuilder()
+                    //.ConfigureLogging(options => options.AddConsole())
+                    //.ConfigureLogging(options => options.AddDebug())
+                    .UseNLog()
+                    .UseConfiguration(config)
+                    .UseIISIntegration()
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseStartup<Startup>()
+                    .Build();
+
+                host.Run();
+            }
+            catch (Exception e)
+            {
+                //NLog: catch setup errors
+                logger.Error(e, "Stopped program because of exception");
+                throw;
+            }
         }
     }
 }
