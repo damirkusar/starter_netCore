@@ -11,9 +11,9 @@ namespace WebApp.Identity.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection ConfigureIdentity(this IServiceCollection services, IConfigurationRoot configuration)
+        public static IServiceCollection ConfigureIdentity(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IdDbContext>(
+            services.AddDbContext<IdentityDbContext>(
                 options =>
                 {
                     options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
@@ -33,7 +33,7 @@ namespace WebApp.Identity.Extensions
                 o.SignIn.RequireConfirmedPhoneNumber = false;
                 o.User.RequireUniqueEmail = true;
             })
-                .AddEntityFrameworkStores<IdDbContext>()
+                .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
             //services.ConfigureApplicationCookie(options =>
@@ -82,7 +82,7 @@ namespace WebApp.Identity.Extensions
 
             services.AddOpenIddict(options =>
             {
-                options.AddEntityFrameworkCoreStores<IdDbContext>();
+                options.AddEntityFrameworkCoreStores<IdentityDbContext>();
 
                 // Register the ASP.NET Core MVC binder used by OpenIddict.
                 // Note: if you don't call this method, you won't be able to

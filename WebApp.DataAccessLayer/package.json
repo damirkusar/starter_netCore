@@ -8,10 +8,10 @@
   "devDependencies": {
   },
   "scripts": {
-    "scaffold-models": "dotnet ef --startup-project ../WebApp dbcontext scaffold \"Server=(localdb)\\mssqllocaldb;Database=WebAppSolution;Trusted_Connection=True;MultipleActiveResultSets=true\" \"Microsoft.EntityFrameworkCore.SqlServer\" -c \"GeneratedDataDbContext\" -e \"Development\" -o \"GeneratedModels\" --schema \"Models\" --verbose",
-    "preinit-applicationdb": "dotnet ef --startup-project ../WebApp migrations add InitApplicationDbContext -c ApplicationDbContext -e Development",
-    "init-applicationdb": "dotnet ef --startup-project ../WebApp database update -c ApplicationDbContext -e Development",
-    "preinit-datadb": "dotnet ef --startup-project ../WebApp migrations add InitDataDbContext -c DataDbContext -e Development",
-    "init-datadb": "dotnet ef --startup-project ../WebApp database update -c DataDbContext -e Development"
+    "preinit-identitydb": "dotnet ef --startup-project ../WebApp migrations add InitIdentityDbContext -c IdentityDbContext",
+    "init-identitydb": "dotnet ef --startup-project ../WebApp database update -c IdentityDbContext",
+
+    "preinit-datadb": "dotnet ef --startup-project ../WebApp migrations add InitDataDbContext -c DataDbContext",
+    "init-datadb": "dotnet ef --startup-project ../WebApp database update -c DataDbContext"
   }
 }

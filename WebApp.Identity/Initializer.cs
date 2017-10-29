@@ -15,7 +15,7 @@ namespace WebApp.Identity
             // Create a new service scope to ensure the database context is correctly disposed when this methods returns.
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var context = scope.ServiceProvider.GetRequiredService<IdDbContext>();
+                var context = scope.ServiceProvider.GetRequiredService<IdentityDbContext>();
                 await context.Database.EnsureCreatedAsync(cancellationToken);
 
                 var manager = scope.ServiceProvider.GetRequiredService<OpenIddictApplicationManager<OpenIddictApplication>>();

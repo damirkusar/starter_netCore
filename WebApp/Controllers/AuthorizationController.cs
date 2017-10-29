@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AspNet.Security.OpenIdConnect.Extensions;
 using AspNet.Security.OpenIdConnect.Primitives;
@@ -111,11 +112,20 @@ namespace WebApp.Controllers
         {
             // Create a new ClaimsPrincipal containing the claims that
             // will be used to create an id_token, a token or a code.
-            var principal = await signInManager.CreateUserPrincipalAsync(user);
+            ClaimsPrincipal principal;
+            try
+            {
+                principal = await signInManager.CreateUserPrincipalAsync(user);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
             // Create a new authentication ticket holding the user identity.
             var ticket = new AuthenticationTicket(principal,
-                new Microsoft.AspNetCore.Authentication.AuthenticationProperties(),
+                new AuthenticationProperties(),
                 OpenIdConnectServerDefaults.AuthenticationScheme);
 
             // Set the list of scopes granted to the client application.

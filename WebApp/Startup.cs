@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApp.DataAccessLayer;
 using WebApp.Identity.Extensions;
@@ -13,15 +12,11 @@ namespace WebApp
 {
     public class Startup
     {
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables();
-            this.Configuration = builder.Build();
+            this.Configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -60,18 +55,8 @@ namespace WebApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
-            //loggerFactory.AddDebug();
-            //loggerFactory.AddNLog();
-
-            //app.AddNLogWeb();
-
-            //LogManager.Configuration.Variables["connectionString"] =
-            //    this.Configuration.GetConnectionString("LogConnection");
-            //LogManager.Configuration.Variables["configDir"] = "C:\\temp\\";
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -108,8 +93,6 @@ namespace WebApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-//            Initializer.CreateTestClient(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
         }
     }
 }
