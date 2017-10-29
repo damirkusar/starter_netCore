@@ -17,6 +17,7 @@
     },
     "Development": {
       "commandName": "IISExpress",
+      "commandLineArgs": "/main Program.ch",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

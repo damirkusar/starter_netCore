@@ -11,10 +11,10 @@ namespace WebApp
         public static void Main(string[] args)
         {
             // NLog: setup the logger first to catch all errors
-            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            //var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
-                logger.Debug("init main");
+                //logger.Debug("init main");
 
                 var config = new ConfigurationBuilder()
                     .AddEnvironmentVariables(prefix: "ASPNETCORE_")
@@ -24,7 +24,7 @@ namespace WebApp
                 var host = new WebHostBuilder()
                     //.ConfigureLogging(options => options.AddConsole())
                     //.ConfigureLogging(options => options.AddDebug())
-                    .UseNLog()
+                    //.UseNLog()
                     .UseConfiguration(config)
                     .UseIISIntegration()
                     .UseKestrel()
@@ -37,7 +37,7 @@ namespace WebApp
             catch (Exception e)
             {
                 //NLog: catch setup errors
-                logger.Error(e, "Stopped program because of exception");
+                //logger.Error(e, "Stopped program because of exception");
                 throw;
             }
         }
