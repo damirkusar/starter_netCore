@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -69,7 +70,16 @@ namespace WebApp.Controllers
         private async Task<IActionResult> IsPasswordGrantType(OpenIdConnectRequest request)
         {
             this.logger.Trace($"Token GrantType is Password");
-            var user = await this.userManager.FindByNameAsync(request.Username);
+            ApplicationUser user;
+            try
+            {
+                user = await this.userManager.FindByNameAsync(request.Username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
             if (user == null)
             {
