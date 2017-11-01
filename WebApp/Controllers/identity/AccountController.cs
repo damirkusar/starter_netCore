@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
+using Microsoft.Extensions.Logging;
+using WebApp.Filters;
 using WebApp.Identity.DataAccessLayer.Models;
 using WebApp.Identity.ViewModels.Account;
 
@@ -11,147 +13,83 @@ namespace WebApp.Controllers.identity
     [Authorize]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiExplorerSettings(IgnoreApi = false)]
-    [Route("api/Account")]
+    [Route("api/[controller]")]
     public class AccountController : Controller
     {
+        private readonly ILogger<AccountController> logger;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly RoleManager<ApplicationRole> roleManager;
-        private readonly Logger logger;
 
         public AccountController(
-            UserManager<ApplicationUser> userManager,
-            RoleManager<ApplicationRole> roleManager)
+            ILogger<AccountController> logger,
+            UserManager<ApplicationUser> userManager)
         {
+            this.logger = logger;
             this.userManager = userManager;
-            this.roleManager = roleManager;
-            this.logger = LogManager.GetCurrentClassLogger();
         }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("Register")]
-        public IActionResult Register([FromBody] RegisterViewModel registerViewModel)
+        [ValidateModelState]
+        public async Task<IActionResult> Register([FromBody] RegisterViewModel registerViewModel)
         {
-            try
+            var dbUser = await this.userManager.FindByEmailAsync(registerViewModel.Email);
+            if (dbUser != null)
             {
-                if (!this.ModelState.IsValid)
-                {
-                    return this.BadRequest(this.ModelState);
-                }
-
-                var dbUser = this.userManager.FindByEmailAsync(registerViewModel.Email).Result;
-                if (dbUser != null)
-                {
-                    return this.BadRequest("Email is already taken");
-                }
-
-                var user = new ApplicationUser
-                {
-                    UserName = registerViewModel.UserName,
-                    Email = registerViewModel.Email,
-                    FirstName = registerViewModel.FirstName,
-                    LastName = registerViewModel.LastName,
-                    LockoutEnabled = true
-                };
-
-                var result = this.userManager.CreateAsync(user, registerViewModel.Password).Result;
-                if (!result.Succeeded)
-                {
-                    return this.GetErrorResult(result);
-                }
-
-                user = this.userManager.FindByNameAsync(user.UserName).Result;
-                return this.Ok(user);
+                return this.BadRequest("Email is already taken");
             }
-            catch (Exception exception)
+
+            var user = new ApplicationUser
             {
-                return this.BadRequest(exception);
+                UserName = registerViewModel.UserName,
+                Email = registerViewModel.Email,
+                FirstName = registerViewModel.FirstName,
+                LastName = registerViewModel.LastName,
+                LockoutEnabled = true
+            };
+
+            var result = await this.userManager.CreateAsync(user, registerViewModel.Password);
+            if (!result.Succeeded)
+            {
+                return this.StatusCode(500, "Could not create user");
             }
+
+            user = await this.userManager.FindByNameAsync(user.UserName);
+            return this.Ok(user);
         }
 
 
         [HttpPost]
         [Route("changePassword")]
-        public IActionResult ChangePassword([FromBody] ChangePasswordViewModel viewModel)
+        [ValidateModelState]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordViewModel viewModel)
         {
-            try
+            var user = await this.userManager.GetUserAsync(this.User);
+            var result = await this.userManager.ChangePasswordAsync(user, viewModel.CurrentPassword, viewModel.NewPassword);
+
+            if (result.Succeeded)
             {
-                if (this.ModelState.IsValid)
-                {
-                    var user = this.userManager.GetUserAsync(this.User).Result;
-                    var result = this.userManager.ChangePasswordAsync(user, viewModel.CurrentPassword, viewModel.NewPassword).Result;
-
-                    if (result.Succeeded)
-                    {
-                        return this.Ok();
-                    }
-
-                    this.ModelState.AddModelError("", "Error in changing password!");
-                }
-
-                return this.BadRequest();
+                return this.NoContent();
             }
-            catch (Exception exception)
-            {
-                return this.BadRequest(exception);
-            }
+
+            return this.StatusCode(500, "Could not change password");
         }
 
         [HttpPost]
         [Route("forceChangePassword")]
-        public IActionResult ForceChangePassword([FromBody] ForceChangePasswordViewModel viewModel)
+        [ValidateModelState]
+        public async Task<IActionResult> ForceChangePassword([FromBody] ForceChangePasswordViewModel viewModel)
         {
-            try
+            var user = await this.userManager.FindByNameAsync(viewModel.UserName);
+            var passwordToken =  await this.userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await this.userManager.ResetPasswordAsync(user, passwordToken, viewModel.NewPassword);
+
+            if (result.Succeeded)
             {
-                if (this.ModelState.IsValid)
-                {
-                    var user = this.userManager.FindByNameAsync(viewModel.UserName).Result;
-                    var passwordToken = this.userManager.GeneratePasswordResetTokenAsync(user).Result;
-                    var result = this.userManager.ResetPasswordAsync(user, passwordToken, viewModel.NewPassword).Result;
-
-                    if (result.Succeeded)
-                    {
-                        return this.Ok();
-                    }
-
-                    this.ModelState.AddModelError("", "Error in changing password!");
-                }
-
-                return this.BadRequest();
-            }
-            catch (Exception exception)
-            {
-                return this.BadRequest(exception);
-            }
-        }
-
-        private IActionResult GetErrorResult(IdentityResult result)
-        {
-            if (result == null)
-            {
-                return this.StatusCode(500, "Could not create User");
+                return this.Ok();
             }
 
-            if (!result.Succeeded)
-            {
-                if (result.Errors != null)
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        this.ModelState.AddModelError(error.Code, error.Description);
-                    }
-                }
-
-                if (this.ModelState.IsValid)
-                {
-                    // No ModelState errors are available to send, so just return an empty BadRequest.
-                    return this.BadRequest();
-                }
-
-                return this.BadRequest(this.ModelState);
-            }
-
-            return null;
+            return this.StatusCode(500, "Could not change password");
         }
     }
 }

@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AspNet.Security.OpenIdConnect.Extensions;
 using AspNet.Security.OpenIdConnect.Primitives;
@@ -11,8 +9,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using NLog;
 using OpenIddict.Core;
 using OpenIddict.Models;
 using WebApp.Identity.DataAccessLayer.Models;
@@ -21,29 +19,26 @@ namespace WebApp.Controllers.identity
 {
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = false)]
-    [Route("api/auth")]
+    [Route("api/[controller]")]
     public class AuthorizationController : Controller
     {
-        private readonly OpenIddictApplicationManager<OpenIddictApplication> applicationManager;
-        private readonly OpenIddictTokenManager<OpenIddictToken> tokenManager;
+        private readonly ILogger<AuthorizationController> logger;
         private readonly IOptions<IdentityOptions> identityOptions;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly Logger logger;
 
         public AuthorizationController(
+            ILogger<AuthorizationController> logger,
             OpenIddictApplicationManager<OpenIddictApplication> applicationManager,
             OpenIddictTokenManager<OpenIddictToken> tokenManager,
             IOptions<IdentityOptions> identityOptions,
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager)
         {
-            this.applicationManager = applicationManager;
-            this.tokenManager = tokenManager;
+            this.logger = logger;
             this.identityOptions = identityOptions;
             this.signInManager = signInManager;
             this.userManager = userManager;
-            this.logger = LogManager.GetCurrentClassLogger();
         }
 
         [HttpPost]
@@ -60,7 +55,7 @@ namespace WebApp.Controllers.identity
                 return await this.IsPasswordGrantType(request);
             }
 
-            this.logger.Error($"Error in Token: The specified grant ({request.GrantType}) type is not supported");
+            this.logger.LogError($"Error in Token: The specified grant ({request.GrantType}) type is not supported");
             return this.BadRequest(new OpenIdConnectResponse
             {
                 Error = OpenIdConnectConstants.Errors.UnsupportedGrantType,
@@ -70,17 +65,7 @@ namespace WebApp.Controllers.identity
 
         private async Task<IActionResult> IsPasswordGrantType(OpenIdConnectRequest request)
         {
-            this.logger.Trace($"Token GrantType is Password");
-            ApplicationUser user;
-            try
-            {
-                user = await this.userManager.FindByNameAsync(request.Username);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            var user = await this.userManager.FindByNameAsync(request.Username);
 
             if (user == null)
             {
@@ -112,16 +97,7 @@ namespace WebApp.Controllers.identity
         {
             // Create a new ClaimsPrincipal containing the claims that
             // will be used to create an id_token, a token or a code.
-            ClaimsPrincipal principal;
-            try
-            {
-                principal = await signInManager.CreateUserPrincipalAsync(user);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            var principal = await signInManager.CreateUserPrincipalAsync(user);
 
             // Create a new authentication ticket holding the user identity.
             var ticket = new AuthenticationTicket(principal,

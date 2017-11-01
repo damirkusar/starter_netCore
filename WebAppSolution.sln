@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Identity.Interface",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Identity.DataAccessLayer", "WebApp.Identity.DataAccessLayer\WebApp.Identity.DataAccessLayer.csproj", "{CD28B2DC-FDEB-4199-8697-C047202196DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.TransferObjects", "WebApp.TransferObjects\WebApp.TransferObjects.csproj", "{A2738336-6A2A-40B2-A9DD-48AA57271F6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{CD28B2DC-FDEB-4199-8697-C047202196DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD28B2DC-FDEB-4199-8697-C047202196DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD28B2DC-FDEB-4199-8697-C047202196DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2738336-6A2A-40B2-A9DD-48AA57271F6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2738336-6A2A-40B2-A9DD-48AA57271F6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2738336-6A2A-40B2-A9DD-48AA57271F6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2738336-6A2A-40B2-A9DD-48AA57271F6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
