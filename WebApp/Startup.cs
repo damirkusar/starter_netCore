@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApp.DataAccessLayer;
 using WebApp.Identity.Extensions;
+using WebApp.Middleware;
 
 namespace WebApp
 {
@@ -27,17 +29,22 @@ namespace WebApp
             services.AddDbContext<DataDbContext>(
                 options => options.UseSqlServer(this.Configuration.GetConnectionString("DataConnection")));
 
-            // Add identity services from WebApp.Identiy.
+            // Configure api gateway
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            // Configure business layer
             services.ConfigureIdentity(this.Configuration);
+
+            services.AddScoped<DataLayer, DataLayer>();
+
+            services.AddAutoMapper(config =>
+            {
+            });
 
             // Add framework services.
             services.AddMvc();
             services.AddOptions();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<DataLayer, DataLayer>();
-
-            // Swagger
+            // Configure Swagger
             services.ConfigureSwaggerGen(options =>
                 options.CustomSchemaIds(schemaId => schemaId.FullName)
             );
@@ -57,26 +64,6 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-            }
-
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-
-            // Configure business layer
-            app.ConfigureIdentity();
-
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
-                await next();
-            });
-
             app.UseCors(builder =>
                 builder.AllowAnyHeader()
                     .AllowAnyMethod()
@@ -84,8 +71,23 @@ namespace WebApp
                     .WithExposedHeaders("Content-Disposition", "Content-Type")
             );
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "angularXcore v1"); });
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+                await next();
+            });
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            // Configure business layer
+            app.ConfigureIdentity();
+
+            // Configure Middleware
+            app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+            app.UseMiddleware<GlobalTraceMiddleware>();
 
             app.UseMvc(routes =>
             {
@@ -93,6 +95,10 @@ namespace WebApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // Configure Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "angularXcore v1"); });
         }
     }
 }

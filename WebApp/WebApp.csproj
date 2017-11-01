@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
 
     <PackageReference Include="AspNet.Security.OAuth.Introspection" Version="2.0.0-rc1-final" />
@@ -32,6 +34,8 @@
     <ProjectReference Include="..\WebApp.Identity\WebApp.Identity.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controllers\identity\" />
+    <Folder Include="Controllers\localisation\" />
     <Folder Include="wwwroot" />
     <Content Update="appsettings.production.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

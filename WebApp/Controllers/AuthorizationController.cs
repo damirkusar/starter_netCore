@@ -143,6 +143,13 @@ namespace WebApp.Controllers
             // To allow OpenIddict to serialize them, you must attach them a destination, that specifies
             // whether they should be included in access tokens, in identity tokens or in both.
 
+
+            var destinations = new List<string>
+            {
+                OpenIdConnectConstants.Destinations.AccessToken,
+                OpenIdConnectConstants.Destinations.IdentityToken
+            };
+
             foreach (var claim in ticket.Principal.Claims)
             {
                 // Never include the security stamp in the access and identity tokens, as it's a secret value.
@@ -150,12 +157,7 @@ namespace WebApp.Controllers
                 {
                     continue;
                 }
-
-                var destinations = new List<string>
-                {
-                    OpenIdConnectConstants.Destinations.AccessToken
-                };
-
+                
                 // Only add the iterated claim to the id_token if the corresponding scope was granted to the client application.
                 // The other claims will only be added to the access_token, which is encrypted when using the default format.
                 if ((claim.Type == OpenIdConnectConstants.Claims.Name && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile)) ||
