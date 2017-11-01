@@ -2,11 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
-    <AssemblyName>WebApp.Identity</AssemblyName>
-    <PackageId>WebApp.Identity</PackageId>
-    <Authors>Damir Kusar</Authors>
-    <Company />
   </PropertyGroup>
 
   <ItemGroup>

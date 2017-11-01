@@ -16,6 +16,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Identity", "WebApp.I
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WebApp.Database", "WebApp.Database\WebApp.Database.sqlproj", "{1D1EF301-4D4E-4C99-A874-A138D7D236E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Localisation", "WebApp.Localisation\WebApp.Localisation.csproj", "{D179A614-2555-43DC-BCC3-0F3735DD7ACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Localisation.DataAccessLayer", "WebApp.Localisation.DataAccessLayer\WebApp.Localisation.DataAccessLayer.csproj", "{3B866CA2-1016-409E-A715-AB06304D8E2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Localisation.Interface", "WebApp.Localisation.Interface\WebApp.Localisation.Interface.csproj", "{DAF9C6D2-BEEE-4F3D-8021-E9E60031DD65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +44,18 @@ Global
 		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D179A614-2555-43DC-BCC3-0F3735DD7ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D179A614-2555-43DC-BCC3-0F3735DD7ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D179A614-2555-43DC-BCC3-0F3735DD7ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D179A614-2555-43DC-BCC3-0F3735DD7ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B866CA2-1016-409E-A715-AB06304D8E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B866CA2-1016-409E-A715-AB06304D8E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B866CA2-1016-409E-A715-AB06304D8E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B866CA2-1016-409E-A715-AB06304D8E2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAF9C6D2-BEEE-4F3D-8021-E9E60031DD65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAF9C6D2-BEEE-4F3D-8021-E9E60031DD65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAF9C6D2-BEEE-4F3D-8021-E9E60031DD65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAF9C6D2-BEEE-4F3D-8021-E9E60031DD65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

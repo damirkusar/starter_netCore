@@ -2,12 +2,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
-using WebApp.DataAccessLayer;
 using WebApp.Identity.Extensions;
+using WebApp.Localisation.Extensions;
 using WebApp.Middleware;
 
 namespace WebApp
@@ -26,15 +25,11 @@ namespace WebApp
         {
             services.AddCors();
 
-            services.AddDbContext<DataDbContext>(
-                options => options.UseSqlServer(this.Configuration.GetConnectionString("DataConnection")));
-
             // Configure api gateway
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Configure business layer
             services.ConfigureIdentity(this.Configuration);
-
-            services.AddScoped<DataLayer, DataLayer>();
+            services.ConfigureLocalisation(this.Configuration);
 
             services.AddAutoMapper(config =>
             {
@@ -84,6 +79,7 @@ namespace WebApp
 
             // Configure business layer
             app.ConfigureIdentity();
+            app.ConfigureLocalisation();
 
             // Configure Middleware
             app.UseMiddleware<GlobalExceptionHandlingMiddleware>();

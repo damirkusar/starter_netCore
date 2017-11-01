@@ -32,10 +32,10 @@
   <ItemGroup>
     <ProjectReference Include="..\WebApp.DataAccessLayer\WebApp.DataAccessLayer.csproj" />
     <ProjectReference Include="..\WebApp.Identity\WebApp.Identity.csproj" />
+    <ProjectReference Include="..\WebApp.Localisation.Interface\WebApp.Localisation.Interface.csproj" />
+    <ProjectReference Include="..\WebApp.Localisation\WebApp.Localisation.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\identity\" />
-    <Folder Include="Controllers\localisation\" />
     <Folder Include="wwwroot" />
     <Content Update="appsettings.production.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

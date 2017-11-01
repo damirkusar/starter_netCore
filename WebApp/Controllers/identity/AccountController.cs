@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +6,7 @@ using NLog;
 using WebApp.DataAccessLayer.Models;
 using WebApp.Identity.ViewModels.Account;
 
-namespace WebApp.Controllers
+namespace WebApp.Controllers.identity
 {
     [Authorize]
     [Authorize(AuthenticationSchemes = "Bearer")]

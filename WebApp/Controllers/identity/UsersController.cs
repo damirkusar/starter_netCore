@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using NLog;
 using WebApp.DataAccessLayer.Models;
 
-namespace WebApp.Controllers
+namespace WebApp.Controllers.identity
 {
     [Authorize]
     [Authorize(AuthenticationSchemes = "Bearer")]

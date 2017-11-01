@@ -17,7 +17,7 @@ using OpenIddict.Core;
 using OpenIddict.Models;
 using WebApp.DataAccessLayer.Models;
 
-namespace WebApp.Controllers
+namespace WebApp.Controllers.identity
 {
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = false)]
@@ -142,8 +142,6 @@ namespace WebApp.Controllers
             // Note: by default, claims are NOT automatically included in the access and identity tokens.
             // To allow OpenIddict to serialize them, you must attach them a destination, that specifies
             // whether they should be included in access tokens, in identity tokens or in both.
-
-
             var destinations = new List<string>
             {
                 OpenIdConnectConstants.Destinations.AccessToken,
@@ -160,9 +158,9 @@ namespace WebApp.Controllers
                 
                 // Only add the iterated claim to the id_token if the corresponding scope was granted to the client application.
                 // The other claims will only be added to the access_token, which is encrypted when using the default format.
-                if ((claim.Type == OpenIdConnectConstants.Claims.Name && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile)) ||
-                    (claim.Type == OpenIdConnectConstants.Claims.Email && ticket.HasScope(OpenIdConnectConstants.Scopes.Email)) ||
-                    (claim.Type == OpenIdConnectConstants.Claims.Role && ticket.HasScope(OpenIddictConstants.Claims.Roles)))
+                if (claim.Type == OpenIdConnectConstants.Claims.Name && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile) ||
+                    claim.Type == OpenIdConnectConstants.Claims.Email && ticket.HasScope(OpenIdConnectConstants.Scopes.Email) ||
+                    claim.Type == OpenIdConnectConstants.Claims.Role && ticket.HasScope(OpenIddictConstants.Claims.Roles))
                 {
                     destinations.Add(OpenIdConnectConstants.Destinations.IdentityToken);
                 }
