@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIddict.Core;
 using OpenIddict.Models;
-using WebApp.DataAccessLayer;
+using WebApp.Identity.DataAccessLayer;
 
 namespace WebApp.Identity
 {

@@ -15,7 +15,7 @@ using Microsoft.Extensions.Options;
 using NLog;
 using OpenIddict.Core;
 using OpenIddict.Models;
-using WebApp.DataAccessLayer.Models;
+using WebApp.Identity.DataAccessLayer.Models;
 
 namespace WebApp.Controllers.identity
 {

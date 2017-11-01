@@ -19,7 +19,7 @@ namespace WebApp.Localisation.DataAccessLayer
             {
                 l.ToTable("Localisations");
                 l.Property(p => p.LocalisationId).HasDefaultValueSql("NEWSEQUENTIALID()");
-                //l.HasKey(item => new { item.LocalisationId });
+                // l.HasKey(item => new { item.LocalisationId });
             });
         }
 

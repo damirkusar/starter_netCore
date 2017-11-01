@@ -24,7 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebApp.DataAccessLayer\WebApp.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\WebApp.Identity.DataAccessLayer\WebApp.Identity.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\WebApp.Identity.Interface\WebApp.Identity.Interface.csproj" />
   </ItemGroup>
 
 </Project>

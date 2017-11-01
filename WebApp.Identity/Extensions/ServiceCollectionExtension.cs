@@ -1,11 +1,12 @@
 ﻿using System;
 using AspNet.Security.OpenIdConnect.Primitives;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApp.DataAccessLayer;
-using WebApp.DataAccessLayer.Models;
+using WebApp.Identity.DataAccessLayer;
+using WebApp.Identity.DataAccessLayer.Models;
 
 namespace WebApp.Identity.Extensions
 {
@@ -19,6 +20,13 @@ namespace WebApp.Identity.Extensions
                     options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
                     options.UseOpenIddict();
                 });
+
+            services.AddAutoMapper(conf =>
+            {
+            });
+
+            services.AddScoped<IIdentityDbContext, IdentityDbContext>();
+            //services.AddScoped<IIdentityService, IdentityService>();
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(o =>
             {

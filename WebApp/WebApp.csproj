@@ -30,7 +30,7 @@
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebApp.DataAccessLayer\WebApp.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\WebApp.Identity.Interface\WebApp.Identity.Interface.csproj" />
     <ProjectReference Include="..\WebApp.Identity\WebApp.Identity.csproj" />
     <ProjectReference Include="..\WebApp.Localisation.Interface\WebApp.Localisation.Interface.csproj" />
     <ProjectReference Include="..\WebApp.Localisation\WebApp.Localisation.csproj" />

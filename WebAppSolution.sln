@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{E9CAB98D-F6C0-4F9A-8499-243C2268E8D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.DataAccessLayer", "WebApp.DataAccessLayer\WebApp.DataAccessLayer.csproj", "{8CC95427-D8E2-4970-B5C1-1BBD78FB32C2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Identity", "WebApp.Identity\WebApp.Identity.csproj", "{FAD93669-6978-4934-9BFE-4BB2E5C49E46}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WebApp.Database", "WebApp.Database\WebApp.Database.sqlproj", "{1D1EF301-4D4E-4C99-A874-A138D7D236E8}"
@@ -36,10 +34,6 @@ Global
 		{E9CAB98D-F6C0-4F9A-8499-243C2268E8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9CAB98D-F6C0-4F9A-8499-243C2268E8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9CAB98D-F6C0-4F9A-8499-243C2268E8D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CC95427-D8E2-4970-B5C1-1BBD78FB32C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CC95427-D8E2-4970-B5C1-1BBD78FB32C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CC95427-D8E2-4970-B5C1-1BBD78FB32C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CC95427-D8E2-4970-B5C1-1BBD78FB32C2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FAD93669-6978-4934-9BFE-4BB2E5C49E46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FAD93669-6978-4934-9BFE-4BB2E5C49E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAD93669-6978-4934-9BFE-4BB2E5C49E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
