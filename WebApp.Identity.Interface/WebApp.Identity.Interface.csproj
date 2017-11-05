@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.0.0" />
+    <PackageReference Include="AspNet.Security.OpenIdConnect.Primitives" Version="2.0.0-rc1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.0.0" />
   </ItemGroup>
 
 </Project>

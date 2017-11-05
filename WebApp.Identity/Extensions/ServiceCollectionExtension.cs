@@ -27,9 +27,13 @@ namespace WebApp.Identity.Extensions
                 conf.CreateMap<NewUser, ApplicationUser>().ReverseMap();
             });
 
+            // Add Interface mappings
             services.AddScoped<IIdentityDbContext, IdentityDbContext>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IChangePasswordService, ChangePasswordService>();
             services.AddScoped<IRegisterService, RegisterService>();
 
+            // Add Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>(o =>
             {
                 o.Password.RequireDigit = true;

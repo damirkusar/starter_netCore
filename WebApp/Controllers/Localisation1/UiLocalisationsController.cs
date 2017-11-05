@@ -8,7 +8,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using WebApp.Filters;
 using WebApp.Localisation.Interface;
 
-namespace WebApp.Controllers.Localisation
+namespace WebApp.Controllers.Localisation1
 {
     [AllowAnonymous]
     [Route("api/[controller]")]
