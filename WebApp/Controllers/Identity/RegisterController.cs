@@ -34,7 +34,8 @@ namespace WebApp.Controllers.Identity
 
         [HttpPost]
         [ValidateModelState]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IActionResult))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             var newUser = this.mapper.Map<RegisterRequest, NewUser>(request);

@@ -36,7 +36,8 @@ namespace WebApp.Controllers.Identity
 
         [HttpPost]
         [ValidateModelState]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IActionResult))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
         {
             var result = await this.changePasswordService.ChangePasswordAsync(this.User, request.CurrentPassword, request.NewPassword);
@@ -52,7 +53,8 @@ namespace WebApp.Controllers.Identity
         [HttpPost]
         [Route("force")]
         [ValidateModelState]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IActionResult))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> ForceChangePassword([FromBody] ForceChangePasswordRequest request)
         {
             var result = await this.changePasswordService.ForceChangePasswordAsync(request.UserName, request.NewPassword);

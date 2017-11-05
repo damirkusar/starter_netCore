@@ -39,6 +39,7 @@ namespace WebApp.Controllers.Identity
         [HttpPost]
         [Route("token")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(SignInResult))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(OpenIdConnectResponse))]
         public async Task<IActionResult> Token([FromBody] OpenIdConnectRequest request)
         {
             Debug.Assert(request.IsTokenRequest(), 
