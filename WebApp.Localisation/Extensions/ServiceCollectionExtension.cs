@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Localisation.DataAccessLayer;
 using WebApp.Localisation.Interface;
@@ -9,12 +8,12 @@ namespace WebApp.Localisation.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection ConfigureLocalisation(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureLocalisation(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<LocalisationDbContext>(
                 options =>
                 {
-                    options.UseSqlServer(configuration.GetConnectionString("LocalisationConnection"));
+                    options.UseSqlServer(connectionString);
                 });
 
             services.AddAutoMapper(conf =>

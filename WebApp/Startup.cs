@@ -1,10 +1,10 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using WebApp.Extensions;
 using WebApp.Identity.Extensions;
 using WebApp.Localisation.Extensions;
 using WebApp.Middleware;
@@ -28,12 +28,11 @@ namespace WebApp
             // Configure api gateway
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Configure business layer
-            services.ConfigureIdentity(this.Configuration);
-            services.ConfigureLocalisation(this.Configuration);
+            services.ConfigureIdentity(this.Configuration.GetConnectionString("IdentityConnection"));
+            services.ConfigureLocalisation(this.Configuration.GetConnectionString("LocalisationConnection"));
 
-            services.AddAutoMapper(config =>
-            {
-            });
+            // Configure AutoMapper for API Gateway
+            services.ConfigureAutoMapper();
 
             // Add framework services.
             services.AddMvc();

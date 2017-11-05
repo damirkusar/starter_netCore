@@ -15,11 +15,10 @@ namespace WebApp.Localisation.DataAccessLayer
             modelBuilder.HasDefaultSchema("Model");
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Models.Localisation>(l =>
+            modelBuilder.Entity<Models.Localisation>(c =>
             {
-                l.ToTable("Localisations");
-                l.Property(p => p.LocalisationId).HasDefaultValueSql("NEWSEQUENTIALID()");
-                // l.HasKey(item => new { item.LocalisationId });
+                c.ToTable("Localisations");
+                c.Property(p => p.LocalisationId).HasDefaultValueSql("NEWSEQUENTIALID()");
             });
         }
 

@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp.Identity.ViewModels.Account
+namespace WebApp.TransferObjects
 {
-    public class ChangePasswordViewModel
+    public class ForceChangePasswordRequest
     {
-        [DataType(DataType.Password)]
-        public string CurrentPassword { get; set; }
+        [Required]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

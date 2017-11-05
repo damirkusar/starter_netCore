@@ -15,6 +15,11 @@ namespace WebApp.Identity.DataAccessLayer
         {
             builder.HasDefaultSchema("Identiy");
             base.OnModelCreating(builder);
+
+            builder.Entity<ApplicationUser>(c =>
+            {
+                c.Property(p => p.LockoutEnabled).HasDefaultValue(true);
+            });
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp.Identity.ViewModels.Account
+namespace WebApp.TransferObjects
 {
-    public class RegisterViewModel
+    public class RegisterRequest
     {
         [Required]
         public string FirstName { get; set; }

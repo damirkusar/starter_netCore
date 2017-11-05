@@ -1,10 +1,14 @@
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using WebApp.Filters;
 using WebApp.Localisation.Interface;
 
-namespace WebApp.Controllers.localisation
+namespace WebApp.Controllers.Localisation
 {
     [AllowAnonymous]
     [Route("api/[controller]")]
@@ -21,7 +25,8 @@ namespace WebApp.Controllers.localisation
         }
 
         [HttpGet]
-        [Route("{languageIsoAlpha2}")]
+        [ValidateModelState]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(JObject))]
         public async Task<IActionResult> GetLocalisations(string languageIsoAlpha2)
         {
             var localisations = await this.localisationService.GetJsonLocalisationsAsync(languageIsoAlpha2);

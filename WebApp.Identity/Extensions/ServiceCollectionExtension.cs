@@ -3,30 +3,32 @@ using AspNet.Security.OpenIdConnect.Primitives;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Identity.DataAccessLayer;
 using WebApp.Identity.DataAccessLayer.Models;
+using WebApp.Identity.Interface;
+using WebApp.Identity.Interface.Models;
 
 namespace WebApp.Identity.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection ConfigureIdentity(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureIdentity(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<IdentityDbContext>(
                 options =>
                 {
-                    options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
+                    options.UseSqlServer(connectionString);
                     options.UseOpenIddict();
                 });
 
             services.AddAutoMapper(conf =>
             {
+                conf.CreateMap<NewUser, ApplicationUser>().ReverseMap();
             });
 
             services.AddScoped<IIdentityDbContext, IdentityDbContext>();
-            //services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IRegisterService, RegisterService>();
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(o =>
             {

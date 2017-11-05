@@ -15,7 +15,7 @@ using OpenIddict.Core;
 using OpenIddict.Models;
 using WebApp.Identity.DataAccessLayer.Models;
 
-namespace WebApp.Controllers.identity
+namespace WebApp.Controllers.Identity
 {
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = false)]
