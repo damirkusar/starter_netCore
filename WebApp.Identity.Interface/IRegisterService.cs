@@ -6,6 +6,6 @@ namespace WebApp.Identity.Interface
 {
     public interface IRegisterService
     {
-        Task<IdentityResult> RegisterAsync(NewUser newUser);
+        Task<IdentityResult> RegisterAsync(RegisterUser newUser);
     }
 }

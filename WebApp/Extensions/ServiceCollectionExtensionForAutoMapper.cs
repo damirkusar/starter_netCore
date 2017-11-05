@@ -11,7 +11,7 @@ namespace WebApp.Extensions
         {
             services.AddAutoMapper(conf =>
             {
-                conf.CreateMap<RegisterRequest, NewUser>().ReverseMap();
+                conf.CreateMap<RegisterUserRequest, RegisterUser>().ReverseMap();
             });
 
             return services;

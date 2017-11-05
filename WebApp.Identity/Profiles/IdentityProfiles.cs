@@ -8,7 +8,7 @@ namespace WebApp.Identity.Profiles
     {
         public IdentityProfile() : base("Identity")
         {
-            this.CreateMap<NewUser, ApplicationUser>().ReverseMap();
+            this.CreateMap<RegisterUser, ApplicationUser>().ReverseMap();
         }
     }
 }

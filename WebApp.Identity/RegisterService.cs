@@ -24,9 +24,9 @@ namespace WebApp.Identity
             this.userManager = userManager;
         }
 
-        public async Task<IdentityResult> RegisterAsync(NewUser newUser)
+        public async Task<IdentityResult> RegisterAsync(RegisterUser newUser)
         {
-            var newApplicationUser = this.mapper.Map<NewUser, ApplicationUser>(newUser);
+            var newApplicationUser = this.mapper.Map<RegisterUser, ApplicationUser>(newUser);
             var result = await this.userManager.CreateAsync(newApplicationUser, newUser.Password);
             return result;
         }
