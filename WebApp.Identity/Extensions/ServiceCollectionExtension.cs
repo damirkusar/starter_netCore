@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WebApp.Identity.DataAccessLayer;
 using WebApp.Identity.DataAccessLayer.Models;
 using WebApp.Identity.Interface;
-using WebApp.Identity.Interface.Models;
+using WebApp.Identity.Profiles;
 
 namespace WebApp.Identity.Extensions
 {
@@ -24,7 +24,7 @@ namespace WebApp.Identity.Extensions
 
             services.AddAutoMapper(conf =>
             {
-                conf.CreateMap<NewUser, ApplicationUser>().ReverseMap();
+                conf.AddProfile<IdentityProfile>();
             });
 
             // Add Interface mappings

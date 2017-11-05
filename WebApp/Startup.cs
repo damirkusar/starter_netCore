@@ -24,7 +24,7 @@ namespace WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-
+            
             // Configure api gateway
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Configure business layer

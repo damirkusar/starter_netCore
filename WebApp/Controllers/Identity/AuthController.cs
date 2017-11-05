@@ -17,15 +17,15 @@ namespace WebApp.Controllers.Identity
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/[controller]")]
-    public class AuthorizationController : Controller
+    public class AuthController : Controller
     {
-        private readonly ILogger<AuthorizationController> logger;
+        private readonly ILogger<AuthController> logger;
         private readonly IMapper mapper;
         private readonly IAuthService authService;
         private readonly IOptions<IdentityOptions> identityOptions;
 
-        public AuthorizationController(
-            ILogger<AuthorizationController> logger,
+        public AuthController(
+            ILogger<AuthController> logger,
             IMapper mapper,
             IAuthService authService,
             IOptions<IdentityOptions> identityOptions)

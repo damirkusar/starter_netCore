@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Localisation.DataAccessLayer;
 using WebApp.Localisation.Interface;
+using WebApp.Localisation.Profiles;
 
 namespace WebApp.Localisation.Extensions
 {
@@ -18,6 +19,7 @@ namespace WebApp.Localisation.Extensions
 
             services.AddAutoMapper(conf =>
             {
+                conf.AddProfile<LocalisationProfile>();
             });
 
             services.AddScoped<ILocalisationDbContext, LocalisationDbContext>();
