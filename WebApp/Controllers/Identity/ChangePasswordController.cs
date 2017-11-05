@@ -12,7 +12,7 @@ using WebApp.Identity.Interface;
 using WebApp.Identity.Interface.Constants;
 using WebApp.TransferObjects;
 
-namespace WebApp.Controllers.Identity1
+namespace WebApp.Controllers.Identity
 {
     [Authorize]
     [ApiExplorerSettings(IgnoreApi = false)]

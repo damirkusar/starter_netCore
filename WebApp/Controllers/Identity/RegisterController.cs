@@ -11,7 +11,7 @@ using WebApp.Identity.Interface;
 using WebApp.Identity.Interface.Models;
 using WebApp.TransferObjects;
 
-namespace WebApp.Controllers.Identity1
+namespace WebApp.Controllers.Identity
 {
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = false)]
