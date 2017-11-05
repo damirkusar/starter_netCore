@@ -41,8 +41,7 @@ namespace WebApp.Controllers.Identity
             var result = await this.registerService.RegisterAsync(newUser);
             if (!result.Succeeded)
             {
-                var errorMessage = result.Errors.FirstOrDefault();
-                return this.StatusCode(500, errorMessage);
+                return this.StatusCode((int) HttpStatusCode.InternalServerError, result.Errors);
             }
 
             return this.NoContent();

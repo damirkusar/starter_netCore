@@ -51,6 +51,7 @@ namespace WebApp.Controllers.Identity
             }
 
             this.logger.LogError($"Error in Token: The specified grant ({request.GrantType}) type is not supported");
+
             return this.BadRequest(new OpenIdConnectResponse
             {
                 Error = OpenIdConnectConstants.Errors.UnsupportedGrantType,

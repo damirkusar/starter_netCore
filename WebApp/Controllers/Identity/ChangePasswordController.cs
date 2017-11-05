@@ -42,8 +42,7 @@ namespace WebApp.Controllers.Identity
             var result = await this.changePasswordService.ChangePasswordAsync(this.User, request.CurrentPassword, request.NewPassword);
             if (!result.Succeeded)
             {
-                var errorMessage = result.Errors.FirstOrDefault();
-                return this.StatusCode(500, errorMessage);
+                return this.StatusCode((int) HttpStatusCode.InternalServerError, result.Errors);
             }
 
             return this.NoContent();
@@ -59,8 +58,7 @@ namespace WebApp.Controllers.Identity
             var result = await this.changePasswordService.ForceChangePasswordAsync(request.UserName, request.NewPassword);
             if (!result.Succeeded)
             {
-                var errorMessage = result.Errors.FirstOrDefault();
-                return this.StatusCode(500, errorMessage);
+                return this.StatusCode((int) HttpStatusCode.InternalServerError, result.Errors);
             }
 
             return this.NoContent();
