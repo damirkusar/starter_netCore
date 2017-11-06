@@ -1,6 +1,6 @@
 ﻿namespace WebApp.Identity.Interface.Models
 {
-    public class NewUser
+    public class RegisterUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
