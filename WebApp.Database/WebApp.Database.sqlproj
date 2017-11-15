@@ -57,52 +57,8 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="SecurityModel\" />
-    <Folder Include="SecurityModel\Tables\" />
-    <Folder Include="Model\" />
-    <Folder Include="Model\Tables\" />
-    <Folder Include="Security\" />
-    <Folder Include="StaticModel\" />
-    <Folder Include="StaticModel\Tables\" />
-    <Folder Include="Facade\" />
-    <Folder Include="Facade\Views\" />
-    <Folder Include="LoggingModel\" />
-    <Folder Include="LoggingModel\Tables\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="SecurityModel\Tables\OpenIddictTokens.sql" />
-    <Build Include="SecurityModel\Tables\UserRoles.sql" />
-    <Build Include="SecurityModel\Tables\UserLogins.sql" />
-    <Build Include="SecurityModel\Tables\UserClaims.sql" />
-    <Build Include="SecurityModel\Tables\RoleClaims.sql" />
-    <Build Include="SecurityModel\Tables\OpenIddictAuthorizations.sql" />
-    <Build Include="SecurityModel\Tables\Users.sql" />
-    <Build Include="SecurityModel\Tables\Roles.sql" />
-    <Build Include="SecurityModel\Tables\OpenIddictScopes.sql" />
-    <Build Include="SecurityModel\Tables\OpenIddictApplications.sql" />
-    <Build Include="SecurityModel\Tables\UserTokens.sql" />
-    <Build Include="Model\Tables\Localisations.sql" />
-    <Build Include="Security\SecurityModel.sql" />
-    <Build Include="Security\Model.sql" />
-    <Build Include="Security\StaticModel.sql" />
-    <Build Include="StaticModel\Tables\MimeTypes.sql" />
-    <Build Include="StaticModel\Tables\LocalisationKeys.sql" />
-    <Build Include="StaticModel\Tables\Languages.sql" />
-    <Build Include="StaticModel\Tables\Countries.sql" />
-    <Build Include="Facade\Views\Localisations.sql" />
-    <Build Include="Security\Facade.sql" />
-    <Build Include="LoggingModel\Tables\Log.sql" />
-    <Build Include="Security\LoggingModel.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare.scmp" />
-    <None Include="WebAppSolution.Test.publish.xml" />
-    <None Include="WebAppSolution.Development.publish.xml" />
-    <None Include="WebAppSolution.Staging.publish.xml" />
-    <None Include="WebAppSolution.Production.publish.xml" />
-    <None Include="WebApp.Database.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>
