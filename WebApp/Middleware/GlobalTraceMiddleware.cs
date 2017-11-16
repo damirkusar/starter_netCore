@@ -19,7 +19,8 @@ namespace WebApp.Middleware
         {
             if (context.Request.Path.StartsWithSegments("/api"))
             {
-                this.logger.LogTrace($"{context.Request.Method} {context.Request.Path}");
+                this.logger.LogInformation("");
+                this.logger.LogTrace("");
             }
             await this.next(context);
         }

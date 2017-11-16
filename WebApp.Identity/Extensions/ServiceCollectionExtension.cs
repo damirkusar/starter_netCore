@@ -1,4 +1,5 @@
 ﻿using System;
+using AspNet.Security.OAuth.Validation;
 using AspNet.Security.OpenIdConnect.Primitives;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -123,7 +124,11 @@ namespace WebApp.Identity.Extensions
                 // options.AddEphemeralSigningKey();
             });
 
-            services.AddAuthentication().AddOAuthValidation();
+            services.AddAuthentication(o =>
+            {
+                o.DefaultAuthenticateScheme = OAuthValidationDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = OAuthValidationDefaults.AuthenticationScheme;
+            }).AddOAuthValidation();
 
             // If you prefer using JWT, don't forget to disable the automatic
             // JWT -> WS-Federation claims mapping used by the JWT middleware:

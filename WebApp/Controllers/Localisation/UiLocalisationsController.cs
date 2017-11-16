@@ -15,7 +15,7 @@ namespace WebApp.Controllers.Localisation
     [ApiExplorerSettings(IgnoreApi = false)]
     public class UiLocalisationsController : Controller
     {
-        private ILogger<UiLocalisationsController> logger;
+        private readonly ILogger<UiLocalisationsController> logger;
         private readonly ILocalisationService localisationService;
 
         public UiLocalisationsController(ILogger<UiLocalisationsController> logger, ILocalisationService localisationService)

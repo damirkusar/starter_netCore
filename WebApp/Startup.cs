@@ -58,6 +58,10 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Configure business layer
+            app.ConfigureIdentity();
+            app.ConfigureLocalisation();
+
             app.UseCors(builder =>
                 builder.AllowAnyHeader()
                     .AllowAnyMethod()
@@ -75,21 +79,12 @@ namespace WebApp
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            // Configure business layer
-            app.ConfigureIdentity();
-            app.ConfigureLocalisation();
-
+            
             // Configure Middleware
             app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
             app.UseMiddleware<GlobalTraceMiddleware>();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
 
             // Configure Swagger
             app.UseSwagger();

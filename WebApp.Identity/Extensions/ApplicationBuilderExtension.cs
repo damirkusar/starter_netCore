@@ -8,24 +8,6 @@ namespace WebApp.Identity.Extensions
         {
             app.UseAuthentication();
 
-            //app.UseGoogleAuthentication(new GoogleOptions()
-            //{
-            //    ClientId = Configuration["Authentication:Google:ClientId"],
-            //    ClientSecret = Configuration["Authentication:Google:ClientSecret"]
-            //});
-
-            //app.UseFacebookAuthentication(new FacebookOptions()
-            //{
-            //    AppId = Configuration["Authentication:Facebook:AppId"],
-            //    AppSecret = Configuration["Authentication:Facebook:AppSecret"]
-            //});
-
-            //app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
-            //{
-            //    ClientId = Configuration["Authentication:Microsoft:ClientId"],
-            //    ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"]
-            //});
-
             return app;
         }
     }
