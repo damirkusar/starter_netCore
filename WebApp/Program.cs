@@ -11,6 +11,7 @@ namespace WebApp
     {
         public static void Main(string[] args)
         {
+            ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("aspnet-user-id", typeof(AspNetUserIdLayoutRenderer));
             ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("aspnet-user-name", typeof(AspNetUsernameLayoutRenderer));
 
             var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();

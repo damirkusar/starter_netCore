@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using NLog;
 using NLog.LayoutRenderers;
 using NLog.Web.LayoutRenderers;
@@ -6,8 +7,8 @@ using WebApp.Identity.Extensions;
 
 namespace WebApp.LoggingRenderer
 {
-    [LayoutRenderer("aspnet-user-name")]
-    public class AspNetUsernameLayoutRenderer : AspNetLayoutRendererBase
+    [LayoutRenderer("aspnet-user-id")]
+    public class AspNetUserIdLayoutRenderer : AspNetLayoutRendererBase
     {
         protected override void DoAppend(StringBuilder builder, LogEventInfo logEvent)
         {
@@ -17,8 +18,17 @@ namespace WebApp.LoggingRenderer
             {
                 return;
             }
-            var username = context.User.GetUsername();
-            builder.Append(username);
+
+            var userId = context.User.GetUserId();
+            if (!userId.Equals(Guid.Empty))
+            {
+                builder.Append(userId);
+            }
+            else
+            {
+                builder.Append(string.Empty);
+            }
+
         }
     }
 }

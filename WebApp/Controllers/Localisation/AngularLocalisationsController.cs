@@ -13,12 +13,12 @@ namespace WebApp.Controllers.Localisation
     [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiExplorerSettings(IgnoreApi = false)]
-    public class UiLocalisationsController : Controller
+    public class AngularLocalisationsController : Controller
     {
-        private readonly ILogger<UiLocalisationsController> logger;
+        private readonly ILogger<AngularLocalisationsController> logger;
         private readonly ILocalisationService localisationService;
 
-        public UiLocalisationsController(ILogger<UiLocalisationsController> logger, ILocalisationService localisationService)
+        public AngularLocalisationsController(ILogger<AngularLocalisationsController> logger, ILocalisationService localisationService)
         {
             this.logger = logger;
             this.localisationService = localisationService;
