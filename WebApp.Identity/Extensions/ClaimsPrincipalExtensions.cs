@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
 
 namespace WebApp.Identity.Extensions
 {
-    public static class ClaimsIdentityExtensions
+    public static class ClaimsPrincipalExtensions
     {
         public static Guid GetUserId(this ClaimsPrincipal principal)
         {

@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApp.Extensions;
 using WebApp.Identity.Extensions;
-using WebApp.Localisation.Extensions;
 using WebApp.Middleware;
 
 namespace WebApp
@@ -29,7 +28,6 @@ namespace WebApp
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Configure business layer
             services.ConfigureIdentity(this.Configuration.GetConnectionString("IdentityConnection"));
-            services.ConfigureLocalisation(this.Configuration.GetConnectionString("LocalisationConnection"));
 
             // Configure AutoMapper for API Gateway
             services.ConfigureAutoMapper();
@@ -60,7 +58,6 @@ namespace WebApp
         {
             // Configure business layer
             app.ConfigureIdentity();
-            app.ConfigureLocalisation();
 
             app.UseCors(builder =>
                 builder.AllowAnyHeader()
