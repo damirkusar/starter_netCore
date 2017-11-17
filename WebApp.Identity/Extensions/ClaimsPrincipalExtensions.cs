@@ -29,8 +29,8 @@ namespace WebApp.Identity.Extensions
             }
             if (principal.Claims.Any())
             {
-                var email = principal.Claims.First(x => x.Type.Equals("username")).Value;
-                return email;
+                var username = principal.Claims.First(x => x.Type.Equals("username")).Value;
+                return username;
             }
             return string.Empty;
         }
