@@ -38,8 +38,6 @@
   <ItemGroup>
     <ProjectReference Include="..\WebApp.Identity.Interface\WebApp.Identity.Interface.csproj" />
     <ProjectReference Include="..\WebApp.Identity\WebApp.Identity.csproj" />
-    <ProjectReference Include="..\WebApp.Localisation.Interface\WebApp.Localisation.Interface.csproj" />
-    <ProjectReference Include="..\WebApp.Localisation\WebApp.Localisation.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings.production.json">
