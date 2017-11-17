@@ -23,10 +23,11 @@ namespace WebApp.Identity.Extensions
                     options.UseOpenIddict();
                 });
 
-            services.AddAutoMapper(conf =>
-            {
-                conf.AddProfile<IdentityProfile>();
-            });
+            //services.AddAutoMapper(conf =>
+            //{
+            //    conf.AddProfile<IdentityProfile>();
+            //});
+
 
             // Add Interface mappings
             services.AddScoped<IIdentityDbContext, IdentityDbContext>();

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Identity.Interface.Models;
+using WebApp.Identity.Profiles;
 using WebApp.TransferObjects;
 
 namespace WebApp.Extensions
@@ -11,6 +12,8 @@ namespace WebApp.Extensions
         {
             services.AddAutoMapper(conf =>
             {
+                conf.AddProfile<IdentityProfile>();
+
                 conf.CreateMap<RegisterUserRequest, RegisterUser>().ReverseMap();
             });
 

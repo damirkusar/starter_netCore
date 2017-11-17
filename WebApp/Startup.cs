@@ -26,11 +26,11 @@ namespace WebApp
             
             // Configure api gateway
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            // Configure business layer
-            services.ConfigureIdentity(this.Configuration.GetConnectionString("IdentityConnection"));
-
             // Configure AutoMapper for API Gateway
             services.ConfigureAutoMapper();
+
+            // Configure business layer
+            services.ConfigureIdentity(this.Configuration.GetConnectionString("IdentityConnection"));
 
             // Add framework services.
             services.AddMvc();
