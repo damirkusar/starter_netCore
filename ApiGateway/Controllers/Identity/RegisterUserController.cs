@@ -15,16 +15,16 @@ namespace ApiGateway.Controllers.Identity
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/[controller]")]
-    public class RegisterController : Controller
+    public class RegisterUserController : Controller
     {
-        private readonly ILogger<ChangePasswordController> logger;
+        private readonly ILogger<RegisterUserController> logger;
         private readonly IMapper mapper;
-        private readonly IRegisterService registerService;
+        private readonly IRegisterUserService registerService;
 
-        public RegisterController(
-            ILogger<ChangePasswordController> logger,
+        public RegisterUserController(
+            ILogger<RegisterUserController> logger,
             IMapper mapper,
-            IRegisterService registerService)
+            IRegisterUserService registerService)
         {
             this.logger = logger;
             this.mapper = mapper;

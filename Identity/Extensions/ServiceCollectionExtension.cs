@@ -2,8 +2,9 @@
 using AspNet.Security.OAuth.Validation;
 using AspNet.Security.OpenIdConnect.Primitives;
 using Identity.Data;
-using Identity.Data.Models;
 using Identity.Interface;
+using Identity.Interface.Data;
+using Identity.Interface.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,8 @@ namespace Identity.Extensions
             services.AddScoped<IIdentityDbContext, IdentityDbContext>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IChangePasswordService, ChangePasswordService>();
-            services.AddScoped<IRegisterService, RegisterService>();
+            services.AddScoped<IRegisterUserService, RegisterUserService>();
+            services.AddScoped<IRegisterClientService, RegisterClientService>();
 
             // Add Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>(o =>

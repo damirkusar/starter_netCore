@@ -11,6 +11,11 @@ namespace Identity.Extensions
         public static Guid GetUserId(this ClaimsPrincipal principal)
         {
             var guidClaim = GetClaimValue(principal, OpenIdConnectConstants.Claims.Subject);
+            if (guidClaim.Equals(string.Empty))
+            {
+                return new Guid();
+            }
+
             var guid = new Guid(guidClaim);
             return guid;
         }

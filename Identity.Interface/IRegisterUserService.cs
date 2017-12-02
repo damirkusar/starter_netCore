@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Identity.Interface
 {
-    public interface IRegisterService
+    public interface IRegisterUserService
     {
-        Task<IdentityResult> RegisterAsync(RegisterUser newUser);
+        Task<IdentityResult> RegisterAsync(RegisterUser user);
     }
 }

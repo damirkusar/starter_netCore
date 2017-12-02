@@ -15,6 +15,7 @@ namespace ApiGateway.Extensions
                 conf.AddProfile<IdentityProfile>();
 
                 conf.CreateMap<RegisterUserRequest, RegisterUser>().ReverseMap();
+                conf.CreateMap<RegisterClientRequest, RegisterClient>().ReverseMap();
             });
 
             return services;

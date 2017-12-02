@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
-using Identity.Data.Models;
 using Identity.Interface;
+using Identity.Interface.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 

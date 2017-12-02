@@ -6,9 +6,9 @@ using AspNet.Security.OpenIdConnect.Extensions;
 using AspNet.Security.OpenIdConnect.Primitives;
 using AspNet.Security.OpenIdConnect.Server;
 using AutoMapper;
-using Identity.Data.Models;
 using Identity.Interface;
 using Identity.Interface.Constants;
+using Identity.Interface.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -95,6 +95,7 @@ namespace Identity
                 if (claim.Type == OpenIdConnectConstants.Claims.Username && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile) ||
                     claim.Type == Claims.LastName && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile) ||
                     claim.Type == Claims.LastName && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile) ||
+                    claim.Type == Claims.Email && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile) ||
                     claim.Type == OpenIdConnectConstants.Claims.Email && ticket.HasScope(OpenIdConnectConstants.Scopes.Email) ||
                     claim.Type == OpenIdConnectConstants.Claims.Role && ticket.HasScope(OpenIddictConstants.Scopes.Roles))
                 {
@@ -114,6 +115,7 @@ namespace Identity
 
             await this.CreateClaim(user, principal, Claims.LastName, user.LastName);
             await this.CreateClaim(user, principal, Claims.FirstName, user.FirstName);
+            await this.CreateClaim(user, principal, Claims.Email, user.Email);
 
             var newPrincipal = await this.signInManager.CreateUserPrincipalAsync(user);
             return newPrincipal;

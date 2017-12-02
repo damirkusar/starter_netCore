@@ -1,0 +1,48 @@
+2017-12-02 15:26:43.6436 Error Error parsing layout aspnet-user-id will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-id'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:26:43.6530 Error Error parsing layout aspnet-user-name will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-name'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:26:43.6530 Error Error parsing layout aspnet-user-id will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-id'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:26:43.6649 Error Error parsing layout aspnet-user-name will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-name'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:26:43.7366 Error Error parsing layout aspnet-user-id will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-id'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:26:43.7449 Error Error parsing layout aspnet-user-name will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-name'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:26:43.7449 Error Error parsing layout aspnet-user-id will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-id'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:26:43.7449 Error Error parsing layout aspnet-user-name will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-name'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:27:26.5585 Error Error parsing layout aspnet-user-id will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-id'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:27:26.5585 Error Error parsing layout aspnet-user-name will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-name'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:27:26.5699 Error Error parsing layout aspnet-user-id will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-id'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:27:26.5699 Error Error parsing layout aspnet-user-name will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-name'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:27:26.6345 Error Error parsing layout aspnet-user-id will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-id'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:27:26.6345 Error Error parsing layout aspnet-user-name will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-name'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:27:26.6345 Error Error parsing layout aspnet-user-id will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-id'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)
+2017-12-02 15:27:26.6345 Error Error parsing layout aspnet-user-name will be ignored. Exception: System.ArgumentException: LayoutRenderer cannot be found: 'aspnet-user-name'. Is NLog.Web not included?
+   at NLog.Config.Factory`2.CreateInstance(String name)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(ConfigurationItemFactory configurationItemFactory, String name)

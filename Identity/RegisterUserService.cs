@@ -1,21 +1,21 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using Identity.Data.Models;
 using Identity.Interface;
+using Identity.Interface.Data.Models;
 using Identity.Interface.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
 namespace Identity
 {
-    public class RegisterService: IRegisterService
+    public class RegisterUserService: IRegisterUserService
     {
-        private readonly ILogger<RegisterService> logger;
+        private readonly ILogger<RegisterUserService> logger;
         private readonly IMapper mapper;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public RegisterService(
-            ILogger<RegisterService> logger,
+        public RegisterUserService(
+            ILogger<RegisterUserService> logger,
             IMapper mapper,
             UserManager<ApplicationUser> userManager)
         {
@@ -24,10 +24,10 @@ namespace Identity
             this.userManager = userManager;
         }
 
-        public async Task<IdentityResult> RegisterAsync(RegisterUser newUser)
+        public async Task<IdentityResult> RegisterAsync(RegisterUser user)
         {
-            var newApplicationUser = this.mapper.Map<RegisterUser, ApplicationUser>(newUser);
-            var result = await this.userManager.CreateAsync(newApplicationUser, newUser.Password);
+            var newApplicationUser = this.mapper.Map<RegisterUser, ApplicationUser>(user);
+            var result = await this.userManager.CreateAsync(newApplicationUser, user.Password);
             return result;
         }
     }

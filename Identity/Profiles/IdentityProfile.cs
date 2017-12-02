@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Identity.Data.Models;
+using Identity.Interface.Data.Models;
 using Identity.Interface.Models;
 
 namespace Identity.Profiles
