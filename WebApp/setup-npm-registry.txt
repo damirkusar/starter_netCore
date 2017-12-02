@@ -1,3 +1,0 @@
-﻿npm set registry http://someOtherRegistryForNpm
-npm set registry https://registry.npmjs.org
-npm config set @SomePrefix:registry http://someOtherRegistryForNpm

@@ -8,15 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{E9CAB98D-F6C0-4F9A-8499-243C2268E8D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{E9CAB98D-F6C0-4F9A-8499-243C2268E8D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Identity", "WebApp.Identity\WebApp.Identity.csproj", "{FAD93669-6978-4934-9BFE-4BB2E5C49E46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity", "Identity\Identity.csproj", "{FAD93669-6978-4934-9BFE-4BB2E5C49E46}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WebApp.Database", "WebApp.Database\WebApp.Database.sqlproj", "{1D1EF301-4D4E-4C99-A874-A138D7D236E8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Identity.Interface", "WebApp.Identity.Interface\WebApp.Identity.Interface.csproj", "{623B62EE-243B-4084-99E1-54DE612D17CF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Identity.DataAccessLayer", "WebApp.Identity.DataAccessLayer\WebApp.Identity.DataAccessLayer.csproj", "{CD28B2DC-FDEB-4199-8697-C047202196DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Interface", "Identity.Interface\Identity.Interface.csproj", "{623B62EE-243B-4084-99E1-54DE612D17CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,18 +28,10 @@ Global
 		{FAD93669-6978-4934-9BFE-4BB2E5C49E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAD93669-6978-4934-9BFE-4BB2E5C49E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAD93669-6978-4934-9BFE-4BB2E5C49E46}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D1EF301-4D4E-4C99-A874-A138D7D236E8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{623B62EE-243B-4084-99E1-54DE612D17CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{623B62EE-243B-4084-99E1-54DE612D17CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{623B62EE-243B-4084-99E1-54DE612D17CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{623B62EE-243B-4084-99E1-54DE612D17CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD28B2DC-FDEB-4199-8697-C047202196DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD28B2DC-FDEB-4199-8697-C047202196DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD28B2DC-FDEB-4199-8697-C047202196DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD28B2DC-FDEB-4199-8697-C047202196DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

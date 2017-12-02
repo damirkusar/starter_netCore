@@ -1,0 +1,14 @@
+{
+  "name": "identity",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "repository": "https://github.com/damirkusar/angularXcore",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "preinit": "dotnet ef --startup-project ../ApiGateway migrations add InitIdentityDbContext -c IdentityDbContext",
+    "init": "dotnet ef --startup-project ../ApiGateway database update -c IdentityDbContext"
+  }
+}
