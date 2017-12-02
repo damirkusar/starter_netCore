@@ -47,7 +47,7 @@ namespace Identity
                         DisplayName = client.DisplayName
                     };
 
-                    var openIddictApplication = await manager.CreateAsync(application, "388D45FA-B36B-4988-BA59-B187D329C207", cancellationToken);
+                    var openIddictApplication = await manager.CreateAsync(application, client.ClientSecret, cancellationToken);
                 }
             }
         }
