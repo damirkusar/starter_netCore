@@ -41,13 +41,16 @@ namespace Identity
 
                 if (await manager.FindByClientIdAsync(client.ClientId, cancellationToken) == null)
                 {
-                    var application = new OpenIddictApplication
+                    var application = new OpenIddictApplicationDescriptor()
                     {
                         ClientId = client.ClientId,
-                        DisplayName = client.DisplayName
+                        ClientSecret = client.ClientSecret,
+                        DisplayName = client.DisplayName,
+                        //RedirectUris = { },
+                        //PostLogoutRedirectUris = { }
                     };
 
-                    var openIddictApplication = await manager.CreateAsync(application, client.ClientSecret, cancellationToken);
+                    var openIddictApplication = await manager.CreateAsync(application, cancellationToken);
                 }
             }
         }
