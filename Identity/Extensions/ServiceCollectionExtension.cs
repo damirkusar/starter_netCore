@@ -31,7 +31,7 @@ namespace Identity.Extensions
             // Add Interface mappings
             services.AddScoped<IIdentityDbContext, IdentityDbContext>();
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IChangePasswordService, ChangePasswordService>();
+            services.AddScoped<IChangeUserPasswordService, ChangeUserPasswordService>();
             services.AddScoped<IRegisterUserService, RegisterUserService>();
             services.AddScoped<IRegisterClientService, RegisterClientService>();
 
