@@ -16,15 +16,15 @@ namespace IdentityProvider.Controllers.Identity
     [Authorize]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/[controller]")]
-    public class ChangePasswordController : Controller
+    public class ChangeUserPasswordController : Controller
     {
-        private readonly ILogger<ChangePasswordController> logger;
+        private readonly ILogger<ChangeUserPasswordController> logger;
         private readonly IMapper mapper;
         private readonly IChangeUserPasswordService changeUserPasswordService;
 
 
-        public ChangePasswordController(
-            ILogger<ChangePasswordController> logger,
+        public ChangeUserPasswordController(
+            ILogger<ChangeUserPasswordController> logger,
             IMapper mapper,
             IChangeUserPasswordService changeUserPasswordService)
         {
