@@ -2,8 +2,7 @@
 using AspNet.Security.OAuth.Validation;
 using AspNet.Security.OpenIdConnect.Primitives;
 using Identity.Data;
-using Identity.Interface.Data;
-using Identity.Interface.Data.Models;
+using Identity.Data.Models;
 using Identity.Interface.Services;
 using Identity.Services;
 using Microsoft.AspNetCore.Identity;

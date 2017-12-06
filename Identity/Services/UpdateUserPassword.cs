@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Identity.Interface.Data.Models;
+using Identity.Data.Models;
 using Identity.Interface.Services;
 using Identity.Interface.TransferObjects;
 using Microsoft.AspNetCore.Identity;

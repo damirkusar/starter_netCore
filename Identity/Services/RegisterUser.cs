@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using Identity.Interface.Data.Models;
+using Identity.Data.Models;
 using Identity.Interface.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;

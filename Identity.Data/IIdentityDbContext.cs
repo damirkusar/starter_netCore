@@ -1,7 +1,7 @@
-﻿using Identity.Interface.Data.Models;
+﻿using Identity.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Identity.Interface.Data
+namespace Identity.Data
 {
     public interface IIdentityDbContext
     {

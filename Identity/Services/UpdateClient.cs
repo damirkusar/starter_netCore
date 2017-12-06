@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Identity.Interface.Services;
 using Identity.Interface.TransferObjects;

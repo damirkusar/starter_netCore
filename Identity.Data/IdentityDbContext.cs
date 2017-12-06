@@ -1,6 +1,5 @@
 ﻿using System;
-using Identity.Interface.Data;
-using Identity.Interface.Data.Models;
+using Identity.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
