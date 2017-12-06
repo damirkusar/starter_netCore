@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using AspNet.Security.OpenIdConnect.Extensions;
 using AspNet.Security.OpenIdConnect.Primitives;
@@ -13,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OpenIddict.Core;
+using OpenIddict.Models;
 
 namespace Identity.Services
 {
@@ -21,15 +24,55 @@ namespace Identity.Services
         private readonly ILogger<Auth> logger;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager;
 
         public Auth(
             ILogger<Auth> logger,
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager)
         {
             this.logger = logger;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.openIddictApplicationManager = openIddictApplicationManager;
+        }
+
+        public async Task<bool> IsClientValidToSignInAsync(string clientId, CancellationToken cancellationToken)
+        {
+            var application = await this.openIddictApplicationManager.FindByClientIdAsync(clientId, cancellationToken);
+            return application != null;
+        }
+
+        public async Task<AuthenticationTicket> CreateClientGrantTypeTicketAsync(OpenIdConnectRequest request, CancellationToken cancellationToken)
+        {
+            var application = await this.openIddictApplicationManager.FindByClientIdAsync(request.ClientId, cancellationToken);
+            
+            // Create a new ClaimsIdentity containing the claims that
+            // will be used to create an id_token, a token or a code.
+            var identity = new ClaimsIdentity(
+                OpenIdConnectServerDefaults.AuthenticationScheme,
+                OpenIdConnectConstants.Claims.Name,
+                OpenIdConnectConstants.Claims.Role);
+
+            // Use the client_id as the subject identifier.
+            identity.AddClaim(OpenIdConnectConstants.Claims.Subject, application.ClientId,
+                OpenIdConnectConstants.Destinations.AccessToken,
+                OpenIdConnectConstants.Destinations.IdentityToken);
+
+            identity.AddClaim(OpenIdConnectConstants.Claims.Name, application.DisplayName,
+                OpenIdConnectConstants.Destinations.AccessToken,
+                OpenIdConnectConstants.Destinations.IdentityToken);
+
+            // Create a new authentication ticket holding the user identity.
+            var ticket = new AuthenticationTicket(
+                new ClaimsPrincipal(identity),
+                new AuthenticationProperties(),
+                OpenIdConnectServerDefaults.AuthenticationScheme);
+
+            ticket.SetResources("resource_server");
+
+            return ticket;
         }
 
         public async Task<bool> IsUserValidToSignInAsync(string userName, string password)

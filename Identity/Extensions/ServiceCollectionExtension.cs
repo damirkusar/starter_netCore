@@ -68,7 +68,7 @@ namespace Identity.Extensions
                 options.AllowPasswordFlow();
                 options.AllowClientCredentialsFlow();
 
-                options.SetAccessTokenLifetime(TimeSpan.FromHours(24));
+                options.SetAccessTokenLifetime(TimeSpan.FromMinutes(7));
 
                 // During development, you can disable the HTTPS requirement.
                 options.DisableHttpsRequirement();
