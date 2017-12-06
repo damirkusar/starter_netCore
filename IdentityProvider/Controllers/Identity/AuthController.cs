@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading.Tasks;
 using AspNet.Security.OpenIdConnect.Primitives;
 using AutoMapper;
-using Identity.Interface;
 using Identity.Interface.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -22,13 +21,13 @@ namespace IdentityProvider.Controllers.Identity
     {
         private readonly ILogger<AuthController> logger;
         private readonly IMapper mapper;
-        private readonly IAuthService authService;
+        private readonly IAuth authService;
         private readonly IOptions<IdentityOptions> identityOptions;
 
         public AuthController(
             ILogger<AuthController> logger,
             IMapper mapper,
-            IAuthService authService,
+            IAuth authService,
             IOptions<IdentityOptions> identityOptions)
         {
             this.logger = logger;

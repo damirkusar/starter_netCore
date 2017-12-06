@@ -1,4 +1,5 @@
-﻿namespace Identity.Interface.Models
+﻿
+namespace Identity.Interface.TransferObjects
 {
     public class RegisterClient
     {

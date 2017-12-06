@@ -8,14 +8,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.Services
 {
-    public class ChangeUserPasswordService: IChangeUserPasswordService
+    public class ChangeUserPassword: IChangeUserPassword
     {
-        private readonly ILogger<ChangeUserPasswordService> logger;
+        private readonly ILogger<ChangeUserPassword> logger;
         private readonly IMapper mapper;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ChangeUserPasswordService(
-            ILogger<ChangeUserPasswordService> logger,
+        public ChangeUserPassword(
+            ILogger<ChangeUserPassword> logger,
             IMapper mapper,
             UserManager<ApplicationUser> userManager)
         {

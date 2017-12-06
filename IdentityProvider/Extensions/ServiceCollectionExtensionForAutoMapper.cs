@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using Identity.Interface.Models;
 using Identity.Profiles;
-using IdentityProvider.TransferObjects;
+using IdentityProvider.Profiles;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IdentityProvider.Extensions
@@ -12,10 +11,8 @@ namespace IdentityProvider.Extensions
         {
             services.AddAutoMapper(conf =>
             {
+                conf.AddProfile<IdentityProviderProfile>();
                 conf.AddProfile<IdentityProfile>();
-
-                conf.CreateMap<RegisterUserRequest, RegisterUser>().ReverseMap();
-                conf.CreateMap<RegisterClientRequest, RegisterClient>().ReverseMap();
             });
 
             return services;

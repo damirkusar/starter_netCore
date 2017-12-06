@@ -1,9 +1,8 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
-using Identity.Interface;
-using Identity.Interface.Models;
 using Identity.Interface.Services;
+using Identity.Interface.TransferObjects;
 using IdentityProvider.Filters;
 using IdentityProvider.TransferObjects;
 using Microsoft.AspNetCore.Authorization;
@@ -20,12 +19,12 @@ namespace IdentityProvider.Controllers.Identity
     {
         private readonly ILogger<UserController> logger;
         private readonly IMapper mapper;
-        private readonly IRegisterUserService registerService;
+        private readonly IRegisterUser registerService;
 
         public UserController(
             ILogger<UserController> logger,
             IMapper mapper,
-            IRegisterUserService registerService)
+            IRegisterUser registerService)
         {
             this.logger = logger;
             this.mapper = mapper;

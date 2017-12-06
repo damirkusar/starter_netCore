@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Identity.Interface.Services
 {
-    public interface IChangeUserPasswordService
+    public interface IChangeUserPassword
     {
         Task<IdentityResult> ChangePasswordAsync(ClaimsPrincipal user, string currentPassword, string newPassword);
         Task<IdentityResult> ForceChangePasswordAsync(string userName, string newPassword);

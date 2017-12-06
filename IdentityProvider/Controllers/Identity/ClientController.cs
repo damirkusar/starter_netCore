@@ -1,9 +1,8 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
-using Identity.Interface;
-using Identity.Interface.Models;
 using Identity.Interface.Services;
+using Identity.Interface.TransferObjects;
 using IdentityProvider.Filters;
 using IdentityProvider.TransferObjects;
 using Microsoft.AspNetCore.Authorization;
@@ -20,16 +19,19 @@ namespace IdentityProvider.Controllers.Identity
     {
         private readonly ILogger<ClientController> logger;
         private readonly IMapper mapper;
-        private readonly IRegisterClientService registerService;
+        private readonly IRegisterClient registerClient;
+        private readonly IDeleteClient deleteClient;
 
         public ClientController(
             ILogger<ClientController> logger,
             IMapper mapper,
-            IRegisterClientService registerService)
+            IRegisterClient registerClient,
+            IDeleteClient deleteClient)
         {
             this.logger = logger;
             this.mapper = mapper;
-            this.registerService = registerService;
+            this.registerClient = registerClient;
+            this.deleteClient = deleteClient;
         }
 
         [HttpPost]
@@ -39,8 +41,17 @@ namespace IdentityProvider.Controllers.Identity
         public async Task<IActionResult> Register([FromBody] RegisterClientRequest request)
         {
             var client = this.mapper.Map<RegisterClientRequest, RegisterClient>(request);
-            await this.registerService.RegisterAsync(client);
+            await this.registerClient.RegisterAsync(client);
+            return this.NoContent();
+        }
 
+        [HttpDelete("{clientId}")]
+        [ValidateModelState]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
+        public async Task<IActionResult> Delete(string clientId)
+        {
+            await this.deleteClient.DeleteAsync(clientId);
             return this.NoContent();
         }
     }

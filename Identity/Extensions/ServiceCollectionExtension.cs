@@ -2,7 +2,6 @@
 using AspNet.Security.OAuth.Validation;
 using AspNet.Security.OpenIdConnect.Primitives;
 using Identity.Data;
-using Identity.Interface;
 using Identity.Interface.Data;
 using Identity.Interface.Data.Models;
 using Identity.Interface.Services;
@@ -24,18 +23,13 @@ namespace Identity.Extensions
                     options.UseOpenIddict();
                 });
 
-            //services.AddAutoMapper(conf =>
-            //{
-            //    conf.AddProfile<IdentityProfile>();
-            //});
-
-
             // Add Interface mappings
             services.AddScoped<IIdentityDbContext, IdentityDbContext>();
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IChangeUserPasswordService, ChangeUserPasswordService>();
-            services.AddScoped<IRegisterUserService, RegisterUserService>();
-            services.AddScoped<IRegisterClientService, RegisterClientService>();
+            services.AddScoped<IAuth, Auth>();
+            services.AddScoped<IChangeUserPassword, ChangeUserPassword>();
+            services.AddScoped<IRegisterUser, RegisterUser>();
+            services.AddScoped<IRegisterClient, RegisterClient>();
+            services.AddScoped<IDeleteClient, DeleteClient>();
 
             // Add Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>(o =>

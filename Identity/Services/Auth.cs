@@ -17,15 +17,15 @@ using OpenIddict.Core;
 
 namespace Identity.Services
 {
-    public class AuthService : IAuthService
+    public class Auth : IAuth
     {
-        private readonly ILogger<AuthService> logger;
+        private readonly ILogger<Auth> logger;
         private readonly IMapper mapper;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
 
-        public AuthService(
-            ILogger<AuthService> logger,
+        public Auth(
+            ILogger<Auth> logger,
             IMapper mapper,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)

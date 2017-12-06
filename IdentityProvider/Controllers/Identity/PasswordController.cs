@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
-using Identity.Interface;
 using Identity.Interface.Constants;
 using Identity.Interface.Services;
 using IdentityProvider.Attributes;
@@ -21,13 +20,13 @@ namespace IdentityProvider.Controllers.Identity
     {
         private readonly ILogger<PasswordController> logger;
         private readonly IMapper mapper;
-        private readonly IChangeUserPasswordService changeUserPasswordService;
+        private readonly IChangeUserPassword changeUserPasswordService;
 
 
         public PasswordController(
             ILogger<PasswordController> logger,
             IMapper mapper,
-            IChangeUserPasswordService changeUserPasswordService)
+            IChangeUserPassword changeUserPasswordService)
         {
             this.logger = logger;
             this.mapper = mapper;
