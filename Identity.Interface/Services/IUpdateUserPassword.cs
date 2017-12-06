@@ -6,6 +6,6 @@ namespace Identity.Interface.Services
 {
     public interface IUpdateUserPassword
     {
-        Task<IdentityResult> UpdateAsync(ChangeUserPassword userPassword);
+        Task<IdentityResult> UpdateAsync(string userId, UserPassword userPassword);
     }
 }

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Identity.Interface.Data.Models;
 using Identity.Interface.Services;
+using Identity.Interface.TransferObjects;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
@@ -19,9 +20,9 @@ namespace Identity.Services
             this.userManager = userManager;
         }
 
-        public async Task<IdentityResult> UpdateAsync(Interface.TransferObjects.ChangeUserPassword userPassword)
+        public async Task<IdentityResult> UpdateAsync(string userId, UserPassword userPassword)
         {
-            var applicationUser = await this.userManager.FindByIdAsync(userPassword.UserId);
+            var applicationUser = await this.userManager.FindByIdAsync(userId);
             var result = await this.userManager.ChangePasswordAsync(applicationUser, userPassword.Password, userPassword.NewPassword);
             return result;
         }

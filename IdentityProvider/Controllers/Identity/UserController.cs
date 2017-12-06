@@ -45,7 +45,7 @@ namespace IdentityProvider.Controllers.Identity
             var result = await this.registerService.RegisterAsync(newUser);
             if (!result.Succeeded)
             {
-                return this.StatusCode((int) HttpStatusCode.InternalServerError, result.Errors);
+                return this.StatusCode((int)HttpStatusCode.InternalServerError, result.Errors);
             }
 
             return this.NoContent();
@@ -55,10 +55,10 @@ namespace IdentityProvider.Controllers.Identity
         [ValidateModelState]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
-        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+        public async Task<IActionResult> ChangePassword([FromBody] PasswordRequest request)
         {
-            var result = await this.updateUserPassword.UpdateAsync(
-                new ChangeUserPassword { UserId = this.User.GetUserId().ToString(), Password = request.CurrentPassword, NewPassword = request.NewPassword });
+            var result = await this.updateUserPassword.UpdateAsync(this.User.GetUserId().ToString(),
+                new UserPassword { Password = request.CurrentPassword, NewPassword = request.NewPassword });
             if (!result.Succeeded)
             {
                 return this.StatusCode((int)HttpStatusCode.InternalServerError, result.Errors);
