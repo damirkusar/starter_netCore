@@ -26,10 +26,11 @@ namespace Identity.Extensions
             // Add Interface mappings
             services.AddScoped<IIdentityDbContext, IdentityDbContext>();
             services.AddScoped<IAuth, Auth>();
-            services.AddScoped<IChangeUserPassword, ChangeUserPassword>();
             services.AddScoped<IRegisterUser, RegisterUser>();
+            services.AddScoped<IUpdateUserPassword, UpdateUserPassword>();
             services.AddScoped<IRegisterClient, RegisterClient>();
             services.AddScoped<IDeleteClient, DeleteClient>();
+            services.AddScoped<IUpdateClient, UpdateClient>();
 
             // Add Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>(o =>

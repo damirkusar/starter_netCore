@@ -20,18 +20,15 @@ namespace Identity.Services
     public class Auth : IAuth
     {
         private readonly ILogger<Auth> logger;
-        private readonly IMapper mapper;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
 
         public Auth(
             ILogger<Auth> logger,
-            IMapper mapper,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             this.logger = logger;
-            this.mapper = mapper;
             this.userManager = userManager;
             this.signInManager = signInManager;
         }

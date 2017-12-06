@@ -1,7 +1,7 @@
 ﻿
 namespace Identity.Interface.TransferObjects
 {
-    public class RegisterClient
+    public class Client
     {
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }

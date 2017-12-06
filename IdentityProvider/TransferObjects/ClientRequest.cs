@@ -2,7 +2,7 @@
 
 namespace IdentityProvider.TransferObjects
 {
-    public class RegisterClientRequest
+    public class ClientRequest
     {
         [Required]
         public string ClientId { get; set; }

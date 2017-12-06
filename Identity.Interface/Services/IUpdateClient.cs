@@ -3,8 +3,8 @@ using Identity.Interface.TransferObjects;
 
 namespace Identity.Interface.Services
 {
-    public interface IRegisterClient
+    public interface IUpdateClient
     {
-        Task RegisterAsync(Client client);
+        Task UpdateAsync(Client client);
     }
 }
