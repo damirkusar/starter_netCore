@@ -2,7 +2,7 @@
 using Identity.Interface.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Identity.Interface
+namespace Identity.Interface.Services
 {
     public interface IRegisterUserService
     {

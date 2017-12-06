@@ -5,6 +5,8 @@ using Identity.Data;
 using Identity.Interface;
 using Identity.Interface.Data;
 using Identity.Interface.Data.Models;
+using Identity.Interface.Services;
+using Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

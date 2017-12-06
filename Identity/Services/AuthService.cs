@@ -6,16 +6,16 @@ using AspNet.Security.OpenIdConnect.Extensions;
 using AspNet.Security.OpenIdConnect.Primitives;
 using AspNet.Security.OpenIdConnect.Server;
 using AutoMapper;
-using Identity.Interface;
 using Identity.Interface.Constants;
 using Identity.Interface.Data.Models;
+using Identity.Interface.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OpenIddict.Core;
 
-namespace Identity
+namespace Identity.Services
 {
     public class AuthService : IAuthService
     {
@@ -96,7 +96,6 @@ namespace Identity
                     claim.Type == Claims.LastName && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile) ||
                     claim.Type == Claims.LastName && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile) ||
                     claim.Type == Claims.Email && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile) ||
-                    claim.Type == OpenIdConnectConstants.Claims.Email && ticket.HasScope(OpenIdConnectConstants.Scopes.Email) ||
                     claim.Type == OpenIdConnectConstants.Claims.Role && ticket.HasScope(OpenIddictConstants.Scopes.Roles))
                 {
                     destinations.Add(OpenIdConnectConstants.Destinations.IdentityToken);

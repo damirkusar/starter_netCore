@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Identity.Interface;
 using Identity.Interface.Models;
+using Identity.Interface.Services;
 using IdentityProvider.Filters;
 using IdentityProvider.TransferObjects;
 using Microsoft.AspNetCore.Authorization;
@@ -15,14 +16,14 @@ namespace IdentityProvider.Controllers.Identity
     [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/[controller]")]
-    public class RegisterClientController : Controller
+    public class ClientController : Controller
     {
-        private readonly ILogger<RegisterClientController> logger;
+        private readonly ILogger<ClientController> logger;
         private readonly IMapper mapper;
         private readonly IRegisterClientService registerService;
 
-        public RegisterClientController(
-            ILogger<RegisterClientController> logger,
+        public ClientController(
+            ILogger<ClientController> logger,
             IMapper mapper,
             IRegisterClientService registerService)
         {

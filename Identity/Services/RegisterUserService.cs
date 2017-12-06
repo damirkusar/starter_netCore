@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using Identity.Interface;
 using Identity.Interface.Data.Models;
 using Identity.Interface.Models;
+using Identity.Interface.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Identity
+namespace Identity.Services
 {
     public class RegisterUserService: IRegisterUserService
     {

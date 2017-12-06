@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AspNet.Security.OpenIdConnect.Primitives;
 using AutoMapper;
 using Identity.Interface;
+using Identity.Interface.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

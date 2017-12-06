@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace Identity.Interface
+namespace Identity.Interface.Services
 {
     public interface IAuthService
     {

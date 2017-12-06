@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace Identity.Interface
+namespace Identity.Interface.Services
 {
     public interface IChangeUserPasswordService
     {

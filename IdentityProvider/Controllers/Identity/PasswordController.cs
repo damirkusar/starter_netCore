@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Identity.Interface;
 using Identity.Interface.Constants;
+using Identity.Interface.Services;
 using IdentityProvider.Attributes;
 using IdentityProvider.Filters;
 using IdentityProvider.TransferObjects;
@@ -16,15 +17,15 @@ namespace IdentityProvider.Controllers.Identity
     [Authorize]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/[controller]")]
-    public class ChangeUserPasswordController : Controller
+    public class PasswordController : Controller
     {
-        private readonly ILogger<ChangeUserPasswordController> logger;
+        private readonly ILogger<PasswordController> logger;
         private readonly IMapper mapper;
         private readonly IChangeUserPasswordService changeUserPasswordService;
 
 
-        public ChangeUserPasswordController(
-            ILogger<ChangeUserPasswordController> logger,
+        public PasswordController(
+            ILogger<PasswordController> logger,
             IMapper mapper,
             IChangeUserPasswordService changeUserPasswordService)
         {

@@ -3,14 +3,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Identity.Data;
-using Identity.Interface;
 using Identity.Interface.Models;
+using Identity.Interface.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OpenIddict.Core;
 using OpenIddict.Models;
 
-namespace Identity
+namespace Identity.Services
 {
     public class RegisterClientService : IRegisterClientService
     {
