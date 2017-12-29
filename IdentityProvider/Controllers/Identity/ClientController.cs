@@ -19,6 +19,7 @@ namespace IdentityProvider.Controllers.Identity
     {
         private readonly ILogger<ClientController> logger;
         private readonly IMapper mapper;
+        private readonly ILoadClient loadClient;
         private readonly IRegisterClient registerClient;
         private readonly IDeleteClient deleteClient;
         private readonly IUpdateClient updateClient;
@@ -26,15 +27,32 @@ namespace IdentityProvider.Controllers.Identity
         public ClientController(
             ILogger<ClientController> logger,
             IMapper mapper,
+            ILoadClient loadClient,
             IRegisterClient registerClient,
             IDeleteClient deleteClient,
             IUpdateClient updateClient)
         {
             this.logger = logger;
             this.mapper = mapper;
+            this.loadClient = loadClient;
             this.registerClient = registerClient;
             this.deleteClient = deleteClient;
             this.updateClient = updateClient;
+        }
+
+        [HttpGet("{clientId}")]
+        [ValidateModelState]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Client))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
+        public async Task<IActionResult> GetClient(string clientId)
+        {
+            var client = await this.loadClient.LoadAsync(clientId);
+            if (client == null)
+            {
+                return this.BadRequest();
+            }
+
+            return this.Ok(client);
         }
 
         [HttpPost]
@@ -52,7 +70,7 @@ namespace IdentityProvider.Controllers.Identity
         [ValidateModelState]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
-        public async Task<IActionResult> Update(string clientId, ClientRequest request)
+        public async Task<IActionResult> Update(string clientId, [FromBody] ClientRequest request)
         {
             var client = this.mapper.Map<ClientRequest, Client>(request);
             await this.updateClient.UpdateAsync(client);

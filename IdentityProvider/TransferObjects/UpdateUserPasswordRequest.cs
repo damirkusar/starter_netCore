@@ -2,7 +2,7 @@
 
 namespace IdentityProvider.TransferObjects
 {
-    public class PasswordRequest
+    public class UpdateUserPasswordRequest
     {
         [DataType(DataType.Password)]
         public string CurrentPassword { get; set; }

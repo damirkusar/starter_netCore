@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Identity.Extensions;
@@ -20,19 +22,78 @@ namespace IdentityProvider.Controllers.Identity
     {
         private readonly ILogger<UserController> logger;
         private readonly IMapper mapper;
+        private readonly ILoadUser loadUser;
+        private readonly IUpdateUser updateUser;
+        private readonly IDeleteUser deleteUser;
         private readonly IRegisterUser registerService;
         private readonly IUpdateUserPassword updateUserPassword;
 
         public UserController(
             ILogger<UserController> logger,
             IMapper mapper,
+            ILoadUser loadUser,
+            IUpdateUser updateUser,
+            IDeleteUser deleteUser,
             IRegisterUser registerService,
             IUpdateUserPassword updateUserPassword)
         {
             this.logger = logger;
             this.mapper = mapper;
+            this.loadUser = loadUser;
+            this.updateUser = updateUser;
+            this.deleteUser = deleteUser;
             this.registerService = registerService;
             this.updateUserPassword = updateUserPassword;
+        }
+
+        [HttpGet]
+        [ValidateModelState]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<User>))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await this.loadUser.LoadAsync();
+
+            return this.Ok(users);
+        }
+
+        [HttpGet("{userId}")]
+        [ValidateModelState]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(User))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
+        public async Task<IActionResult> GetUser(Guid userId)
+        {
+            var user = await this.loadUser.LoadAsync(userId);
+
+            return this.Ok(user);
+        }
+
+        [HttpPut("{userId}")]
+        [ValidateModelState]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(User))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
+        public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] UpdateUserRequest request)
+        {
+            var updatedUser = this.mapper.Map<UpdateUserRequest, UpdatedUser>(request);
+            updatedUser.UserId = userId;
+            var result = await this.updateUser.UpdateAsync(updatedUser);
+            if (!result.Succeeded)
+            {
+                return this.StatusCode((int)HttpStatusCode.InternalServerError, result.Errors);
+            }
+
+            return this.Ok(request);
+        }
+
+        [HttpDelete("{userId}")]
+        [ValidateModelState]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
+        public async Task<IActionResult> DeleteUser(Guid userId)
+        {
+            await this.deleteUser.DeleteAsync(userId);
+
+            return this.NoContent();
         }
 
         [HttpPost]
@@ -55,7 +116,7 @@ namespace IdentityProvider.Controllers.Identity
         [ValidateModelState]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
-        public async Task<IActionResult> ChangePassword([FromBody] PasswordRequest request)
+        public async Task<IActionResult> ChangePassword([FromBody] UpdateUserPasswordRequest request)
         {
             var result = await this.updateUserPassword.UpdateAsync(this.User.GetUserId().ToString(),
                 new UserPassword { Password = request.CurrentPassword, NewPassword = request.NewPassword });

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Identity.Interface.Services;
@@ -13,18 +12,15 @@ namespace Identity.Services
     {
         private readonly ILogger<DeleteClient> logger;
         private readonly IMapper mapper;
-        private readonly IServiceProvider services;
         private readonly OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager;
 
         public DeleteClient(
             ILogger<DeleteClient> logger,
             IMapper mapper,
-            IServiceProvider services,
             OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager)
         {
             this.logger = logger;
             this.mapper = mapper;
-            this.services = services;
             this.openIddictApplicationManager = openIddictApplicationManager;
         }
 

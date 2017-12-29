@@ -9,6 +9,7 @@ namespace IdentityProvider.Profiles
         public IdentityProviderProfile() : base("IdentityProvider")
         {
             this.CreateMap<RegisterUserRequest, RegisterUser>().ReverseMap();
+            this.CreateMap<UpdateUserRequest, UpdatedUser>().ReverseMap();
             this.CreateMap<ClientRequest, Client>().ReverseMap();
         }
     }
