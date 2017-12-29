@@ -12,7 +12,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace IdentityProvider.Controllers.Identity
 {
-    [AllowAnonymous]
+    [Authorize]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/[controller]")]
     public class ClientController : Controller

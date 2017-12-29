@@ -15,7 +15,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace IdentityProvider.Controllers.Identity
 {
-    [AllowAnonymous]
+    [Authorize]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/[controller]")]
     public class UserController : Controller
@@ -96,6 +96,7 @@ namespace IdentityProvider.Controllers.Identity
             return this.NoContent();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateModelState]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
@@ -112,6 +113,7 @@ namespace IdentityProvider.Controllers.Identity
             return this.NoContent();
         }
 
+        [AllowAnonymous]
         [HttpPut("password")]
         [ValidateModelState]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(NoContentResult))]
