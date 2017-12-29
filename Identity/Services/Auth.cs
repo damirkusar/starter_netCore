@@ -47,7 +47,7 @@ namespace Identity.Services
         public async Task<AuthenticationTicket> CreateClientGrantTypeTicketAsync(OpenIdConnectRequest request, CancellationToken cancellationToken)
         {
             var application = await this.openIddictApplicationManager.FindByClientIdAsync(request.ClientId, cancellationToken);
-            
+
             // Create a new ClaimsIdentity containing the claims that
             // will be used to create an id_token, a token or a code.
             var identity = new ClaimsIdentity(
@@ -70,7 +70,7 @@ namespace Identity.Services
                 new AuthenticationProperties(),
                 OpenIdConnectServerDefaults.AuthenticationScheme);
 
-            ticket.SetResources("resource_server");
+            ticket.SetResources("resource-server-1", "http://localhost:4302/");
 
             return ticket;
         }
@@ -111,7 +111,7 @@ namespace Identity.Services
                 OpenIddictConstants.Scopes.Roles
             }.Intersect(request.GetScopes()));
 
-            ticket.SetResources("resource-server");
+            ticket.SetResources("resource-server-1", "http://localhost:4302/");
 
             // Note: by default, claims are NOT automatically included in the access and identity tokens.
             // To allow OpenIddict to serialize them, you must attach them a destination, that specifies

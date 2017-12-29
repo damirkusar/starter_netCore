@@ -1,0 +1,14 @@
+{
+  "name": "identity",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "repository": "https://github.com/damirkusar/angularXcore",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "preinit": "dotnet ef --startup-project ../ResourceTemplateProvider migrations add InitResourceDbContext -c ResourceTemplateDbContext",
+    "init": "dotnet ef --startup-project ../ResourceTemplateProvider database update -c ResourceTemplateDbContext"
+  }
+}

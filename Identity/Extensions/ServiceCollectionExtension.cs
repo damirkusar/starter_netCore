@@ -71,6 +71,7 @@ namespace Identity.Extensions
 
                 options.AllowPasswordFlow();
                 options.AllowClientCredentialsFlow();
+                options.EnableIntrospectionEndpoint("/connect/introspect");
 
                 options.SetAccessTokenLifetime(TimeSpan.FromMinutes(7));
 
