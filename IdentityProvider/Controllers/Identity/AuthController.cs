@@ -70,14 +70,14 @@ namespace IdentityProvider.Controllers.Identity
 
         private async Task<IActionResult> HandlePasswordGrantType(OpenIdConnectRequest request)
         {
-            if (request.ClientId == null)
-            {
-                return this.BadRequest(new OpenIdConnectResponse
-                {
-                    Error = OpenIdConnectConstants.Errors.UnauthorizedClient,
-                    ErrorDescription = "The clientId/clientSecret couple is invalid."
-                });
-            }
+            //if (request.ClientId == null)
+            //{
+            //    return this.BadRequest(new OpenIdConnectResponse
+            //    {
+            //        Error = OpenIdConnectConstants.Errors.UnauthorizedClient,
+            //        ErrorDescription = "The clientId/clientSecret couple is invalid."
+            //    });
+            //}
 
             var valid = await this.authService.IsUserValidToSignInAsync(request.Username, request.Password);
             if (!valid)
