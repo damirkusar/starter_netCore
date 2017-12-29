@@ -43,12 +43,12 @@ namespace ResourceProvider
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info {Title = "angularXcore API", Version = "v1"});
+                c.SwaggerDoc("v1", new Info {Title = "angularXcore Resource API", Version = "v1"});
                 c.AddSecurityDefinition("OpenIdDict", new OAuth2Scheme
                 {
                     Type = "oauth2",
                     Flow = "password",
-                    TokenUrl = "/api/auth/token"
+                    TokenUrl = "http://localhost:4301/api/auth/token"
                 });
             });
         }
