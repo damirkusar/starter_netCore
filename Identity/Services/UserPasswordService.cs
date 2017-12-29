@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.Services
 {
-    public class UpdateUserPassword: IUpdateUserPassword
+    public class UserPasswordService: IUserPasswordService
     {
-        private readonly ILogger<UpdateUserPassword> logger;
+        private readonly ILogger<UserPasswordService> logger;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public UpdateUserPassword(
-            ILogger<UpdateUserPassword> logger,
+        public UserPasswordService(
+            ILogger<UserPasswordService> logger,
             UserManager<ApplicationUser> userManager)
         {
             this.logger = logger;

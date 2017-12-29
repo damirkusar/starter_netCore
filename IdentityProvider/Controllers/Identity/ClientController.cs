@@ -19,25 +19,16 @@ namespace IdentityProvider.Controllers.Identity
     {
         private readonly ILogger<ClientController> logger;
         private readonly IMapper mapper;
-        private readonly ILoadClient loadClient;
-        private readonly IRegisterClient registerClient;
-        private readonly IDeleteClient deleteClient;
-        private readonly IUpdateClient updateClient;
+        private readonly IClientService clientService;
 
         public ClientController(
             ILogger<ClientController> logger,
             IMapper mapper,
-            ILoadClient loadClient,
-            IRegisterClient registerClient,
-            IDeleteClient deleteClient,
-            IUpdateClient updateClient)
+            IClientService clientService)
         {
             this.logger = logger;
             this.mapper = mapper;
-            this.loadClient = loadClient;
-            this.registerClient = registerClient;
-            this.deleteClient = deleteClient;
-            this.updateClient = updateClient;
+            this.clientService = clientService;
         }
 
         [HttpGet("{clientId}")]
@@ -46,7 +37,7 @@ namespace IdentityProvider.Controllers.Identity
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> GetClient(string clientId)
         {
-            var client = await this.loadClient.LoadAsync(clientId);
+            var client = await this.clientService.LoadAsync(clientId);
             if (client == null)
             {
                 return this.BadRequest();
@@ -62,7 +53,7 @@ namespace IdentityProvider.Controllers.Identity
         public async Task<IActionResult> Register([FromBody] ClientRequest request)
         {
             var client = this.mapper.Map<ClientRequest, Client>(request);
-            await this.registerClient.RegisterAsync(client);
+            await this.clientService.RegisterAsync(client);
             return this.NoContent();
         }
 
@@ -73,7 +64,7 @@ namespace IdentityProvider.Controllers.Identity
         public async Task<IActionResult> Update(string clientId, [FromBody] ClientRequest request)
         {
             var client = this.mapper.Map<ClientRequest, Client>(request);
-            await this.updateClient.UpdateAsync(client);
+            await this.clientService.UpdateAsync(client);
             return this.NoContent();
         }
 
@@ -83,7 +74,7 @@ namespace IdentityProvider.Controllers.Identity
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> Delete(string clientId)
         {
-            await this.deleteClient.DeleteAsync(clientId);
+            await this.clientService.DeleteAsync(clientId);
             return this.NoContent();
         }
     }

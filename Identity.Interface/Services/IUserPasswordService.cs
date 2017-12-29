@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Identity.Interface.Services
 {
-    public interface IRegisterUser
+    public interface IUserPasswordService
     {
-        Task<IdentityResult> RegisterAsync(RegisterUser user);
+        Task<IdentityResult> UpdateAsync(string userId, UserPassword userPassword);
     }
 }

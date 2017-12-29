@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Identity.Interface.Services
 {
-    public interface IAuth
+    public interface IAuthService
     {
         Task<bool> IsUserValidToSignInAsync(string userName, string password);
         Task<AuthenticationTicket> CreatePasswordGrantTypeTicketAsync(OpenIdConnectRequest request, IOptions<IdentityOptions> identityOptions);

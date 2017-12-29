@@ -19,15 +19,15 @@ using OpenIddict.Models;
 
 namespace Identity.Services
 {
-    public class Auth : IAuth
+    public class AuthService : IAuthService
     {
-        private readonly ILogger<Auth> logger;
+        private readonly ILogger<AuthService> logger;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager;
 
-        public Auth(
-            ILogger<Auth> logger,
+        public AuthService(
+            ILogger<AuthService> logger,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager)

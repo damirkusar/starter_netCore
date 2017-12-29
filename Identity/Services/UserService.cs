@@ -11,14 +11,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.Services
 {
-    public class LoadUser : ILoadUser
+    public class UserService : IUserService
     {
-        private readonly ILogger<LoadUser> logger;
+        private readonly ILogger<UserService> logger;
         private readonly IMapper mapper;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public LoadUser(
-            ILogger<LoadUser> logger,
+        public UserService(
+            ILogger<UserService> logger,
             IMapper mapper,
             UserManager<ApplicationUser> userManager
             )
@@ -40,6 +40,30 @@ namespace Identity.Services
             var applicationUser = await this.userManager.FindByIdAsync(userId.ToString());
             var user = this.mapper.Map<ApplicationUser, User>(applicationUser);
             return user;
+        }
+
+        public async Task<IdentityResult> RegisterAsync(Interface.TransferObjects.RegisterUser user)
+        {
+            var newApplicationUser = this.mapper.Map<Interface.TransferObjects.RegisterUser, ApplicationUser>(user);
+            var result = await this.userManager.CreateAsync(newApplicationUser, user.Password);
+            return result;
+        }
+
+        public async Task<IdentityResult> UpdateAsync(UpdatedUser user)
+        {
+            var applicationUser = await this.userManager.FindByIdAsync(user.UserId.ToString());
+            applicationUser.FirstName = user.FirstName;
+            applicationUser.LastName = user.LastName;
+            applicationUser.Email = user.Email;
+
+            var result = await this.userManager.UpdateAsync(applicationUser);
+            return result;
+        }
+
+        public async Task DeleteAsync(Guid userId)
+        {
+            var applicationUser = await this.userManager.FindByIdAsync(userId.ToString());
+            await this.userManager.DeleteAsync(applicationUser);
         }
     }
 }

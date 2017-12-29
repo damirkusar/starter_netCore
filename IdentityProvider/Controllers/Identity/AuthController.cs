@@ -23,14 +23,14 @@ namespace IdentityProvider.Controllers.Identity
     {
         private readonly ILogger<AuthController> logger;
         private readonly IMapper mapper;
-        private readonly IAuth authService;
+        private readonly IAuthService authService;
         private readonly IOptions<IdentityOptions> identityOptions;
 
         public AuthController(
             ILogger<AuthController> logger,
             IOptions<IdentityOptions> identityOptions,
             IMapper mapper,
-            IAuth authService)
+            IAuthService authService)
         {
             this.logger = logger;
             this.mapper = mapper;

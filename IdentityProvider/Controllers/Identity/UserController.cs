@@ -22,27 +22,18 @@ namespace IdentityProvider.Controllers.Identity
     {
         private readonly ILogger<UserController> logger;
         private readonly IMapper mapper;
-        private readonly ILoadUser loadUser;
-        private readonly IUpdateUser updateUser;
-        private readonly IDeleteUser deleteUser;
-        private readonly IRegisterUser registerService;
-        private readonly IUpdateUserPassword updateUserPassword;
+        private readonly IUserService userService;
+        private readonly IUserPasswordService updateUserPassword;
 
         public UserController(
             ILogger<UserController> logger,
             IMapper mapper,
-            ILoadUser loadUser,
-            IUpdateUser updateUser,
-            IDeleteUser deleteUser,
-            IRegisterUser registerService,
-            IUpdateUserPassword updateUserPassword)
+            IUserService userService,
+            IUserPasswordService updateUserPassword)
         {
             this.logger = logger;
             this.mapper = mapper;
-            this.loadUser = loadUser;
-            this.updateUser = updateUser;
-            this.deleteUser = deleteUser;
-            this.registerService = registerService;
+            this.userService = userService;
             this.updateUserPassword = updateUserPassword;
         }
 
@@ -52,7 +43,7 @@ namespace IdentityProvider.Controllers.Identity
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await this.loadUser.LoadAsync();
+            var users = await this.userService.LoadAsync();
 
             return this.Ok(users);
         }
@@ -63,7 +54,7 @@ namespace IdentityProvider.Controllers.Identity
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> GetUser(Guid userId)
         {
-            var user = await this.loadUser.LoadAsync(userId);
+            var user = await this.userService.LoadAsync(userId);
 
             return this.Ok(user);
         }
@@ -76,7 +67,7 @@ namespace IdentityProvider.Controllers.Identity
         {
             var updatedUser = this.mapper.Map<UpdateUserRequest, UpdatedUser>(request);
             updatedUser.UserId = userId;
-            var result = await this.updateUser.UpdateAsync(updatedUser);
+            var result = await this.userService.UpdateAsync(updatedUser);
             if (!result.Succeeded)
             {
                 return this.StatusCode((int)HttpStatusCode.InternalServerError, result.Errors);
@@ -91,7 +82,7 @@ namespace IdentityProvider.Controllers.Identity
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> DeleteUser(Guid userId)
         {
-            await this.deleteUser.DeleteAsync(userId);
+            await this.userService.DeleteAsync(userId);
 
             return this.NoContent();
         }
@@ -104,7 +95,7 @@ namespace IdentityProvider.Controllers.Identity
         public async Task<IActionResult> Register([FromBody] RegisterUserRequest request)
         {
             var newUser = this.mapper.Map<RegisterUserRequest, RegisterUser>(request);
-            var result = await this.registerService.RegisterAsync(newUser);
+            var result = await this.userService.RegisterAsync(newUser);
             if (!result.Succeeded)
             {
                 return this.StatusCode((int)HttpStatusCode.InternalServerError, result.Errors);
