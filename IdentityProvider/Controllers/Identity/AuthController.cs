@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Net;
 using System.Threading.Tasks;
 using AspNet.Security.OpenIdConnect.Extensions;
 using AspNet.Security.OpenIdConnect.Primitives;
@@ -11,8 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using SignInResult = Microsoft.AspNetCore.Mvc.SignInResult;
 
 namespace IdentityProvider.Controllers.Identity
 {
@@ -38,10 +35,7 @@ namespace IdentityProvider.Controllers.Identity
             this.identityOptions = identityOptions;
         }
 
-        [HttpPost]
-        [Route("token")]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(SignInResult))]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(OpenIdConnectResponse))]
+        [HttpPost("token")]
         public async Task<IActionResult> Token([FromBody] OpenIdConnectRequest request)
         {
             // Note: the client credentials are automatically validated by OpenIddict: if client_id or client_secret are invalid, this action won't be invoked.

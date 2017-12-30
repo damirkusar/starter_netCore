@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using AspNet.Security.OAuth.Introspection;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ResourceProvider.Controllers
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = OAuthIntrospectionDefaults.AuthenticationScheme)]
     [ApiExplorerSettings(IgnoreApi = false)]
     [Route("api/[controller]")]
     public class ResourceController : Controller

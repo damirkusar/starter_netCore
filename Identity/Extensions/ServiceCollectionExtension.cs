@@ -62,10 +62,13 @@ namespace Identity.Extensions
                 options.AddMvcBinders();
 
                 options.EnableTokenEndpoint("/api/auth/token");
+                //options.EnableAuthorizationEndpoint("/api/auth/authorize");
+                //options.EnableLogoutEndpoint("/api/auth/logout");
+                options.EnableIntrospectionEndpoint("/connect/introspect");
 
                 options.AllowPasswordFlow();
                 options.AllowClientCredentialsFlow();
-                options.EnableIntrospectionEndpoint("/connect/introspect");
+                //options.AllowImplicitFlow();
 
                 options.SetAccessTokenLifetime(TimeSpan.FromMinutes(7));
 
