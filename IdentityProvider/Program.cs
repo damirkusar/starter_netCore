@@ -1,5 +1,5 @@
 using System;
-using IdentityProvider.LoggingRenderer;
+using Common.LoggingRenderer;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using NLog.Config;

@@ -1,6 +1,8 @@
 using System;
+using Common.LoggingRenderer;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using NLog.Config;
 using NLog.Web;
 
 namespace ResourceProvider
@@ -9,8 +11,8 @@ namespace ResourceProvider
     {
         public static void Main(string[] args)
         {
-            //ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("aspnet-user-id", typeof(AspNetUserIdLayoutRenderer));
-            //ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("aspnet-user-name", typeof(AspNetUsernameLayoutRenderer));
+            ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("aspnet-user-id", typeof(AspNetUserIdLayoutRenderer));
+            ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("aspnet-user-name", typeof(AspNetUsernameLayoutRenderer));
 
             var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 

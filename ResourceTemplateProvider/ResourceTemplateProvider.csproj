@@ -34,6 +34,7 @@
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\ResourceTemplate.Interface\ResourceTemplate.Interface.csproj" />
     <ProjectReference Include="..\ResourceTemplate\ResourceTemplate.csproj" />
   </ItemGroup>

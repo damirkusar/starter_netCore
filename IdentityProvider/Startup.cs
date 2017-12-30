@@ -1,6 +1,6 @@
+using Common.Middleware;
 using Identity.Extensions;
 using IdentityProvider.Extensions;
-using IdentityProvider.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

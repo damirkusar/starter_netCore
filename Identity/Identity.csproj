@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Identity.Data\Identity.Data.csproj" />
     <ProjectReference Include="..\Identity.Interface\Identity.Interface.csproj" />
   </ItemGroup>
