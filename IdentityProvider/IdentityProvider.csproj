@@ -6,7 +6,7 @@
     <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>IdentityProvider</AssemblyName>
-    <PackageId>ApiGateway</PackageId>
+    <PackageId>IdentityProvider</PackageId>
     <OutputType>Exe</OutputType>
     <RootNamespace>IdentityProvider</RootNamespace>
   </PropertyGroup>

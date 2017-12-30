@@ -6,7 +6,7 @@
     <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>ResourceProvider</AssemblyName>
-    <PackageId>ApiGateway</PackageId>
+    <PackageId>ResourceProvider</PackageId>
     <OutputType>Exe</OutputType>
     <RootNamespace>ResourceProvider</RootNamespace>
   </PropertyGroup>
