@@ -48,8 +48,13 @@ namespace WebApiGateway.Controllers
             var request = this.restClient.CreateRequest(this.HttpContext, this.microserviceUrls.ResourceService, "resource", Method.GET);
 
             var response = await this.restClient.ExecuteTaskAsync<List<ResourceResponse>>(request);
-            var resource = response.Data;
 
+            if (!response.IsSuccessful)
+            {
+                return this.StatusCode((int)response.StatusCode);
+            }
+
+            var resource = response.Data;
             return this.Ok(resource);
         }
 
@@ -62,8 +67,13 @@ namespace WebApiGateway.Controllers
             var request = this.restClient.CreateRequest(this.HttpContext, this.microserviceUrls.ResourceService, $"resource/{resourceId}", Method.GET);
 
             var response = await this.restClient.ExecuteTaskAsync<ResourceResponse>(request);
-            var resource = response.Data;
 
+            if (!response.IsSuccessful)
+            {
+                return this.StatusCode((int)response.StatusCode);
+            }
+
+            var resource = response.Data;
             return this.Ok(resource);
         }
 
@@ -77,8 +87,13 @@ namespace WebApiGateway.Controllers
             request.AddJsonBody(resourceRequest);
 
             var response = await this.restClient.ExecuteTaskAsync<ResourceResponse>(request);
+
+            if (!response.IsSuccessful)
+            {
+                return this.StatusCode((int) response.StatusCode);
+            }
+
             var resource = response.Data;
-            
             return this.Ok(resource);
         }
     }
