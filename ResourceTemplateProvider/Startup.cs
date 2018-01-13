@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ResourceProvider.Extensions;
+using ResourceProvider.Settings;
 using ResourceTemplate.Data;
 using ResourceTemplate.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
@@ -41,7 +42,7 @@ namespace ResourceProvider
 
                 .AddOAuthIntrospection(options =>
                 {
-                    options.Authority = new Uri("http://localhost:4401/");
+                    options.Authority = new Uri(this.Configuration["MicroserviceUrls:IdentityService"]);
                     options.Audiences.Add("resource-server-1");
                     options.ClientId = "resource-server-1";
                     options.ClientSecret = "846B62D0-DEF9-4215-A99D-86E6B8DAB342";
@@ -59,6 +60,8 @@ namespace ResourceProvider
             // Add framework services.
             services.AddMvc();
             services.AddOptions();
+
+            services.Configure<MicroserviceUrls>(this.Configuration.GetSection("MicroserviceUrls"));
 
             // Configure Swagger
             services.ConfigureSwaggerGen(options =>

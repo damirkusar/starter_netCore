@@ -58,7 +58,7 @@ namespace ResourceProvider.Controllers
         [ValidateModelState]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Resource))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
-        public async Task<IActionResult> Register([FromBody] ResourceRequest request)
+        public async Task<IActionResult> Post([FromBody] ResourceRequest request)
         {
             var newResource = this.mapper.Map<ResourceRequest, Resource>(request);
             var result = await this.resourceService.AddAsync(newResource);

@@ -8,7 +8,11 @@ using Common.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using RestSharp;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using WebApiGateway.Adaptor;
+using WebApiGateway.Settings;
 using WebApiGateway.TransferObjects;
 
 namespace WebApiGateway.Controllers
@@ -20,52 +24,62 @@ namespace WebApiGateway.Controllers
     {
         private readonly ILogger<ResourceController> logger;
         private readonly IMapper mapper;
+        private readonly MicroserviceUrls microserviceUrls;
+        private readonly ICustomRestClient restClient;
 
         public ResourceController(
             ILogger<ResourceController> logger,
-            IMapper mapper)
+            IMapper mapper,
+            IOptions<MicroserviceUrls> microserviceUrls,
+            ICustomRestClient restClient)
         {
             this.logger = logger;
             this.mapper = mapper;
+            this.microserviceUrls = microserviceUrls.Value;
+            this.restClient = restClient;
         }
 
         [HttpGet]
         [ValidateModelState]
-        //[SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<Resource>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<ResourceResponse>))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> Get()
         {
-            //var resources = await this.resourceService.LoadAsync();
-            //return this.Ok(resources);
-            return this.NoContent();
+            var request = this.restClient.CreateRequest(this.HttpContext, this.microserviceUrls.ResourceService, "resource", Method.GET);
+
+            var response = await this.restClient.ExecuteTaskAsync<List<ResourceResponse>>(request);
+            var resource = response.Data;
+
+            return this.Ok(resource);
         }
 
         [HttpGet("{resourceId}")]
         [ValidateModelState]
-        //[SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Resource))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(ResourceResponse))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
         public async Task<IActionResult> Get(Guid resourceId)
         {
-            //var resource = await this.resourceService.LoadAsync(resourceId);
-            //return this.Ok(resource);
-            return this.NoContent();
+            var request = this.restClient.CreateRequest(this.HttpContext, this.microserviceUrls.ResourceService, $"resource/{resourceId}", Method.GET);
+
+            var response = await this.restClient.ExecuteTaskAsync<ResourceResponse>(request);
+            var resource = response.Data;
+
+            return this.Ok(resource);
         }
 
         [HttpPost]
         [ValidateModelState]
-        //[SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Resource))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(ResourceResponse))]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = typeof(ObjectResult))]
-        public async Task<IActionResult> Register([FromBody] ResourceRequest request)
+        public async Task<IActionResult> Post([FromBody] ResourceRequest resourceRequest)
         {
-            //var newResource = this.mapper.Map<ResourceRequest, Resource>(request);
-            //var result = await this.resourceService.AddAsync(newResource);
-            //if (result == null)
-            //{
-            //    return this.StatusCode((int)HttpStatusCode.InternalServerError);
-            //}
+            var request = this.restClient.CreateRequest(this.HttpContext, this.microserviceUrls.ResourceService, $"resource", Method.POST);
+            request.AddJsonBody(resourceRequest);
 
-            //return this.Ok(result);
-            return this.NoContent();
+            var response = await this.restClient.ExecuteTaskAsync<ResourceResponse>(request);
+            var resource = response.Data;
+            
+            return this.Ok(resource);
         }
     }
 }

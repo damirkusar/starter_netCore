@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RestSharp;
 using Swashbuckle.AspNetCore.Swagger;
+using WebApiGateway.Adaptor;
 using WebApiGateway.Extensions;
+using WebApiGateway.Settings;
 
 namespace WebApiGateway
 {
@@ -29,10 +32,9 @@ namespace WebApiGateway
                 {
                     options.DefaultScheme = OAuthIntrospectionDefaults.AuthenticationScheme;
                 })
-
                 .AddOAuthIntrospection(options =>
                 {
-                    options.Authority = new Uri("http://localhost:4401/");
+                    options.Authority = new Uri(this.Configuration["MicroserviceUrls:IdentityService"]);
                     options.Audiences.Add("web-api-gateway");
                     options.ClientId = "web-api-gateway";
                     options.ClientSecret = "846B62D0-DEF9-4215-A99D-86E6B8DAB342";
@@ -41,12 +43,16 @@ namespace WebApiGateway
 
             // Configure api gateway
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<ICustomRestClient, CustomRestClient>();
+            services.AddSingleton<IRestClient, RestClient>();
             // Configure AutoMapper for API Gateway
             services.ConfigureAutoMapper();
 
             // Add framework services.
             services.AddMvc();
             services.AddOptions();
+
+            services.Configure<MicroserviceUrls>(this.Configuration.GetSection("MicroserviceUrls"));
 
             // Configure Swagger
             services.ConfigureSwaggerGen(options =>
@@ -55,7 +61,7 @@ namespace WebApiGateway
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info {Title = "angularXcore Resource API", Version = "v1"});
+                c.SwaggerDoc("v1", new Info {Title = "angularXcore WebApiGateway API", Version = "v1"});
                 c.AddSecurityDefinition("OpenIdDict", new OAuth2Scheme
                 {
                     Type = "oauth2",
