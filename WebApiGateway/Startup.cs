@@ -4,15 +4,12 @@ using Common.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ResourceProvider.Extensions;
-using ResourceTemplate.Data;
-using ResourceTemplate.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
+using WebApiGateway.Extensions;
 
-namespace ResourceProvider
+namespace WebApiGateway
 {
     public class Startup
     {
@@ -28,12 +25,6 @@ namespace ResourceProvider
         {
             services.AddCors();
 
-            services.AddDbContext<ResourceTemplateDbContext>(
-                options =>
-                {
-                    options.UseSqlServer(this.Configuration.GetConnectionString("ResourceConnection"));
-                });
-
             services.AddAuthentication(options =>
                 {
                     options.DefaultScheme = OAuthIntrospectionDefaults.AuthenticationScheme;
@@ -42,8 +33,8 @@ namespace ResourceProvider
                 .AddOAuthIntrospection(options =>
                 {
                     options.Authority = new Uri("http://localhost:4401/");
-                    options.Audiences.Add("resource-server-1");
-                    options.ClientId = "resource-server-1";
+                    options.Audiences.Add("web-api-gateway");
+                    options.ClientId = "web-api-gateway";
                     options.ClientSecret = "846B62D0-DEF9-4215-A99D-86E6B8DAB342";
                     options.RequireHttpsMetadata = false;
                 });
@@ -52,9 +43,6 @@ namespace ResourceProvider
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Configure AutoMapper for API Gateway
             services.ConfigureAutoMapper();
-
-            // Configure business layer
-            services.ConfigureResource();
 
             // Add framework services.
             services.AddMvc();
@@ -72,7 +60,7 @@ namespace ResourceProvider
                 {
                     Type = "oauth2",
                     Flow = "password",
-                    TokenUrl = "http://localhost:4401/api/auth/token"
+                    TokenUrl = "http://localhost:4301/api/auth/token"
                 });
             });
         }
@@ -80,9 +68,6 @@ namespace ResourceProvider
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // Configure business layer
-            app.ConfigureResource();
-
             app.UseCors(builder =>
                 builder.AllowAnyHeader()
                     .AllowAnyMethod()

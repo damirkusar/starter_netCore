@@ -69,7 +69,7 @@ namespace Identity.Services
                 new AuthenticationProperties(),
                 OpenIdConnectServerDefaults.AuthenticationScheme);
 
-            ticket.SetResources("resource-server-1");
+            ticket.SetResources("web-api-gateway", "resource-server-1");
 
             return ticket;
         }
@@ -110,7 +110,7 @@ namespace Identity.Services
                 OpenIddictConstants.Scopes.Roles
             }.Intersect(request.GetScopes()));
 
-            ticket.SetResources("resource-server-1");
+            ticket.SetResources("web-api-gateway", "resource-server-1");
 
             // Note: by default, claims are NOT automatically included in the access and identity tokens.
             // To allow OpenIddict to serialize them, you must attach them a destination, that specifies
