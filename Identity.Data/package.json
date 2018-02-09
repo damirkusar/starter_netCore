@@ -2,7 +2,7 @@
   "name": "identity",
   "version": "1.0.0",
   "license": "UNLICENSED",
-  "repository": "https://github.com/damirkusar/angularXcore",
+  "repository": "https://github.com/damirkusar/starter_netCore",
   "dependencies": {
   },
   "devDependencies": {

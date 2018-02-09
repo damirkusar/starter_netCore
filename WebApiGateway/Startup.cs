@@ -61,7 +61,7 @@ namespace WebApiGateway
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info {Title = "angularXcore WebApiGateway API", Version = "v1"});
+                c.SwaggerDoc("v1", new Info {Title = "WebApiGateway API", Version = "v1"});
                 c.AddSecurityDefinition("OpenIdDict", new OAuth2Scheme
                 {
                     Type = "oauth2",
@@ -100,7 +100,7 @@ namespace WebApiGateway
 
             // Configure Swagger
             app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "angularXcore v1"); });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiGateway API v1"); });
         }
     }
 }

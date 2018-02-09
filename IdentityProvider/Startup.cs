@@ -119,7 +119,7 @@ namespace IdentityProvider
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info {Title = "angularXcore API", Version = "v1"});
+                c.SwaggerDoc("v1", new Info {Title = "Identity Provider API", Version = "v1"});
                 c.AddSecurityDefinition("OpenIdDict", new OAuth2Scheme
                 {
                     Type = "oauth2",
@@ -161,7 +161,7 @@ namespace IdentityProvider
 
             // Configure Swagger
             app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "angularXcore v1"); });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Identity Provider API v1"); });
         }
     }
 }
