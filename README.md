@@ -1,4 +1,4 @@
-# Bootstrap your .net core backend with Starter_netCore quickly
+# Bootstrap your .net core backend with starter_netCore quickly
 
 This starter project gives you a lot of things you may need when starting your project. 
 It is split into different projects and services which are doing just that what they need to. Of course you can put everything into one, if you wish. 
