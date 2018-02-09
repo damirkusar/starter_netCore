@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.2" />
     <PackageReference Include="OpenIddict" Version="2.0.0-rc1-final" />
     <PackageReference Include="OpenIddict.Mvc" Version="2.0.0-rc1-final" />
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="2.0.0-rc1-final" />
