@@ -70,7 +70,7 @@ namespace ResourceProvider
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info {Title = "Resource API", Version = "v1"});
+                c.SwaggerDoc("v1", new Info {Title = "Resource Provider API", Version = "v1"});
                 c.AddSecurityDefinition("OpenIdDict", new OAuth2Scheme
                 {
                     Type = "oauth2",
@@ -112,7 +112,7 @@ namespace ResourceProvider
 
             // Configure Swagger
             app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Resource API v1"); });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Resource Provider API v1"); });
         }
     }
 }
