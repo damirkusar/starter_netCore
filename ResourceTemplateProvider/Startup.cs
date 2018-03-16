@@ -1,5 +1,6 @@
 using System;
 using AspNet.Security.OAuth.Introspection;
+using AutoMapper;
 using Common.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,10 +8,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ResourceProvider.Extensions;
+using ResourceProvider.Profiles;
 using ResourceProvider.Settings;
 using ResourceTemplate.Data;
 using ResourceTemplate.Extensions;
+using ResourceTemplate.Profiles;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace ResourceProvider
@@ -51,8 +53,9 @@ namespace ResourceProvider
 
             // Configure api gateway
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            // Configure AutoMapper for API Gateway
-            services.ConfigureAutoMapper();
+
+            // Configure automapper
+            services.AddAutoMapper(typeof(ResourceProviderProfile), typeof(ResourceProfile));
 
             // Configure business layer
             services.ConfigureResource();

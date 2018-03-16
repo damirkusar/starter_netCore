@@ -1,5 +1,6 @@
 using System;
 using AspNet.Security.OAuth.Introspection;
+using AutoMapper;
 using Common.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RestSharp;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApiGateway.Adaptor;
-using WebApiGateway.Extensions;
+using WebApiGateway.Profiles;
 using WebApiGateway.Settings;
 
 namespace WebApiGateway
@@ -45,8 +46,9 @@ namespace WebApiGateway
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<ICustomRestClient, CustomRestClient>();
             services.AddSingleton<IRestClient, RestClient>();
-            // Configure AutoMapper for API Gateway
-            services.ConfigureAutoMapper();
+
+            // Configure automapper
+            services.AddAutoMapper(typeof(WebApiGatewayProfile));
 
             // Add framework services.
             services.AddMvc();

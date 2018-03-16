@@ -1,11 +1,13 @@
 using System;
 using AspNet.Security.OAuth.Validation;
 using AspNet.Security.OpenIdConnect.Primitives;
+using AutoMapper;
 using Common.Middleware;
 using Identity.Data;
 using Identity.Data.Models;
 using Identity.Extensions;
-using IdentityProvider.Extensions;
+using Identity.Profiles;
+using IdentityProvider.Profiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -102,8 +104,9 @@ namespace IdentityProvider
 
             // Configure api gateway
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            // Configure AutoMapper for API Gateway
-            services.ConfigureAutoMapper();
+
+            // Configure automapper
+            services.AddAutoMapper(typeof(IdentityProviderProfile), typeof(IdentityProfile));
 
             // Configure business layer
             services.ConfigureIdentity();
